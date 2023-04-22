@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'ex001_ColumnRow.dart';
 
 void main() {
   runApp(const FlutterCookbookApp());
@@ -48,10 +49,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  void fun1(){print("func1 running");}
-  void fun2(){print("func2 running");}
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -60,22 +57,44 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    ListTile listItem(String index,String title, void _func()) {
+    ListTile listItem(
+        String index, String title, BuildContext context, Widget drcWidget) {
       return ListTile(
-        leading: Text(index),
-        title: OutlinedButton(
-          onPressed: _func,
-          child: Text(title),
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              index,
+              style: const TextStyle(
+                color: Colors.blue,
+                fontSize: 18,
+              ),
+            ),
+            const Icon(
+              Icons.done_sharp,
+              color: Colors.lightBlue,
+            ),
+          ],
+        ),
+        title: ElevatedButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return drcWidget;
+            }));
+          },
+          child: Text(
+            title,
+          ),
         ),
       );
     }
 
-
     Widget listWidget = ListView(
       scrollDirection: Axis.vertical,
       children: [
-        listItem("01","title 01",fun1),
-        listItem("02","title 02",fun2),
+        listItem("001", "Column and Row", context, ExColumnRow()),
+        listItem("001", "Column and Row", context, ExColumnRow()),
+        listItem("001", "Column and Row", context, ExColumnRow()),
       ],
     );
 
@@ -87,6 +106,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: listWidget,
     );
-
   }
 }
