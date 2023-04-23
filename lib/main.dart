@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttercookbook/ex006_RouterNavigator.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
+import 'ex003_ImageWidget.dart';
 
 void main() {
   runApp(const FlutterCookbookApp());
@@ -96,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         listItem("001", "Column and Row", context, const ExColumnRow()),
         listItem("002", "ListView", context, const ExListView()),
+        listItem("003", "Image", context, const ExImage()),
         listItem("006", "Router and Navigation", context, const SecondRouter(data: "send data")),
       ],
     );
