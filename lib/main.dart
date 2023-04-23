@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercookbook/ex006_RouterNavigator.dart';
 import 'ex001_ColumnRow.dart';
+import 'ex002_ListView.dart';
 
 void main() {
   runApp(const FlutterCookbookApp());
@@ -92,9 +94,9 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget listWidget = ListView(
       scrollDirection: Axis.vertical,
       children: [
-        listItem("001", "Column and Row", context, ExColumnRow()),
-        listItem("001", "Column and Row", context, ExColumnRow()),
-        listItem("001", "Column and Row", context, ExColumnRow()),
+        listItem("001", "Column and Row", context, const ExColumnRow()),
+        listItem("002", "ListView", context, const ExListView()),
+        listItem("006", "Router and Navigation", context, const SecondRouter(data: "send data")),
       ],
     );
 
