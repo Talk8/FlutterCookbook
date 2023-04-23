@@ -15,12 +15,24 @@ class ExStack extends StatelessWidget {
       children: [
         const CircleAvatar(
           backgroundColor: Colors.blueAccent,
-          //找不到图片使用颜色填充
-          backgroundImage: AssetImage("images/ex.png"),
-          radius: 80,
-          //不添加时有边框，添加后没有边框
+          backgroundImage: AssetImage("images/ax.png"),
           foregroundColor: Colors.black87,
+          foregroundImage: AssetImage("images/ax.png"),
+          radius: 80,
+          child: Text("avatar",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 20),
+          ),
         ),
+        // const CircleAvatar(
+        //   backgroundColor: Colors.blueAccent,
+        //   //找不到图片使用颜色填充
+        //   backgroundImage: AssetImage("images/ex.png"),
+        //   radius: 80,
+        //   //不添加时有边框，添加后没有边框
+        //   foregroundColor: Colors.black87,
+        // ),
         Container(
           decoration: const BoxDecoration(
             color: Colors.grey,
