@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercookbook/ex004_GirdView.dart';
 import 'package:fluttercookbook/ex006_RouterNavigator.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
@@ -98,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("001", "Column and Row", context, const ExColumnRow()),
         listItem("002", "ListView", context, const ExListView()),
         listItem("003", "Image", context, const ExImage()),
+        listItem("004", "GirdView", context, const ExGirdView()),
         listItem("006", "Router and Navigation", context, const SecondRouter(data: "send data")),
       ],
     );
