@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttercookbook/ex004_GirdView.dart';
 import 'package:fluttercookbook/ex005_Stack.dart';
 import 'package:fluttercookbook/ex006_RouterNavigator.dart';
+import 'package:fluttercookbook/ex007_Button.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
+import 'ex008_Text.dart';
 
 void main() {
   runApp(const FlutterCookbookApp());
@@ -103,6 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("004", "GirdView", context, const ExGirdView()),
         listItem("005", "Stack", context, const ExStack()),
         listItem("006", "Router and Navigation", context, const SecondRouter(data: "send data")),
+        listItem("007", "Button", context, const ExButton()),
+        listItem("008", "Text", context, const ExText()),
       ],
     );
 
