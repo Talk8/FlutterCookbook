@@ -13,3 +13,4 @@ this is a cookbook of flutter, there are all kinds of demo.
 | ex009_TextField                 | this is the example of TextField Widget.                       |
 | ex010_BottomNavigationBar       | this is the example of BottomNavigationBar and FloatingActionButton.|
 | ex011_ProgressIndicator         | this is the example of all kinds of progress indicator Widget. |
+| ex012_ConstrainedBox            | this is the example of all kinds of constrained boxWidget.     |
