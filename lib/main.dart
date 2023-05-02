@@ -10,6 +10,7 @@ import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
 import 'ex008_Text.dart';
+import 'ex012_ConstrainedBox.dart';
 
 void main() {
   runApp(const FlutterCookbookApp());
@@ -113,6 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("009", "TextField", context, const ExTextField()),
         listItem("010", "BottomNavigation", context, const ExBottomNavigation()),
         listItem("011", "ProgressIndicator", context, const ExProgressWidget()),
+        listItem("012", "ConstrainedBox", context, const ExConstrainedBox()),
       ],
     );
 

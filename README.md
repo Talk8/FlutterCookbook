@@ -1,6 +1,6 @@
 # FlutterCookbook
 this is a cookbook of flutter, there are all kinds of demo.
-| ** Name of Demo ** | ** Detailed information ** |
+| **Name of Demo** | **Detailed information** |
 | :------------------------------ | :------------------------------------------------------------- |
 | ex001_ColumnRow                 | This is the example of  Column and Row Widget.                 |
 | ex002_ListView                  | This is the example of listView Widget.                        |
