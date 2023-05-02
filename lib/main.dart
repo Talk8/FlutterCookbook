@@ -5,6 +5,7 @@ import 'package:fluttercookbook/ex006_RouterNavigator.dart';
 import 'package:fluttercookbook/ex007_Button.dart';
 import 'package:fluttercookbook/ex009_TextField.dart';
 import 'package:fluttercookbook/ex010_BottomNavigation.dart';
+import 'package:fluttercookbook/ex011_progressIndicator.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -111,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("008", "Text", context, const ExText()),
         listItem("009", "TextField", context, const ExTextField()),
         listItem("010", "BottomNavigation", context, const ExBottomNavigation()),
+        listItem("011", "ProgressIndicator", context, const ExProgressWidget()),
       ],
     );
 
