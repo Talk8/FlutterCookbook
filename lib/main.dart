@@ -6,6 +6,7 @@ import 'package:fluttercookbook/ex007_Button.dart';
 import 'package:fluttercookbook/ex009_TextField.dart';
 import 'package:fluttercookbook/ex010_BottomNavigation.dart';
 import 'package:fluttercookbook/ex011_progressIndicator.dart';
+import 'package:fluttercookbook/ex013_Align_padding.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -115,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("010", "BottomNavigation", context, const ExBottomNavigation()),
         listItem("011", "ProgressIndicator", context, const ExProgressWidget()),
         listItem("012", "ConstrainedBox", context, const ExConstrainedBox()),
+        listItem("013", "AlignAndPadding", context, const ExAlignAndPadding()),
       ],
     );
 
