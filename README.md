@@ -15,3 +15,5 @@ this is a cookbook of flutter, there are all kinds of demo.
 | ex011_ProgressIndicator         | this is the example of all kinds of progress indicator Widget. |
 | ex012_ConstrainedBox            | this is the example of all kinds of constrained boxWidget.     |
 | ex013_AlignAndPadding           | this is the example of Align and Padding Widget.               |
+| ex014_PointerEvent              | this is the example of PointerEvent.                           |
+| ex015_PageView                  | this is the example of PageView Widget.                        |
