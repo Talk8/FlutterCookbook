@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//和25回中的内容匹配
+//和25回中的内容相匹配
 class ExPageView extends StatefulWidget {
   const ExPageView({Key? key}) : super(key: key);
 
