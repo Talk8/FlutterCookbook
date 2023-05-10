@@ -16,7 +16,10 @@ class _ExPageViewState extends State<ExPageView> {
         title: const Text("Example of PaveView"),
         backgroundColor: Colors.purpleAccent,
       ),
-      body: PageView(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          PageView(
         scrollDirection: Axis.horizontal,
         onPageChanged: (value){print("onPage Changed: ${value}");},
         children: [
@@ -38,6 +41,9 @@ class _ExPageViewState extends State<ExPageView> {
             color: Colors.brown,
             child: const Text("Page 3"),
           ),
+        ],
+          ),
+          Text("column")
         ],
       ),
     );
