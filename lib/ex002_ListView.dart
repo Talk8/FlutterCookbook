@@ -41,18 +41,21 @@ class ExListView extends StatelessWidget {
       itemCount: 8,
       itemExtent: 60,
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-          decoration: BoxDecoration(
-            //只添加底部的边框线
-            // border: Border(bottom: BorderSide(width: 1, color: Colors.lightBlue)),
-            //添加一个边框
-            // border: Border.fromBorderSide(BorderSide(width: 1,color: Colors.yellow)),
-            border: Border.all(color: Colors.greenAccent, width: 1),
-            //给边框设置半径，就是让装饰器的边框呈现圆角
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: listItem(Icons.ice_skating, "$index"),
-        );
+        //不添加任何装饰
+        return listItem(Icons.ice_skating, "$index");
+        //使用装饰来添加分隔线
+        // return Container(
+        //   decoration: BoxDecoration(
+        //     //只添加底部的边框线
+        //     // border: Border(bottom: BorderSide(width: 1, color: Colors.lightBlue)),
+        //     //添加一个边框
+        //     // border: Border.fromBorderSide(BorderSide(width: 1,color: Colors.yellow)),
+        //     border: Border.all(color: Colors.greenAccent, width: 1),
+        //     //给边框设置半径，就是让装饰器的边框呈现圆角
+        //     borderRadius: BorderRadius.circular(30),
+        //   ),
+        //   child: listItem(Icons.ice_skating, "$index"),
+        // );
       },
     );
 
