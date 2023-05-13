@@ -9,8 +9,8 @@ class ExPageView extends StatefulWidget {
 }
 
 class _ExPageViewState extends State<ExPageView> {
-  //用来获取当前被选中Page的索引值
-  PageController mPageController = PageController(initialPage: 0);
+  //用来获取当前被选中Page的索引值,可以设置默认初始页，不过不能和指示器联动
+  PageController mPageController = PageController(initialPage: 1);
   //用来存放当前被选中page的索引值
   var pageIndex = 0;
   @override
@@ -84,11 +84,11 @@ class Indicator extends StatelessWidget {
 
   Widget _Indicator(int index, int pageCount, double r, double s) {
     //通过pageController中的索引值来判断当前页面是否被选中
-    // bool isIndexPageSelected = (index ==
-    //     (pageController.page != null ? pageController.page?.round() : 0));
+    bool isIndexPageSelected = (index ==
+        (pageController.page != null ? pageController.page?.round() : 0));
 
     //通过参数传递的索引值来判断当前页面是否被选中
-    bool isIndexPageSelected = (index == currentIndex) ? true : false;
+    // bool isIndexPageSelected = (index == currentIndex) ? true : false;
     //打印索引值，调试使用
     // print("page count ${pageController.page?.round()}");
     // print("current : ${currentIndex}");
