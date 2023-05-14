@@ -69,8 +69,14 @@ class _ExPageViewState extends State<ExPageView> {
 }
 
 class Indicator extends StatelessWidget {
-  Indicator({Key? key, required this.pageController, this.count: 0, this.currentIndex: 0})
-      : super(key: key);
+  Indicator({
+    Key? key,
+    required this.pageController,
+    required this.count,
+    this.currentIndex = 0,
+    this.radius = 30,
+    this.space = 18,
+  }) : super(key: key);
 
   PageController pageController;
   //被选中page的索引值
@@ -112,11 +118,15 @@ class Indicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _Indicator(0, 3, 20, 18),
-        _Indicator(1, 3, 20, 18),
-        _Indicator(2, 3, 20, 18),
-      ],
+      // children: [
+      //   _Indicator(0, 3, 20, 18),
+      //   _Indicator(1, 3, 20, 18),
+      //   _Indicator(2, 3, 20, 18),
+      // ],
+      //使用List来代替上面的代码
+      children: List<Widget>.generate(count, (index) {
+        return _Indicator(index, count, radius, space);
+      }),
     );
   }
 }
