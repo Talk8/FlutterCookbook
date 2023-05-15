@@ -59,19 +59,29 @@ class ExListView extends StatelessWidget {
       },
     );
 
+    ScrollController _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      //offset并不是ListView中的索引值
+      print("offset---: ${_scrollController.offset}");
+      //Position的信息多，包含了offset
+      print("position---: ${_scrollController.position}");
+      // print(_scrollController.jumpTo(1));
+    });
+
     //通过separatorBuilder属性来设定divider
     Widget listEx02 = ListView.separated(
+        controller: _scrollController,
         itemBuilder: (BuildContext context, int index) {
           return listItem(Icons.cabin, "$index");
         },
         separatorBuilder: (BuildContext context, int index) {
           return const Divider(
-            endIndent: 1,
+            endIndent: 5,
             height: 1,
             color: Colors.lightBlue,
           );
         },
-        itemCount: 6);
+        itemCount: 19);
 
     return Scaffold(
       appBar: AppBar(
@@ -79,7 +89,7 @@ class ExListView extends StatelessWidget {
         backgroundColor: Colors.purpleAccent,
       ),
       // body: listEx,
-      body: listEx01,
+      body: listEx02,
       // body: listEx02,
     );
   }
