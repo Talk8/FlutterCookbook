@@ -10,6 +10,7 @@ import 'package:fluttercookbook/ex013_Align_padding.dart';
 import 'package:fluttercookbook/ex014_PointerEvent.dart';
 import 'package:fluttercookbook/ex015_PageView.dart';
 import 'package:fluttercookbook/ex016_Switch.dart';
+import 'package:fluttercookbook/ex017_Gesture.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -123,6 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("014", "PointerEvent", context, const ExPointerEvent()),
         listItem("015", "PageView", context, const ExPageView()),
         listItem("016", "Switch", context, const EXSwitch()),
+        listItem("017", "Gesture", context, const ExGesture()),
       ],
     );
 
