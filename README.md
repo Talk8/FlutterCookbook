@@ -19,3 +19,4 @@ this is a cookbook of flutter, there are all kinds of demo.
 | ex015_PageView                  | this is the example of PageView Widget.                        |
 | ex016_Switch                    | this is the example of Switch Widget.                          |
 | ex017_Gesture                   | this is the example of Gesture Widget.                         |
+| ex018_Dismissible               | this is the example of Dismissible Widget.                     |
