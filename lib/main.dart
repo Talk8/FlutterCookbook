@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercookbook/ExLoadingPage.dart';
 import 'package:fluttercookbook/ex004_GirdView.dart';
 import 'package:fluttercookbook/ex005_Stack.dart';
 import 'package:fluttercookbook/ex006_RouterNavigator.dart';
@@ -11,6 +12,7 @@ import 'package:fluttercookbook/ex014_PointerEvent.dart';
 import 'package:fluttercookbook/ex015_PageView.dart';
 import 'package:fluttercookbook/ex016_Switch.dart';
 import 'package:fluttercookbook/ex017_Gesture.dart';
+import 'package:fluttercookbook/ex018_Dismissible.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -42,6 +44,13 @@ class FlutterCookbookApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: ExLoadingPage(),
+
+      //这种方式的路由可以启动，但是有报错，与setState有关。
+      routes: <String,WidgetBuilder>{
+        "MyHomePage":(BuildContext context) => const MyHomePage(title: "My Home Page"),
+
+      },
     );
   }
 }
@@ -125,6 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("015", "PageView", context, const ExPageView()),
         listItem("016", "Switch", context, const EXSwitch()),
         listItem("017", "Gesture", context, const ExGesture()),
+        listItem("018", "Dismissble", context, const ExDismissble()),
       ],
     );
 
