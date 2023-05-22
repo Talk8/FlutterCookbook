@@ -18,7 +18,8 @@ class ExDismissble extends StatelessWidget {
         itemBuilder: (context, index) {
           return Dismissible(
             // key: Key(arrayList[index]),
-            //使用上面方法中的key会有运行时错误，提示没有删除内容
+            //使用上面方法中的key会有运行时错误，提示如下：
+            //A dismissed Dismissible widget is still part of the tree.
             key: UniqueKey(),
 
             //是否确定删除当前的item,返回true删除，否则不删除
