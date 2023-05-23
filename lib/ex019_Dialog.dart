@@ -1,0 +1,140 @@
+import 'package:flutter/material.dart';
+
+class ExDialog extends StatefulWidget {
+  const ExDialog({Key? key}) : super(key: key);
+
+  @override
+  State<ExDialog> createState() => _ExDialogState();
+}
+
+class _ExDialogState extends State<ExDialog> {
+  _showAlertDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Alert Dialog"),
+            content: Text("This is a Example of  AlerDialog"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  print("Yes selected");
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Yes"),
+              ),
+              TextButton(
+                onPressed: () {
+                  print("No selected");
+                  Navigator.of(context).pop();
+                },
+                child: const Text("No"),
+              ),
+            ],
+          );
+        });
+  }
+
+  //通过showDialog方法弹出窗口
+  _showAboutDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AboutDialog(
+            applicationName: "App Name",
+            applicationVersion: "v1.0",
+            applicationIcon: const Icon(Icons.android),
+            children: [
+              //可以不添加Buttonm,因为已经自带了两个Button
+              TextButton(
+                  onPressed: () {
+                    print("ok selected");
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("Ok"),
+              )
+            ],
+          );
+        },
+    );
+  }
+
+  //直接使用系统封装好的方法：showAboutDialog()
+  _showSystemAboutDialog() {
+    showAboutDialog(context: context,
+    applicationName: "app",
+    applicationVersion: "v111",
+      children: [
+        Text("Item 1"),
+        Text("Item 2"),
+        Text("Item 3"),
+      ],
+    );
+  }
+
+  _showBottomSheet(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context){
+          return Container(
+            width: 300,
+            height: 100,
+            color: Colors.green,
+            child:const Text("This is BottomSheet"),
+          );
+        }
+    );
+  }
+
+  _bottomSheet(context) {
+    return BottomSheet(
+        onClosing: (){
+          print("close sheet");
+        },
+        builder: (context){
+         return Container(
+           alignment: Alignment.center,
+           color: Colors.green,
+           width: double.infinity,
+           height: 200,
+           child: Text("This is a BottomSheet"),
+         );
+        }
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.purpleAccent,
+        title: const Text("Example of All kinds of dialog"),
+      ),
+      bottomSheet: _bottomSheet(context),
+      body: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () => _showAlertDialog(),
+            child: const Text("Show Dialog"),
+          ),
+          ElevatedButton(
+            onPressed: () => _showAboutDialog(),
+            child: const Text("Show About Dialog"),
+          ),
+          ElevatedButton(
+            onPressed: () => _showSystemAboutDialog(),
+            child: const Text("Show System AboutDialog"),
+          ),
+          ElevatedButton(
+            onPressed: () => _showBottomSheet(context),
+            child: const Text("Show BottomSheet"),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Close BottomSheet"),
+          ),
+        ],
+      ),
+    );
+  }
+}

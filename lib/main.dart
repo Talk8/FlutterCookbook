@@ -13,6 +13,7 @@ import 'package:fluttercookbook/ex015_PageView.dart';
 import 'package:fluttercookbook/ex016_Switch.dart';
 import 'package:fluttercookbook/ex017_Gesture.dart';
 import 'package:fluttercookbook/ex018_Dismissible.dart';
+import 'package:fluttercookbook/ex019_Dialog.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -134,7 +135,8 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("015", "PageView", context, const ExPageView()),
         listItem("016", "Switch", context, const EXSwitch()),
         listItem("017", "Gesture", context, const ExGesture()),
-        listItem("018", "Dismissble", context, const ExDismissble()),
+        listItem("018", "Dismissible", context, const ExDismissble()),
+        listItem("019", "Dialog", context, const ExDialog()),
       ],
     );
 
