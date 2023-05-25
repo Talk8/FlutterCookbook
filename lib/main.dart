@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("016", "Switch", context, const EXSwitch()),
         listItem("017", "Gesture", context, const ExGesture()),
         listItem("018", "Dismissible", context, const ExDismissble()),
-        listItem("019", "Dialog", context, const ExDialog()),
+        listItem("019", "Dialog and BottomSheet", context, const ExDialog()),
       ],
     );
 

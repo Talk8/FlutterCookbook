@@ -38,32 +38,33 @@ class _ExDialogState extends State<ExDialog> {
   //通过showDialog方法弹出窗口
   _showAboutDialog() {
     showDialog(
-        context: context,
-        builder: (BuildContext context){
-          return AboutDialog(
-            applicationName: "App Name",
-            applicationVersion: "v1.0",
-            applicationIcon: const Icon(Icons.android),
-            children: [
-              //可以不添加Buttonm,因为已经自带了两个Button
-              TextButton(
-                  onPressed: () {
-                    print("ok selected");
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Ok"),
-              )
-            ],
-          );
-        },
+      context: context,
+      builder: (BuildContext context) {
+        return AboutDialog(
+          applicationName: "App Name",
+          applicationVersion: "v1.0",
+          applicationIcon: const Icon(Icons.android),
+          children: [
+            //可以不添加Buttonm,因为已经自带了两个Button
+            TextButton(
+              onPressed: () {
+                print("ok selected");
+                Navigator.of(context).pop();
+              },
+              child: const Text("Ok"),
+            )
+          ],
+        );
+      },
     );
   }
 
   //直接使用系统封装好的方法：showAboutDialog()
   _showSystemAboutDialog() {
-    showAboutDialog(context: context,
-    applicationName: "app",
-    applicationVersion: "v111",
+    showAboutDialog(
+      context: context,
+      applicationName: "app",
+      applicationVersion: "v111",
       children: [
         Text("Item 1"),
         Text("Item 2"),
@@ -72,37 +73,75 @@ class _ExDialogState extends State<ExDialog> {
     );
   }
 
+  //会遮挡底部的导航栏，点击窗口外区域不会关闭窗口
   _showBottomSheet(context) {
+    ElevatedButton(
+      child: const Text('showBottomSheet'),
+      onPressed: () {
+        Scaffold.of(context).showBottomSheet<void>(
+          (BuildContext context) {
+            return Container(
+              height: 200,
+              color: Colors.amber,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Text('BottomSheet'),
+                    ElevatedButton(
+                      child: const Text('Close BottomSheet'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  //不会遮挡底部的导航栏，点击窗口外区域可以关闭窗口
+  _showModalBottomSheet(context) {
     showModalBottomSheet(
         context: context,
-        builder: (BuildContext context){
+        builder: (BuildContext context) {
           return Container(
             width: 300,
             height: 100,
             color: Colors.green,
-            child:const Text("This is BottomSheet"),
+            child: const Text("This is BottomSheet"),
           );
-        }
-    );
+        });
   }
 
-  _bottomSheet(context) {
+  _bottomSheet(BuildContext context) {
     return BottomSheet(
-        onClosing: (){
+        backgroundColor: Colors.purpleAccent,
+        shape: const CircleBorder(
+          side: BorderSide(
+          ),
+        ),
+        onClosing: () {
           print("close sheet");
         },
-        builder: (context){
-         return Container(
-           alignment: Alignment.center,
-           color: Colors.green,
-           width: double.infinity,
-           height: 200,
-           child: Text("This is a BottomSheet"),
-         );
-        }
-    );
+        builder: (context) {
+          return Container(
+            alignment: Alignment.center,
+            color: Colors.green,
+            width: double.infinity,
+            height: 200,
+            child: Text("This is a BottomSheet"),
+          );
+        });
   }
 
+  /*
+  //用来演示Dialog和ModalBottomSheet
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +149,9 @@ class _ExDialogState extends State<ExDialog> {
         backgroundColor: Colors.purpleAccent,
         title: const Text("Example of All kinds of dialog"),
       ),
-      bottomSheet: _bottomSheet(context),
+      //在这里设置bottomSheet会一直显示
+      // bottomSheet: _bottomSheet(context),
+
       body: Column(
         children: [
           ElevatedButton(
@@ -126,14 +167,71 @@ class _ExDialogState extends State<ExDialog> {
             child: const Text("Show System AboutDialog"),
           ),
           ElevatedButton(
+            //无法显示BottomSheet,这种用法不对，参看下面被注释掉的代码中的用法
             onPressed: () => _showBottomSheet(context),
             child: const Text("Show BottomSheet"),
           ),
           ElevatedButton(
+            onPressed: () => _showModalBottomSheet(context),
+            child: const Text("Show Modal BottomSheet"),
+          ),
+          ElevatedButton(
+            //关于当前页面，而不是关闭BottomSheet
             onPressed: () => Navigator.pop(context),
             child: const Text("Close BottomSheet"),
           ),
         ],
+      ),
+    );
+  }
+
+  */
+  //用来演示ShowBottomSheet
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Example of BottomSheet"),
+      ),
+      body: const ExBottomSheet(),
+    );
+  }
+}
+
+//必须创建一个widget并且将它赋值给Scaffold的body属性才可以,该示例来源于官方文档
+//参考：https://api.flutter.dev/flutter/material/ScaffoldState/showBottomSheet.html
+class ExBottomSheet extends StatelessWidget {
+  const ExBottomSheet({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        child: const Text('showBottomSheet'),
+        onPressed: () {
+          Scaffold.of(context).showBottomSheet<void>(
+            (BuildContext context) {
+              return Container(
+                height: 200,
+                color: Colors.amber,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text('This is BottomSheet'),
+                      ElevatedButton(
+                        child: const Text('Close BottomSheet'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
