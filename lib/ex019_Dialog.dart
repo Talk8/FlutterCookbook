@@ -219,6 +219,7 @@ class ExBottomSheet extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       const Text('This is BottomSheet'),
+                      //关闭BottomSheet窗口
                       ElevatedButton(
                         child: const Text('Close BottomSheet'),
                         onPressed: () {
