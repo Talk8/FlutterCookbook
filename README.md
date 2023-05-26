@@ -21,3 +21,4 @@ this is a cookbook of flutter, there are all kinds of demo.
 | ex017_Gesture                   | this is the example of Gesture Widget.                         |
 | ex018_Dismissible               | this is the example of Dismissible Widget.                     |
 | ex019_DialogAndBottomSheet      | this is the example of Dialog and BottomSheet Widget.          |
+| ex020_SnackBarAndToolTip        | this is the example of SnackBar and ToolTip Widget.            |
