@@ -29,7 +29,7 @@ class _ExTimeDatePickerState extends State<ExTimeDatePicker> {
                     );
                   });
             },
-            child: Text("ShowDialog Fun"),
+            child: const Text("ShowDialog Fun"),
           ),
           ElevatedButton(
             onPressed: () {
@@ -42,7 +42,34 @@ class _ExTimeDatePickerState extends State<ExTimeDatePicker> {
               );
             },
             child: const Text("ShowTimePicker Fun"),
-          )
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return DatePickerDialog(
+                    initialEntryMode: DatePickerEntryMode.input,
+                    initialDate: DateTime(2021),
+                    firstDate: DateTime(2001),
+                    lastDate: DateTime(2099),
+                  );
+                },
+              );
+            },
+            child: const Text("Show DatePickerDialog Fun"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showDatePicker(
+                context: context,
+                initialDate: DateTime(2023),
+                firstDate: DateTime(2021),
+                lastDate: DateTime(2033),
+              );
+            },
+            child: const Text("ShowDatePicker Fun"),
+          ),
         ],
       ),
     );
