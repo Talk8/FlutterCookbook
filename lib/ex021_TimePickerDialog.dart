@@ -70,6 +70,33 @@ class _ExTimeDatePickerState extends State<ExTimeDatePicker> {
             },
             child: const Text("ShowDatePicker Fun"),
           ),
+          ElevatedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return DateRangePickerDialog(
+                    initialEntryMode: DatePickerEntryMode.input,
+                    //currentDate属性必须写不然报空指针异常
+                    currentDate:DateTime(2023),
+                    firstDate: DateTime(2001),
+                    lastDate: DateTime(2099),
+                  );
+                },
+              );
+            },
+            child: const Text("Show DateRangePickerDialog Fun"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showDateRangePicker(
+                context: context,
+                firstDate: DateTime(2021),
+                lastDate: DateTime(2033),
+              );
+            },
+            child: const Text("ShowDateRangePicker Fun"),
+          ),
         ],
       ),
     );
