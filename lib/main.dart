@@ -16,6 +16,7 @@ import 'package:fluttercookbook/ex018_Dismissible.dart';
 import 'package:fluttercookbook/ex019_Dialog.dart';
 import 'package:fluttercookbook/ex020_SnackBar.dart';
 import 'package:fluttercookbook/ex021_TimePickerDialog.dart';
+import 'package:fluttercookbook/ex022_Checkbox.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -141,6 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("019", "Dialog and BottomSheet", context, const ExDialog()),
         listItem("020", "SnackBar and ToolTip", context, const ExSnackBar()),
         listItem("021", "Time and Date Picker Dialog", context, const ExTimeDatePicker()),
+        listItem("022", "Checkbox and ", context, const ExCheckbox()),
       ],
     );
 
