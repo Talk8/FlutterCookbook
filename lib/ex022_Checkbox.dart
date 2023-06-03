@@ -27,7 +27,7 @@ class _ExCheckboxState extends State<ExCheckbox> {
           child: Checkbox(
             //是否选中的状态
             value: _checkState,
-            //对后周围的颜色，默认是蓝色
+            //对号周围的颜色，默认是蓝色
             activeColor: Colors.deepPurpleAccent,
             //对号的颜色，默认是白色
             checkColor: Colors.amber,
