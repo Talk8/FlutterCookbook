@@ -142,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("019", "Dialog and BottomSheet", context, const ExDialog()),
         listItem("020", "SnackBar and ToolTip", context, const ExSnackBar()),
         listItem("021", "Time and Date Picker Dialog", context, const ExTimeDatePicker()),
-        listItem("022", "Checkbox and ", context, const ExCheckbox()),
+        listItem("022", "Checkbox and Transform", context, const ExCheckbox()),
       ],
     );
 

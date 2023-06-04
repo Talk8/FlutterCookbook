@@ -9,6 +9,26 @@ class ExCheckbox extends StatefulWidget {
 
 class _ExCheckboxState extends State<ExCheckbox> {
   var _checkState = false;
+  //平移
+  final Widget _translate = Transform.translate(
+    offset: const Offset(0, 0),
+    child: const Text("Transform.translate"),
+  );
+
+  //旋转
+  final Widget _rotate = Transform.rotate(
+    angle: 30,
+    child: const Text("Transform.rotate"),
+  );
+
+  //上下翻转或者左右倒置
+  final Widget _flip = Transform.flip(
+    flipX: true,
+    flipY: false,
+    filterQuality: FilterQuality.medium,
+    child: const Text("Transform.flip"),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,10 +37,20 @@ class _ExCheckboxState extends State<ExCheckbox> {
         backgroundColor: Colors.purpleAccent,
       ),
       body: Container(
-        alignment: Alignment.topRight,
+        //transform示例使用居中对齐
+        alignment: Alignment.center,
+        //checkbox示例使用靠右对齐
+        // alignment: Alignment.topRight,
         color: Colors.blueGrey,
         width: 300,
         height: 300,
+        //平移示例
+        child: _translate,
+        //旋转示例
+        // child: _rotate,
+        //翻转示例
+        // child: _flip,
+        /* checkbox和scale的示例
         //checkbox无法修改大小，通过Transform来修改它的大小
         child: Transform.scale(
           scale: 1.6,
@@ -55,6 +85,7 @@ class _ExCheckboxState extends State<ExCheckbox> {
             },
           ),
         ),
+         */
       ),
     );
   }
