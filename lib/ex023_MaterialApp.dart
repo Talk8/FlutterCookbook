@@ -15,26 +15,28 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
       //外层设置后这里也要设置，不然不起作用，仍然显示Debug字样
       debugShowCheckedModeBanner: false,
 
-      home:DefaultTabController(
+      home: DefaultTabController(
         length: 3,
         initialIndex: 1,
-        child:
-      Scaffold(
-        appBar: AppBar(
-          title: Text("Example of Material App"),
-          bottom: TabBar(
-            tabs:const [
-              Icon(Icons.web),
-              Icon(Icons.favorite),
-              Icon(Icons.self_improvement),
-            ],
-          ),
+        child: Scaffold(
+            appBar: AppBar(
+              title: Text("Example of Material App"),
+              bottom: TabBar(
+                tabs: const [
+                  Icon(Icons.web),
+                  Icon(Icons.favorite),
+                  Icon(Icons.self_improvement),
+                ],
+              ),
+            ),
+            body:const TabBarView(
+              children: [
+                Text("First TabBarView"),
+                Text("Seconde TabBarView"),
+                Text("Third TabBarView"),
+              ],
+            ),
         ),
-        body: ElevatedButton(
-          child: Text("Button"),
-          onPressed: (){},
-        ),
-      ),
       ),
       theme: ThemeData(
         //用来控制主要的颜色，比如AppBar,button和默认颜色
