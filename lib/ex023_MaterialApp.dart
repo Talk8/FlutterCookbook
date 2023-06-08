@@ -22,6 +22,12 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
             appBar: AppBar(
               title: Text("Example of Material App"),
               bottom: TabBar(
+                labelColor: Colors.green,
+                indicatorColor: Colors.green,
+                unselectedLabelColor: Colors.grey,
+                onTap: (index){
+                  print("$index is selected");
+                },
                 tabs: const [
                   Icon(Icons.web),
                   Icon(Icons.favorite),
