@@ -21,6 +21,27 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
         child: Scaffold(
             appBar: AppBar(
               title: Text("Example of Material App"),
+              //默认使用系统设置，为true
+              centerTitle: false,
+              //会控制AppBar内所有的Icon
+              iconTheme:const IconThemeData(
+                color: Colors.yellow,
+                size:40.0,
+              ) ,
+              //只能控制AppBar内Actions里的Icon
+              actionsIconTheme: const IconThemeData(
+                color: Colors.green,
+                size: 20.0,
+              ),
+              leading:const Icon(Icons.menu),
+              actions: [
+                const Icon(Icons.download),
+                IconButton(
+                    onPressed: (){
+                      print("share value button clicked");
+                    },
+                    icon: Icon(Icons.share)),
+              ],
               bottom: TabBar(
                 labelColor: Colors.green,
                 indicatorColor: Colors.green,
