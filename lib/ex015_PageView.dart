@@ -10,7 +10,11 @@ class ExPageView extends StatefulWidget {
 
 class _ExPageViewState extends State<ExPageView> {
   //用来获取当前被选中Page的索引值,可以设置默认初始页，不过不能和指示器联动
-  PageController mPageController = PageController(initialPage: 1);
+  PageController mPageController = PageController(
+      initialPage: 1,
+      //用来控制每个页面的宽度
+      viewportFraction: 0.8,
+  );
   //用来存放当前被选中page的索引值
   var pageIndex = 0;
   @override
