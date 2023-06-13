@@ -19,6 +19,7 @@ import 'package:fluttercookbook/ex020_SnackBar.dart';
 import 'package:fluttercookbook/ex021_TimePickerDialog.dart';
 import 'package:fluttercookbook/ex022_Checkbox.dart';
 import 'package:fluttercookbook/ex023_MaterialApp.dart';
+import 'package:fluttercookbook/ex025_BoxDecoration.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -148,6 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("022", "Checkbox and Transform", context, const ExCheckbox()),
         listItem("023", "MaterialApp", context, const ExMaterialApp()),
         listItem("024", "Radio and RadioListTitle", context, const ExRadio()),
+        listItem("025", "BoxDecoration", context, const ExBoxDecoration()),
       ],
     );
 
