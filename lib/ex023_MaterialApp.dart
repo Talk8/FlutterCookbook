@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercookbook/ex007_Button.dart';
 
 /*
 这个示例包含了MaterialApp中的属性示例，AppBar属性示例，
@@ -19,6 +20,9 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
       //如果MaterialApp有嵌套，那么每个都需要设置，特别是最外层的MaterialApp
       //外层设置后这里也要设置，不然不起作用，仍然显示Debug字样
       debugShowCheckedModeBanner: false,
+     //指定根路由，根路由变化后当前页面也会变成根路由中指定的页面
+      //通俗点讲就是home属性对应的页面换成了根路由对应的页面
+     // initialRoute: "/" ,
 
       home: DefaultTabController(
         length: 3,
@@ -63,11 +67,20 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
               ],
             ),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
-              Text("First TabBarView"),
-              Text("Seconde TabBarView"),
-              Text("Third TabBarView"),
+              TextButton(
+                child: Text("First TabBarView"),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder:(context){
+                      return ExButton();
+                    } )
+                  );
+                },
+              ),
+              const Text("Seconde TabBarView"),
+              const Text("Third TabBarView"),
             ],
           ),
           //drawer无法控制大小，可以在外层嵌套一个容器来调整大小
@@ -76,13 +89,21 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
           //   height: 300,
           //   child: _drawer,
           // ),
-         drawer: _drawer,
-          // drawer: ExDrawer(),
+          // drawer: _drawer,
+          drawer: ExDrawer(),
           onDrawerChanged: (changed) {
             print("changed: $changed");
           },
         ),
       ),
+      //创建命名路由
+      routes: {
+        //定义根路由,注意home属性有值后不能在此指定根路由，否则报错
+        // "/": (context) => ExPageView(),
+        // =>写法是一个语法糖，它和MaterialPageRoute中的build属性相同
+        "/ButtonExample": (context) => ExButton(),
+
+      },
       theme: ThemeData(
         //用来控制主要的颜色，比如AppBar,button和默认颜色
         primarySwatch: Colors.deepPurple,
@@ -106,23 +127,23 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
           width: 200,
           height: 200,
           child:
-        //用来控制drawer最上部分的区域
-        DrawerHeader(
-          child: Text("The Header"),
-          decoration: BoxDecoration(
-            //只控制header区域的颜色，不设置时默认为主题的primerColor
-            color: Colors.yellow,
-            //使用图片当作boxdecoration的背景
-            image: DecorationImage(
-              image: AssetImage("images/ex.png"),
-              //图像填充，这里的值是铺满整个屏幕
-              fit: BoxFit.cover,
-              //给背景图片添加颜色滤镜
-              colorFilter:
-                  ColorFilter.mode(Colors.greenAccent, BlendMode.hardLight),
+              //用来控制drawer最上部分的区域
+              DrawerHeader(
+            child: Text("The Header"),
+            decoration: BoxDecoration(
+              //只控制header区域的颜色，不设置时默认为主题的primerColor
+              color: Colors.yellow,
+              //使用图片当作boxdecoration的背景
+              image: DecorationImage(
+                image: AssetImage("images/ex.png"),
+                //图像填充，这里的值是铺满整个屏幕
+                fit: BoxFit.cover,
+                //给背景图片添加颜色滤镜
+                colorFilter:
+                    ColorFilter.mode(Colors.greenAccent, BlendMode.hardLight),
+              ),
             ),
           ),
-        ),
         ),
         //drawer中的选项，也就是list中的item
         ListTile(
@@ -160,10 +181,10 @@ class _ExDrawerState extends State<ExDrawer> {
           UserAccountsDrawerHeader(
             accountName: Text("User Name"),
             accountEmail: Text("User Mail"),
-            currentAccountPicture:CircleAvatar(
-              backgroundImage:AssetImage("images/ex.png") ,
-            ) ,
-            otherAccountsPictures:const [
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: AssetImage("images/ex.png"),
+            ),
+            otherAccountsPictures: const [
               CircleAvatar(
                 backgroundColor: Colors.yellow,
               ),
@@ -193,6 +214,22 @@ class _ExDrawerState extends State<ExDrawer> {
           ListTile(
             leading: Icon(Icons.message),
             title: Text("Messages"),
+            //点击这个条目跳转到其它页面r,
+            onTap: () {
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(builder: (context){
+              //     return ExButton();
+              //   })
+              // );
+
+              //下面代码是上面代码的语法糖式写法
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(builder: (context) => ExButton())
+              // );
+
+              //使用命名路由
+              Navigator.pushNamed(context,"/ButtonExample");
+            },
           ),
         ],
       ),
