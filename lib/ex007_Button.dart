@@ -45,6 +45,17 @@ class ExButton extends StatelessWidget {
               onPressed: () {},
               label: Text("TextButton"),
             ),
+            OutlinedButton.icon(
+                onPressed: (){},
+                icon: Icon(Icons.delete),
+                label:Text("Delete"),
+            ),
+            ElevatedButton.icon(
+                onPressed: (){},
+                icon: Icon(Icons.search_rounded),
+                label: Text('search'),
+            ),
+
             //水波效果，这个需要使用stack/position添加到某个组件上面
             //不然看不到透明色，只有点击时才有效果。
             Container(
