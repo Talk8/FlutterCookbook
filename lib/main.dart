@@ -21,6 +21,7 @@ import 'package:fluttercookbook/ex022_Checkbox.dart';
 import 'package:fluttercookbook/ex023_MaterialApp.dart';
 import 'package:fluttercookbook/ex025_BoxDecoration.dart';
 import 'package:fluttercookbook/ex026_Form.dart';
+import 'package:fluttercookbook/ex027_Slider.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -152,6 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("024", "Radio and RadioListTitle", context, const ExRadio()),
         listItem("025", "BoxDecoration", context, const ExBoxDecoration()),
         listItem("026", "Form and TextFormField", context, const ExForm()),
+        listItem("027", "Slider ", context, const ExSlider()),
       ],
     );
 
