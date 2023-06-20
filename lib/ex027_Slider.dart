@@ -73,15 +73,43 @@ class _ExSliderState extends State<ExSlider> {
           activeColor: Colors.purpleAccent,
           inactiveColor: Colors.green,
         ),
+        //把slider放在容器中，并且设置容器的宽度和高度，宽度和高度值保持不同，
+        // 在每列中添加一个文本控件，对比文本控件和容器之间的距离就能看出来
+        //transform组件没有旋转布局，
+        Text("start widget"),
         RotatedBox(
-          child: _slider(),
+          child: Container(
+            color: Colors.blue,
+            width: 300,
+            height: 200,
+            child: _slider(),
+          ),
           //赋值1-4就可以实现旋转效果
           quarterTurns: 1,
         ),
+        Text("end widget"),
         Transform.rotate(
           //通过指定的弧度进行旋转
           angle: pi / 2,
-          child: _slider(),
+          // child: _slider(),
+          child: Container(
+            color: Colors.yellowAccent,
+            width: 100,
+            height: 300,
+            child: _slider(),
+          ),
+        ),
+        Text("end text"),
+        //通过Theme组件修改label中的背景和颜色
+        SliderTheme(
+            data:SliderThemeData(
+              valueIndicatorColor: Colors.white,
+                valueIndicatorTextStyle: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 24,
+                ),
+            ),
+            child: _slider(),
         ),
       ]),
     );
