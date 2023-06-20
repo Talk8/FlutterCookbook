@@ -27,3 +27,5 @@ this is a cookbook of flutter, there are all kinds of demo.
 | ex023_MaterialApp and TabView   | this is the example of MaterialApp,TabBar,TabView,Drawer,Router|
 | ex024_Radio and RadioListTitle  | this is the example of Radio and RadioListTitle                |
 | ex025_BoxDecoration             | this is the example of BoxDecoration                           |
+| ex026_Form Series               | this is the example of Form and TextFormField                  |
+| ex027_Slider                    | this is the example of Slider                                  |
