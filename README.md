@@ -1,5 +1,5 @@
 # FlutterCookbook
-this is a cookbook of flutter, there are all kinds of demo.
+this is a cookbook of flutter, there are all kinds of demo,please refer to following table for details.
 | **Name of Demo** | **Detailed information** |
 | :------------------------------ | :------------------------------------------------------------- |
 | ex001_ColumnRow                 | This is the example of  Column and Row Widget.                 |
@@ -29,3 +29,4 @@ this is a cookbook of flutter, there are all kinds of demo.
 | ex025_BoxDecoration             | this is the example of BoxDecoration                           |
 | ex026_Form Series               | this is the example of Form and TextFormField                  |
 | ex027_Slider                    | this is the example of Slider                                  |
+| ex028_Slider                    | this is the example of Chip                                    |
