@@ -1,6 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+//对应chip和wrap相关的知识
 class ExChip extends StatefulWidget {
   const ExChip({Key? key}) : super(key: key);
 
@@ -17,7 +17,26 @@ class _ExChipState extends State<ExChip> {
         backgroundColor: Colors.purpleAccent,
         title: Text("Example of Chip"),
       ),
-      body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      //使用Column当作chip的容器
+      // body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      //使用Wrap当作chip的容器
+      body: Wrap(
+        //控制Wrap中组件的排列方向，默认是水平排列
+        // direction: Axis.vertical,
+        //用来控制主轴方向上子组件之前的间隔
+        // spacing: 206,
+        //用来控制纵轴方向上子组件之前的间隔和对齐方式
+        // runSpacing: 8,
+
+        //对齐方式不同时尺寸要求也不一样
+        direction: Axis.horizontal,
+        spacing: 8,
+        runSpacing: 19,
+
+        runAlignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+
+        children: [
         Chip(
           label: Text('label'),
           //该属性只有设置onDeleted属性时才起作用，否则看不到图标,图标在尾部和头部相对应
@@ -37,10 +56,12 @@ class _ExChipState extends State<ExChip> {
             style: BorderStyle.none,
           ),
         ),
-        const Chip(
+        Chip(
           label: Text("weather"),
           //修改整个chip的背景颜色
           backgroundColor: Colors.purpleAccent,
+          //只添加该属性时显示默认的图标：带x的小圆
+          onDeleted: ()=>print('onDelete callback'),
         ),
         const Chip(
           label: Text("name"),

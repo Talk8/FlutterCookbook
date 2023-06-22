@@ -155,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("025", "BoxDecoration", context, const ExBoxDecoration()),
         listItem("026", "Form and TextFormField", context, const ExForm()),
         listItem("027", "Slider ", context, const ExSlider()),
-        listItem("028", "Chip", context, const ExChip()),
+        listItem("028", "Chip and Wrap", context, const ExChip()),
       ],
     );
 
