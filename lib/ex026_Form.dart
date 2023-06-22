@@ -14,8 +14,10 @@ class _ExFormState extends State<ExForm> {
   final formKey = GlobalKey<FormState>();
   AutovalidateMode _autoValidate = AutovalidateMode.disabled;
   String? _name = "Default Name";
-  String? _pwd = "Defaulte_pwd";
+  String? _pwd = "Default Pwd";
 
+  //验证和提交和方法，虽然只验证和提交一次，但是它会回调Form中所有子组件的验证和提交方法。
+  //相当于一次对所有的输入内容进行了验证和提交。
   void loginWithForm() {
     //合法性验证成功则保存数据,否则打开自动验证功能，这样在用户输入后会自动关闭错误提示，这种体验比较好
     if (formKey.currentState!.validate()) {
