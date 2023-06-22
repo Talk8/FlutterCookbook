@@ -63,10 +63,10 @@ class ExListView extends StatelessWidget {
     Widget listEx01 = ListView.builder(
       controller: _scrollController,
       itemCount: 8,
-      itemExtent: 60,
+      itemExtent: 80,
       itemBuilder: (BuildContext context, int index) {
         //不添加任何装饰
-        return listItem(Icons.ice_skating, "$index",index);
+        // return listItem(Icons.ice_skating, "$index",index);
         //使用装饰来添加分隔线
         // return Container(
         //   decoration: BoxDecoration(
@@ -80,6 +80,21 @@ class ExListView extends StatelessWidget {
         //   ),
         //   child: listItem(Icons.ice_skating, "$index"),
         // );
+
+        //通过column把Divider和listItem组合成新组件进而实现分隔线的效果
+        return Column(
+          children: [
+            listItem(Icons.ice_skating, "$index",index),
+            Divider(
+              color: Colors.grey,
+              //用来控制分隔线的宽度,默认值是0.0
+              thickness: 1.0,
+              //用来控制分隔线的前后与屏幕边缘的间距
+              indent: 32,
+              endIndent: 12,
+            ),
+          ],
+        );
       },
     );
 
@@ -107,8 +122,8 @@ class ExListView extends StatelessWidget {
         title: const Text("ListView example AppBar"),
         backgroundColor: Colors.purpleAccent,
       ),
-       body: listEx,
-      // body: listEx02,
+       // body: listEx,
+      body: listEx01,
       // body: listEx02,
     );
   }

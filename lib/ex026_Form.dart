@@ -127,6 +127,15 @@ class _ExFormState extends State<ExForm> {
                   _pwd = value;
                 },
               ),
+              //分隔线
+              Divider(
+                color: Colors.grey,
+                //用来控制分隔线的宽度,默认值是0.0
+                thickness: 1.0,
+                //用来控制分隔线的前后的间距
+                indent: 8,
+                endIndent: 8,
+              ),
               Container(
                 width: double.infinity,
                 height: 56.0,
