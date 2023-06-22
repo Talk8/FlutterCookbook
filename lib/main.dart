@@ -22,6 +22,7 @@ import 'package:fluttercookbook/ex023_MaterialApp.dart';
 import 'package:fluttercookbook/ex025_BoxDecoration.dart';
 import 'package:fluttercookbook/ex026_Form.dart';
 import 'package:fluttercookbook/ex027_Slider.dart';
+import 'package:fluttercookbook/ex028_Chip.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -154,6 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("025", "BoxDecoration", context, const ExBoxDecoration()),
         listItem("026", "Form and TextFormField", context, const ExForm()),
         listItem("027", "Slider ", context, const ExSlider()),
+        listItem("028", "Chip", context, const ExChip()),
       ],
     );
 
