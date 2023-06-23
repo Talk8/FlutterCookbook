@@ -30,3 +30,4 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex026_Form Series               | this is the example of Form and TextFormField                  |
 | ex027_Slider                    | this is the example of Slider                                  |
 | ex028_ChipAndWrap               | this is the example of Chip and Wrap                           |
+| ex029_DataTable                 | this is the example of DataTable                               |
