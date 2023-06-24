@@ -25,7 +25,7 @@ import 'package:fluttercookbook/ex027_Slider.dart';
 import 'package:fluttercookbook/ex028_Chip.dart';
 import 'package:fluttercookbook/ex029_DataTable.dart';
 import 'package:fluttercookbook/ex030_PaginatedDataTable.dart';
-import 'package:fluttercookbook/ex031_Cart.dart';
+import 'package:fluttercookbook/ex031_Card.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
