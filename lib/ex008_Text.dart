@@ -26,7 +26,9 @@ class ExText extends StatelessWidget {
             backgroundColor: Colors.cyan,
           ),
           textAlign: TextAlign.left,
+          //文字内容显示的最大行数
           maxLines: 1,
+          //超过最大行数后显示三个点
           overflow: TextOverflow.ellipsis,
         ),
       ),
