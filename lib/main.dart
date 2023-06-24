@@ -25,6 +25,7 @@ import 'package:fluttercookbook/ex027_Slider.dart';
 import 'package:fluttercookbook/ex028_Chip.dart';
 import 'package:fluttercookbook/ex029_DataTable.dart';
 import 'package:fluttercookbook/ex030_PaginatedDataTable.dart';
+import 'package:fluttercookbook/ex031_Cart.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -160,6 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("028", "Chip and Wrap", context, const ExChip()),
         listItem("029", "DataTable", context, const ExDataTable()),
         listItem("030", "PaginatedDataTable", context, const ExPaginatedDataTable()),
+        listItem("031", "Card", context, const ExCard()),
       ],
     );
 
