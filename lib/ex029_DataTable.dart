@@ -110,7 +110,6 @@ class _ExDataTableState extends State<ExDataTable> {
          //把List转换成DataRow类型的数组,主要是用了map方法
          rows: dataList.map((e) => DataRow(
            selected: e.isSelected,
-           // selected: e.isSelected,
            //该属性赋值后会在第一列左侧显示一个方框（复选框),点击复选框时回调该方法
            onSelectChanged: (value){
              //如果当前行没有被选择，就将其修改为选择，因为点击时才回调此方法
@@ -120,7 +119,6 @@ class _ExDataTableState extends State<ExDataTable> {
                });
              }
            },
-           // onSelectChanged: ,
            cells: [
            DataCell(Text(e.name)),
            DataCell(Text(e.age)),
