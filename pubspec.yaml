@@ -29,6 +29,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #talk8 add 添加国际化相关内容,添加完后IDE会在窗口上方自动弹出flutter命令，选择pub get就可以添加依赖
+  #或者是在终端中执行flutter命令，命令内容？依赖主要更新了Dart_Packages.xml文件中的内容
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+
+#导入intl依赖，输入任何数字后IDE就会自动弹出当前最新的版本
+  intl_translation: ^0.18.2
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -51,6 +60,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true # Add this line
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

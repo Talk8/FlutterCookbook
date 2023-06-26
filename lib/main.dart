@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttercookbook/Ex024_Radio.dart';
 import 'package:fluttercookbook/ExLoadingPage.dart';
 import 'package:fluttercookbook/ex004_GirdView.dart';
@@ -26,6 +27,8 @@ import 'package:fluttercookbook/ex028_Chip.dart';
 import 'package:fluttercookbook/ex029_DataTable.dart';
 import 'package:fluttercookbook/ex030_PaginatedDataTable.dart';
 import 'package:fluttercookbook/ex031_Card.dart';
+import 'package:fluttercookbook/ex032_Localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -44,6 +47,26 @@ class FlutterCookbookApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Cookbook',
+      //locale属性可以手动指定当前app使用的语言和地区，如果不指定，默认为跟随系统语言
+      // locale: Locale('zh','CN'),
+      locale: Locale('es'),
+      localizationsDelegates: [
+        //添加自己定义的多语言文字
+        AppLocalizations.delegate,
+        //添加这三个delegate后界面上的文字就会自动适配手机当前的语言
+        //这三个库包含系统自带组件中使用的文字，比如日期组件中的年月日
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      //添加多国语言和语言对应的地区，IOS的版本在info.plist中添加
+      supportedLocales: [
+        Locale('en',"US"),
+        Locale('zh',"CN"),
+        Locale('es'),
+      ],
+      //这行代码可以替代上面的配置，因为它已经自动生成上面的配置
+      // supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
@@ -162,6 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("029", "DataTable", context, const ExDataTable()),
         listItem("030", "PaginatedDataTable", context, const ExPaginatedDataTable()),
         listItem("031", "Card", context, const ExCard()),
+        listItem("032", "Localization", context, const ExLocalization()),
       ],
     );
 
