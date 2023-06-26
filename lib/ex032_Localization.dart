@@ -11,6 +11,7 @@ class ExLocalization extends StatefulWidget {
 class _ExLocalizationState extends State<ExLocalization> {
   @override
   Widget build(BuildContext context) {
+    //获取App当前的语言设置
     Locale _locale = Localizations.localeOf(context);
     return Scaffold(
       appBar: AppBar(
