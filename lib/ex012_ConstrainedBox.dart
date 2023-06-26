@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//对应21回中的内容
+//对应21,69回中的内容
 class ExConstrainedBox extends StatelessWidget {
   const ExConstrainedBox({Key? key}) : super(key: key);
 
@@ -66,6 +66,28 @@ class ExConstrainedBox extends StatelessWidget {
               color: Colors.blue,
               alignment: Alignment.center, //对齐会让child组件的宽度从自身大小变为填满父布局
               child: const Text("This is the column 7"),
+            ),
+          ),
+          const Expanded(
+            flex: 4,
+            //按照宽高比约束子组件
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              //对图片做剪裁，主要是切圆角
+              child: ClipRRect(
+                //四个方向都设置圆角
+                borderRadius: BorderRadius.all(Radius.circular(28)),
+                //只有顶部两个方向都设置圆角
+                // borderRadius: BorderRadius.only(
+                //   //card自带的圆角是16，
+                //   topLeft: Radius.circular(16),
+                //   topRight: Radius.circular(16),
+                // ),
+                child: Image(
+                  image: AssetImage("images/ex.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
         ],
