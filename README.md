@@ -33,3 +33,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex029_DataTable                 | this is the example of DataTable                               |
 | ex030_PaginatedDataTable        | this is the example of PaginatedDataTable                      |
 | ex031_Card                      | this is the example of Card Widget                             |
+| ex032_Localization              | this is the example of Localization Widget                     |
+| ex033_Clip                      | this is the example of Clip Widget                             |
