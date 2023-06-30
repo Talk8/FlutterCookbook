@@ -22,8 +22,114 @@ class ExImage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Example of Image Widget"),
+        backgroundColor: Colors.purpleAccent,
       ),
-      body: imageEx,
+      // body: imageEx,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          buildImageFill(),
+          buildImageCover(),
+          buildImageContain(),
+          buildImageColorLighten(),
+          buildImageColorClear(),
+          buildImageColorDstIn(),
+          buildImageColorDstOut(),
+          buildImageColorDiff(),
+        ],
+      ),
+    );
+  }
+
+  //抽象成方法
+  Image buildImageFill() {
+    return Image(
+      width: 80,
+      height: 100,
+      image: AssetImage("images/panda.jpeg"),
+      fit: BoxFit.fill,
+      filterQuality:FilterQuality.high ,
+    );
+  }
+
+  Image buildImageCover() {
+    return Image(
+      width: 100,
+      height: 100,
+      image: AssetImage("images/panda.jpeg"),
+      fit: BoxFit.cover,
+      filterQuality:FilterQuality.high,
+    );
+  }
+
+  Image buildImageContain() {
+    return Image(
+      width: 100,
+      height: 100,
+      image: AssetImage("images/panda.jpeg"),
+      fit: BoxFit.contain,
+      filterQuality:FilterQuality.high,
+    );
+  }
+
+  Image buildImageColorLighten() {
+    return Image(
+      color: Colors.purpleAccent,
+      width: 100,
+      height: 100,
+      image: AssetImage("images/panda.jpeg"),
+      fit: BoxFit.contain,
+      filterQuality:FilterQuality.high,
+      colorBlendMode: BlendMode.lighten,
+    );
+  }
+
+  Image buildImageColorClear() {
+    return Image(
+      color: Colors.purpleAccent,
+      width: 100,
+      height: 100,
+      image: AssetImage("images/panda.jpeg"),
+      fit: BoxFit.contain,
+      filterQuality:FilterQuality.high,
+      colorBlendMode: BlendMode.clear,
+    );
+  }
+
+  Image buildImageColorDstIn() {
+    return Image(
+      color: Colors.purpleAccent,
+      width: 100,
+      height: 100,
+      image: AssetImage("images/panda.jpeg"),
+      fit: BoxFit.contain,
+      filterQuality:FilterQuality.high,
+      colorBlendMode: BlendMode.dstIn,
+    );
+  }
+
+  Image buildImageColorDstOut() {
+    return Image(
+      color: Colors.purpleAccent,
+      width: 100,
+      height: 100,
+      image: AssetImage("images/panda.jpeg"),
+      fit: BoxFit.contain,
+      filterQuality:FilterQuality.high,
+      colorBlendMode: BlendMode.dstOut,
+    );
+  }
+
+  Image buildImageColorDiff() {
+    return Image(
+      color: Colors.purpleAccent,
+      width: 100,
+      height: 100,
+      image: AssetImage("images/panda.jpeg"),
+      fit: BoxFit.contain,
+      filterQuality:FilterQuality.high,
+      colorBlendMode: BlendMode.difference,
     );
   }
 }
