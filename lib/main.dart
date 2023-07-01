@@ -30,6 +30,7 @@ import 'package:fluttercookbook/ex031_Card.dart';
 import 'package:fluttercookbook/ex032_Localization.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttercookbook/ex033_Clip.dart';
+import 'package:fluttercookbook/ex034_IconCustom.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -188,6 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("031", "Card", context, const ExCard()),
         listItem("032", "Localization", context, const ExLocalization()),
         listItem("033", "Clip", context, const ExClip()),
+        listItem("034", "Icon", context, const ExIconCustom()),
       ],
     );
 
