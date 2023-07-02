@@ -14,8 +14,17 @@ class ExMaterialApp extends StatefulWidget {
 }
 
 class _ExMaterialAppState extends State<ExMaterialApp> {
+   final ThemeData _customTheme = ThemeData(
+         //控制AppBar以及它上面内容的背景色
+         primarySwatch: Colors.orange,
+         canvasColor: Colors.redAccent,
+         //控制AppBar以下界面的背景色
+         scaffoldBackgroundColor:Colors.blue,
+   );
+
   @override
   Widget build(BuildContext context) {
+    ThemeData _themeData = Theme.of(context);
     return MaterialApp(
       //如果MaterialApp有嵌套，那么每个都需要设置，特别是最外层的MaterialApp
       //外层设置后这里也要设置，不然不起作用，仍然显示Debug字样
@@ -60,10 +69,16 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
               onTap: (index) {
                 print("$index is selected");
               },
-              tabs: const [
-                Icon(Icons.web),
-                Icon(Icons.favorite),
-                Icon(Icons.self_improvement),
+              tabs: [
+                const Icon(Icons.web),
+                //使用主题覆盖单独修改第二个图标的颜色
+                Theme(
+                  data: _themeData.copyWith(
+                    iconTheme: _themeData.iconTheme.copyWith(color: Colors.red),
+                  ),
+                    child:Icon(Icons.favorite),
+                ),
+                const Icon(Icons.self_improvement),
               ],
             ),
           ),
@@ -104,12 +119,23 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
         "/ButtonExample": (context) => ExButton(),
 
       },
+      //使用自定义的主题
+      theme: _customTheme,
+      /*
+      //对父应主题进行扩展，或者说覆盖父主题
+      theme: Theme.of(context).copyWith(
+          primaryColor: Colors.red,
+          scaffoldBackgroundColor:Colors.redAccent, ),
+       */
+
+      /*
       theme: ThemeData(
         //用来控制主要的颜色，比如AppBar,button和默认颜色
         primarySwatch: Colors.deepPurple,
         //用来控制body体内的主要颜色
         scaffoldBackgroundColor: Colors.blueGrey,
       ),
+       */
     );
   }
 
