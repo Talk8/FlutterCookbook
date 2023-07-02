@@ -119,15 +119,8 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
         "/ButtonExample": (context) => ExButton(),
 
       },
-      //使用自定义的主题
+      //使用自定义的主题的两种方式
       theme: _customTheme,
-      /*
-      //对父应主题进行扩展，或者说覆盖父主题
-      theme: Theme.of(context).copyWith(
-          primaryColor: Colors.red,
-          scaffoldBackgroundColor:Colors.redAccent, ),
-       */
-
       /*
       theme: ThemeData(
         //用来控制主要的颜色，比如AppBar,button和默认颜色
@@ -135,6 +128,13 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
         //用来控制body体内的主要颜色
         scaffoldBackgroundColor: Colors.blueGrey,
       ),
+       */
+
+      /*
+      //对父应主题进行扩展，或者说覆盖父主题
+      theme: Theme.of(context).copyWith(
+          primaryColor: Colors.red,
+          scaffoldBackgroundColor:Colors.redAccent, ),
        */
     );
   }
