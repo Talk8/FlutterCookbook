@@ -25,6 +25,22 @@ class _ExIconCustomState extends State<ExIconCustom> {
      */
   }
 
+   _syncLaunch() {
+    print("func start");
+    Future.wait([
+      Future.delayed(Duration(seconds: 3),() {
+        print("launch url");
+        launchUrl(Uri.parse('https://pub.dev'));
+      })
+    ])
+    .then((value) => print("then running"))
+    .catchError((e){
+      print("error: "+e.toString());
+    })
+    .whenComplete(() => print("complete running"));
+    print("func end");
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -39,8 +55,9 @@ class _ExIconCustomState extends State<ExIconCustom> {
         children: [
           Icon(Icons.add),
           IconButton(
-              onPressed: _launchUrl,
-              icon:Icon(Icons.web_rounded),
+              // onPressed: _launchUrl,
+            onPressed: _syncLaunch,
+            icon:Icon(Icons.web_rounded),
           ),
 
         ],
