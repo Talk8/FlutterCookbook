@@ -39,6 +39,9 @@ dependencies:
   intl_translation: ^0.18.2
 
 
+#导入包用来访问网络,开始使用最新版本无法导入，换成低版本后就可以了
+  url_launcher: ^6.1.6
+#  url_launcher: ^6.1.11
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -75,6 +78,12 @@ flutter:
   assets:
     - images/ex.png
     - images/panda.jpeg
+
+  fonts:
+    - family: IconMoon
+      fonts:
+#        - asset: fonts/IconMoonFree.ttf
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
