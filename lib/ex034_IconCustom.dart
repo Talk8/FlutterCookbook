@@ -25,6 +25,7 @@ class _ExIconCustomState extends State<ExIconCustom> {
      */
   }
 
+  //通过Future实现异步操作
    _syncLaunch() {
     print("func start");
     Future.wait([
@@ -39,6 +40,21 @@ class _ExIconCustomState extends State<ExIconCustom> {
     })
     .whenComplete(() => print("complete running"));
     print("func end");
+  }
+
+  //通过Stream实现异步操作，程序运行结果可以参考77，78回的内容
+  _syncMultiLauncher() {
+    Stream.fromFutures([
+      Future.delayed(Duration(seconds: 2),()=>debugPrint('do one'),),
+      // Future.delayed(Duration(seconds: 2),()=>debugPrint('do two'),),
+      Future.delayed(Duration(seconds: 2),(){throw AssertionError();},),
+      Future.delayed(Duration(seconds: 2),()=>debugPrint('do three'),),
+    ])
+    .listen(
+      (event) {print('onData');},
+      onDone:() => print('onDone'),
+      onError: (v) => print('onError'),
+    );
   }
 
   @override
@@ -56,7 +72,8 @@ class _ExIconCustomState extends State<ExIconCustom> {
           Icon(Icons.add),
           IconButton(
               // onPressed: _launchUrl,
-            onPressed: _syncLaunch,
+            // onPressed: _syncLaunch,
+            onPressed: _syncMultiLauncher,
             icon:Icon(Icons.web_rounded),
           ),
 
