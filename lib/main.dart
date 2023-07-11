@@ -82,8 +82,8 @@ class FlutterCookbookApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      // home: ExLoadingPage(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: ExLoadingPage(),
 
       //这种方式的路由可以启动，但是有报错，与setState有关。
       routes: <String,WidgetBuilder>{
