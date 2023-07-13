@@ -121,6 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    debugPrint('HomePage build');
+
     ListTile listItem(
         String index, String title, BuildContext context, Widget drcWidget) {
       return ListTile(
@@ -201,5 +203,35 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: listWidget,
     );
+  }
+
+  @override
+  void initState() {
+    debugPrint('HomePage initState');
+  }
+
+  @override
+  void dispose() {
+    debugPrint('HomePage dispose');
+  }
+
+  @override
+  void activate() {
+    debugPrint('HomePage activate');
+  }
+
+  @override
+  void deactivate() {
+    debugPrint('HomePage deactivate');
+  }
+
+  @override
+  void reassemble() {
+    debugPrint('HomePage reassemble');
+  }
+
+  @override
+  void didUpdateWidget(Widget oldWidget) {
+    debugPrint('HomePage didUpdateWidget');
   }
 }
