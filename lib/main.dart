@@ -191,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("031", "Card", context, const ExCard()),
         listItem("032", "Localization", context, const ExLocalization()),
         listItem("033", "Clip", context, const ExClip()),
-        listItem("034", "Icon", context, const ExIconCustom()),
+        listItem("034", "Icon&FontIcon Future&Stream", context, const ExIconCustom()),
         listItem("035", "SplashScreen", context, const ExSplashScreen()),
       ],
     );
