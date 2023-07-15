@@ -190,7 +190,7 @@ class _ExIconCustomState extends State<ExIconCustom> {
           //使用自定义类中的图标，可以修改图标和大小和颜色
           Icon(CustomIcon.char_count,size: 40,color: Colors.purpleAccent,),
           //使用自定义类中的图标，图标和大小和颜色使用默认值，图标从网络下载遵守SIL开源协议
-          Icon(CustomAppIcon.download),
+          Icon(CustomAppIcon.gplus_circled),
           IconButton(
               // onPressed: _launchUrl,
             // onPressed: _syncLaunch,
@@ -240,7 +240,7 @@ class CustomAppIcon {
   // MyFlutterApp._();
 
   // static const _kFontFam = 'MyFlutterApp';
-  static const _kFontFam = 'CustomAppIcon';
+  static const _kFontFam = 'FlutterIconCom';
   static const String? _kFontPkg = null;
 
   static const IconData note_1 = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
