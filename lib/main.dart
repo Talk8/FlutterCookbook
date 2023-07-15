@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttercookbook/Ex024_Radio.dart';
-import 'package:fluttercookbook/ExLoadingPage.dart';
+import 'package:fluttercookbook/ex035_SplashScreen.dart';
 import 'package:fluttercookbook/ex004_GirdView.dart';
 import 'package:fluttercookbook/ex005_Stack.dart';
 import 'package:fluttercookbook/ex006_RouterNavigator.dart';
@@ -83,7 +83,7 @@ class FlutterCookbookApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: ExLoadingPage(),
+      home: ExSplashScreen(),
 
       //这种方式的路由可以启动，但是有报错，与setState有关。
       routes: <String,WidgetBuilder>{
@@ -192,6 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("032", "Localization", context, const ExLocalization()),
         listItem("033", "Clip", context, const ExClip()),
         listItem("034", "Icon", context, const ExIconCustom()),
+        listItem("035", "SplashScreen", context, const ExSplashScreen()),
       ],
     );
 
