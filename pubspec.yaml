@@ -82,7 +82,10 @@ flutter:
   fonts:
     - family: IconMoon
       fonts:
-#        - asset: fonts/IconMoonFree.ttf
+        - asset: fonts/IcoMoonFree.ttf
+    - family: FlutterIconCom
+      fonts:
+        - asset: fonts/FlutterIconCom.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
