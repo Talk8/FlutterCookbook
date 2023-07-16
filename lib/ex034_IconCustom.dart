@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-//这个文件中包含了自定义字体图标83，以及异步中的Future和Stream相关的内容
+//这个文件中包含了自定义字体图标84，85,86以及异步中的Future和Stream相关的内容
 class ExIconCustom extends StatefulWidget {
   const ExIconCustom({Key? key}) : super(key: key);
 
@@ -185,6 +185,10 @@ class _ExIconCustomState extends State<ExIconCustom> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(Icons.add),
+          Icon(Icons.watch,
+          size: 90,
+          color: Colors.blue[400],
+          ),
           //通过IconData使用ttf文件中的图标
           Icon(IconData(0x2211,fontFamily:'IconMoon' )),
           //使用自定义类中的图标，可以修改图标和大小和颜色
