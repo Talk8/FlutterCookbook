@@ -191,7 +191,7 @@ class _ExIconCustomState extends State<ExIconCustom> {
           ),
           //通过IconData使用ttf文件中的图标
           Icon(IconData(0x2211,fontFamily:'IconMoon' )),
-          //使用自定义类中的图标，可以修改图标和大小和颜色
+          //使用自定义类中的字体图标，还可以修改图标和大小和颜色
           Icon(CustomIcon.char_count,size: 40,color: Colors.purpleAccent,),
           //使用自定义类中的图标，图标和大小和颜色使用默认值，图标从网络下载遵守SIL开源协议
           Icon(CustomAppIcon.gplus_circled),
