@@ -199,7 +199,7 @@ class _ExIconCustomState extends State<ExIconCustom> {
           ///使用font_awesome_flutter包中的图标
           Icon(FontAwesomeIcons.twitter),
           Icon(FontAwesomeIcons.music),
-          
+
           IconButton(
               // onPressed: _launchUrl,
             // onPressed: _syncLaunch,
