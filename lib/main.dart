@@ -31,6 +31,8 @@ import 'package:fluttercookbook/ex032_Localization.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttercookbook/ex033_Clip.dart';
 import 'package:fluttercookbook/ex034_IconCustom.dart';
+import 'package:fluttercookbook/ex036_networkDIO.dart';
+import 'package:logger/logger.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -82,8 +84,9 @@ class FlutterCookbookApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: ExSplashScreen(),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      ///注释掉程序中的splashScreen
+      // home: ExSplashScreen(),
 
       //这种方式的路由可以启动，但是有报错，与setState有关。
       routes: <String,WidgetBuilder>{
@@ -113,6 +116,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Logger logger = Logger(
+    printer: PrettyPrinter(
+        methodCount: 0,
+        printEmojis: false,
+        printTime: true,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -193,6 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("033", "Clip", context, const ExClip()),
         listItem("034", "Icon&FontIcon Future&Stream", context, const ExIconCustom()),
         listItem("035", "SplashScreen", context, const ExSplashScreen()),
+        listItem("036", "NetworkDio", context, const ExNetworkDio()),
       ],
     );
 
@@ -209,6 +221,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     debugPrint('HomePage initState');
+    ///测试各种log输出
+    logger.v('initState');
+    logger.i('initState');
+    logger.w('initState');
+    logger.d('initState');
+    logger.e('initState');
   }
 
   @override
