@@ -33,7 +33,14 @@ class ExColumnRow extends StatelessWidget {
           /// spaceEvenly 所有组件之间的边距平分
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.end,
+          ///用来控制每个组件的大小，默认是不max表示组件占用row中最大空间，类似android中的match_parent,
+          ///可以修改成min,表示依据组件占用row中空间包裹自己就可以，类似android中的wrap_content
+          ///交叉轴cross默认情况下，组件占用空间包裹自己就可以,可以修改crossAxisAlignment的属性值为stretch
+          ///这样交叉轴上的组件就会占用最大空间,类似android中的match_parent,
+          mainAxisSize: MainAxisSize.max,
           children: [
+            ///expanded会自动扩展或者伸缩，如果屏幕上有扩展空间就扩展，没有扩展空间就收缩，可以通过flex控制伸缩或者扩展比例
+            ///flex就类似于android中的weight，表示比重
             Expanded(
               child: Column(
                 children: const [
