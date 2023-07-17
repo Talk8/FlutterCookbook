@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //这个文件中包含了自定义字体图标84，85,86以及异步中的Future和Stream相关的内容
 class ExIconCustom extends StatefulWidget {
@@ -189,12 +190,16 @@ class _ExIconCustomState extends State<ExIconCustom> {
           size: 90,
           color: Colors.blue[400],
           ),
-          //通过IconData使用ttf文件中的图标
+          ///通过IconData使用ttf文件中的图标
           Icon(IconData(0x2211,fontFamily:'IconMoon' )),
-          //使用自定义类中的字体图标，还可以修改图标和大小和颜色
+          ///使用自定义类中的字体图标，还可以修改图标和大小和颜色
           Icon(CustomIcon.char_count,size: 40,color: Colors.purpleAccent,),
-          //使用自定义类中的图标，图标和大小和颜色使用默认值，图标从网络下载遵守SIL开源协议
+          ///使用自定义类中的图标，图标和大小和颜色使用默认值，图标从网络下载遵守SIL开源协议
           Icon(CustomAppIcon.gplus_circled),
+          ///使用font_awesome_flutter包中的图标
+          Icon(FontAwesomeIcons.twitter),
+          Icon(FontAwesomeIcons.music),
+          
           IconButton(
               // onPressed: _launchUrl,
             // onPressed: _syncLaunch,
