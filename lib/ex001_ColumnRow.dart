@@ -27,7 +27,10 @@ class ExColumnRow extends StatelessWidget {
             border: Border.all(color: Colors.red, width: 3),
             borderRadius: const BorderRadius.all(Radius.circular(20))),
         child: const Row(
-          //主轴对齐方式，cross表示与主轴垂直方向的对齐方式
+          ///主轴对齐方式，cross表示与主轴垂直方向的对齐方式
+          /// spaceBetween 靠近start/end的间距为0，其它组件之间的边距平分
+          /// spaceAround 靠近start/end的间距为其它组件间距的一半，其它组件之间的边距平分
+          /// spaceEvenly 所有组件之间的边距平分
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
