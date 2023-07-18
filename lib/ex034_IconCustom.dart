@@ -246,7 +246,8 @@ class CustomIcon {
 
 //从fluttericon.com下载的图标，类型是Entypo,下面的代码来自下载包中的示例MyFlutterApp.dart,我修改了名字
 class CustomAppIcon {
-  // MyFlutterApp._();
+  //单例模式
+  CustomAppIcon.CustomAppIcon_();
 
   // static const _kFontFam = 'MyFlutterApp';
   static const _kFontFam = 'FlutterIconCom';
