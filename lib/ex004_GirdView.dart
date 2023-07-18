@@ -1,4 +1,5 @@
-//本代码和第七回的内容匹配，主要介绍GridView这个Widget
+///本代码和第七回的内容匹配，主要介绍GridView这个Widget
+/// ColorPaletteByGridView与88回内容对应，主要是使用GridView的构造方法实现一个调色板
 
 import 'dart:math';
 
