@@ -222,11 +222,11 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     debugPrint('HomePage initState');
     ///测试各种log输出
-    logger.v('initState');
-    logger.i('initState');
-    logger.w('initState');
-    logger.d('initState');
-    logger.e('initState');
+    // logger.v('initState');
+    // logger.i('initState');
+    // logger.w('initState');
+    // logger.d('initState');
+    // logger.e('initState');
   }
 
   @override
