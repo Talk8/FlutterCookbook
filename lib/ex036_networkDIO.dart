@@ -41,7 +41,7 @@ class _ExNetworkDioState extends State<ExNetworkDio> {
               ///使用自定义的方法或者封装类中的静态方法发起GET请求
               // _getRequest();
               HttpRequest.request(_getTypeUUID,method: 'get', params: {"uuid":"a19da"})
-              .then((value) => print(value.toString()));
+              .then((value) => print('receive data ${value.toString()}'));
             },
             child: Text('GET request'),
           ),
@@ -49,9 +49,9 @@ class _ExNetworkDioState extends State<ExNetworkDio> {
             onPressed: () {
               debugPrint('post button clicked');
               ///使用自定义的方法或者封装类中的静态方法发起POST请求
-              // _postRequest();
+              /// _postRequest();
               HttpRequest.request(_postType,method: 'post', params: {"user":"jam"})
-              .then((value) => debugPrint(value.toString()));
+              .then((value) => debugPrint('receive data ${value.toString()}'));
             },
             child: Text('POST request'),
           ),
@@ -63,6 +63,7 @@ class _ExNetworkDioState extends State<ExNetworkDio> {
 
 
 ///封装DIO网络库
+///封装常用的网络参数
 class HttpConfig {
   static final String BASE_URL = 'https://httpbin.org';
   static final int TIME_OUT = 15;
@@ -77,14 +78,34 @@ class HttpRequest {
   );
 
   static final mdio = Dio(baseOptions);
-
+///把网络操作相关的功能封装成独立的方法，网络操作相关的数据通过url和params参数传递
   static Future<T> request<T>(String url,{
         String method='get',
-        required Map<String,dynamic> params
+        required Map<String,dynamic> params,
+        Interceptor? interceptor,
       }) async {
 
     final option = Options(method: method);
-    //默认也会抛出异常，这里只用来捕获特定的异常
+
+    ///添加拦截器
+    Interceptor _interceptor = InterceptorsWrapper(
+      onRequest: (options,handler) {
+        // print('request: '+ options.toString());
+        print('request: '+ options.toString());
+        return handler.next(options);
+        },
+      onResponse: (response,handler){
+        print('response: ' + response.toString());
+        return handler.next(response);
+        },
+      onError: (error,handler) {
+        print('response: ' + error.toString());
+        return handler.next(error);
+        },
+    );
+    mdio.interceptors.add(_interceptor);
+
+    ///默认也会抛出异常，这里只用来捕获特定的异常
     try {
       Response response = await mdio.request(
           url, queryParameters: params, options: option);
