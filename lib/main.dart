@@ -32,6 +32,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttercookbook/ex033_Clip.dart';
 import 'package:fluttercookbook/ex034_IconCustom.dart';
 import 'package:fluttercookbook/ex036_networkDIO.dart';
+import 'package:fluttercookbook/ex037_CustomRatingBar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
@@ -205,6 +207,12 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("034", "Icon&FontIcon Future&Stream", context, const ExIconCustom()),
         listItem("035", "SplashScreen", context, const ExSplashScreen()),
         listItem("036", "NetworkDio", context, const ExNetworkDio()),
+        ///使用自定义的评分条：三种不同的评分条，只有评分的形状不同
+        listItem("037", "CustomRatingBar - Star", context, CustomRatingBar(rating:7.0)),
+        listItem("037", "CustomRatingBar - DianZan", context, CustomRatingBar(rating: 7.0,countOfStar: 5,
+          paramRatingedWidget:Icon(FontAwesomeIcons.thumbsUp) ,paramUnRatingedWidget:Icon(FontAwesomeIcons.thumbsUp),)),
+        listItem("037", "CustomRatingBar - Face ", context, CustomRatingBar(rating: 7.0,countOfStar: 5,
+          paramRatingedWidget:Icon(FontAwesomeIcons.faceSmile) ,paramUnRatingedWidget:Icon(FontAwesomeIcons.faceSmile),)),
       ],
     );
 
