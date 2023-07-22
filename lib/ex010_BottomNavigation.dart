@@ -71,7 +71,7 @@ class _bodyWidget extends State<BodyWidget> {
       // body: const Text("test"),
       body: bodyWidgetList[selectIndex],
       bottomNavigationBar: BottomNavigationBar(
-        //超过3个item时需要使用type属性
+        //超过3个item时需要使用type属性,不然无法显示文字
         backgroundColor: Colors.amber,
         type: BottomNavigationBarType.fixed,
         currentIndex: selectIndex,
