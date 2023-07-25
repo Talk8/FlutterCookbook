@@ -57,10 +57,10 @@ class FlutterCookbookApp extends StatelessWidget {
       // locale: Locale('zh','CN'),
       locale: Locale('es'),
       localizationsDelegates: [
-        //添加自己定义的多语言文字
+        ///添加自己定义的多语言文字
         AppLocalizations.delegate,
-        //添加这三个delegate后界面上的文字就会自动适配手机当前的语言
-        //这三个库包含系统自带组件中使用的文字，比如日期组件中的年月日
+        ///添加这三个delegate后界面上的文字就会自动适配手机当前的语言
+        ///这三个库包含系统自带组件中使用的文字，比如日期组件中的年月日
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
