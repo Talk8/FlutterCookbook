@@ -37,4 +37,4 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex033_Clip                      | this is the example of Clip Widget.                            |
 | ex034_Icon and Async task       | this is the example of Icon Widget and Async task:Future,stream|
 | ex035_SplashScreen              | this is the example of SplashScreen and Widget Circle method   |
-| ex036_DioNetworkOption          | this is the example of http option by dio                      |
+| ex036_DioNetworkOption          | this is the example of http option by dio.                     |
