@@ -6,6 +6,8 @@ import 'package:fluttercookbook/x_z_weather_bean_entity.dart';
 import 'package:fluttercookbook/ex038_NetworkDemo/core/networkException.dart';
 import '_private_data.dart';
 
+///与90到96章回的内容匹配，包含网络请求参数配置，dio封装，JSON数据解析等内容
+///ex038目录下的代码是另外一种封装dio的思路，最大的区别是包含了适配器，可以mock数据
 class ExNetworkDio extends StatefulWidget {
   const ExNetworkDio({Key? key}) : super(key: key);
 
