@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:fluttercookbook/ex038_NetworkDemo/core/network.dart';
+import 'package:fluttercookbook/ex038_NetworkDemo/request/test_request.dart';
+import 'package:fluttercookbook/x_z_weather_bean_entity.dart';
+import 'package:fluttercookbook/ex038_NetworkDemo/core/networkException.dart';
+import '_private_data.dart';
 
 class ExNetworkDio extends StatefulWidget {
   const ExNetworkDio({Key? key}) : super(key: key);
@@ -24,6 +29,101 @@ class _ExNetworkDioState extends State<ExNetworkDio> {
 
     _postRequest() {
       _mDio.post(_postType).then((value) => debugPrint(value.toString()));
+    }
+
+    ///获取天气信息，网络框架使用httpRequest,请求参数使用map添加
+    _getWeatherInfo() async {
+      var url = HttpConfig.BASE_URL+HttpConfig.PATH_TIAN_QI_SHI_KUANG;
+      Map<String,String> queryParams = {};
+      queryParams['key'] = PrivateKey.key;
+      queryParams['location'] = 'beijing';
+      queryParams['language'] = 'zh-Hans';
+      queryParams['unit'] = 'c';
+
+      TestRequest _testRequest = TestRequest();
+      _testRequest.addRequestParams('key',PrivateKey.key)
+          .addRequestParams('location', 'beijing')
+          .addRequestParams('language', 'zh-Hans')
+          .addRequestParams('unit', 'c');
+      HttpRequest.request(url, params: queryParams)
+      .then((value){
+        debugPrint(XZWeatherBeanEntity.fromJson(value).toString());
+        XZWeatherBeanEntity.fromJson(value).results?.forEach((element) {
+          print("now: ${element.now}");
+        });
+      });
+    }
+
+    ///获取天气信息，网络框架使用httpRequest,但是请求参数使用testRequest.
+    _getWeatherInfoByTestRequest() async {
+      TestRequest _testRequest = TestRequest();
+      _testRequest.addRequestParams('key',PrivateKey.key)
+          .addRequestParams('location', 'beijing')
+          .addRequestParams('language', 'zh-Hans')
+          .addRequestParams('unit', 'c');
+      ///params为空，因为testrequest中已经包含
+      HttpRequest.request(_testRequest.url(), params:{})
+          .then((value){
+        debugPrint(XZWeatherBeanEntity.fromJson(value).toString());
+        XZWeatherBeanEntity.fromJson(value).results?.forEach((element) {
+          print("now: ${element.now}");
+        });
+      });
+    }
+
+    ///使用封装的网络框架发起Http请求,一定要封装成异步方法，不然无法捕获到异常
+    _mockRequest() async {
+      TestRequest testRequest = TestRequest();
+      testRequest.addHeader("token","token-value");
+      testRequest.addRequestParams("key1", "value1").addRequestParams("key2", "value2");
+      var result;
+      try {
+        result = await NetworkWrapper.getInstance()?.fire(testRequest);
+      }on NeedAuth catch(e) {
+        print('NeedAuth error');
+        debugPrint(e.toString());
+      }on NeedLogin catch(e) {
+        print('NeedLogin error');
+        debugPrint(e.toString());
+      }on DioException catch(e) {
+        print('dio error');
+        debugPrint(e.toString());
+      } catch (e) {
+        print('other error');
+        debugPrint(e.toString());
+      }
+
+      debugPrint("result: ${result.toString()}");
+    }
+
+
+    ///使用封装的network网络框架发起Http请求,
+    _dioRequest() async {
+      ///base url在baseReqeust中设置，path在testRequest的path方法中设定。这里只添加body中的内容
+      ///也就是baseRequest中queryParams中的数据
+      TestRequest testRequest = TestRequest();
+      testRequest.addRequestParams('key',PrivateKey.key)
+      .addRequestParams('location', 'beijing')
+      .addRequestParams('language', 'zh-Hans')
+      .addRequestParams('unit', 'c');
+
+      // debugPrint(' before fire: ${testRequest.toString()}');
+
+      var result;
+      try {
+        result = await NetworkWrapper.getInstance()?.fire(testRequest);
+      }on NeedAuth catch(e) {
+        print('NeedAuth error');
+        debugPrint(e.toString());
+      }on NeedLogin catch(e) {
+        print('NeedLogin error');
+        debugPrint(e.toString());
+      }catch (e) {
+        print('other error');
+        debugPrint(e.toString());
+      }
+
+      debugPrint("result: ${result.toString()}");
     }
 
     return Scaffold(
@@ -55,6 +155,34 @@ class _ExNetworkDioState extends State<ExNetworkDio> {
             },
             child: Text('POST request'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              debugPrint('get weather button clicked');
+              _getWeatherInfo();
+            },
+            child: Text('get weather by HttpRequest'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              debugPrint('get weather button clicked');
+              _getWeatherInfoByTestRequest();
+            },
+            child: Text('get weather by TestRequest'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              debugPrint('network button clicked');
+              _mockRequest();
+            },
+            child: Text('mock Network Framework request'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              debugPrint('weather button clicked');
+              _dioRequest();
+            },
+            child: Text('weather data request by network'),
+          ),
         ],
       ),
     );
@@ -65,8 +193,21 @@ class _ExNetworkDioState extends State<ExNetworkDio> {
 ///封装DIO网络库
 ///封装常用的网络参数
 class HttpConfig {
-  static final String BASE_URL = 'https://httpbin.org';
-  static final int TIME_OUT = 15;
+  // static final String BASE_URL = 'https://httpbin.org';
+  static const String BASE_URL = "https://api.seniverse.com";
+  static const int TIME_OUT = 15;
+  var _getTypeUUID = "https://httpbin.org/uuid";
+
+  ///对应天气实况
+  // var TIAN_QI_SHI_KUANG = "https://api.seniverse.com/v3/weather/now.json?key=your_api_key&location=beijing&language=zh-Hans&unit=c";
+  static const PATH_TIAN_QI_SHI_KUANG = "/v3/weather/now.json";
+
+  ///对应24小时逐小时天气预报
+  // var HOUR24 = "https://api.seniverse.com/v3/weather/hourly.json?key=your_api_key&location=beijing&language=zh-Hans&unit=c&start=0&hours=24";
+  static const PATH_HOUR24 = "/v3/weather/hourly.json";
+  ///对应未来15天逐日天气预报和和昨日天气，不过免费的key只能获取3天的天气预报
+  // var FORECAST_DAYS = "https://api.seniverse.com/v3/weather/daily.json?key=your_api_key&location=beijing&language=zh-Hans&unit=c&start=0&days=3";
+  static const PATH_FORECAST_DAYS = "/v3/weather/daily.json";
 }
 
 class HttpRequest {
@@ -90,8 +231,12 @@ class HttpRequest {
     ///添加拦截器
     Interceptor _interceptor = InterceptorsWrapper(
       onRequest: (options,handler) {
+        ///调试时再打开，主要有来显示请求相关的数据
         // print('request: '+ options.toString());
-        print('request: '+ options.toString());
+        // print('request: baseUrl: '+ options.baseUrl);
+        // print('request: path: '+ options.path);
+        // print('request: url: '+ options.uri.toString());
+        // print('request: queryParams: '+ options.queryParameters.toString());
         return handler.next(options);
         },
       onResponse: (response,handler){
