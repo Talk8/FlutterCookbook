@@ -9,8 +9,9 @@ class DioAdapter extends NetworkAdapter {
   Future<Response> send<T>(BaseRequest request) async {
     // TODO: implement send
     var options= BaseOptions(
-      baseUrl: request.baseUrl(),
-      queryParameters: request.queryParams,
+      ///在testRequest中已经包含，不需要在这里设置，不然就会报重复设置的错误
+      // baseUrl: request.baseUrl(),
+      // queryParameters: request.queryParams,
       headers: request.headerParams,
       sendTimeout: const Duration(seconds: 20),
     );
@@ -23,11 +24,12 @@ class DioAdapter extends NetworkAdapter {
     ///添加拦截器
     Interceptor _interceptor = InterceptorsWrapper(
       onRequest: (options,handler) {
+        ///调试时再打开，主要有来显示请求相关的数据
         // print('request: '+ options.toString());
-        print('request: baseUrl: '+ options.baseUrl);
-        print('request: path: '+ options.path);
-        print('request: url: '+ options.uri.toString());
-        print('request: queryParams: '+ options.queryParameters.toString());
+        // print('request: baseUrl: '+ options.baseUrl);
+        // print('request: path: '+ options.path);
+        // print('request: url: '+ options.uri.toString());
+        // print('request: queryParams: '+ options.queryParameters.toString());
         return handler.next(options);
       },
       onResponse: (response,handler){
@@ -80,19 +82,24 @@ class DioAdapter extends NetworkAdapter {
   }
 }
 
-///自定义的转换器，可以使用dio的提供的SyncTransformer
-class CustomTransform extends Transformer {
+///自定义的转换器，可以使用dio的提供的SyncTransformer,在PUT,POST和PATCH请求中才有效果
+class CustomTransform extends BackgroundTransformer{
+  ///在PUT,POST和PATCH请求中才会回调
   @override
   Future<String> transformRequest(RequestOptions options) {
     // TODO: implement transformRequest
     print('transformRequest running');
-    return Future.value('request');
+    return super.transformRequest(options);
   }
 
+  ///除了PUT,POST和PATCH请求外，GET请求中也会回调
   @override
   Future transformResponse(RequestOptions options, ResponseBody response) {
     // TODO: implement transformResponse
     print('transformResponse running');
-    return Future.value('response');
+    ///转换返回的数据 为string: response
+    // return Future.value('response');
+    ///不转换数据
+    return super.transformResponse(options, response);
   }
 }

@@ -18,5 +18,4 @@ class TestRequest extends BaseRequest {
     ///path是com到key之间的内容，通过url自动生成 :"https://api.seniverse.com/v3/weather/now.json?key
     return "v3/weather/now.json";
   }
-
 }
