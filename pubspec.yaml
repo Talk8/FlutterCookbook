@@ -45,6 +45,9 @@ dependencies:
 
 #导入DIO包来访问网络
   dio: ^5.2.1
+#导入shared_preferences包实现本地存储
+  shared_preferences: ^2.2.0
+
 #导入font_awesome_flutter字体图标包
   font_awesome_flutter: ^10.5.0
 
