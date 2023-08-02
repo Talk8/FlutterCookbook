@@ -125,7 +125,9 @@ class WidgetA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('builder of Widget A running');
-    return Text("Widget A data:${Provider.of<ViewModel>(context)._data}");
+    ///监听器设置为false时不会更新共享数据，更不会更新整个组件，当前build方法不会被回调
+    return Text("Widget A data:${Provider.of<ViewModel>(context,listen: true)._data}");
+    // return Text("Widget A data:${Provider.of<ViewModel>(context,listen: false)._data}");
   }
 }
 
