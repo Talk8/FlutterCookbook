@@ -33,6 +33,7 @@ class _EXSharedDataState extends State<EXSharedData> {
               child: const SonWidget(),
             ),
           ),
+
           ///使用Provider获取共享数据，并且更新组件
           Container(
             width: 300,
@@ -41,6 +42,7 @@ class _EXSharedDataState extends State<EXSharedData> {
             color: Colors.green,
             child: WidgetA(),
           ),
+
           ///使用Consumer获取共享数据,并且更新组件
           Container(
             width: 300,
@@ -48,6 +50,16 @@ class _EXSharedDataState extends State<EXSharedData> {
             alignment: Alignment.center,
             color: Colors.green,
             child: WidgetB(),
+          ),
+
+          ///使用Selector获取共享数据,是否更新组件可以通过shouldRebuild属性进行配置
+          ///Selector还有数据转换功能
+          Container(
+            width: 300,
+            height: 100,
+            alignment: Alignment.center,
+            color: Colors.green,
+            child: WidgetC(),
           ),
           SizedBox(
             width: 200,
@@ -77,16 +89,63 @@ class _EXSharedDataState extends State<EXSharedData> {
             width: 200,
             height: 100,
             child: Consumer<ViewModel>(
-              builder: (context,viewModel,child){
+              builder: (context, viewModel, child) {
                 return ElevatedButton(
-                    onPressed:() {viewModel.setData = "change data";
-                      print('change value button clicked');},
+                    onPressed: () {
+                      viewModel.setData = "change data";
+                      print('change value button clicked');
+                    },
                     child: const Text('change data by Consumer'));
               },
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class WidgetC extends StatelessWidget {
+  const WidgetC({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Selector<ViewModel, ViewModelAfterTranslate>(
+      ///把新类型中数据通过child显示出来
+      builder: (context, viewModelAnother,child) {
+        print('builder of Selector of Widget C running');
+        return Text('Widget C data: ${viewModelAnother.getIntData}');
+      },
+      ///在selector中进行数据类型转换，通过参数传入原类型，在方法中转换后返回新类型
+      selector: (context, viewModel) {
+        ViewModelAfterTranslate obj = ViewModelAfterTranslate();
+        ///依据共享数据的值来转换数据,转换后的数据通过builder属性显示出来
+        /// 字符串是通过button修改产生的，这里写成固定的值，实际项目中不能这样写
+        if(viewModel.getData == 'change data') {
+          obj.setIntData = 1;
+        }else if(viewModel.getData == 'another value'){
+          obj.setIntData = 2;
+        }else {
+          obj.setIntData = 0;
+        }
+        return obj;
+      },
+      ///可以配置是否需要更新数据，默认值为false,它是可选属性
+      ///注意方法中的参数类型是新数据类型，也就是转换后的数据类型
+      // shouldRebuild:(previous,next) => true,
+      shouldRebuild:(previous,next) {
+        print(' prev: ${previous.getIntData}, next: ${next.getIntData}');
+        if (previous.getIntData == next.getIntData) {
+          return false;
+        } else {
+          return true;
+        }
+      },
+      ///没有使用该属性
+      child: Text('child'),
     );
   }
 }
@@ -101,15 +160,16 @@ class WidgetB extends StatelessWidget {
     ///使用consumer共享数据时consumer外层的build不调用，只调用consumer中builder属性对应的方法
     print('builder of Widget B running');
     return Consumer<ViewModel>(
-      builder: (context,data,child){
+      builder: (context, data, child) {
         print('builder of Consumer of Widget B running');
-        if(child != null){
+        if (child != null) {
           ///在这里添加需要更新的widget
           print(' child is not null');
         }
         print('data is: ${data.getData}');
         return Text("Widget B data: ${data._data}");
       },
+
       ///在这里添加不需要更新的widget，这个child和builder方法中的child一样
       child: Text('childe of consumer'),
     );
@@ -125,7 +185,7 @@ class WidgetA extends StatelessWidget {
   Widget build(BuildContext context) {
     print('builder of Widget A running');
     ///监听器设置为false时不会更新共享数据，更不会更新整个组件，当前build方法不会被回调
-    return Text("Widget A data:${Provider.of<ViewModel>(context,listen: true)._data}");
+    return Text("Widget A data:${Provider.of<ViewModel>(context, listen: true)._data}");
     // return Text("Widget A data:${Provider.of<ViewModel>(context,listen: false)._data}");
   }
 }
@@ -216,7 +276,6 @@ class ViewModel extends ChangeNotifier {
   late int _intData;
   late String _data;
 
-
   ViewModel() {
     _intData = 0;
     _data = 'init data';
@@ -240,5 +299,21 @@ class ViewModel extends ChangeNotifier {
     _data = value;
     ///当数据更新时通知更新UI
     notifyListeners();
+  }
+}
+
+///创建数据类型转换类,它表示转换后的类型，它的类型是任意的，不需要继承ChangeNotifier类
+///示例中通过不同的数值把string类型的数据转换成了int类型的数据
+class ViewModelAfterTranslate {
+  late int _intData;
+
+  ViewModel() {
+    _intData = 0;
+  }
+
+  int get getIntData => _intData;
+
+  set setIntData(int value) {
+    _intData = value;
   }
 }
