@@ -10,7 +10,6 @@ class EXSharedData extends StatefulWidget {
 
 class _EXSharedDataState extends State<EXSharedData> {
   String _tempData = "default value";
-  String _allShatedData = 'no value';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -33,8 +33,12 @@ import 'package:fluttercookbook/ex033_Clip.dart';
 import 'package:fluttercookbook/ex034_IconCustom.dart';
 import 'package:fluttercookbook/ex036_networkDIO.dart';
 import 'package:fluttercookbook/ex037_CustomRatingBar.dart';
+import 'package:fluttercookbook/ex039_SharedPreferences.dart';
+import 'package:fluttercookbook/ex040_FileOperation.dart';
+import 'package:fluttercookbook/ex041_SharedData.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -42,7 +46,16 @@ import 'ex008_Text.dart';
 import 'ex012_ConstrainedBox.dart';
 
 void main() {
-  runApp(const FlutterCookbookApp());
+  // runApp(const FlutterCookbookApp());
+  ///共享数据是自定义的viewModel
+  ///在整个应用的顶层设置Notifier,
+  ///在整个应用的任何位置都可以使用viewModel中共享的数据
+  runApp(
+    ChangeNotifierProvider(
+      create:(context) => ViewModel(),
+      child: const FlutterCookbookApp(),
+    )
+  );
 }
 
 class FlutterCookbookApp extends StatelessWidget {
@@ -213,6 +226,9 @@ class _MyHomePageState extends State<MyHomePage> {
           paramRatingedWidget:Icon(FontAwesomeIcons.thumbsUp) ,paramUnRatingedWidget:Icon(FontAwesomeIcons.thumbsUp),)),
         listItem("037", "CustomRatingBar - Face ", context, CustomRatingBar(rating: 7.0,countOfStar: 5,
           paramRatingedWidget:Icon(FontAwesomeIcons.faceSmile) ,paramUnRatingedWidget:Icon(FontAwesomeIcons.faceSmile),)),
+        listItem("039", "SharedPreferences", context, const ExSharedPreferences()),
+        listItem("040", "FileStored", context, const ExFileStored()),
+        listItem("041", "SharedData/StateManaged", context, const EXSharedData()),
       ],
     );
 
