@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+///与101-105章回的内容匹配，主要介绍如何在组件之间共享数据，或者叫状态管理
+///点击修改共享数据的button,监听共享数据的组件会收到数据变化的通知，然后更新组件中的数据
 class EXSharedData extends StatefulWidget {
   const EXSharedData({Key? key}) : super(key: key);
 

@@ -40,3 +40,6 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex036_DioNetworkOption          | this is the example of http request by dio and json parse.     |
 | ex037_CustomRatingBar           | this is the example of custom rating bar.                      |
 | ex038_NetworkPackage            | this is the example of Network package,and query weather info. |
+| ex039_SharedPreferences         | this is the example of SharedPreference package.               |
+| ex040_FileOperation             | this is the example of path_provide package,and file operation.|
+| ex041_SharedData                | this is the example of provide package,and state management.   |
