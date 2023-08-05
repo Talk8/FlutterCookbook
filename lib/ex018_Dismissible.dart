@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///与32内容对应
 class ExDismissble extends StatelessWidget {
   const ExDismissble({Key? key}) : super(key: key);
 

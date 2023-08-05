@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//和23,24回中的内容相匹配
+///和23,24回中的内容相匹配
 class ExPointerEvent extends StatefulWidget {
   const ExPointerEvent({Key? key}) : super(key: key);
 
@@ -9,11 +9,12 @@ class ExPointerEvent extends StatefulWidget {
 }
 
 class _ExPointerEventState extends State<ExPointerEvent> {
+  ///event中的position是事件的全局坐标，相对于屏幕整个屏幕，localPosition是局部事件，相对于事件所在的容器
   void _eventCancle(PointerCancelEvent event) => print("Event cancel");
-  void _eventDown(PointerDownEvent event) => print("Event Down: position:${event.position}");
-  void _eventUp(PointerEvent event) => print("Event Up: position:${event.position}");
+  void _eventDown(PointerDownEvent event) => print("Event Down: position:${event.position},location:${event.localPosition}");
+  void _eventUp(PointerEvent event) => print("Event Up: position:${event.position},location:${event.localPosition}");
   void _eventMove(PointerEvent event) => print(
-      "Event Move: position:${event.position} transform: ${event.transform},delta: ${event.delta}");
+      "Event Move: position:${event.position},location:${event.localPosition} \n transform: ${event.transform},delta: ${event.delta}");
 
   @override
   Widget build(BuildContext context) {
