@@ -253,6 +253,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    super.initState();
     debugPrint('HomePage initState');
     ///测试各种log输出
     // logger.v('initState');
@@ -264,26 +265,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
+    super.dispose();
     debugPrint('HomePage dispose');
   }
 
   @override
   void activate() {
+    super.activate();
     debugPrint('HomePage activate');
   }
 
   @override
   void deactivate() {
+    super.deactivate();
     debugPrint('HomePage deactivate');
   }
 
   @override
   void reassemble() {
+    super.reassemble();
     debugPrint('HomePage reassemble');
   }
 
   @override
   void didUpdateWidget(Widget oldWidget) {
+    super.didUpdateWidget(widget);
     debugPrint('HomePage didUpdateWidget');
   }
 }
