@@ -50,12 +50,21 @@ void main() {
   ///共享数据是自定义的viewModel
   ///在整个应用的顶层设置Notifier,
   ///在整个应用的任何位置都可以使用viewModel中共享的数据
+  ///多个ChangeNotifierProvider
   runApp(
-    ChangeNotifierProvider(
-      create:(context) => ViewModel(),
-      child: const FlutterCookbookApp(),
-    )
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider( create:(context) => ViewModel(), child: const FlutterCookbookApp(),)
+      ],
+      child:const FlutterCookbookApp(),),
   );
+  ///单个ChangeNotifierProvider
+  // runApp(
+  //   ChangeNotifierProvider(
+  //     create:(context) => ViewModel(),
+  //     child: const FlutterCookbookApp(),
+  //   )
+  // );
 }
 
 class FlutterCookbookApp extends StatelessWidget {
