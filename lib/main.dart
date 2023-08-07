@@ -117,6 +117,29 @@ class FlutterCookbookApp extends StatelessWidget {
         "MyHomePage":(BuildContext context) => const MyHomePage(title: "My Home Page"),
         'SecondRouter':(BuildContext context) => const SecondRouter(data: 'data from home'),
       },
+      ///主要用来拦截不在routes属性中定义的路由，需要和pushNamed方法配合使用才能回调该属性对应的方法
+      onGenerateRoute:(settings) {
+        if(settings.name == 'SecondRouter') {
+          debugPrint('setting: ${settings.toString()}');
+          return MaterialPageRoute(builder: (context){
+            return SecondRouter(data: 'data from home');
+          },
+              ///如果路由中包含参数，一定要给这个属性赋值，不然路由中的参数为null
+              settings: settings);
+        }else {
+          debugPrint('setting: ${settings.toString()}');
+          return null;
+        }
+      },
+      ///主要用来拦截不在routes属性中定义的路由，需要和pushNamed方法配合使用才能回调该属性对应的方法
+      ///优先级低于onGenerateRoute,只有onGenerateRoute方法返回Null时才回调此属性对应的方法
+      onUnknownRoute: (settings) {
+        debugPrint('unknown setting: ${settings.toString()}');
+        return MaterialPageRoute(builder: (context){
+          ///这里可以创建一个未知错误的界面，遇到未知路由则跳转到该界面
+          return SecondRouter(data: 'data from home');
+        });
+      },
     );
   }
 }
@@ -180,7 +203,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: ElevatedButton(
           onPressed: () {
             if(index == '006') {///通过参数来传递数据，数据类型是Object
+              debugPrint('second router clicked');
+              ///创建两个路由,SecondRouter不会被拦截，因为routers属性对应的路由表中有该属性
+              ///ThirdRouter会被拦截，因它不在路由表中，先是onGenerateRoute拦截，但是没有处理，转到onUnknownRoute中
               Navigator.pushNamed(context, 'SecondRouter',arguments: 'data from arguments');
+              Navigator.pushNamed(context, 'ThirdRouter',arguments: 'data from arguments');
             }else {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return drcWidget;

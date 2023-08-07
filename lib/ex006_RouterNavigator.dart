@@ -10,7 +10,7 @@ class SecondRouter extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     ///读取命名路由传递的参数并且通过Text显示出来
-    String arguments = ModalRoute.of(context)?.settings.arguments as String;
+    String? arguments = ModalRoute.of(context)?.settings.arguments?.toString();
 
     return Scaffold(
       appBar: AppBar(
