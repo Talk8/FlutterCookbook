@@ -115,7 +115,7 @@ class FlutterCookbookApp extends StatelessWidget {
       //这种方式的路由可以启动，但是有报错，与setState有关。
       routes: <String,WidgetBuilder>{
         "MyHomePage":(BuildContext context) => const MyHomePage(title: "My Home Page"),
-
+        'SecondRouter':(BuildContext context) => const SecondRouter(data: 'data from home'),
       },
     );
   }
@@ -179,9 +179,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         title: ElevatedButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return drcWidget;
-            }));
+            if(index == '006') {///通过参数来传递数据，数据类型是Object
+              Navigator.pushNamed(context, 'SecondRouter',arguments: 'data from arguments');
+            }else {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return drcWidget;
+              }));
+            }
           },
           child: Text(
             title,
