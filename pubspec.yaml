@@ -59,6 +59,9 @@ dependencies:
 
 #导入logger包用来向android一样打印log
   logger: ^1.4.0
+#导入permission包来使用权限申请
+  permission_handler: ^10.4.3
+
 #导入BLE包来使用蓝牙
   flutter_reactive_ble: ^5.1.1
 
