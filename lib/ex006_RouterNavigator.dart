@@ -13,6 +13,8 @@ class SecondRouter extends StatelessWidget {
     String? arguments = ModalRoute.of(context)?.settings.arguments?.toString();
 
     return Scaffold(
+      ///设置背景色使转场动画效果更加明显
+      backgroundColor: Colors.green,
       appBar: AppBar(
         title: const Text("This is the second page"),
         backgroundColor: Colors.purpleAccent,

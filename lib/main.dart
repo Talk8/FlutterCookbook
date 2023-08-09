@@ -36,6 +36,8 @@ import 'package:fluttercookbook/ex037_CustomRatingBar.dart';
 import 'package:fluttercookbook/ex039_SharedPreferences.dart';
 import 'package:fluttercookbook/ex040_FileOperation.dart';
 import 'package:fluttercookbook/ex041_SharedData.dart';
+import 'package:fluttercookbook/ex042_Animation.dart';
+import 'package:fluttercookbook/ex042_ble.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -96,6 +98,10 @@ class FlutterCookbookApp extends StatelessWidget {
       //这行代码可以替代上面的配置，因为它已经自动生成上面的配置
       // supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
+      ///适配深色模式
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blueGrey,
+      ),
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -121,11 +127,30 @@ class FlutterCookbookApp extends StatelessWidget {
       onGenerateRoute:(settings) {
         if(settings.name == 'SecondRouter') {
           debugPrint('setting: ${settings.toString()}');
+          ///通过路由拦截器对个别的页面进行拦截，进而实现界面切换时的动画效果
+          ///这里使用了PageRouteBuilder类和FadeTransition类
+          return PageRouteBuilder(
+              ///把动画传递给路由,annimation可以自己定义也可以使用参数中的默认值,不过2没有值
+              pageBuilder:(context,animation1,animation2) {
+                ///创建渐变组件主要使用了它的opacity属性
+                return FadeTransition(
+                  opacity: animation1,
+                  child: SecondRouter(data: "animation",),);
+              },
+            fullscreenDialog: true,
+            ///用来控制动画播放时长
+            transitionDuration:const Duration(seconds: 3),
+          );
+          /*
           return MaterialPageRoute(builder: (context){
             return SecondRouter(data: 'data from home');
           },
+              ///用来控制窗口的进入方式，默认从右到左，设置为true后从下到上，类似IOS中的modal窗口
+              ///用这种方式弹出的窗口，左侧是一个x图标，而不是常用的back图标
+              fullscreenDialog: true,
               ///如果路由中包含参数，一定要给这个属性赋值，不然路由中的参数为null
               settings: settings);
+           */
         }else {
           debugPrint('setting: ${settings.toString()}');
           return null;
@@ -269,6 +294,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("039", "SharedPreferences", context, const ExSharedPreferences()),
         listItem("040", "FileStored", context, const ExFileStored()),
         listItem("041", "SharedData/StateManaged", context, const EXSharedData()),
+        listItem("042", "BLE ", context, const ExAnimation()),
       ],
     );
 
