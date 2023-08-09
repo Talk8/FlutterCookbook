@@ -90,7 +90,9 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder:(context){
                       return ExButton();
-                    } )
+                    },
+                    ///用来控制窗口的进入方式，默认从右到左，设置为true后从下到上，类似IOS中的modal窗口
+                    fullscreenDialog: true,)
                   );
                 },
               ),
