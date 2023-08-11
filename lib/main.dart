@@ -38,6 +38,7 @@ import 'package:fluttercookbook/ex040_FileOperation.dart';
 import 'package:fluttercookbook/ex041_SharedData.dart';
 import 'package:fluttercookbook/ex042_Animation.dart';
 import 'package:fluttercookbook/ex042_ble.dart';
+import 'package:fluttercookbook/ex043_ScreenSize.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -76,6 +77,7 @@ class FlutterCookbookApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      ///只在Android有效果，在最近程序的缩略图中显示这个名称
       title: 'Flutter Cookbook',
       //locale属性可以手动指定当前app使用的语言和地区，如果不指定，默认为跟随系统语言
       // locale: Locale('zh','CN'),
@@ -112,7 +114,13 @@ class FlutterCookbookApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
+        ///控制的范围比primaryColor大
         primarySwatch: Colors.blue,
+        ///主要控制顶部导航和底部native bottom的颜色
+        primaryColor: Colors.blue,
+
+        ///程序的亮度
+        // brightness: Brightness.dark,///默认值是light
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ///注释掉程序中的splashScreen
@@ -295,6 +303,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("040", "FileStored", context, const ExFileStored()),
         listItem("041", "SharedData/StateManaged", context, const EXSharedData()),
         listItem("042", "BLE ", context, const ExAnimation()),
+        listItem("043", "Screen Size Auto fit", context, const ExScreenSize()),
       ],
     );
 
