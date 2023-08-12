@@ -39,6 +39,7 @@ import 'package:fluttercookbook/ex041_SharedData.dart';
 import 'package:fluttercookbook/ex042_Animation.dart';
 import 'package:fluttercookbook/ex042_ble.dart';
 import 'package:fluttercookbook/ex043_ScreenSize.dart';
+import 'package:fluttercookbook/ex044_ExDynamicList.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -120,7 +121,7 @@ class FlutterCookbookApp extends StatelessWidget {
         primaryColor: Colors.blue,
 
         ///组件背景颜色
-        canvasColor: Colors.blue[100],
+        // canvasColor: Colors.blue[100],
         ///字体主题，通过Theme.of(context).TextTheme.xxx方式使用
         textTheme: const TextTheme(
           bodySmall: TextStyle(fontSize: 16),
@@ -310,8 +311,9 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("039", "SharedPreferences", context, const ExSharedPreferences()),
         listItem("040", "FileStored", context, const ExFileStored()),
         listItem("041", "SharedData/StateManaged", context, const EXSharedData()),
-        listItem("042", "BLE ", context, const ExAnimation()),
+        listItem("042", "Animation ", context, const ExAnimation()),
         listItem("043", "Screen Size Auto fit", context, const ExScreenSize()),
+        listItem("044", "ScrollView and Dynamic List", context, const ExDynamicList()),
       ],
     );
 
