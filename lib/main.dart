@@ -119,6 +119,14 @@ class FlutterCookbookApp extends StatelessWidget {
         ///主要控制顶部导航和底部native bottom的颜色
         primaryColor: Colors.blue,
 
+        ///组件背景颜色
+        canvasColor: Colors.blue[100],
+        ///字体主题，通过Theme.of(context).TextTheme.xxx方式使用
+        textTheme: const TextTheme(
+          bodySmall: TextStyle(fontSize: 16),
+          bodyMedium: TextStyle(fontSize: 20),
+          bodyLarge: TextStyle(fontSize: 22),
+        )
         ///程序的亮度
         // brightness: Brightness.dark,///默认值是light
       ),
