@@ -19,6 +19,8 @@ class _ExDynamicListState extends State<ExDynamicList> {
       ///它可以包含比屏幕尺寸大的widget，比如listView,这样可以滚动显示
       body: SingleChildScrollView(
         child: Column(
+          ///这里没有指定column的主轴和从轴对齐方式，从轴默认为center,column中的child的大小
+          ///默认为所有children中宽度最大的一个，可以指定最小宽度
           children: [
             const Image(
               width: double.infinity,

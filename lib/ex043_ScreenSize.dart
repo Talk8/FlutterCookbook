@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///与111，112章回的内容相匹配
 class ExScreenSize extends StatefulWidget {
   const ExScreenSize({Key? key}) : super(key: key);
 
@@ -24,7 +25,7 @@ class _ExScreenSizeState extends State<ExScreenSize> {
       ///screen util包最好在根目录进行初始化，用它包含MaterialApp比较好
       body: ScreenUtilInit(
         ///这里初始化为设计稿的尺寸为iphone6,单位是dp，flutter的单位都是dp和android一样
-        ///我在这里输入的是分辨率，单位为px，没有转换成dp
+        ///我在这里输入的是分辨率，单位为dp，没有转换成px
         designSize:const Size(375.0,667.0),
         builder: (context,child) {
           return HomeWidget();
