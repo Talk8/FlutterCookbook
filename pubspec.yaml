@@ -67,6 +67,8 @@ dependencies:
 
 #导入BLE包来使用蓝牙
   flutter_reactive_ble: ^5.1.1
+##导入BLE包来使用蓝牙,这个包的版本更新太快了，几乎一天一更新
+  flutter_blue_plus: any
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
