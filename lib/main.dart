@@ -37,7 +37,7 @@ import 'package:fluttercookbook/ex039_SharedPreferences.dart';
 import 'package:fluttercookbook/ex040_FileOperation.dart';
 import 'package:fluttercookbook/ex041_SharedData.dart';
 import 'package:fluttercookbook/ex042_Animation.dart';
-import 'package:fluttercookbook/ex042_ble.dart';
+import 'package:fluttercookbook/ex045_Bluetooth.dart';
 import 'package:fluttercookbook/ex043_ScreenSize.dart';
 import 'package:fluttercookbook/ex044_ExDynamicList.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -314,6 +314,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("042", "Animation ", context, const ExAnimation()),
         listItem("043", "Screen Size Auto fit", context, const ExScreenSize()),
         listItem("044", "ScrollView and Dynamic List", context, const ExDynamicList()),
+        listItem("045", "BLE ", context, const ExBle()),
       ],
     );
 
