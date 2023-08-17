@@ -58,7 +58,8 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider( create:(context) => ViewModel(), child: const FlutterCookbookApp(),)
+        ChangeNotifierProvider( create:(context) => ViewModel(), child: const FlutterCookbookApp(),),
+        ChangeNotifierProvider( create:(context) => DeviceViewModel(), child: const FlutterCookbookApp(),),
       ],
       child:const FlutterCookbookApp(),),
   );
