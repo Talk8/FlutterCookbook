@@ -46,3 +46,4 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex042_Animation                 | this is the example of Animation widget.                       |
 | ex043_ScreenSize                | this is the example of Fit screen and screenutil package.      |
 | ex044_ScrollView                | this is the example of ScrollView and local listview.          |
+| ex045_Bluetooth                 | this is the example of BLE scan,connect,read/write character.  |
