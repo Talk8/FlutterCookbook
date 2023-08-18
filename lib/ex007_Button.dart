@@ -32,8 +32,16 @@ class ExButton extends StatelessWidget {
             ),
             //带背景的按钮
             ElevatedButton(
+              ///把onPressed属性设置为null后按钮处于disable状态：变灰色，而且没有任何点击效果
+              ///可以依据相关的条件来disable/enable
+              // onPressed: null,
               onPressed: () {},
               child: Text("ElevatedButton"),
+              ///这个style可以button中文字和背景的配色：黑底白字
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+              ),
             ),
             //同时带有文字和图标的按钮
             TextButton.icon(
