@@ -13,7 +13,9 @@ import 'package:fluttercookbook/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    ///把默认的值修改成当前项目中的值
+    // await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const FlutterCookbookApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
