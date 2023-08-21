@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:fluttercookbook/_private_data.dart';
 import 'package:logger/logger.dart';
 
 ///两个包导入后会发生错误，因为有些类名相同
@@ -99,6 +101,18 @@ class _ExBleState extends State<ExBle> {
                   },
                   child: const Text('Stop Scan')),
               // BleDeviceList(),
+              ElevatedButton(
+                  onPressed: () {
+                    debugPrint('discover service');
+                    scanDeviceList?.forEach((scanResult) {
+                      scanResult.device.connectionState.listen((data) {
+                        if(data == BluetoothConnectionState.connected) {
+                          discoverServices(scanResult.device);
+                        }
+                      });
+                    });
+                  },
+                  child: const Text('Discover Service')),
               SizedBox(
                 height: 500,
                 // child: DeviceListNeedUpdateStae(),),
@@ -114,6 +128,14 @@ class _ExBleState extends State<ExBle> {
                     },
                 ),
               ),
+              // SizedBox(
+              //   height: 50,
+              //   child:Consumer<DeviceConnectStateStream>(
+              //     builder: (context,data,child){
+              //       return Text(data.connectSate.toString());
+              //     },
+              //   ),
+              // ),
               const SizedBox(
                 height: 50,
                 child: DataWidget(),
@@ -362,7 +384,8 @@ class _ExBleState extends State<ExBle> {
     return result;
   }
 
-  ///通过StreamBuilder来自动监听设备连接状态
+  ///通过StreamBuilder来自动监听设备连接状态,
+  ///看了一下官方的example程序，也使用StreamBuilder来监听连接状态，看来我的思路是对的
   ///本来想使用provide/consumer来获取，但是连接状态是Stream类型，属于异步操作。
   ///因此通过StreamBuilder来自动监听设备连接状态
   ///本方法有一个缺点就是连接错误时不知道设备状态，考虑如何修改
@@ -470,6 +493,81 @@ class _ExBleState extends State<ExBle> {
           .whenComplete(() => log.i('connect finished'));
     }
   }
+
+  ///把十进制的数据转换成十六进制的数据
+  String getNiceHexArray(List<int> bytes) {
+    return '[${bytes.map((i) => i.toRadixString(16).padLeft(2, '0')).join(', ')}]'.toUpperCase();
+  }
+
+  Future<List<BluetoothService>> discoverServices(BluetoothDevice device) async {
+    List<BluetoothService> services = await device.discoverServices();
+    List<BluetoothCharacteristic> characteristics;
+    Stream<List<int>> readValueChanged;
+    Stream<List<int>> writeValueChanged;
+
+    for (var element in services) {
+      // log.i("service: ${element.toString()}");
+      characteristics = element.characteristics;
+      for(var char in characteristics) {
+        if(char.properties.read) {
+          readValueChanged = char.onValueReceived;
+          readValueChanged.listen((event) {
+            log.i('read chara feedback: ${event.toString()}');
+          });
+
+          readCharacteristics(char);
+        }
+
+        if(char.properties.write) {
+          writeValueChanged = char.onValueReceived;
+          writeValueChanged.listen((event) {
+            log.i('write chara feedback: ${getNiceHexArray(event)}');
+          },
+            onError:(e){log.i('write chara error: ${e.toString()}');},
+            onDone: () => log.i('write chara done'),
+          );
+
+          writeCharacteristics(char);
+        }
+      }
+    }
+    return services;
+  }
+
+
+  ///依据指定的UUID读取特征值
+  void readCharacteristics (BluetoothCharacteristic characteristic) async{
+    if(PrivateKey.searchServiceUuid != characteristic.characteristicUuid.toString()) {
+      return null;
+    }
+
+    List<int> value =  await characteristic.read();
+    log.w('read characteristic:  ${value.toString()}');
+  }
+
+  ///依据指定的UUID写入特征值
+  void writeCharacteristics (BluetoothCharacteristic characteristic) async{
+    if(PrivateKey.writeCharacteristicUuid != characteristic.characteristicUuid.toString()) {
+      return null;
+    }
+
+    List<int> value = [0x00,0x01,0x02,0x00,0x00,0x04,0x01,0x01,0x00];
+    // List<int> value = [12,13,14];
+
+    ///计算CRC
+    for(var v in value) {
+      value[value.length-1] += v;
+    }
+
+
+    await characteristic.write(value,withoutResponse: false);
+    log.w('write characteristic:  ${value.toString()}');
+    log.w('write characteristic hex:  ${getNiceHexArray(value)}');
+    ///把int数据转换成byte数据，int默认64位，Uint8为8位。这样可以去掉溢出的部分
+    Uint8List bytes = Uint8List.fromList(value);
+    log.w('write characteristic ori:  ${bytes.toString()}');
+    log.w('write characteristic hex:  ${getNiceHexArray(bytes)}');
+  }
 }
 
 
@@ -523,4 +621,3 @@ class DataWidget extends StatelessWidget {
     );
   }
 }
-
