@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttercookbook/ex024_Radio.dart';
 import 'package:fluttercookbook/ex035_SplashScreen.dart';
@@ -37,9 +38,11 @@ import 'package:fluttercookbook/ex039_SharedPreferences.dart';
 import 'package:fluttercookbook/ex040_FileOperation.dart';
 import 'package:fluttercookbook/ex041_SharedData.dart';
 import 'package:fluttercookbook/ex042_Animation.dart';
+import 'package:fluttercookbook/ex045_BlueDemo.dart';
 import 'package:fluttercookbook/ex045_Bluetooth.dart';
 import 'package:fluttercookbook/ex043_ScreenSize.dart';
 import 'package:fluttercookbook/ex044_ExDynamicList.dart';
+import 'package:fluttercookbook/ex046_ExpandList.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +63,7 @@ void main() {
       providers: [
         ChangeNotifierProvider( create:(context) => ViewModel(), child: const FlutterCookbookApp(),),
         ChangeNotifierProvider( create:(context) => DeviceViewModel(), child: const FlutterCookbookApp(),),
+        StreamProvider<BluetoothConnectionState>(create: (context) => DeviceConnectStateStream().connectSate, initialData: BluetoothConnectionState.disconnected),
       ],
       child:const FlutterCookbookApp(),),
   );
@@ -316,6 +320,8 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("043", "Screen Size Auto fit", context, const ExScreenSize()),
         listItem("044", "ScrollView and Dynamic List", context, const ExDynamicList()),
         listItem("045", "BLE ", context, const ExBle()),
+        listItem("045", "FlutterBlueApp ", context, const FlutterBlueApp()),
+        listItem("046", "ExpandList", context, const ExExpandList()),
       ],
     );
 
