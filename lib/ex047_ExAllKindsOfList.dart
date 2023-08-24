@@ -11,24 +11,30 @@ class _ExAllKindsOfListState extends State<ExAllKindsOfList> {
   final List<int> _radioListValue = List.generate(3, (index) => index + 1);
   var _groupValue = 1;
   var _checkState = 1;
-  bool? _checkBoxState = false;
-  bool _switchState = false;
 
+  ///创建编译时的值需要static,如果是编译时常量需要static const
+  ///这里不加static会导致编译出错，因为组件无法在编译时知道初始值是什么。
+  static int listSize = 3;
+  static final List<bool?> _checkBoxState = List.generate(listSize, (index) => false);
+  static final List<bool> _switchState = List.generate(listSize, (index) => false);
 
   RadioListTile _radioListTile(index) {
     _checkState = index;
     return RadioListTile(
-      //在radio右侧显示标题
+      ///在radio右侧显示标题
       title: Text("This is item: $index"),
-      //控制radio和title的颜色
+
+      ///控制radio被选择时的颜色
       activeColor: Colors.green,
       value: _checkState,
+      ///控制是否被选择
       groupValue: _groupValue,
-      //属性值为true时title颜色为ActiveColor,否则为默认值
+
+      ///属性值为true时title颜色为ActiveColor,否则为默认值
       selected: (_groupValue == _checkState),
       onChanged: (v) {
-        //v的值就是index
-        print("value of list $v");
+        ///v的值就是index，与_radioListValue中的值相对应
+        debugPrint("value of list $v");
         setState(
           () {
             if (_checkState == _groupValue) {
@@ -42,49 +48,49 @@ class _ExAllKindsOfListState extends State<ExAllKindsOfList> {
     );
   }
 
-  ///是否选中状态需要单独管理，现在是所有组件使用一个状态值
+  ///通过_checkBoxState数组管理复选框是否选中的状态值
   CheckboxListTile _checkBoxListTile(index) {
-    _checkState = index;
     return CheckboxListTile(
-      //在checkBox左侧显示标题
+      ///在checkBox左侧显示标题
       title: Text("This is item: $index"),
-      //控制radio和title的颜色
+
+      ///相当于整个title的背景颜
+      tileColor: Colors.blue,
+
+      ///控制checkbox被选中时的颜色
       activeColor: Colors.green,
-      value: _checkBoxState,
+
+      ///true表示选中false表示未选中
+      value: _checkBoxState[index],
       onChanged: (v) {
         //v的值就是index
-        print("value of list $v");
+        debugPrint("value of list $v");
         setState(
           () {
-            _checkBoxState = v;
-            // if (_checkBoxState ?? false) {
-            //   _checkBoxState = false;
-            // } else {
-            //   _checkBoxState = true;
-            // }
+            _checkBoxState[index] = v;
           },
         );
       },
     );
   }
 
-  ///开关状态需要单独管理，现在是所有组件使用一个状态值
+  ///通过_switchState数组管理单个开关是否选中的状态值
   SwitchListTile _switchListTile(index) {
-    _checkState = index;
     return SwitchListTile(
-      //在switch左侧显示标题
+      ///在switch左侧显示标题
       title: Text("This is item: $index"),
-      //控制radio和title的颜色
+      ///控制switch的颜色
       activeColor: Colors.green,
-      value: _switchState,
-      //属性值为true时title颜色为ActiveColor,否则为默认值
-      // selected: (_groupValue == _checkState),
+      ///用来控制title中文字被选中时的颜色
+      selected: _switchState[index],
+      value: _switchState[index],
+      ///点击switch或者它前面的文字时都会回调此方法
       onChanged: (v) {
-        //v的值就是index
-        print("value of list $v");
+        ///v的值就是index
+        debugPrint("value of list $v");
         setState(
           () {
-            _switchState = v;
+            _switchState[index] = v;
           },
         );
       },
@@ -102,20 +108,27 @@ class _ExAllKindsOfListState extends State<ExAllKindsOfList> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: listSize,
+            itemBuilder: (context,index){
+              return _switchListTile(index);
+            }),
           ListView(
             shrinkWrap: true,
             children: [
               _radioListTile(_radioListValue[0]),
               _radioListTile(_radioListValue[1]),
               _radioListTile(_radioListValue[2]),
-              _checkBoxListTile(0),
-              _checkBoxListTile(0),
-              _checkBoxListTile(0),
-              _switchListTile(0),
-              _switchListTile(1),
-              _switchListTile(2),
             ],
-          )
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: listSize,
+            itemBuilder: (context, index) {
+              return _checkBoxListTile(index);
+            },
+          ),
         ],
       ),
     );
