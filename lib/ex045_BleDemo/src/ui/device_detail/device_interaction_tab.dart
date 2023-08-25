@@ -149,6 +149,8 @@ class _DeviceInteractionTabState extends State<_DeviceInteractionTab> {
                     ],
                   ),
                 ),
+
+                ///如果蓝牙设备没有连接就不显示service列表，这个是SliverChildListDelegate特有的，ListView就没有此功能
                 if (widget.viewModel.deviceConnected)
                   _ServiceDiscoveryList(
                     deviceId: widget.viewModel.deviceId,
@@ -161,6 +163,7 @@ class _DeviceInteractionTabState extends State<_DeviceInteractionTab> {
       );
 }
 
+///这个是显示服务列表的组件，主要通过expansionPanel实现
 class _ServiceDiscoveryList extends StatefulWidget {
   const _ServiceDiscoveryList({
     required this.deviceId,
@@ -207,17 +210,42 @@ class _ServiceDiscoveryListState extends State<_ServiceDiscoveryList> {
 
   Widget _characteristicTile(
           DiscoveredCharacteristic characteristic, String deviceId) =>
+  ///这个代码是为了从当前页面把context传递下一级页面时添加的，传递context也不起使用
+      // Widget _characteristicTile(BuildContext context,
+      // DiscoveredCharacteristic characteristic, String deviceId) =>
       ListTile(
         onTap: () => showDialog<void>(
-            context: context,
-            builder: (context) => CharacteristicInteractionDialog(
+          context: context,
+          ///原来是在下一级通过consumer获取provider中的共享数据，修改成在当前页面中获取共享数据
+          // builder: (context) => CharacteristicInteractionDialog(
+          //   bcontext: context,
+          //       characteristic: QualifiedCharacteristic(
+          //           characteristicId: characteristic.characteristicId,
+          //           serviceId: characteristic.serviceId,
+          //           deviceId: deviceId),
+          //     )),
+          builder: (context) {
+            return Consumer<BleDeviceInteractor>(
+              builder: (context, data, _) {
+                return CharacteristicInteractionDialog(
+                  readCharacteristic: data.readCharacteristic,
+                  writeWithoutResponse: data.writeCharacteristicWithoutResponse,
+                  writeWithResponse: data.writeCharacteristicWithResponse,
+                  subscribeToCharacteristic: data.subScribeToCharacteristic,
+                  bcontext: context,
                   characteristic: QualifiedCharacteristic(
                       characteristicId: characteristic.characteristicId,
                       serviceId: characteristic.serviceId,
                       deviceId: deviceId),
-                )),
+                );
+              },
+            );
+          },
+        ),
         title: Text(
           '${characteristic.characteristicId}\n(${_characteristicsSummary(characteristic)})',
+          ///这个是为了调试时添加的：确认是否可以通过当前页面的context获取到provider中的值
+          // 'check: ${Provider.of<BleDeviceInteractor>(context, listen: false).toString()}',
           style: const TextStyle(
             fontSize: 14,
           ),
@@ -226,6 +254,10 @@ class _ServiceDiscoveryListState extends State<_ServiceDiscoveryList> {
 
   List<ExpansionPanel> buildPanels() {
     final panels = <ExpansionPanel>[];
+    ///这个是为了调试时添加的：确认是否可以通过当前页面的context获取到provider中的值
+    // BleDeviceInteractor bleDeviceInteractor =
+    //     Provider.of<BleDeviceInteractor>(context, listen: false);
+    // print('result: ${bleDeviceInteractor.toString()}');
 
     widget.discoveredServices.asMap().forEach(
           (index, service) => panels.add(

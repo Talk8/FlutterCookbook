@@ -9,19 +9,54 @@ import 'package:provider/provider.dart';
 class CharacteristicInteractionDialog extends StatelessWidget {
   const CharacteristicInteractionDialog({
     required this.characteristic,
+    ///增加这四个参数是为了通过上一级把参数传递到dialog中，因为当前无法通过provider获取到这四个值
+    ///但是在上一级可以通过consumer获取到这四个值
+    required this.readCharacteristic,
+    required this.writeWithResponse,
+    required this.writeWithoutResponse,
+    required this.subscribeToCharacteristic,
+
+    required this.bcontext,
     Key? key,
   }) : super(key: key);
   final QualifiedCharacteristic characteristic;
 
+  final Future<List<int>> Function(QualifiedCharacteristic characteristic)
+  readCharacteristic;
+  final Future<void> Function(
+      QualifiedCharacteristic characteristic, List<int> value)
+  writeWithResponse;
+
+  final Stream<List<int>> Function(QualifiedCharacteristic characteristic)
+  subscribeToCharacteristic;
+
+  final Future<void> Function(
+      QualifiedCharacteristic characteristic, List<int> value)
+  writeWithoutResponse;
+  final BuildContext bcontext;
+
   @override
-  Widget build(BuildContext context) => Consumer<BleDeviceInteractor>(
-      builder: (context, interactor, _) => _CharacteristicInteractionDialog(
-            characteristic: characteristic,
-            readCharacteristic: interactor.readCharacteristic,
-            writeWithResponse: interactor.writeCharacteristicWithResponse,
-            writeWithoutResponse: interactor.writeCharacteristicWithoutResponse,
-            subscribeToCharacteristic: interactor.subScribeToCharacteristic,
-          ));
+  // Widget build(BuildContext bcontext) => Consumer<BleDeviceInteractor>(
+  // builder: (BuildContext bcontext,interactor,_) => _CharacteristicInteractionDialog(
+  Widget build(BuildContext context) => _CharacteristicInteractionDialog(
+  characteristic: characteristic,
+            ///默认代码：通过consumer获取参数值
+            // readCharacteristic: interactor.readCharacteristic,
+            // writeWithResponse: interactor.writeCharacteristicWithResponse,
+            // writeWithoutResponse: interactor.writeCharacteristicWithoutResponse,
+            // subscribeToCharacteristic: interactor.subScribeToCharacteristic,
+    ///尝试使用provoder读取也不可以，报同样的错误，把context换成从上级传递来的bcontext也不可以，我估计就是dialog获取不到原来的context引起的
+        // readCharacteristic: Provider.of<BleDeviceInteractor>(bcontext,listen: false).readCharacteristic,
+        // writeWithResponse: Provider.of<BleDeviceInteractor>(bcontext,listen: false).writeCharacteristicWithResponse,
+        // writeWithoutResponse: Provider.of<BleDeviceInteractor>(bcontext,listen: false).writeCharacteristicWithoutResponse,
+        // subscribeToCharacteristic: Provider.of<BleDeviceInteractor>(bcontext,listen: false).subScribeToCharacteristic,
+
+    readCharacteristic: readCharacteristic,
+    writeWithResponse:writeWithResponse,
+    writeWithoutResponse: writeWithoutResponse,
+    subscribeToCharacteristic: subscribeToCharacteristic,
+  );
+  // ));
 }
 
 class _CharacteristicInteractionDialog extends StatefulWidget {
@@ -137,6 +172,7 @@ class _CharacteristicInteractionDialogState
             ),
           ),
         ),
+    ///这两个button宽度超出屏幕宽度，有报错现象：A RenderFlex overflowed by 8.3 pixels on the right.
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

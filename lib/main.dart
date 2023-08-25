@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:fluttercookbook/ex024_Radio.dart';
 import 'package:fluttercookbook/ex035_SplashScreen.dart';
 import 'package:fluttercookbook/ex004_GirdView.dart';
@@ -38,19 +39,26 @@ import 'package:fluttercookbook/ex039_SharedPreferences.dart';
 import 'package:fluttercookbook/ex040_FileOperation.dart';
 import 'package:fluttercookbook/ex041_SharedData.dart';
 import 'package:fluttercookbook/ex042_Animation.dart';
+import 'package:fluttercookbook/ex045_BleDemo/main.dart';
 import 'package:fluttercookbook/ex045_BlueDemo.dart';
 import 'package:fluttercookbook/ex045_Bluetooth.dart';
 import 'package:fluttercookbook/ex043_ScreenSize.dart';
 import 'package:fluttercookbook/ex044_ExDynamicList.dart';
 import 'package:fluttercookbook/ex046_ExpandList.dart';
+import 'package:fluttercookbook/ex047_ExAllKindsOfList.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:logger/logger.dart';
+// import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
 import 'ex008_Text.dart';
 import 'ex012_ConstrainedBox.dart';
+import 'ex045_BleDemo/src/ble/ble_device_connector.dart';
+import 'ex045_BleDemo/src/ble/ble_device_interactor.dart';
+import 'ex045_BleDemo/src/ble/ble_logger.dart';
+import 'ex045_BleDemo/src/ble/ble_scanner.dart';
+import 'ex045_BleDemo/src/ble/ble_status_monitor.dart';
 
 void main() {
   // runApp(const FlutterCookbookApp());
@@ -58,12 +66,76 @@ void main() {
   ///在整个应用的顶层设置Notifier,
   ///在整个应用的任何位置都可以使用viewModel中共享的数据
   ///多个ChangeNotifierProvider
+  ///这个值是测试时使用的数值，用来测试provider.value()
+  String shData = 'data of main';
+
+
+  ///给ex045_BleDemo目录下的程序使用，主要用来管理共享数据
+  late final FlutterReactiveBle _ble;
+  late final BleLogger _bleLogger;
+  late final BleScanner _scanner;
+  late final BleStatusMonitor _monitor;
+  late final BleDeviceConnector _connector;
+  late final BleDeviceInteractor _serviceDiscoverer;
+
+    // TODO: implement initState
+  ///这行代码在模块的main文件中无法使用，但是在这个项目的main文件中可以使用，
+  ///不在这里使用它反而会报错
+  WidgetsFlutterBinding.ensureInitialized();
+
+  ///给ex045_BleDemo目录下的程序使用，主要用来管理共享数据
+  _ble = FlutterReactiveBle();
+    _bleLogger = BleLogger(ble: _ble);
+    _scanner = BleScanner(ble: _ble, logMessage: _bleLogger.addToLog);
+    _monitor = BleStatusMonitor(_ble);
+    _connector = BleDeviceConnector(
+      ble: _ble,
+      logMessage: _bleLogger.addToLog,
+    );
+    _serviceDiscoverer = BleDeviceInteractor(
+      bleDiscoverServices: _ble.discoverServices,
+      readCharacteristic: _ble.readCharacteristic,
+      writeWithResponse: _ble.writeCharacteristicWithResponse,
+      writeWithOutResponse: _ble.writeCharacteristicWithoutResponse,
+      subscribeToCharacteristic: _ble.subscribeToCharacteristic,
+      logMessage: _bleLogger.addToLog,
+    );
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider( create:(context) => ViewModel(), child: const FlutterCookbookApp(),),
         ChangeNotifierProvider( create:(context) => DeviceViewModel(), child: const FlutterCookbookApp(),),
+        ///测试时使用的数据
+        Provider.value(value: shData),
         StreamProvider<BluetoothConnectionState>(create: (context) => DeviceConnectStateStream().connectSate, initialData: BluetoothConnectionState.disconnected),
+
+        ///给ex045_BleDemo目录下的程序使用，主要用来管理共享数据
+        Provider.value(value: _scanner),
+        Provider.value(value: _monitor),
+        Provider.value(value: _connector),
+        Provider.value(value: _serviceDiscoverer),
+        // Provider(create: (_) => _serviceDiscoverer,),
+        Provider.value(value: _bleLogger),
+        StreamProvider<BleScannerState?>(
+          create: (_) => _scanner.state,
+          initialData: const BleScannerState(
+            discoveredDevices: [],
+            scanIsInProgress: false,
+          ),
+        ),
+        StreamProvider<BleStatus?>(
+          create: (_) => _monitor.state,
+          initialData: BleStatus.unknown,
+        ),
+        StreamProvider<ConnectionStateUpdate>(
+          create: (_) => _connector.state,
+          initialData: const ConnectionStateUpdate(
+            deviceId: 'Unknown device',
+            connectionState: DeviceConnectionState.disconnected,
+            failure: null,
+          ),
+        ),
       ],
       child:const FlutterCookbookApp(),),
   );
@@ -210,13 +282,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Logger logger = Logger(
-    printer: PrettyPrinter(
-        methodCount: 0,
-        printEmojis: false,
-        printTime: true,
-    ),
-  );
+  ///引入ble共享数据后这个logger重名，因为它也使用了logger这个包，这里先不使用
+  // Logger logger = Logger(
+  //   printer: PrettyPrinter(
+  //       methodCount: 0,
+  //       printEmojis: false,
+  //       printTime: true,
+  //   ),
+  // );
 
   @override
   Widget build(BuildContext context) {
@@ -321,7 +394,9 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("044", "ScrollView and Dynamic List", context, const ExDynamicList()),
         listItem("045", "BLE ", context, const ExBle()),
         listItem("045", "FlutterBlueApp ", context, const FlutterBlueApp()),
-        listItem("046", "ExpandList", context, const ExExpandList()),
+        listItem("045", "FlutterReactiveBlueApp ", context, const ExReactiveBleDemo()),
+        listItem("046", "ExpandList, Flexible", context, const ExExpandList()),
+        listItem("047", "All kinds of list", context, const ExAllKindsOfList()),
       ],
     );
 

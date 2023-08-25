@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+import 'package:fluttercookbook/_private_data.dart';
 // import 'package:flutter_reactive_ble_example/src/ble/ble_scanner.dart';
 import 'package:fluttercookbook/ex045_BleDemo/src/ble/ble_scanner.dart';
 import 'package:provider/provider.dart';
@@ -80,7 +81,9 @@ class _DeviceListState extends State<_DeviceList> {
 
   void _startScanning() {
     final text = _uuidController.text;
-    widget.startScan(text.isEmpty ? [] : [Uuid.parse(_uuidController.text)]);
+    ///把输入UUID搜索修改成指定UUID搜索
+    // widget.startScan(text.isEmpty ? [] : [Uuid.parse(_uuidController.text)]);
+    widget.startScan([Uuid.parse(PrivateKey.searchServiceUuid)]);
   }
 
   @override

@@ -24,16 +24,21 @@ class _ExReactiveBleDemoState extends State<ExReactiveBleDemo> {
   ///这个代码不清楚做什么
   // WidgetsFlutterBinding.ensureInitialized();
 
+  ///状态共享的代码移到了项目的main文件中,这里不在做数据共享
+  /*
   late final FlutterReactiveBle _ble;
   late final BleLogger _bleLogger;
   late final BleScanner _scanner;
   late final BleStatusMonitor _monitor;
   late final BleDeviceConnector _connector;
   late final BleDeviceInteractor _serviceDiscoverer;
+   */
 
   @override
   void initState() {
     // TODO: implement initState
+    ///状态共享的代码移到了项目的main文件中,这里不在做数据共享
+    /*
     _ble = FlutterReactiveBle();
     _bleLogger = BleLogger(ble: _ble);
     _scanner = BleScanner(ble: _ble, logMessage: _bleLogger.addToLog);
@@ -50,12 +55,15 @@ class _ExReactiveBleDemoState extends State<ExReactiveBleDemo> {
       subscribeToCharacteristic: _ble.subscribeToCharacteristic,
       logMessage: _bleLogger.addToLog,
     );
+     */
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    ///状态共享的代码移到了项目的main文件中,这里不在做数据共享
+    /*
     return MultiProvider(
       providers: [
         Provider.value(value: _scanner),
@@ -89,6 +97,13 @@ class _ExReactiveBleDemoState extends State<ExReactiveBleDemo> {
         theme: ThemeData(primarySwatch: _themeColor),
         home: const HomeScreen(),
       ),
+    );
+     */
+    return MaterialApp(
+      title: 'Flutter Reactive BLE example',
+      color: _themeColor,
+      theme: ThemeData(primarySwatch: _themeColor),
+      home: const HomeScreen(),
     );
   }
 }
