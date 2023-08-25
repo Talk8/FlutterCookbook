@@ -48,5 +48,6 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex044_ScrollView                | this is the example of ScrollView and local listview.          |
 | ex045_Bluetooth                 | this is the example of BLE scan,connect,read/write character.  |
 | ex045_BlueDemo                  | this is the code of BLE demo which is from flutter_blue_plus pkg|
+| ex045_BleDemo                   | this is the code of BLE demo which is from flutter_reactive_ble |
 | ex046_ExpandList                | this is the example of ExpansionPanelList and ExpansionTile.   |
 | ex047_AllKindsOfList            | this is the example of CheckBoxListTile and SwitchListTile     |

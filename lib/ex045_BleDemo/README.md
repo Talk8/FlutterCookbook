@@ -1,4 +1,7 @@
 # 这个文件夹下的代码和文件都来源于flutter_reactive_ble包
+# 包下载后可以运行，不过有错误：点击设备详情界面的character后无法弹出dialog,
+# 原因是无法通过consumer获取到共享数据，参考0118提交的修改
+# 修改思路：在上级页面获取共享数据，然后以参数的形式传递给下一级页面(dialog)
 
 # Flutter reactive BLE library
 
