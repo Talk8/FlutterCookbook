@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ExDialog extends StatefulWidget {
   const ExDialog({Key? key}) : super(key: key);
@@ -140,7 +141,6 @@ class _ExDialogState extends State<ExDialog> {
         });
   }
 
-  /*
   //用来演示Dialog和ModalBottomSheet
   @override
   Widget build(BuildContext context) {
@@ -180,12 +180,50 @@ class _ExDialogState extends State<ExDialog> {
             onPressed: () => Navigator.pop(context),
             child: const Text("Close BottomSheet"),
           ),
+          ///我在这里可以在showDialog中通过consumer获取到provider中的数据，但是ex045蓝牙
+          ///包中的内容却不行，估计是包中嵌套的太多导致的。
+          ElevatedButton(
+            onPressed: () {
+              String str = Provider.of<String>(context,listen: false);
+              showDialog(context: context, builder: (context) {
+                return Consumer<String>(
+                  builder: (context, data, _) {
+                    return AlertDialog(
+                      title: Text('alter'),
+                      // content: Text('$str'),
+                      content: Text('$data'),
+                    );
+                  },
+                );
+              },
+              );
+            }, ///consumer中无法嵌套show dialog,报发下错误：
+            ///setState() or markNeedsBuild() called during build.
+            /*
+            child: Consumer<String>(
+              builder: (context,data,_){
+                print('test');
+                String str = data;
+                // return Text("Consumer $str");
+                showDialog(context: context,
+                    builder: (context){
+                      return Text("Consumer $str");
+                    },);
+                return Text("Consumer $str");
+                },
+            ),
+
+             */
+            child: const Text("Consumer debug"),
+          ),
+
+
         ],
       ),
     );
   }
 
-  */
+  /*
   //用来演示ShowBottomSheet
   @override
   Widget build(BuildContext context) {
@@ -196,6 +234,8 @@ class _ExDialogState extends State<ExDialog> {
       body: const ExBottomSheet(),
     );
   }
+
+   */
 }
 
 //必须创建一个widget并且将它赋值给Scaffold的body属性才可以,该示例来源于官方文档
