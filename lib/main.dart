@@ -80,7 +80,7 @@ void main() {
 
     // TODO: implement initState
   ///这行代码在模块的main文件中无法使用，但是在这个项目的main文件中可以使用，
-  ///不在这里使用它反而会报错
+  ///不在这里使用它反而会报错,使用后会重新安装程序，相当了卸载程序后再次安装
   WidgetsFlutterBinding.ensureInitialized();
 
   ///给ex045_BleDemo目录下的程序使用，主要用来管理共享数据

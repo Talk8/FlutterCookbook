@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+///与121，122扩展列表和扩展内容相匹配
+///与124 Flexible相关的内容匹配
+///与125，list，map转换知识相匹配
+///与126 级联操作知识相匹配
+///与127 空安全相关的知识匹配
 class ExExpandList extends StatefulWidget {
   const ExExpandList({Key? key}) : super(key: key);
 
@@ -10,7 +15,103 @@ class ExExpandList extends StatefulWidget {
 class _ExExpandListState extends State<ExExpandList> {
   bool isExpand = true;
   final Map<int,bool> _isExpandList = {0:false,1:false,2:false};
+  late final ListView _listView;
 
+  ///可空类型不需要初始化，非可空类型必须初始化不然报错
+  int ? nonIntValue;
+  TestObject? nonTObj;
+  // int intValue;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    ///List和map相互转换
+    List<int> intList = List.generate(3, (index) => index+2);
+    List<String> strList = ['one','two','three','four','five'];
+    List<int> filterList = intList.map((e) => e+3).toList();
+    Map<int,int> iMap = {1:1,2:2};
+    ///list转换成map时索引值从0开始，与索引值对应的value就是list中的元素的值
+    ///map[key,value]，list= [];key=index...,value=list[index];
+    Map<int,int> intMap = intList.asMap();
+    Map<int,String> strMap = strList.asMap();
+    ///map的key和value可以单独转换成list
+    List<int> exchangeIntList = intMap.values.toList();
+    List<int> exchangeIntListKey = intMap.keys.toList();
+    List<String> exchangeStrList = strMap.values.toList();
+    ///字符串拼接
+    String values = strMap.values.join('-');
+
+    ///list添加单个元素
+    strList.add(values);
+    ///list使用级联操作符添加多个元素。级联操作符是两个点，可以使用同一个对象多次调用对象中的方法。
+    ///它的第一个点可以理解为返回this，也就是当前对象
+    strList
+      ..add('six')
+      ..add('seven')
+      ..remove('two')
+      ..add('eight');
+
+    ///在对象上使用级联操作符，多次调用了类的属性和func方法
+    TestObject tObj = TestObject(1, 'a');
+    tObj.func();
+    tObj
+      ..a = 3
+      ..b = 'b'
+      ..func();
+
+    ///三个点的使用方法：用来给List赋值，相当把一个List完全复制给另外一个List
+    List<Text> textList = [Text('a'),Text('b'),Text('c'),];
+    List<ListTile> tileList = [ListTile(title: Text('aa'),),ListTile(title: Text('bb'),),ListTile(title: Text('cc'),),];
+
+    _listView = ListView(
+      shrinkWrap: true,
+      children: [
+        ...strList.map((e) => ListTile(title: Text(e)),).toList(),
+        ...textList.map((e) => ListTile(title: e,),).toList(),
+        ...tileList.map((e) => e,).toList(),
+      ],
+    );
+
+    Future<String> future = Future.value("one");
+    future.then((value) => debugPrint(value))
+        .onError((error, stackTrace) => debugPrint('error: ${error.toString()}'))
+        .whenComplete(() => debugPrint('complete')) ;
+
+    debugPrint('intList: ${intList.toString()}');
+    debugPrint('strList: ${strList.toString()}');
+    debugPrint('intMap: ${intMap.toString()}');
+    debugPrint('strMap: ${strMap.toString()}');
+    debugPrint('ex_intList: ${exchangeIntList.toString()}');
+    debugPrint('ex_intList: ${exchangeIntListKey.toString()}');
+    debugPrint('ex_strList: ${exchangeStrList.toString()}');
+    debugPrint('strValue: $values');
+
+    ///空安全相关内容
+    nonIntValue = 3;
+    TestObject temp = TestObject(1, 'good');
+    ///非空变量可以赋值给可空变量，但是可空变量不能赋值给非空变量
+    // nonTObj = temp;
+    // temp = nonTObj;
+    ///使用可空对象,如果对象为空则不做任何操作，不会访问对象的属性a
+    debugPrint('value: ${nonTObj?.a}');
+
+    ///变量的值肯定不为空，这样做不太好，虽然可以通过编译，但是会引起运行时异常
+    // debugPrint('value: ${nonTObj!.a}');
+
+    ///判断对象是否为空：如果为空则括号中的值为temp,否则为nonTObj
+    debugPrint('value: ${(nonTObj ?? temp).toString()}');
+    if(nonTObj == null) {
+      debugPrint('nonTobj is null');
+    } else {
+      debugPrint('nonTobj is not null');
+    }
+
+    ///三元操作符
+    (nonTObj == null) ? debugPrint('nonTobj is null'): debugPrint('nonTobj is not null');
+
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,12 +211,40 @@ class _ExExpandListState extends State<ExExpandList> {
           ElevatedButton(
             onPressed:() {
               debugPrint('hello');
-              List<int> intList = List.generate(3, (index) => index+2);
             },
             child: const Text('Button'),
+          ),
+          ///Flexible可以填充满整个屏幕的剩余空间，如果有多个Flexible,可以通过flex属性控制容器的占比
+          Flexible(
+            ///用来控制容器占用的比例
+            flex: 2,
+            child: _listView,
+          ),
+          ///这里使用scrollView当作外层容器也会报错，
+          // SingleChildScrollView(
+          Flexible(
+            child: _listView,
           ),
         ],
       ),
     );
+  }
+}
+
+///测试类，主要用来演示级联操作在对象上的用法
+class TestObject {
+  int a;
+  String b;
+
+  TestObject(this.a, this.b);
+
+  void func(){
+    debugPrint('func: a= $a,b= $b');
+  }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return ('a = $a, b = $b');
   }
 }
