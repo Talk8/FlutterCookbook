@@ -46,6 +46,8 @@ import 'package:fluttercookbook/ex043_ScreenSize.dart';
 import 'package:fluttercookbook/ex044_ExDynamicList.dart';
 import 'package:fluttercookbook/ex046_ExpandList.dart';
 import 'package:fluttercookbook/ex047_ExAllKindsOfList.dart';
+import 'package:fluttercookbook/ex048_ExModalBarrier.dart';
+import 'package:fluttercookbook/ex049_ExMethodChannel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -397,6 +399,8 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("045", "FlutterReactiveBlueApp ", context, const ExReactiveBleDemo()),
         listItem("046", "ExpandList, Flexible", context, const ExExpandList()),
         listItem("047", "All kinds of list", context, const ExAllKindsOfList()),
+        listItem("048", "MethodChannel", context, const ExModalBarrier()),
+        listItem("049", "MethodChannel", context, const ExChannel()),
       ],
     );
 
