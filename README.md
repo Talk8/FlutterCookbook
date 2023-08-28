@@ -52,3 +52,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex046_ExpandList                | this is the example of ExpansionPanelList and ExpansionTile.   |
 | ex046_ExpandList                | this is the example of List, map and null type.                |
 | ex047_AllKindsOfList            | this is the example of CheckBoxListTile and SwitchListTile     |
+| ex048_ModalBarrier              | this is the example of ModalBarrier and Visibility Widget      |
+| ex049_Channel                   | this is the example of channel,which is used for calling native|
