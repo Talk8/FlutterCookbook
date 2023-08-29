@@ -399,7 +399,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("045", "FlutterReactiveBlueApp ", context, const ExReactiveBleDemo()),
         listItem("046", "ExpandList, Flexible", context, const ExExpandList()),
         listItem("047", "All kinds of list", context, const ExAllKindsOfList()),
-        listItem("048", "MethodChannel", context, const ExModalBarrier()),
+        listItem("048", "ModalBarrier", context, const ExModalBarrier()),
         listItem("049", "MethodChannel", context, const ExChannel()),
       ],
     );
