@@ -11,6 +11,7 @@ import 'package:logger/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
+///这个文件是使用flutter_blue_plus包中的内容实现的示例，包含扫描，连接，不过没有发送数据功能
 class ExBle extends StatefulWidget {
   const ExBle({Key? key}) : super(key: key);
 
@@ -115,7 +116,6 @@ class _ExBleState extends State<ExBle> {
                   child: const Text('Discover Service')),
               SizedBox(
                 height: 500,
-                // child: DeviceListNeedUpdateStae(),),
                 child: deviceList(),
                 // child: deviceListWithState(context),
               ),

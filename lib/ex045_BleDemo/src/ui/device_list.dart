@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import '../ble/ble_logger.dart';
 import '../widgets.dart';
 import 'device_detail/device_detail_screen.dart';
-
+///这个界面的各种与ble相关的值都是通过consumer获取来的，值的初始化在main文件中
 class DeviceListScreen extends StatelessWidget {
   const DeviceListScreen({Key? key}) : super(key: key);
 
@@ -133,7 +133,11 @@ class _DeviceListState extends State<_DeviceList> {
               ),
             ),
             const SizedBox(height: 8),
-            ///这个Flexible也可以替换成ScrollView
+            ///这个Flexible也可以替换成ScrollView，这是页面的主要内容
+            ///第一行是ListTile包含一个文本和一个开关：用来控制是否打开log
+            ///第二是也是一个ListTile,包含一个提示语，提示用户如何操作，尾部是设备数量
+            ///第三行也是ListTile，不过是从List转换来的，使用了Map方法
+            ///在列表中添加了点击事件，点击列表时停止扫描并且跳转到设备详情界面
             Flexible(
               child: ListView(
                 children: [
@@ -155,12 +159,14 @@ class _DeviceListState extends State<_DeviceList> {
                           )
                         : null,
                   ),
+                  ///这里把List转换成了ListTile
                   ...widget.scannerState.discoveredDevices
                       .map(
                         (device) => ListTile(
                           title: Text(
                             device.name.isNotEmpty ? device.name : "Unnamed",
                           ),
+                          ///字符串使用三个点包含相当于换行
                           subtitle: Text(
                             """
 ${device.id}
