@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import 'device_interaction_tab.dart';
 
+///设备详情页分两个tab，分别用来显示设备详细信息，和BLE相关的log
 class DeviceDetailScreen extends StatelessWidget {
   final DiscoveredDevice device;
 
@@ -57,6 +58,7 @@ class _DeviceDetail extends StatelessWidget {
                 ],
               ),
             ),
+            ///设备详情页面使用TabView架构
             body: TabBarView(
               children: [
                 DeviceInteractionTab(

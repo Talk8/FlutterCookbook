@@ -12,6 +12,10 @@ import 'characteristic_interaction_dialog.dart';
 part 'device_interaction_tab.g.dart';
 //ignore_for_file: annotate_overrides
 
+///设备Tab页面主要用业显示设备的id和连接状态，代码分析如下：
+///DeviceInteractionTab就是一个壳子，主要用来使用Consumer获取花共享数据
+///真正的页面是_DeviceInteractionTab组件，它通过参数接收数据，参数中的
+///内容比较多，使用DeviceInteractionViewModel类封装，该类封装了设备connect和disconnect功能
 class DeviceInteractionTab extends StatelessWidget {
   final DiscoveredDevice device;
 
@@ -66,7 +70,12 @@ class DeviceInteractionViewModel extends $DeviceInteractionViewModel {
     deviceConnector.disconnect(deviceId);
   }
 }
-
+///界面使用List布局，前面4行的内容是固定的，详细如下：
+///第1行：设备ID
+///第2行：设备是否可以连接
+///第3行：设备的连接状态
+///第4行：设备操作的button，包含：connect,disconnect,discoverServices
+///重点看看如何连接、断开设备，以及发现设备中的服务
 class _DeviceInteractionTab extends StatefulWidget {
   const _DeviceInteractionTab({
     required this.viewModel,
@@ -150,6 +159,7 @@ class _DeviceInteractionTabState extends State<_DeviceInteractionTab> {
                   ),
                 ),
 
+                ///上面是整个页面前三行的内容，第四行内容依据是否有服务来显示
                 ///如果蓝牙设备没有连接就不显示service列表，这个是SliverChildListDelegate特有的，ListView就没有此功能
                 if (widget.viewModel.deviceConnected)
                   _ServiceDiscoveryList(

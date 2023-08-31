@@ -175,6 +175,7 @@ ${device.connectable}
                             """,
                           ),
                           leading: const BluetoothIcon(),
+                          ///点击扫描出的设备列表跳转到设备详情界面
                           onTap: () async {
                             widget.stopScan();
                             await Navigator.push<void>(

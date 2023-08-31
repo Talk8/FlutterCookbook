@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttercookbook/ex045_BleDemo/src/ble/ble_device_connector.dart';
+import 'package:fluttercookbook/ex045_BleDemo/src/ble/ble_device_interactor.dart';
 import 'package:fluttercookbook/ex045_BleDemo/src/ble/ble_logger.dart';
 import 'package:fluttercookbook/ex045_BleDemo/src/ble/ble_scanner.dart';
 import 'package:provider/provider.dart';
 
 import '_private_data.dart';
+import 'ex045_BleDemo/src/ui/device_detail/device_interaction_tab.dart';
 
 ///这个demo是使用reactive_blue中的api实现的ble，包含扫描，连接，发送数据，读取数据功能
 class ExBleAll extends StatefulWidget {
@@ -64,6 +67,8 @@ class BleScannerState {
 
 ///这个组件才是屏幕中主要的内容，通过参数传递BLE相关数据给它，这些数据来源于Consumer,consumer
 ///是从根目录中的provider获取到的蓝牙信息.这便是数据共享
+///这个页面主要实现了ble scan功能,该功能使用了官方demo中的BleScanner类，该类封装reactive_ble包中的扫描接口
+/// _ble.scanForDevices()这个接口返回的是stream对象，因此BleScanner对它进行了封装
 class DeviceList extends StatefulWidget {
   const DeviceList({
     required this.scannerState,
@@ -104,6 +109,11 @@ class _DeviceListState extends State<DeviceList> {
     }
   }
 
+  void routerToDeviceDetailsPage (BuildContext ctx,DiscoveredDevice device) {
+    Navigator.push(ctx,
+      MaterialPageRoute( builder:(_) => DeviceDetails(device: device,),),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     ///通过屏幕宽度的比例来设置界面高度
@@ -163,7 +173,8 @@ class _DeviceListState extends State<DeviceList> {
                                   title: Text(device.name.isNotEmpty ? device.name : 'unKnown'),
                                   ///在字符串中加入换行
                                   subtitle: Text( "mac: ${device.id}\nrssi: ${device.rssi} "),
-                                  onTap: () {},
+                                  ///点击设备后跳转到设备详情页面
+                                  onTap: () => routerToDeviceDetailsPage(context,device),
                                 ),)
                             .toList(),
                       ],
@@ -176,6 +187,8 @@ class _DeviceListState extends State<DeviceList> {
                     onPressed: () {
                       // widget.testConsumer.func();
                       widget.startScan([Uuid.parse(PrivateKey.searchServiceUuid)]);
+                      ///不使用uuid也可以搜索设备
+                      // widget.startScan();
                       ///扫描10s后停止扫描
                       Future.delayed( const Duration( seconds: 10, ), () {
                           widget.stopScan();
@@ -212,5 +225,82 @@ class TestConsumer {
   String sValue = 'data value';
   void func() {
     debugPrint('testConsumer func running');
+  }
+}
+
+///-----------------------------new file ------------------------------------
+///点击设备后跳转的页面，正常项目中应该放到不同的文件中，这里是为了方便查看代码，因此放到了一个文件中
+///这个类有一个必选参数device通过正常的参数传递，其它数据通过consumer传递
+///这个类主要用来包含consumer,页面真正的类在DeviceDetailsPage页面中
+class DeviceDetails extends StatelessWidget {
+  const DeviceDetails({required this.device,Key? key}) : super(key: key);
+
+  final DiscoveredDevice device;
+  @override
+  Widget build(BuildContext context) =>
+      Consumer3<BleDeviceConnector,ConnectionStateUpdate,BleDeviceInteractor>(
+          builder:(_,deviceConnector,connectedState,deviceInteract,__) {
+            return DeviceDetailsPage(
+              viewModel: DeviceInteractionViewModel(
+                deviceId: device.id,
+                connectableStatus: device.connectable,
+                connectionStatus: connectedState.connectionState,
+                deviceConnector: deviceConnector,
+                discoverServices: () => deviceInteract.discoverServices(device.id),
+              ),
+              device: device,
+            );
+          },
+      );
+}
+
+///这个页面才是真正的设备详情页面，这个页面主要实现了connect,disconnect功能
+///这两个功能封装在了DeviceInteractionViewModel类中，该是demo自己封装的，该类封装了reactive_ble
+///包中的接口类：BleDeviceConnector，如果想看连接过程需要到这个类中，该类封装了connect和disconnected功能
+///在项目中我们可以直接使用BleDeviceConnector类提供的connect和disconnect接口
+class DeviceDetailsPage extends StatefulWidget {
+  const DeviceDetailsPage({Key? key, required this.viewModel, required this.device}) : super(key: key);
+
+  ///使用这个变量主要用来获取设备名称
+  final DiscoveredDevice device;
+  ///这个变量参考示例代码编写，DeviceInteractionViewModel类封装了connect,disconnect功能
+  final DeviceInteractionViewModel viewModel;
+
+  @override
+  State<DeviceDetailsPage> createState() => _DeviceDetailsPageState();
+}
+
+class _DeviceDetailsPageState extends State<DeviceDetailsPage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    widget.viewModel.connect();
+    super.initState();
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.device.name ?? 'unKnown'),
+        backgroundColor: Colors.purpleAccent,
+      ),
+      ///设备连接状态从ConnectionStateUpdate类中读取，它是在connect过程中添加到stream中
+      ///然后通过StreamProvider中共享数据，这里通过consumer中的ConnectionStateUpdate获取连接状态
+      ///因此这个值是动态变化的：connecting,disconnected,connected.
+      body:Column(
+        children: [
+          Text('connect state: ${widget.viewModel.connectionStatus}'),
+          ElevatedButton(onPressed: () => widget.viewModel.connect(),
+            child:const Text('Connect Device'),
+          ),
+          ElevatedButton(onPressed: () => widget.viewModel.disconnect(),
+              child:const Text('Disconnected Device'),
+          ),
+        ],
+      ),
+    );
   }
 }
