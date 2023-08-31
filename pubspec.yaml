@@ -62,7 +62,7 @@ dependencies:
 #导入permission包来使用权限申请
   permission_handler: ^10.4.3
 
-#导入screen)util包来使用权限申请
+#导入screenutil包来适配屏幕
   flutter_screenutil: ^5.8.4
 
 #导入BLE包来使用蓝牙

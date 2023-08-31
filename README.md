@@ -46,9 +46,10 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex042_Animation                 | this is the example of Animation widget.                       |
 | ex043_ScreenSize                | this is the example of Fit screen and screenutil package.      |
 | ex044_ScrollView                | this is the example of ScrollView and local listview.          |
-| ex045_Bluetooth                 | this is the example of BLE scan,connect,read/write character.  |
-| ex045_BlueDemo                  | this is the code of BLE demo which is from flutter_blue_plus pkg|
-| ex045_BleDemo                   | this is the code of BLE demo which is from flutter_reactive_ble |
+| ex045_BleWith ble_plus          | this is the example of BLE scan,connect,based on blue_plus pkg.|
+| ex045_BleWith reactive ble      | this is the example of BLE scan,connect,read/write character.based on reactive_ble pkg.|
+| ex045_FlutterBlueApp            | this is the code of BLE demo which is from flutter_blue_plus pkg|
+| ex045_FlutterReactiveBlueApp    | this is the code of BLE demo which is from flutter_reactive_ble|
 | ex046_ExpandList                | this is the example of ExpansionPanelList and ExpansionTile.   |
 | ex046_ExpandList                | this is the example of List, map and null type.                |
 | ex047_AllKindsOfList            | this is the example of CheckBoxListTile and SwitchListTile     |
