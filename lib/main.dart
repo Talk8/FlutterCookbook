@@ -44,10 +44,13 @@ import 'package:fluttercookbook/ex045_BlueDemo.dart';
 import 'package:fluttercookbook/ex045_Bluetooth.dart';
 import 'package:fluttercookbook/ex043_ScreenSize.dart';
 import 'package:fluttercookbook/ex044_ExDynamicList.dart';
+import 'package:fluttercookbook/ex045_ExBleAll.dart';
 import 'package:fluttercookbook/ex046_ExpandList.dart';
 import 'package:fluttercookbook/ex047_ExAllKindsOfList.dart';
 import 'package:fluttercookbook/ex048_ExModalBarrier.dart';
 import 'package:fluttercookbook/ex049_ExMethodChannel.dart';
+import 'package:fluttercookbook/ex050_StremProvider.dart';
+import 'package:fluttercookbook/ex051_AsyncWidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -103,14 +106,20 @@ void main() {
       logMessage: _bleLogger.addToLog,
     );
 
+    TestConsumer testConsumer = TestConsumer();
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider( create:(context) => ViewModel(), child: const FlutterCookbookApp(),),
         ChangeNotifierProvider( create:(context) => DeviceViewModel(), child: const FlutterCookbookApp(),),
-        ///测试时使用的数据
+        ///测试共享时使用的数据
         Provider.value(value: shData),
-        StreamProvider<BluetoothConnectionState>(create: (context) => DeviceConnectStateStream().connectSate, initialData: BluetoothConnectionState.disconnected),
+        ///测试类中共享数据
+        Provider.value(value: testConsumer),
+        ///使用StreamProvider共享stream中的数据,在ex050文件中通过consumer获取数据
+        StreamProvider(create:(_) => Stream.periodic(const Duration(seconds: 2),(event)=>(event+1)).take(5),
+            initialData: 9),
 
         ///给ex045_BleDemo目录下的程序使用，主要用来管理共享数据
         Provider.value(value: _scanner),
@@ -119,6 +128,8 @@ void main() {
         Provider.value(value: _serviceDiscoverer),
         // Provider(create: (_) => _serviceDiscoverer,),
         Provider.value(value: _bleLogger),
+        ///这个state本质上是一个stream，用来监听扫描到的设备列表，在BleScanner中的startScan
+        ///方法中会通过该stream的controller向stream中添加设备
         StreamProvider<BleScannerState?>(
           create: (_) => _scanner.state,
           initialData: const BleScannerState(
@@ -394,13 +405,16 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("042", "Animation ", context, const ExAnimation()),
         listItem("043", "Screen Size Auto fit", context, const ExScreenSize()),
         listItem("044", "ScrollView and Dynamic List", context, const ExDynamicList()),
-        listItem("045", "BLE ", context, const ExBle()),
+        listItem("045", "BLE with ble_plus", context, const ExBle()),
+        listItem("045", "BLE with reactive_ble", context, ExBleAll()),
         listItem("045", "FlutterBlueApp ", context, const FlutterBlueApp()),
         listItem("045", "FlutterReactiveBlueApp ", context, const ExReactiveBleDemo()),
         listItem("046", "ExpandList, Flexible", context, const ExExpandList()),
         listItem("047", "All kinds of list", context, const ExAllKindsOfList()),
         listItem("048", "ModalBarrier", context, const ExModalBarrier()),
         listItem("049", "MethodChannel", context, const ExChannel()),
+        listItem("050", "StreamProvider", context, const ExStreamProvider()),
+        listItem("051", "CustomerAsyncWidget", context, const ExCustomerAsyncWidget()),
       ],
     );
 
