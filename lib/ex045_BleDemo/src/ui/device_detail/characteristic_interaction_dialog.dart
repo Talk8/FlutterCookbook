@@ -6,6 +6,11 @@ import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:fluttercookbook/ex045_BleDemo//src/ble/ble_device_interactor.dart';
 import 'package:provider/provider.dart';
 
+///这个类是demo中封装的类，主要用来提供数据读写操作的界面，实际项目中可以参考,其缺点是读写数据只返回
+///成功与失败，没有具体的值，这个有些遗憾。
+
+///原来的demo想通过它和consumer获取provider中的数据，不过无法获取到，我将其放到了参数中
+///真正的页面在_CharacteristicInteractionDialog中
 class CharacteristicInteractionDialog extends StatelessWidget {
   const CharacteristicInteractionDialog({
     required this.characteristic,
@@ -45,7 +50,7 @@ class CharacteristicInteractionDialog extends StatelessWidget {
             // writeWithResponse: interactor.writeCharacteristicWithResponse,
             // writeWithoutResponse: interactor.writeCharacteristicWithoutResponse,
             // subscribeToCharacteristic: interactor.subScribeToCharacteristic,
-    ///尝试使用provoder读取也不可以，报同样的错误，把context换成从上级传递来的bcontext也不可以，我估计就是dialog获取不到原来的context引起的
+    ///尝试使用provider读取也不可以，报同样的错误，把context换成从上级传递来的bcontext也不可以，我估计就是dialog获取不到原来的context引起的
         // readCharacteristic: Provider.of<BleDeviceInteractor>(bcontext,listen: false).readCharacteristic,
         // writeWithResponse: Provider.of<BleDeviceInteractor>(bcontext,listen: false).writeCharacteristicWithResponse,
         // writeWithoutResponse: Provider.of<BleDeviceInteractor>(bcontext,listen: false).writeCharacteristicWithoutResponse,
@@ -59,6 +64,7 @@ class CharacteristicInteractionDialog extends StatelessWidget {
   // ));
 }
 
+///这个类才是真正的数据读写操作页面
 class _CharacteristicInteractionDialog extends StatefulWidget {
   const _CharacteristicInteractionDialog({
     required this.characteristic,
@@ -151,6 +157,7 @@ class _CharacteristicInteractionDialogState
     });
   }
 
+  ///把Text封装成了标题，主要进行了加粗操作
   Widget sectionHeader(String text) => Text(
         text,
         style: const TextStyle(fontWeight: FontWeight.bold),
@@ -220,11 +227,18 @@ class _CharacteristicInteractionDialogState
         ),
       ];
 
+  ///这个封装的divider组件自带边距：垂直方向上12个dp
   Widget get divider => const Padding(
         padding: EdgeInsets.symmetric(vertical: 12.0),
         child: Divider(thickness: 2.0),
       );
 
+  ///dialog页面布局全在这个build方法中，外层是Dialog组件，组件内是垂直列表布局
+  ///最上方是characterId,其它行的内容依次如下：读操作行，写操作行，订阅操作行，最后是一个关闭窗口的按钮
+  ///我觉得不如使用AlertDialog，然后在Action中添加按钮，不过把每行和分隔线封装成独立的组件，这个
+  ///方法非常好，使得代码非常简洁，而且逻辑有序。它的思路如下：
+  ///创建一个ListView,然后把其它widget赋值给ListView。这些widget可以是单个widget，也可以是
+  ///多个widget组成的widget List.不管是单个还是多个List,默认都是按照List的垂直布局来排列。
   @override
   Widget build(BuildContext context) => Dialog(
         child: Padding(

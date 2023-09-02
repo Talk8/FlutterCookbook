@@ -99,6 +99,7 @@ class _DeviceInteractionTabState extends State<_DeviceInteractionTab> {
 
   Future<void> discoverServices() async {
     final result = await widget.viewModel.discoverServices();
+    ///通过setState来刷新页面
     setState(() {
       discoveredServices = result;
     });
@@ -132,6 +133,8 @@ class _DeviceInteractionTabState extends State<_DeviceInteractionTab> {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
+                ///connect,disconnect,discoverService都使用了device_interaction类中的接口
+                ///这些接口本质上是对reactive_ble包中接口的封装
                 Padding(
                   padding: const EdgeInsets.only(top: 16.0),
                   child: Row(
@@ -189,6 +192,8 @@ class _ServiceDiscoveryList extends StatefulWidget {
 }
 
 class _ServiceDiscoveryListState extends State<_ServiceDiscoveryList> {
+  /// 这个列表对页面中的expandPanel进行管理,主要用来判断扩展列表是否需要展开，
+  /// 它的原理:点击时添加或者删除列表项，使用时判断该列表项是否存在uu
   late final List<int> _expandedItems;
 
   @override
@@ -197,6 +202,7 @@ class _ServiceDiscoveryListState extends State<_ServiceDiscoveryList> {
     super.initState();
   }
 
+  ///把character的各种属性封装成方法
   String _characteristicsSummary(DiscoveredCharacteristic c) {
     final props = <String>[];
     if (c.isReadable) {
@@ -218,6 +224,8 @@ class _ServiceDiscoveryListState extends State<_ServiceDiscoveryList> {
     return props.join("\n");
   }
 
+  ///这个是位于service列表下的character列表，数据来源于方法中的参数，该列表内容通过listTile构建
+  ///标题是characterId+各种属性：read,write,点击后会弹出对话框，在对话框中进行数据读写操作
   Widget _characteristicTile(
           DiscoveredCharacteristic characteristic, String deviceId) =>
   ///这个代码是为了从当前页面把context传递下一级页面时添加的，传递context也不起使用
@@ -262,6 +270,10 @@ class _ServiceDiscoveryListState extends State<_ServiceDiscoveryList> {
         ),
       );
 
+  ///Service的主要内容就在这个方法中，它返回的是一个列表，列表中的每一项为service列表，该列表是扩展列表
+  ///扩展列表标题是serviceId,内容是普通列表，列表中的内容是characters
+  ///这种设计和ble的结构有关：一个设备包含多个service,因此需要列表来显示
+  ///一个service包含多个character，因此需要列表来显示
   List<ExpansionPanel> buildPanels() {
     final panels = <ExpansionPanel>[];
     ///这个是为了调试时添加的：确认是否可以通过当前页面的context获取到provider中的值
@@ -269,6 +281,7 @@ class _ServiceDiscoveryListState extends State<_ServiceDiscoveryList> {
     //     Provider.of<BleDeviceInteractor>(context, listen: false);
     // print('result: ${bleDeviceInteractor.toString()}');
 
+    ///这个给List赋值的方法：一边遍历service列表，一边把列表中的service添加到新列表中
     widget.discoveredServices.asMap().forEach(
           (index, service) => panels.add(
             ExpansionPanel(

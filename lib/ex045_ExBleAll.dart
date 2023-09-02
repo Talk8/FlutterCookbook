@@ -10,7 +10,8 @@ import 'package:provider/provider.dart';
 import '_private_data.dart';
 import 'ex045_BleDemo/src/ui/device_detail/device_interaction_tab.dart';
 
-///这个demo是使用reactive_blue中的api实现的ble，包含扫描，连接，发送数据，读取数据功能
+///这个demo是使用reactive_blue中的api实现的ble，包含扫描，连接，
+///该demo没有实现发送数据，读取数据功能，因为发送数据后只回复成功与失败没有具体的结果
 class ExBleAll extends StatefulWidget {
   const ExBleAll({Key? key}) : super(key: key);
 
@@ -271,6 +272,8 @@ class DeviceDetailsPage extends StatefulWidget {
 }
 
 class _DeviceDetailsPageState extends State<DeviceDetailsPage> {
+  List<DiscoveredService> serviceList = [];
+  bool _isExpand = false;
 
   @override
   void initState() {
@@ -290,16 +293,72 @@ class _DeviceDetailsPageState extends State<DeviceDetailsPage> {
       ///设备连接状态从ConnectionStateUpdate类中读取，它是在connect过程中添加到stream中
       ///然后通过StreamProvider中共享数据，这里通过consumer中的ConnectionStateUpdate获取连接状态
       ///因此这个值是动态变化的：connecting,disconnected,connected.
-      body:Column(
-        children: [
-          Text('connect state: ${widget.viewModel.connectionStatus}'),
-          ElevatedButton(onPressed: () => widget.viewModel.connect(),
-            child:const Text('Connect Device'),
-          ),
-          ElevatedButton(onPressed: () => widget.viewModel.disconnect(),
-              child:const Text('Disconnected Device'),
-          ),
-        ],
+      ///在整个列外面嵌套一层滚动列表，这样可以避免list太长导致运行时错误:纵向长度不够
+      body:SingleChildScrollView(
+        child: Column(
+          children: [
+            ///标题行：显示设备连接状态
+            Text('connect state: ${widget.viewModel.connectionStatus}'),
+            ///按钮行：显示connect,disconnect,discover操作
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ///在Button外层，嵌套一个Flexible更加安全，它会自动调整Button大小，否则如果button中的字太大了就会有宽度上的溢出
+                Flexible(
+                  flex: 1,
+                  child: ElevatedButton(onPressed: () => widget.viewModel.connect(),
+                    child:const Text('Connect device'),
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: ElevatedButton(onPressed: () => widget.viewModel.disconnect(),
+                    child:const Text('Disconnected device'),
+                  ),
+                ),
+                Flexible(
+                  flex: 2,
+                  child: ElevatedButton(onPressed: () async{
+                    final result = await widget.viewModel.discoverServices();
+                    setState(() {
+                      serviceList = result;
+                    });},
+                    child:const Text('Discover Service'),
+                  ),
+                ),
+              ],
+            ),
+            ///服务行：显示服务可折叠服务列表，服务列表中双包含character列表
+            ExpansionPanelList(
+             expansionCallback: (index,isExpand){
+               setState(() {
+                 _isExpand = !isExpand;
+               });
+             },
+             children: [
+               ///这个列表是设备的服务列表,服务列表使用扩展列表封装
+               ...serviceList.map((services) => ExpansionPanel(
+                 headerBuilder:(context,isExpand) =>
+                     ListTile(
+                       leading:const Text('Service:'),
+                       title: Text('${services.serviceId}'),
+                     ),
+                 body: ListView(
+                   shrinkWrap: true,
+                   children: [
+                     ///这个列表是服务的character列表，列表使用ListView封装
+                     ...services.characteristics.map((characters) =>
+                         ListTile(title:Text('${characters.characteristicId}'),),
+                     ).toList(),
+                   ],
+                 ),
+                 isExpanded: _isExpand,
+               ),
+               ).toList(),
+             ],
+            ),
+          ],
+        ),
       ),
     );
   }

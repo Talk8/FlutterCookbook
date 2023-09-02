@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 
+///这个类是demo封装的类，主要用来对ble进行操作，在main文件中通过方法参数来给它赋值。
+///在后续的项目中可以直接使用这个封装类
 class BleDeviceInteractor {
   BleDeviceInteractor({
     required Future<List<DiscoveredService>> Function(String deviceId)
