@@ -72,6 +72,8 @@ dependencies:
 #国内一家专门做ble IOT公司(TTCIOTSDK)提供的包,前面两个我都无法收到BLE回复的数据，这个包可以。
 #这个包还使用device_info_plus和synchronized这两个包来获取设备信息和异步操作（用lock实现）
   flutter_ttc_ble: ^0.1.2
+#ttc_ble的demo中使用了file_picker，所以导入这个包
+  file_picker: ^5.5.0
 #有时间了试试这个包1
 #  flutter_esp_ble_prov: any
 #导入image_picer用来使用相机和相册
