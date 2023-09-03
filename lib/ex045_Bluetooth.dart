@@ -11,7 +11,12 @@ import 'package:logger/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
-///这个文件是使用flutter_blue_plus包中的内容实现的示例，包含扫描，连接，不过没有发送数据功能
+///这个文件是使用flutter_blue_plus包中的内容实现的示例，包含扫描，连接，读写数据功能。
+///读写数据功能集成在了disCoverService方法中，因此在点击该按钮时会读写数据.
+///经过调试后发现，这个包读写character是基础功能，读取数据可以读取到数据 ，写数据只有成功与失败
+///的结果，不能接收写数据那边回复的数据。看包中的源代码后是使用MethodChannel方法实现的原生调用。
+///onCharacteristicWrite方法同没有返回数据。还有一个问题是没有重写onCharacteristicChanged这个
+///原生方法，因此这里也数据也无法接收到。
 class ExBle extends StatefulWidget {
   const ExBle({Key? key}) : super(key: key);
 
@@ -33,31 +38,6 @@ class _ExBleState extends State<ExBle> {
   final scanTimeout = 5;
   StreamSubscription<List<ScanResult>>? subscription;
 
-  ///与flutter_reactive_ble相关的代码注释掉，不再使用
-  /*
-  final FlutterReactiveBle flutterReactiveBle = FlutterReactiveBle();
-  StreamSubscription<DiscoveredDevice>? streamSubscription;
-
-  ///这个方法本身没有问题，但是scan无法停止，导致list无法显示
-  Widget BleDeviceList() {
-    return StreamBuilder<DiscoveredDevice>(
-      stream: flutterReactiveBle.scanForDevices(
-          withServices:[Uuid.parse(PrivateKey.uuid)],),
-      builder: (context,dataSource){
-        debugPrint('builder running');
-       return ListView.builder(
-         shrinkWrap: true,
-         itemBuilder: (context,index){
-           debugPrint('builder running $index');
-        return ListTile(
-          title: Text('${dataSource.data?.name}'),
-          subtitle:Text('${dataSource.data?.id}'),
-        );
-       },);
-      } ,
-    );
-  }
-   */
 
   @override
   void initState() {
@@ -114,6 +94,7 @@ class _ExBleState extends State<ExBle> {
                     });
                   },
                   child: const Text('Discover Service')),
+              ///存入扫描后的设备列表
               SizedBox(
                 height: 500,
                 child: deviceList(),
@@ -145,36 +126,6 @@ class _ExBleState extends State<ExBle> {
         ));
   }
 
-  ///与flutter_reactive_ble相关的代码注释掉，不再使用
-  /*
-  _onData(data) {
-    debugPrint("onData: ${data.toString()}");
-  }
-  void bleScan() {
-    streamSubscription = flutterReactiveBle.scanForDevices(
-      requireLocationServicesEnabled: false,
-      withServices: [Uuid.parse(PrivateKey.uuid)], scanMode: ScanMode.lowPower)
-        .listen(
-          (event) { debugPrint('event: ${event.toString()}'); _onData(event);},
-          onError: (handlerError) {
-            debugPrint("onError: ${handlerError.toString()}"); },
-          onDone: () {
-           debugPrint("onDone");
-          });
-
-        ///这个onError Listen返回内容:stream中的方法
-        // .onError((handlerError) {
-      // debugPrint("listen Error: ${handlerError.toString()}");
-    // });
-  }
-
-  ///scan启动后无法stop
-  void stopScan() {
-    debugPrint('stop scan');
-    streamSubscription?.cancel();
-  }
-
-   */
 
   ///这个widget需要主动更新界面才可以出现内容，因为设备列表开始为空，扫描后虽然有值了但是没有更新界面
   Widget deviceListNeedUpdateState() {
@@ -518,10 +469,17 @@ class _ExBleState extends State<ExBle> {
           readCharacteristics(char);
         }
 
-        if(char.properties.write) {
+        // if(char.properties.write) {
+        debugPrint('uuid : ${char.characteristicUuid.toString()}');
+        if(char.characteristicUuid.toString() == PrivateKey.writeCharacteristicUuid) {
+            debugPrint('set notify');
+          ///这个方法只有读特征时才回调，写特征时不会回调,只有设置NotifyValue后才会回调
+          await char.setNotifyValue(true);
+          ///想看回复的数据监听这个stream是对的，官方demo中使用StreamBuilder监听这个stream来显示回复的数据
           writeValueChanged = char.onValueReceived;
           writeValueChanged.listen((event) {
-            log.i('write chara feedback: ${getNiceHexArray(event)}');
+            // log.i('write chara feedback: ${getNiceHexArray(event)}');
+            log.i('write chara feedback: ${event.toString()}');
           },
             onError:(e){log.i('write chara error: ${e.toString()}');},
             onDone: () => log.i('write chara done'),
@@ -567,6 +525,9 @@ class _ExBleState extends State<ExBle> {
     Uint8List bytes = Uint8List.fromList(value);
     log.w('write characteristic ori:  ${bytes.toString()}');
     log.w('write characteristic hex:  ${getNiceHexArray(bytes)}');
+
+    List<int> readValue =  await characteristic.read();
+    log.w('after write read characteristic:  ${readValue.toString()}');
   }
 }
 

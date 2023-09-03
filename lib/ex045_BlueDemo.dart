@@ -23,6 +23,7 @@ final snackBarKeyC = GlobalKey<ScaffoldMessengerState>();
 final Map<DeviceIdentifier, ValueNotifier<bool>> isConnectingOrDisconnecting = {};
 
 ///我从main文件中直接跳转到了FlutterBlueApp中的,因此没有处理main中权限相关的内容
+///这个是针对不同平台来审评蓝牙权限的代码
 void main() {
   if (Platform.isAndroid) {
     WidgetsFlutterBinding.ensureInitialized();
@@ -75,6 +76,7 @@ class FlutterBlueApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       color: Colors.lightBlue,
+      ///监听蓝牙状态，判断蓝牙是否可用
       home: StreamBuilder<BluetoothAdapterState>(
           stream: FlutterBluePlus.adapterState,
           initialData: BluetoothAdapterState.unknown,
@@ -117,6 +119,7 @@ class BluetoothOffScreen extends StatelessWidget {
                 'Bluetooth Adapter is ${adapterState != null ? adapterState.toString().split(".").last : 'not available'}.',
                 style: Theme.of(context).primaryTextTheme.titleSmall?.copyWith(color: Colors.white),
               ),
+              ///蓝牙没有打开就打开蓝牙，不过这个功能只适用android
               if (Platform.isAndroid)
                 ElevatedButton(
                   child: const Text('TURN ON'),
@@ -159,6 +162,7 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
         appBar: AppBar(
           title: const Text('Find Devices'),
         ),
+        ///支持下拉刷新功能
         body: RefreshIndicator(
           onRefresh: () {
             setState(() {}); // force refresh of connectedSystemDevices
@@ -337,7 +341,10 @@ class DeviceScreen extends StatelessWidget {
             },
             onWritePressed: () async {
               try {
-                await c.write(_getRandomBytes(), withoutResponse: c.properties.writeWithoutResponse);
+                // await c.write(_getRandomBytes(), withoutResponse: c.properties.writeWithoutResponse);
+                ///原来使用随机数来发数据 ，我修改成固定数据，用来测试是否有数据回复，仍然没有回复。
+                List<int> value = [0xaa,0xbb,0xcc,0x00,0x01,0x02];
+                await c.write(value, withoutResponse: c.properties.writeWithoutResponse);
                 final snackBar = snackBarGood("Write: Success");
                 snackBarKeyC.currentState?.removeCurrentSnackBar();
                 snackBarKeyC.currentState?.showSnackBar(snackBar);
