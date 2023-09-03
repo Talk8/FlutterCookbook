@@ -55,3 +55,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex047_AllKindsOfList            | this is the example of CheckBoxListTile and SwitchListTile     |
 | ex048_ModalBarrier              | this is the example of ModalBarrier and Visibility Widget      |
 | ex049_Channel                   | this is the example of channel,which is used for calling native|
+| ex050_SteamProvider             | this is the example of StreamProvider.                         |
+| ex051_RefreshIndicator          | this is the example of AsyncWidget and RefreshIndicator        |
