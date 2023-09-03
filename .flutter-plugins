@@ -1,10 +1,12 @@
 # This is a generated file; do not edit or check into version control.
+device_info=/Users/wy/.pub-cache/hosted/pub.dev/device_info-2.0.3/
 file_selector_linux=/Users/wy/.pub-cache/hosted/pub.dev/file_selector_linux-0.9.2/
 file_selector_macos=/Users/wy/.pub-cache/hosted/pub.dev/file_selector_macos-0.9.3+1/
 file_selector_windows=/Users/wy/.pub-cache/hosted/pub.dev/file_selector_windows-0.9.3/
 flutter_blue_plus=/Users/wy/.pub-cache/hosted/pub.dev/flutter_blue_plus-1.14.7/
 flutter_plugin_android_lifecycle=/Users/wy/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.15/
 flutter_reactive_ble=/Users/wy/.pub-cache/hosted/pub.dev/flutter_reactive_ble-5.1.1/
+flutter_ttc_ble=/Users/wy/.pub-cache/hosted/pub.dev/flutter_ttc_ble-0.1.2/
 image_picker=/Users/wy/.pub-cache/hosted/pub.dev/image_picker-1.0.2/
 image_picker_android=/Users/wy/.pub-cache/hosted/pub.dev/image_picker_android-0.8.7+4/
 image_picker_for_web=/Users/wy/.pub-cache/hosted/pub.dev/image_picker_for_web-3.0.0/
