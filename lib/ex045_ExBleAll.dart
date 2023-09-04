@@ -12,14 +12,14 @@ import 'ex045_BleDemo/src/ui/device_detail/device_interaction_tab.dart';
 
 ///这个demo是使用reactive_blue中的api实现的ble，包含扫描，连接，
 ///该demo没有实现发送数据，读取数据功能，因为发送数据后只回复成功与失败没有具体的结果
-class ExBleAll extends StatefulWidget {
-  const ExBleAll({Key? key}) : super(key: key);
+class ExBleWithReactiveBlue extends StatefulWidget {
+  const ExBleWithReactiveBlue({Key? key}) : super(key: key);
 
   @override
-  State<ExBleAll> createState() => _ExBleAllState();
+  State<ExBleWithReactiveBlue> createState() => _ExBleWithReactiveBlueState();
 }
 
-class _ExBleAllState extends State<ExBleAll> {
+class _ExBleWithReactiveBlueState extends State<ExBleWithReactiveBlue> {
   ///从consumer中拿到共享数据，然后通过构造函数传递给组件
   @override
   Widget build(BuildContext context) => Consumer5<BleStatus, TestConsumer, BleScanner, BleScannerState?, BleLogger>(
