@@ -16,6 +16,8 @@ import 'package:permission_handler/permission_handler.dart';
 
 ///本文件中的代码全部是从flutter_blue_plus包的example中复制而来，包含main.dart，widgets.dart两个文件
 ///它实现了常用的蓝牙功能：扫描、连接、发现service,读写characteristics，读写descriptors,发送通知，修改MTU
+///读写功能都是在character下面显示的，因此都是基于当前的service和character进行的。这与它的api有关
+///因数读写操作的api都在character类下而不是ble下。
 final snackBarKeyA = GlobalKey<ScaffoldMessengerState>();
 final snackBarKeyB = GlobalKey<ScaffoldMessengerState>();
 final snackBarKeyC = GlobalKey<ScaffoldMessengerState>();
@@ -876,6 +878,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                 )
               ],
             ),
+            ///这个value就是读写操作以及notify操作返回的结果，它是通过streamBuilder监听stream后得到的数据
             subtitle: Text(value.toString()),
             contentPadding: const EdgeInsets.all(0.0),
           ),

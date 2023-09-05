@@ -12,19 +12,21 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 ///这个文件是使用flutter_blue_plus包中的内容实现的示例，包含扫描，连接，读写数据功能。
-///读写数据功能集成在了disCoverService方法中，因此在点击该按钮时会读写数据.
+///读写数据功能集成在了disCoverService方法中，因此在点击该按钮时会读写数据.(读数据功能暂时没有)
 ///经过调试后发现，这个包读写character是基础功能，读取数据可以读取到数据 ，写数据只有成功与失败
 ///的结果，不能接收写数据那边回复的数据。看包中的源代码后是使用MethodChannel方法实现的原生调用。
-///onCharacteristicWrite方法同没有返回数据。还有一个问题是没有重写onCharacteristicChanged这个
-///原生方法，因此这里也数据也无法接收到。
-class ExBle extends StatefulWidget {
-  const ExBle({Key? key}) : super(key: key);
+///onCharacteristicWrite方法同没有返回数据。
+///还有一种读写数据的方式就是通过notify功能,首先激活notify功能，然后监听onValueChanged这个
+///stream,它重写了onCharacteristicChanged这个原生方法，因此可以在这里接收数据。
+///注意是character的stream而不是service的stream.
+class ExBleWithBluePlus extends StatefulWidget {
+  const ExBleWithBluePlus({Key? key}) : super(key: key);
 
   @override
-  State<ExBle> createState() => _ExBleState();
+  State<ExBleWithBluePlus> createState() => _ExBleWithBluePlusState();
 }
 
-class _ExBleState extends State<ExBle> {
+class _ExBleWithBluePlusState extends State<ExBleWithBluePlus> {
   List<ScanResult>? scanDeviceList;
 
   ///存放过滤后的设备列表
@@ -452,44 +454,61 @@ class _ExBleState extends State<ExBle> {
 
   Future<List<BluetoothService>> discoverServices(BluetoothDevice device) async {
     List<BluetoothService> services = await device.discoverServices();
-    List<BluetoothCharacteristic> characteristics;
-    Stream<List<int>> readValueChanged;
-    Stream<List<int>> writeValueChanged;
+    List<BluetoothCharacteristic>? characteristics;
+    BluetoothService writeService;
+    BluetoothService notifyService;
+    BluetoothCharacteristic? writeCharacteristic;
+    BluetoothCharacteristic? notifyCharacteristic ;
 
     for (var element in services) {
       // log.i("service: ${element.toString()}");
-      characteristics = element.characteristics;
-      for(var char in characteristics) {
-        if(char.properties.read) {
-          readValueChanged = char.onValueReceived;
-          readValueChanged.listen((event) {
-            log.i('read chara feedback: ${event.toString()}');
-          });
 
-          readCharacteristics(char);
+      // if(element.serviceUuid ==  Guid.fromMac(PrivateKey.notifyServiceUuid))
+      ///查找具有指定uuid的service
+      if (element.serviceUuid.toString() == PrivateKey.notifyServiceUuid) {
+        notifyService = element;
+        characteristics = element.characteristics;
+        for (var char in characteristics) {
+          if (char.characteristicUuid.toString() == PrivateKey.notifyCharacteristicUuid) {
+            notifyCharacteristic = char;
+          }
         }
+      }
 
-        // if(char.properties.write) {
-        debugPrint('uuid : ${char.characteristicUuid.toString()}');
-        if(char.characteristicUuid.toString() == PrivateKey.writeCharacteristicUuid) {
-            debugPrint('set notify');
-          ///这个方法只有读特征时才回调，写特征时不会回调,只有设置NotifyValue后才会回调
-          await char.setNotifyValue(true);
-          ///想看回复的数据监听这个stream是对的，官方demo中使用StreamBuilder监听这个stream来显示回复的数据
-          writeValueChanged = char.onValueReceived;
-          writeValueChanged.listen((event) {
-            // log.i('write chara feedback: ${getNiceHexArray(event)}');
-            log.i('write chara feedback: ${event.toString()}');
-          },
-            onError:(e){log.i('write chara error: ${e.toString()}');},
-            onDone: () => log.i('write chara done'),
-          );
-
-          writeCharacteristics(char);
+        characteristics?.clear();
+      ///查找具有指定uuid的character
+      if( element.serviceUuid.toString() == PrivateKey.writeServiceUuid) {
+        writeService = element;
+        characteristics = element.characteristics;
+        for(var char in characteristics) {
+          if(char.characteristicUuid.toString() == PrivateKey.writeCharacteristicUuid) {
+            writeCharacteristic = char;
+          }
         }
       }
     }
-    return services;
+
+    ///打开NotifyValue功能，以便监听character，也就是ble回复的数值
+    await notifyCharacteristic?.setNotifyValue(true);
+    debugPrint('set notify');
+
+    ///想看回复的数据监听这个stream是对的，官方demo中使用StreamBuilder监听这个stream来显示回复的数据
+    notifyCharacteristic?.onValueReceived.listen((event) {
+      log.i('write chara feedback: ${event.toString()}');
+      ///把int数据转换成byte数据，int默认64位，Unit8为8位。这样可以去掉溢出的部分
+      Uint8List bytes = Uint8List.fromList(event);
+        log.i('write chara feedback hex: ${getNiceHexArray(bytes)}');
+      },
+      ///onError和onDone都不会回调，需要使用try/catch来处理exception
+      onError: (e){
+        log.i('write chara error: ${e.toString()}');
+      },
+      onDone: (){
+        log.i('write chara done:');
+      });
+
+      funcWriteCharacteristics(writeCharacteristic);
+      return services;
   }
 
 
@@ -504,30 +523,24 @@ class _ExBleState extends State<ExBle> {
   }
 
   ///依据指定的UUID写入特征值
-  void writeCharacteristics (BluetoothCharacteristic characteristic) async{
-    if(PrivateKey.writeCharacteristicUuid != characteristic.characteristicUuid.toString()) {
-      return null;
-    }
+  void funcWriteCharacteristics (BluetoothCharacteristic? characteristic) async{
+    // if(PrivateKey.writeCharacteristicUuid != characteristic.characteristicUuid.toString()) {
+    //   return null;
+    // }
 
-    List<int> value = [0x00,0x01,0x02,0x00,0x00,0x04,0x01,0x01,0x00];
-    // List<int> value = [12,13,14];
-
+    List<int> value = [12,13,14];
     ///计算CRC
     for(var v in value) {
       value[value.length-1] += v;
     }
 
-
-    await characteristic.write(value,withoutResponse: false);
+    await characteristic?.write(value,withoutResponse: false);
     log.w('write characteristic:  ${value.toString()}');
     log.w('write characteristic hex:  ${getNiceHexArray(value)}');
-    ///把int数据转换成byte数据，int默认64位，Uint8为8位。这样可以去掉溢出的部分
+    ///把int数据转换成byte数据，int默认64位，Unit8为8位。这样可以去掉溢出的部分
     Uint8List bytes = Uint8List.fromList(value);
     log.w('write characteristic ori:  ${bytes.toString()}');
     log.w('write characteristic hex:  ${getNiceHexArray(bytes)}');
-
-    List<int> readValue =  await characteristic.read();
-    log.w('after write read characteristic:  ${readValue.toString()}');
   }
 }
 
