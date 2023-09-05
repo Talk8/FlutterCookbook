@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:fluttercookbook/ex024_Radio.dart';
@@ -40,6 +39,7 @@ import 'package:fluttercookbook/ex040_FileOperation.dart';
 import 'package:fluttercookbook/ex041_SharedData.dart';
 import 'package:fluttercookbook/ex042_Animation.dart';
 import 'package:fluttercookbook/ex045_BleDemo/main.dart';
+import 'package:fluttercookbook/ex045_BleTiDemo/main.dart';
 import 'package:fluttercookbook/ex045_BlueDemo.dart';
 import 'package:fluttercookbook/ex045_Bluetooth.dart';
 import 'package:fluttercookbook/ex043_ScreenSize.dart';
@@ -405,8 +405,9 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("042", "Animation ", context, const ExAnimation()),
         listItem("043", "Screen Size Auto fit", context, const ExScreenSize()),
         listItem("044", "ScrollView and Dynamic List", context, const ExDynamicList()),
-        listItem("045", "BLE with ble_plus", context, const ExBle()),
-        listItem("045", "BLE with reactive_ble", context, ExBleAll()),
+        listItem("045", "BLE with ble_plus", context, const ExBleWithBluePlus()),
+        listItem("045", "BLE with reactive_ble", context, const ExBleWithReactiveBlue()),
+        listItem("045", "BLE DemoTIApp", context, const MyApp()),
         listItem("045", "FlutterBlueApp ", context, const FlutterBlueApp()),
         listItem("045", "FlutterReactiveBlueApp ", context, const ExReactiveBleDemo()),
         listItem("046", "ExpandList, Flexible", context, const ExExpandList()),
