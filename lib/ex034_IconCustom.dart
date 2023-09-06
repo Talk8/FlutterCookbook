@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-//这个文件中包含了自定义字体图标84，85,86以及异步中的Future和Stream相关的内容
+///这个文件中包含了自定义字体图标84，85,86以及异步中的Future和Stream相关的内容
+///76 url_launch包的使用
 class ExIconCustom extends StatefulWidget {
   const ExIconCustom({Key? key}) : super(key: key);
 

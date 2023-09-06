@@ -58,3 +58,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex049_Channel                   | this is the example of channel,which is used for calling native|
 | ex050_SteamProvider             | this is the example of StreamProvider.                         |
 | ex051_RefreshIndicator          | this is the example of AsyncWidget and RefreshIndicator        |
+| ex052_WillPopScope              | this is the example of WillPopScope Widget                     |
+| ex053_WebView                   | this is the example of WebView Package                         |
