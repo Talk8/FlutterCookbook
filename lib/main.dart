@@ -51,6 +51,7 @@ import 'package:fluttercookbook/ex048_ExModalBarrier.dart';
 import 'package:fluttercookbook/ex049_ExMethodChannel.dart';
 import 'package:fluttercookbook/ex050_StremProvider.dart';
 import 'package:fluttercookbook/ex051_AsyncWidget.dart';
+import 'package:fluttercookbook/ex052_WillPopScope.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -416,6 +417,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("049", "MethodChannel", context, const ExChannel()),
         listItem("050", "StreamProvider", context, const ExStreamProvider()),
         listItem("051", "CustomerAsyncWidget", context, const ExCustomerAsyncWidget()),
+        listItem("052", "WillPopScopeWidget", context, const ExWillPopScope()),
       ],
     );
 
