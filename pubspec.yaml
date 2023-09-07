@@ -82,14 +82,37 @@ dependencies:
 #Flutter官方提供的webview
   webview_flutter: ^4.2.4
 
+#在组件旁边添加小红点
+  badges: ^3.1.2
+
 #dart官方提供的包，像c中的chara一样操作string.还没有使用
 #  characters: ^1.3.0
   #用来生成MD5,SHA加密算法，还没有使用
 #  crypto: ^3.0.3
   #用来登录google账号,还没有使用
 #  google_sign_in:
+  #实现通知功能，还没有使用
+#  flutter_local_notifications:
 
+#实现banner效果，还没有使用
+#  carousel_slider:
 
+#获取GPS信息，还没有使用
+#  geolocator:
+# 实现sqlLite相关功能
+#  sqflite:
+  #实现自动调整文字大小的组件，相当于Text的扩展。
+#  auto_size_text:
+  # 实现文字动画
+#  animated_text_kit:
+  #实现各种形状的进度条
+#  percent_indicator:
+  #实现各种样式的进度，比如旋转，转动
+#  flutter_spinkit:
+  #实现各种图形，类似Echart
+#  fl_chart:
+  #实现滑动菜单功能
+#  flutter_slidable:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
