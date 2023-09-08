@@ -53,6 +53,7 @@ import 'package:fluttercookbook/ex050_StremProvider.dart';
 import 'package:fluttercookbook/ex051_AsyncWidget.dart';
 import 'package:fluttercookbook/ex052_WillPopScope.dart';
 import 'package:fluttercookbook/ex053_WebView.dart';
+import 'package:fluttercookbook/ex054_RedPoint.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -420,6 +421,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("051", "CustomerAsyncWidget", context, const ExCustomerAsyncWidget()),
         listItem("052", "WillPopScopeWidget", context, const ExWillPopScope()),
         listItem("053", "WebViewWidget", context, const ExWebView()),
+        listItem("054", "Badge or RedPoint", context, const ExRedPoint()),
       ],
     );
 
