@@ -76,7 +76,10 @@ dependencies:
   file_picker: ^5.5.0
 #有时间了试试这个包1
 #  flutter_esp_ble_prov: any
-#导入image_picer用来使用相机和相册
+#导入image_picer用来使用相机和相册,IOS上需要使用pod install 命令安装相关的依赖，不然无法通过编译
+# 执行命令时有警告，详细如下： CocoaPods did not set the base configuration of your project because your
+# project already has a custom config set. In order for CocoaPods integration to work at all, please either set the base configurations of the target `Runner` to `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` or include the `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` in your build configuration (`Flutter/Release.xcconfig`).
+#  去掉此警告需要在xcode中配置：project:Runner ->Inof ->Configuration把debug,release,profile三个扩展下的runner修改成None,然后再pod install就可以
   image_picker: ^1.0.2
 
 #Flutter官方提供的webview
