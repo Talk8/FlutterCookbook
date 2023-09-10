@@ -2,6 +2,14 @@
 # 包下载后可以运行，不过有错误：点击设备详情界面的character后无法弹出dialog,
 # 原因是无法通过consumer获取到共享数据，参考0118提交的修改
 # 修改思路：在上级页面获取共享数据，然后以参数的形式传递给下一级页面(dialog)
+# 页面主要功能和布局分析，这是看源代码后得出的结果：
+- 主程序是HomeScreen，进来后依据蓝牙的状态分两个界面：BleStatusScreen和DeviceListScreen。蓝牙状态通过provider管理，获取时使用consumer来获取；
+- BleStatusScreen只有一个文本组件用来显示蓝牙状态，DeviceListScreen才是主界面；
+- DeviceListScreen才是主界面；主界面是Column布局，上层是输入uuid的输入框和开始、停止扫描按钮，下层是扫描出的设备列表，列表外层嵌套了Flexible组件。
+- 在设备列表中通过点击跳转到设备详情页面：DeviceDetailScreen。在看详细页面前可以单独看看扫描和停止扫描的功能，它们是通过Stream进行了，中门还有专门
+- 的状态管理机制。点击列表尾部的蓝牙图标进行设备详情页面。DeviceDetailScreen。
+- DeviceDetailScreen页面顶部有拦截了返回键的操作，在返回时断开蓝牙设备连接。该页面是一个顶部Tab页面，包含两个Tab页面；
+- DeviceInteractionTab和DeviceLogTab。前者用来显示设备详情，后者用来演示log。
 
 # Flutter reactive BLE library
 
