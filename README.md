@@ -61,4 +61,3 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex052_WillPopScope              | this is the example of WillPopScope Widget                     |
 | ex053_WebView                   | this is the example of WebView Package                         |
 | ex054_RedPoint and Badge        | this is the example of RedPoint and Badge                      |
-| ex054_RedPoint and Badge        | this is the example of RedPoint and Badge                      |
