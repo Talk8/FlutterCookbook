@@ -54,6 +54,7 @@ import 'package:fluttercookbook/ex051_AsyncWidget.dart';
 import 'package:fluttercookbook/ex052_WillPopScope.dart';
 import 'package:fluttercookbook/ex053_WebView.dart';
 import 'package:fluttercookbook/ex054_RedPoint.dart';
+import 'package:fluttercookbook/ex055_AppIntroduce.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -422,6 +423,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("052", "WillPopScopeWidget", context, const ExWillPopScope()),
         listItem("053", "WebViewWidget", context, const ExWebView()),
         listItem("054", "Badge or RedPoint", context, const ExRedPoint()),
+        listItem("055", "App Introduce", context, const ExAppIntroduce()),
       ],
     );
 
