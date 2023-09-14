@@ -60,10 +60,14 @@ class _ExAppIntroduceState extends State<ExAppIntroduce> {
           ),
           decoration: const PageDecoration(
             ///可以让image全屏显示，默认情况下image,title,body按照flex值1：1：1均匀分布
+            ///调整flex值可以控制body和title的位置
             fullScreen: true,
             titleTextStyle: TextStyle(color: Colors.deepPurpleAccent,),
+            bodyAlignment: Alignment.bottomLeft,
+            bodyFlex: 1,
+            imageFlex: 5,
             ///image以外区域的颜色
-            // pageColor: Colors.blue,
+            pageColor: Colors.blue,
           )
         ),
         PageViewModel(
