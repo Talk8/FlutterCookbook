@@ -14,12 +14,12 @@ class ExColumnRow extends StatelessWidget {
       ),
       body: Container(
         width: 900,
-        height: 300,
+        height: 100,
         //控制容器内成员的对齐方式，有系统提供的默认值，比如center,也可以自定义
         alignment: Alignment.center,
         // alignment: Alignment(0.3,-0.6),
-        padding: EdgeInsets.all(10),
-        margin: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(20),
         transform: Matrix4.rotationZ(0.0),
         // transformAlignment: Alignment.bottomCenter,
         decoration: BoxDecoration(
@@ -43,7 +43,7 @@ class ExColumnRow extends StatelessWidget {
             ///flex就类似于android中的weight，表示比重
             Expanded(
               child: Column(
-                children: const [
+                children: [
                   Icon(Icons.chat),
                   Text("Contact"),
                 ],
@@ -51,7 +51,7 @@ class ExColumnRow extends StatelessWidget {
             ),
             Expanded(
               child: Column(
-                children: const [
+                children: [
                   Icon(Icons.contacts),
                   Text("WeChat"),
                 ],
@@ -59,14 +59,14 @@ class ExColumnRow extends StatelessWidget {
             ),
             Expanded(
                 child: Column(
-              children: const [
+              children: [
                 Icon(Icons.shutter_speed),
                 Text("Around"),
               ],
             )),
             Expanded(
                 child: Column(
-              children: const [
+              children: [
                 Icon(Icons.person),
                 Text("My self"),
               ],

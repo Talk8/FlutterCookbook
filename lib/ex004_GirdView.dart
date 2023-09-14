@@ -32,7 +32,7 @@ class ExGirdView extends StatelessWidget {
         backgroundColor: Colors.purpleAccent,
       ),
       // body: girdViewEx,
-      body: ColorPaletteByGridView(),
+      body: const ColorPaletteByGridView(),
     );
   }
 }
@@ -61,15 +61,14 @@ class ColorPaletteByGridView extends StatelessWidget {
         ),
         children: List.generate(45, (index) {
           return Container(
+            color: Color.fromARGB(255, Random().nextInt(256), Random().nextInt(256), Random().nextInt(256)),
             child: Center(
               ///使用按钮来响应事件
               child: TextButton(
-                onPressed: ()=>print('$index clicked'),
+                onPressed: ()=> debugPrint('$index clicked'),
                 ///文本使用索引值
-                child: Text('$index',style: TextStyle(color: Colors.white),),),
-            ),
-            ///颜色使用随机数生成
-            color: Color.fromARGB(255, Random().nextInt(256), Random().nextInt(256), Random().nextInt(256)),);
+                child: Text('$index',style: const TextStyle(color: Colors.white),),),
+            ),);
         }),
       ),
     );

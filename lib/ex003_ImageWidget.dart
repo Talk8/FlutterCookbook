@@ -11,8 +11,8 @@ class ExImage extends StatelessWidget {
       width: 300,
       height: 200,
       color: Colors.blue[300],
-      child: Row(
-        children: const [
+      child: const Row(
+        children: [
           //if the image is not existed,it can not be shown.
           Image(image: AssetImage("images/ex.png"),),
         ],
@@ -21,7 +21,7 @@ class ExImage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Example of Image Widget"),
+        title: const Text("Example of Image Widget"),
         backgroundColor: Colors.purpleAccent,
       ),
       // body: imageEx,
@@ -46,7 +46,7 @@ class ExImage extends StatelessWidget {
   //抽象成方法
   //组件尺寸和图片不同时，图片会有拉伸
   Image buildImageFill() {
-    return Image(
+    return const Image(
       width: 160,
       height: 60,
       image: AssetImage("images/panda.jpeg"),
@@ -57,7 +57,7 @@ class ExImage extends StatelessWidget {
 
   //组件尺寸和图片不同时，图片会有剪裁
   Image buildImageCover() {
-    return Image(
+    return const Image(
       width: 160,
       height: 60,
       image: AssetImage("images/panda.jpeg"),
@@ -68,7 +68,7 @@ class ExImage extends StatelessWidget {
 
   //组件尺寸和图片不同时，图片正常显示，不过有缩放现象
   Image buildImageContain() {
-    return Image(
+    return const Image(
       width: 160,
       height: 60,
       image: AssetImage("images/panda.jpeg"),
@@ -79,7 +79,7 @@ class ExImage extends StatelessWidget {
 
   //在图片上加了一层带颜色的蒙板
   Image buildImageColorLighten() {
-    return Image(
+    return const Image(
       color: Colors.purpleAccent,
       width: 100,
       height: 100,
@@ -92,7 +92,7 @@ class ExImage extends StatelessWidget {
 
   //无法显示图片，不建议使用
   Image buildImageColorClear() {
-    return Image(
+    return const Image(
       color: Colors.purpleAccent,
       width: 100,
       height: 100,
@@ -105,7 +105,7 @@ class ExImage extends StatelessWidget {
 
   //无法显示颜色，不建议使用
   Image buildImageColorDstIn() {
-    return Image(
+    return const Image(
       color: Colors.purpleAccent,
       width: 100,
       height: 100,
@@ -118,7 +118,7 @@ class ExImage extends StatelessWidget {
 
   //无法显示图片，不建议使用
   Image buildImageColorDstOut() {
-    return Image(
+    return const Image(
       color: Colors.purpleAccent,
       width: 100,
       height: 100,
@@ -131,7 +131,7 @@ class ExImage extends StatelessWidget {
 
   //图片和颜色混合显示
   Image buildImageColorDiff() {
-    return Image(
+    return const Image(
       color: Colors.purpleAccent,
       width: 100,
       height: 100,
