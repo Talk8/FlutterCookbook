@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///创建一个可以添加图片做为背景的组件，可以修改组件的大小，边框，圆角,与144内容匹配
 class ExPageWithBg extends StatefulWidget {
   const ExPageWithBg({super.key});
 
@@ -43,12 +44,14 @@ class _ExPageWithBgState extends State<ExPageWithBg> {
               width: 200,
               height: 200,
               decoration:const BoxDecoration(
+                ///使用圆形后不能同时使用borderRadius
+                // shape: BoxShape.circle,
                 ///设置容器的边框和圆角，下面的方法可以运行
                 // border: Border.all(color: Colors.deepPurpleAccent,width: 3),
                 // borderRadius: BorderRadius.circular(30),
                 ///部分边框时不能设置borderRadius,需要在container外层再嵌套一层clipRRect
-                border: Border.symmetric(horizontal: BorderSide(color: Colors.deepPurple,width: 3,)),
-                // borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
+                // border: Border.symmetric(horizontal: BorderSide(color: Colors.deepPurple,width: 3,)),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
                 ///修改图片的填充方式和模糊效果
                 image: DecorationImage(
                   opacity: 0.5,
