@@ -37,19 +37,28 @@ class _ExPageWithBgState extends State<ExPageWithBg> {
             ],
           ),
           ///页面中带有背景图片，使用container实现
-          Container(
-            width: 200,
-            height: 200,
-            decoration:const BoxDecoration(
-              ///修改图片的填充方式和模糊效果
-              image: DecorationImage(
-                opacity: 0.5,
-                // colorFilter: ColorFilter.mode(Color.fromARGB(100, 200, 20,30),BlendMode.difference),
-                image: AssetImage("images/ex.png"),
-                fit: BoxFit.fill,
+          ClipRRect(
+            borderRadius: const BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
+            child: Container(
+              width: 200,
+              height: 200,
+              decoration:const BoxDecoration(
+                ///设置容器的边框和圆角，下面的方法可以运行
+                // border: Border.all(color: Colors.deepPurpleAccent,width: 3),
+                // borderRadius: BorderRadius.circular(30),
+                ///部分边框时不能设置borderRadius,需要在container外层再嵌套一层clipRRect
+                border: Border.symmetric(horizontal: BorderSide(color: Colors.deepPurple,width: 3,)),
+                // borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
+                ///修改图片的填充方式和模糊效果
+                image: DecorationImage(
+                  opacity: 0.5,
+                  // colorFilter: ColorFilter.mode(Color.fromARGB(100, 200, 20,30),BlendMode.difference),
+                  image: AssetImage("images/ex.png"),
+                  fit: BoxFit.fill,
+                ),
               ),
+              child:const Text('This is the body'),
             ),
-            child:const Text('This is the body'),
           ),
         ],
       ),
