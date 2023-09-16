@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-///创建拖动的小球游戏，手指拖动到哪里小球移动到哪里，手指点到哪里小球移动到哪里，松开手指后小球回到原位,与145内容匹配
+///创建拖动的小球游戏，手指拖动到哪里小球移动到哪里，手指点到哪里小球移动到哪里，松开手指后小球回到原位,与145，146内容匹配
 ///缺点是区域大小和，小球原始位置(100,100)都是固定的,也就是使用了绝对坐标
 ///位置不够精准，因为移动时没有考虑小球的大小，最好是减去它的半径
 /// 外层是矩形坐标用big表示，里层是小圆坐标用small表示
@@ -106,6 +106,29 @@ class Ball extends StatelessWidget {
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.green,
+        ///可以组合多个BoxShadow,实现混合颜色的效果
+        boxShadow: [
+          BoxShadow(
+            ///控制阴影的偏移值,正值向下和向右偏移，负值向上和左偏移
+            offset: Offset(6, 6),
+            ///控制出阴影颜色
+            color: Colors.red,
+            ///控制阴影展开的大小,值越大阴影越大
+            spreadRadius: 1.0,
+            ///控制模糊的大小，8比较明显，值越大越明显
+            blurRadius: 8.0,
+          ),
+          BoxShadow(
+            ///控制阴影的偏移值,正值向下和向右偏移，负值向上和左偏移
+            offset: Offset(6, 6),
+            ///控制出阴影颜色
+            color: Colors.black38,
+            ///控制阴影展开的大小,值越大阴影越大
+            spreadRadius: 1.0,
+            ///控制模糊的大小，8比较明显，值越大越明显
+            blurRadius: 8.0,
+          )
+        ]
       ),
     );
   }

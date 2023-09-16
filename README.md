@@ -62,3 +62,6 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex053_WebView                   | this is the example of WebView Package                         |
 | ex054_RedPoint and Badge        | this is the example of RedPoint and Badge                      |
 | ex055_AppIntroduce              | this is the example of introduction_screen package             |
+| ex056_PageWithBg                | this is the example of page with image background              |
+| ex057_GestureGame               | this is the example of Gesture game,which moving with gesture  |
+| ex058_AppIntroduce              | this is the example of introduction_screen package             |
