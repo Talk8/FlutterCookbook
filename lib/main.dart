@@ -55,6 +55,9 @@ import 'package:fluttercookbook/ex052_WillPopScope.dart';
 import 'package:fluttercookbook/ex053_WebView.dart';
 import 'package:fluttercookbook/ex054_RedPoint.dart';
 import 'package:fluttercookbook/ex055_AppIntroduce.dart';
+import 'package:fluttercookbook/ex056_PageWithBg.dart';
+import 'package:fluttercookbook/ex058_Rocker.dart';
+import 'package:fluttercookbook/ex057_GestureGame.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -176,8 +179,8 @@ class FlutterCookbookApp extends StatelessWidget {
       title: 'Flutter Cookbook',
       //locale属性可以手动指定当前app使用的语言和地区，如果不指定，默认为跟随系统语言
       // locale: Locale('zh','CN'),
-      locale: Locale('es'),
-      localizationsDelegates: [
+      locale: const Locale('es'),
+      localizationsDelegates: const [
         ///添加自己定义的多语言文字
         AppLocalizations.delegate,
         ///添加这三个delegate后界面上的文字就会自动适配手机当前的语言
@@ -187,7 +190,7 @@ class FlutterCookbookApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       //添加多国语言和语言对应的地区，IOS的版本在info.plist中添加
-      supportedLocales: [
+      supportedLocales: const [
         Locale('en',"US"),
         Locale('zh',"CN"),
         Locale('es'),
@@ -246,7 +249,7 @@ class FlutterCookbookApp extends StatelessWidget {
                 ///创建渐变组件主要使用了它的opacity属性
                 return FadeTransition(
                   opacity: animation1,
-                  child: SecondRouter(data: "animation",),);
+                  child: const SecondRouter(data: "animation",),);
               },
             fullscreenDialog: true,
             ///用来控制动画播放时长
@@ -273,7 +276,7 @@ class FlutterCookbookApp extends StatelessWidget {
         debugPrint('unknown setting: ${settings.toString()}');
         return MaterialPageRoute(builder: (context){
           ///这里可以创建一个未知错误的界面，遇到未知路由则跳转到该界面
-          return SecondRouter(data: 'data from home');
+          return const SecondRouter(data: 'data from home');
         });
       },
     );
@@ -400,9 +403,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ///使用自定义的评分条：三种不同的评分条，只有评分的形状不同
         listItem("037", "CustomRatingBar - Star", context, CustomRatingBar(rating:7.0)),
         listItem("037", "CustomRatingBar - DianZan", context, CustomRatingBar(rating: 7.0,countOfStar: 5,
-          paramRatingedWidget:Icon(FontAwesomeIcons.thumbsUp) ,paramUnRatingedWidget:Icon(FontAwesomeIcons.thumbsUp),)),
+          paramRatingedWidget:const Icon(FontAwesomeIcons.thumbsUp) ,paramUnRatingedWidget:const Icon(FontAwesomeIcons.thumbsUp),)),
         listItem("037", "CustomRatingBar - Face ", context, CustomRatingBar(rating: 7.0,countOfStar: 5,
-          paramRatingedWidget:Icon(FontAwesomeIcons.faceSmile) ,paramUnRatingedWidget:Icon(FontAwesomeIcons.faceSmile),)),
+          paramRatingedWidget:const Icon(FontAwesomeIcons.faceSmile) ,paramUnRatingedWidget:const Icon(FontAwesomeIcons.faceSmile),)),
         listItem("039", "SharedPreferences", context, const ExSharedPreferences()),
         listItem("040", "FileStored", context, const ExFileStored()),
         listItem("041", "SharedData/StateManaged", context, const EXSharedData()),
@@ -424,6 +427,9 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("053", "WebViewWidget", context, const ExWebView()),
         listItem("054", "Badge or RedPoint", context, const ExRedPoint()),
         listItem("055", "App Introduce", context, const ExAppIntroduce()),
+        listItem("056", "Page with image background", context, const ExPageWithBg()),
+        listItem("057", "GestureGame", context, const ExGestureGame()),
+        listItem("058", "Custom Rocker", context, const ExRocker()),
       ],
     );
 
