@@ -64,4 +64,4 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex055_AppIntroduce              | this is the example of introduction_screen package             |
 | ex056_PageWithBg                | this is the example of page with image background              |
 | ex057_GestureGame               | this is the example of Gesture game,which moving with gesture  |
-| ex058_AppIntroduce              | this is the example of introduction_screen package             |
+| ex058_Rocker                    | this is the example of customer Rocker                         |
