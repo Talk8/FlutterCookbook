@@ -24,11 +24,13 @@ class _ExRockerState extends State<ExRocker> {
         title: const Text('Example of Rocker'),
         backgroundColor: Colors.purpleAccent,
       ),
+      ///在组件外加了一个容器，用来限制手势事件的范围,加或者不加都可以，因为CustomRocker自带限制边框
+      ///如果想加容器，长度和宽度最好相同，而且容器大小不能小于CustomRocker自带的边框大小。否则无法显示组件
       body: const SizedBox(
-        width: 200,
-        height: 200,
+        // width: 400,
+        // height: 400,
         ///使用自定义的组件,通过绘制实现
-          child: RockerCus(),
+          child: CustomRocker(radius: 100,ratio: 0.5,padding: 8,),
         ///使用自定义的组件,通过组合组件实现
         // child: RockerWidget(outerSize: 200,innerSize: 100,),
         ///使用三方包中的组件
@@ -904,72 +906,292 @@ class _RockerWidgetState extends State<RockerWidget> {
 
 ///--------------------- customer paint rocker start -------------------------
 /// 使用绘制的方式绘制rocker
-class RockerCus extends StatefulWidget {
-  const RockerCus({super.key});
+///rocker的半径由构造方法传递而来，rocker的为大小为2*(radius+radius*ratio+padding)的正方形
+///rocker中大圆的半径为radius,小圆的半径为radius*ratio
+class CustomRocker extends StatefulWidget {
+  const CustomRocker({super.key, required this.radius, required this.ratio, required this.padding});
+
+  ///外层大圆的半径
+  final double radius;
+  ///外层小圆的半径*ratio = 内层圆的半径
+  final double ratio;
+  ///内边距
+  final double padding;
 
   @override
-  State<RockerCus> createState() => _RockerCusState();
+  State<CustomRocker> createState() => _CustomRockerState();
 }
 
-class _RockerCusState extends State<RockerCus> {
-  final Offset _center = const Offset(200,200);
-  Offset _dragPos = const  Offset(0,0);
+class _CustomRockerState extends State<CustomRocker> {
+  ///控制小圆偏移位置的坐标
+  Offset dragOffset = Offset.zero;
+  ///数学坐标,这个值为正数，需要按照数学中的坐标系自行添加负号
+  Offset realOffset = Offset.zero;
+  ///拖动中才修改小圆的坐标，否则不修改
+  late bool isDrag = false;
 
   @override
   Widget build(BuildContext context) {
+    ///外圆和内圆的半径
+    final double outerRadius = widget.radius;
+    final double innerRadius = widget.ratio>=1? widget.radius * 0.5 : widget.radius * widget.ratio;
+
+    ///外圆和内圆的大小等于2*半径
+    final Size outerSize = Size(outerRadius*2, outerRadius*2);
+    final Size innerSize = Size(innerRadius*2,innerRadius*2);
+
+    ///这是小圆的滑动区域半径，默认是大圆半径+小圆半径,需要调整滑动区域时修改0的值就可以
+    ///也就是说小圆最远可能滑动到areaRadius区域
+    final double areaRadius = outerRadius + innerRadius - 0;
+
+    ///外圆外层嵌套一个正方形，用来控制Router的大小,正方形是小圆滑动区域的直径，加两个8表示两边各有8dp的内边距
+    final double width = (areaRadius + widget.padding) * 2;
+
+    ///圆心位置
+    ///注意数学上的中心点不符合stack的对齐要求，因为是stack以小圆左上角坐标进行对齐，所以减去它的半径
+    final Offset center = Offset(width/2-innerRadius,width/2-innerRadius);
+
+    ///注意这里计算偏移是Position组件的偏移,以小圆左上角的坐标进行偏移，所在需要减去小圆的半径，
+    if(!isDrag) {
+      dragOffset = Offset(center.dx, center.dy);
+    }
+
     return GestureDetector(
       onPanUpdate: _onPanUpdate,
       onPanEnd: _onPanEnd,
-      child: CustomPaint(
-        painter: RockerPainter(_center,_dragPos),
-        // size: Size.infinite,
-        size:const Size(300,300),
+      ///手势事件限制在这个容器内，他的大小与大圆形的半径和比率有关，也可以直接使用固定值指定
+      child: Container(
+        ///这个颜色是组件的背景，可以修改,调试时添加背景有助于调试
+        color: Colors.grey,
+        width: width,
+        height: width,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ///画外层大圆
+            CustomPaint(
+              painter: RockerPainter(outerRadius,Colors.blue),
+              // size: Size.infinite,
+              size: outerSize,
+            ),
+            ///画内层小圆,这里的偏移与画圆时的偏移不同，它是表示圆形左上角与(0,0)的偏移
+            Positioned(
+              top: dragOffset.dy,
+              left: dragOffset.dx,
+              child: CustomPaint(
+                painter: RockerPainter(innerRadius,Colors.deepOrangeAccent),
+                size: innerSize,
+              ),
+            ),
+          ],
+        ),
       ),
     );
-    // return CustomPaint(
-    //   painter: RockerPainter(_center,_dragPos),
-    //   size: Size(300,300),
-    // );
   }
 
+  ///考虑使用streamBuilder,这样只使用画小圆形，现在是大小圆形一起画
   void _onPanUpdate(DragUpdateDetails details) {
     debugPrint('offset: ${details.delta.toString()}');
+    debugPrint('drag location: ${details.localPosition.toString()}');
+    double currentX,currentY,diameter,radius;
+    ///触摸点的坐标
+    currentX = details.localPosition.dx;
+    currentY = details.localPosition.dy;
+    ///这是小圆的半径
+    radius = widget.ratio>=1? widget.radius * 0.5 : widget.radius * widget.ratio;
+    ///这是大圆的直径
+    diameter = widget.radius* 2;
+
+    ///这是小圆的滑动区域半径，默认是大圆半径+小圆半径,需要调整滑动区域时修改0的值就可以
+    ///也就是说小圆最远可能滑动到areaRadius区域
+    final double areaRadius = widget.radius + radius - 0;
+    ///外圆外层嵌套一个正方形，用来控制Router的大小,正方形是小圆滑动区域的直径，加两个padding表示两边各有一个内边距
+    final double width = (areaRadius + widget.padding) * 2 ;
+    ///圆心位置,需要考虑外边的正方形,它包含了小圆的滑动区域
+    ///这个是数学上的中心点，注意：它与stack的对齐要求不一样
+    final Offset center = Offset(width/2,width/2);
+
+    ///弧度值，主要用来判断触摸点是否跑出圈外:斜边值大于外圆的半径
+    ///计算方法：触摸点坐标与圆形坐标的差值，然后求反正切值，注意计算差值时分象限进行计算
+    double radians = 0;
+    ///三角形的三个连长，带area是小圆形滑动区域的边长，不带的是实际触摸点的边长
+    double a,b,c,areaA,areaB,areaC;
+
+
+    ///计算小圆偏移位置，同时把屏幕上的坐标转换为数学坐标
+    ///第一象限
+    if(currentX > center.dx && currentY <= center.dy) {
+      dragOffset = Offset(currentX - radius, currentY - radius);
+      realOffset = Offset(currentX - center.dx,center.dy - currentY);
+
+      ///处理超出大圆范围外的触摸点，将其限定在小圆滑动区域内
+      radians = _math.atan((center.dy - currentY)/(currentX - center.dx));
+      // debugPrint('angel = ${radians*180/_math.pi} ');
+
+      a = realOffset.dx;
+      b = realOffset.dy;
+      c =  a / _math.cos(radians);
+      // debugPrint("c= $c, arR = $areaRadius");
+      if(c > areaRadius) {
+        ///注意：不是乘以滑动区域的半径，而是乘以大圆的半径
+        // areaC = c - areaRadius;
+        areaC = c - diameter/2;
+        areaA = areaC * _math.cos(radians);
+        areaB = areaC * _math.sin(radians);
+
+        dragOffset = Offset(currentX-areaA-radius,currentY+areaB-radius);
+        ///这个值最好再除一个固定值，这样便于计算比例
+        realOffset = Offset(diameter/2* _math.cos(radians), diameter/2* _math.sin(radians));
+        // debugPrint("drag: ${dragOffset.toString()}");
+        // debugPrint("real: ${realOffset.toString()}");
+      }
+    }
+    ///第二象限
+    if(currentX <= center.dx && currentY <= center.dy) {
+      dragOffset = Offset(currentX - radius, currentY - radius);
+      realOffset = Offset(center.dx - currentX,center.dy - currentY);
+
+      ///处理超出大圆范围外的触摸点，将其限定在小圆滑动区域内
+      radians = _math.atan((center.dy - currentY)/(center.dx - currentX));
+
+      a = realOffset.dx;
+      b = realOffset.dy;
+      c =  a / _math.cos(radians);
+      // debugPrint("c= $c, arR = $areaRadius");
+      if(c > areaRadius) {
+        ///注意：不是减去滑动区域的半径，而是减去大圆的半径
+        areaC = c - diameter/2;
+        areaA = areaC * _math.cos(radians);
+        areaB = areaC * _math.sin(radians);
+
+        dragOffset = Offset(currentX+areaA-radius,currentY+areaB-radius);
+        ///这个值最好再除一个固定值，这样便于计算比例
+        realOffset = Offset(diameter/2* _math.cos(radians), diameter/2* _math.sin(radians));
+        debugPrint("drag: ${dragOffset.toString()}");
+        debugPrint("real: ${realOffset.toString()}");
+      }
+    }
+
+    ///第三象限
+    if(currentX <= center.dx && currentY > center.dy) {
+      dragOffset = Offset(currentX - radius, currentY - radius);
+      realOffset = Offset(center.dx - currentX,currentY - center.dy);
+
+      ///处理超出大圆范围外的触摸点，将其限定在小圆滑动区域内
+      radians = _math.atan((currentY - center.dy)/(center.dx - currentX));
+
+      a = realOffset.dx;
+      b = realOffset.dy;
+      c =  a / _math.cos(radians);
+      // debugPrint("c= $c, arR = $areaRadius");
+      if(c > areaRadius) {
+        ///注意：不是减去滑动区域的半径，而是减去大圆的半径
+        areaC = c - diameter/2;
+        areaA = areaC * _math.cos(radians);
+        areaB = areaC * _math.sin(radians);
+
+        dragOffset = Offset(currentX+areaA-radius,currentY-areaB-radius);
+        ///这个值最好再除一个固定值，这样便于计算比例
+        realOffset = Offset(diameter/2* _math.cos(radians), diameter/2* _math.sin(radians));
+        debugPrint("drag: ${dragOffset.toString()}");
+        debugPrint("real: ${realOffset.toString()}");
+      }
+    }
+    ///第四象限
+    if(currentX > center.dx && currentY > center.dy) {
+      dragOffset = Offset(currentX - radius, currentY - radius);
+      realOffset = Offset(currentX - center.dx,currentY - center.dy);
+
+      ///处理超出大圆范围外的触摸点，将其限定在小圆滑动区域内
+      radians = _math.atan((currentY - center.dy)/(currentX - center.dx));
+
+      a = realOffset.dx;
+      b = realOffset.dy;
+      c =  a / _math.cos(radians);
+      if(c > areaRadius) {
+        ///注意：不是减去滑动区域的半径，而是减去大圆的半径
+        // areaC = c - areaRadius;
+        areaC = c - diameter/2;
+        areaA = areaC * _math.cos(radians);
+        areaB = areaC * _math.sin(radians);
+
+        dragOffset = Offset(currentX-areaA-radius,currentY-areaB-radius);
+        ///这个值最好再除一个固定值，这样便于计算比例
+        realOffset = Offset(diameter/2* _math.cos(radians), diameter/2* _math.sin(radians));
+        debugPrint("drag: ${dragOffset.toString()}");
+        debugPrint("real: ${realOffset.toString()}");
+      }
+    }
+
+
     setState(() {
-      _dragPos = Offset(_dragPos.dx + details.delta.dx, _dragPos.dy + details.delta.dy);
+      isDrag = true;
+      dragOffset = dragOffset;
+
+      ///下面的代码可以让小圆正常滑动，但是没有使用活动区域进行限制
+      // if(currentX > diameter && currentY > diameter) {
+      //   debugPrint('step1 ');
+      //   dragOffset = Offset(diameter-radius, diameter-radius);
+      // }
+      //
+      // if(currentX > diameter && currentY <= diameter) {
+      //   debugPrint('step2 ');
+      //   dragOffset = Offset(diameter-radius, currentY-radius);
+      // }
+      //
+      // if(currentX <= diameter && currentY > diameter) {
+      //   debugPrint('step3 ');
+      //   dragOffset = Offset(currentX-radius, diameter-radius);
+      // }
+      //
+      // if(currentX <= diameter && currentY <= diameter) {
+      //   debugPrint('step4 ');
+      //   dragOffset = Offset(currentX-radius, currentY-radius);
+      // }
+      // debugPrint('step0 ');
     });
   }
 
   void _onPanEnd(DragEndDetails details) {
     setState(() {
-      _dragPos = _center;
+      isDrag = false;
     });
   }
 }
 
+///画Rocker中使用的圆
 class RockerPainter extends CustomPainter{
-  final Offset _subCenter;
-  final Offset _subDragPos;
+  ///offset表示圆的圆心与(0,0)的偏移距离,其值等于半径
+  final Color _color;
+  final double radius;
+  Offset _offset = Offset.zero;
+  late Rect mRect;
 
-  RockerPainter(this._subCenter,this._subDragPos);
+  RockerPainter( this.radius,this._color);
 
+  ///参数中的size就是包含类的CustomPaint中指定的size,这里没有使用它
   @override
   void paint(Canvas canvas,Size size) {
     Paint paint = Paint()
-      ..color = Colors.blue
+      ..color = _color
       ..strokeCap = StrokeCap.round
+      ..isAntiAlias = true
       ..strokeWidth = 2.0;
 
-    // Path path = Path()
-    //   ..moveTo(_subCenter.dx, _subCenter.dy)
-    //   ..quadraticBezierTo(_subDragPos.dx, _subDragPos.dy,
-    //     _subCenter.dx + 50 *(1-_subDragPos.dx/size.width),
-    //     _subCenter.dy +50*(1- _subDragPos.dy/size.height),)
-    //   ..quadraticBezierTo(_subCenter.dx - 50 *(1- _subDragPos.dx/size.width),
-    //       _subCenter.dy - 50 *(1 - _subDragPos.dy/size.height),
-    //       _subCenter.dx,_subCenter.dy)
-    //   ..close();
+    ///圆的半径由参数指定
+    _offset = Offset(radius, radius);
 
-    canvas.drawPath(path, paint);
+    mRect = Rect.fromLTWH(0, 0, size.width,size.height);
+    ///画圆：以矩形为基准画一个内切圆，这是另外一种画圆的方法
+    // canvas.drawOval(mRect, paint);
+    // canvas.drawRect(mRect, paint);
+
+    ///画圆：第一个参数指定Offset,表示圆的左上角为基准进行偏移而不是以圆心为基准
+    canvas.drawCircle(_offset,radius,paint);
+
+    ///调试中用log
+    // debugPrint('param: (${_offset.dx},${_offset.dy})');
+    // debugPrint('size:  (${size.width},${size.height})');
   }
 
   @override
