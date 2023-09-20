@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+///与36，37章回内容相匹配
 class ExDialog extends StatefulWidget {
   const ExDialog({Key? key}) : super(key: key);
 
