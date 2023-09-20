@@ -1181,6 +1181,7 @@ class RockerPainter extends CustomPainter{
     ///圆的半径由参数指定
     _offset = Offset(radius, radius);
 
+    canvas.save();
     mRect = Rect.fromLTWH(0, 0, size.width,size.height);
     ///画圆：以矩形为基准画一个内切圆，这是另外一种画圆的方法
     // canvas.drawOval(mRect, paint);
@@ -1188,6 +1189,7 @@ class RockerPainter extends CustomPainter{
 
     ///画圆：第一个参数指定Offset,表示圆的左上角为基准进行偏移而不是以圆心为基准
     canvas.drawCircle(_offset,radius,paint);
+    canvas.restore();
 
     ///调试中用log
     // debugPrint('param: (${_offset.dx},${_offset.dy})');
