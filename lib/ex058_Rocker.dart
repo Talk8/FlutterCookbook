@@ -2,7 +2,10 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 ///包中的内容在可空检查上有错误，需要修改包中的文件才可以，我将包中5个文件中的内容复制到这里来使用
-///因此不再使用包中的内容。
+///因此不再使用包中的内容。本章回中包含三个摇杆：JoystickView这个是包中的摇杆，只能在固定条件下使用
+/// RockerWidget是我准备参考包中的写的，但是无法获取计算坐标，因此放弃。
+/// CustomRocker是结合自定义组件的内容实现的，这个可以正常使用。
+///与150和151的内容相匹配
 // import 'package:control_pad_plus/control_pad_plus.dart';
 
 import 'dart:math' as _math;
@@ -956,6 +959,55 @@ class _CustomRockerState extends State<CustomRocker> {
       dragOffset = Offset(center.dx, center.dy);
     }
 
+    ///8是真正的边距，其它计算的结果是一个相对值，它可以确保arrow位于外层大圆边上
+    double arrowPadding = width/2 - outerRadius + 8;
+
+    ///这里列出了两套箭头，一个是Android风格，一个是ISO风格
+    List<Widget> showArrows(double padding,Color color) {
+      return [
+        Positioned(
+          top: 0.0,
+          bottom: 0.0,
+          left: padding,
+          child: Icon(
+            // Icons.arrow_back,
+            Icons.keyboard_arrow_left,
+            color: color,
+          ),
+        ),
+        Positioned(
+          top: padding,
+          left: 0.0,
+          right: 0.0,
+          child: Icon(
+            // Icons.arrow_upward,
+            Icons.keyboard_arrow_up,
+            color: color,
+          ),
+        ),
+        Positioned(
+          top: 0.0,
+          bottom: 0.0,
+          right: padding,
+          child: Icon(
+            // Icons.arrow_forward,
+            Icons.keyboard_arrow_right,
+            color: color,
+          ),
+        ),
+        Positioned(
+          bottom: padding,
+          left: 0.0,
+          right: 0.0,
+          child: Icon(
+            // Icons.arrow_downward,
+            Icons.keyboard_arrow_down,
+            color: color,
+          ),
+        )
+      ];
+    }
+
     return GestureDetector(
       onPanUpdate: _onPanUpdate,
       onPanEnd: _onPanEnd,
@@ -974,6 +1026,8 @@ class _CustomRockerState extends State<CustomRocker> {
               // size: Size.infinite,
               size: outerSize,
             ),
+            ///显示四个方向箭头,放在这里时在小圆移动过程中会被遮挡
+            ...showArrows(arrowPadding, Colors.white),
             ///画内层小圆,这里的偏移与画圆时的偏移不同，它是表示圆形左上角与(0,0)的偏移
             Positioned(
               top: dragOffset.dy,
@@ -983,6 +1037,8 @@ class _CustomRockerState extends State<CustomRocker> {
                 size: innerSize,
               ),
             ),
+            ///显示四个方向箭头,放在这里时在小圆移动过程中不会被遮挡
+            // ...showArrows(arrowPadding, Colors.white),
           ],
         ),
       ),
@@ -1029,9 +1085,9 @@ class _CustomRockerState extends State<CustomRocker> {
       // debugPrint('angel = ${radians*180/_math.pi} ');
 
       a = realOffset.dx;
-      b = realOffset.dy;
+      b = realOffset.dy; ///这个变量没有实际的作用
       c =  a / _math.cos(radians);
-      // debugPrint("c= $c, arR = $areaRadius");
+      debugPrint("a = $a, b = $b, c= $c, arR = $areaRadius");
       if(c > areaRadius) {
         ///注意：不是乘以滑动区域的半径，而是乘以大圆的半径
         // areaC = c - areaRadius;
