@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-///这个包的功能十分强大，各种想要的属性和功能都包含了，缺点是最近2年没有更新
+///这个包的功能十分强大，各种想要的属性和功能都包含了，缺点是最近2年没有更新,与152的内容相匹配
 class ExSlidingUpPanel extends StatefulWidget {
   const ExSlidingUpPanel({super.key});
 

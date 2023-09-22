@@ -1070,7 +1070,7 @@ class _CustomRockerState extends State<CustomRocker> {
     ///弧度值，主要用来判断触摸点是否跑出圈外:斜边值大于外圆的半径
     ///计算方法：触摸点坐标与圆形坐标的差值，然后求反正切值，注意计算差值时分象限进行计算
     double radians = 0;
-    ///三角形的三个连长，带area是小圆形滑动区域的边长，不带的是实际触摸点的边长
+    ///三角形的三个边长，带area是小圆形滑动区域的边长，不带的是实际触摸点的边长
     double a,b,c,areaA,areaB,areaC;
 
 
