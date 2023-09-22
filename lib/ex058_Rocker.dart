@@ -1082,6 +1082,7 @@ class _CustomRockerState extends State<CustomRocker> {
 
       ///处理超出大圆范围外的触摸点，将其限定在小圆滑动区域内
       radians = _math.atan((center.dy - currentY)/(currentX - center.dx));
+      ///弧度转换成角度
       // debugPrint('angel = ${radians*180/_math.pi} ');
 
       a = realOffset.dx;
