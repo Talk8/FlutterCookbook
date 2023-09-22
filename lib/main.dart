@@ -59,6 +59,8 @@ import 'package:fluttercookbook/ex056_PageWithBg.dart';
 import 'package:fluttercookbook/ex058_Rocker.dart';
 import 'package:fluttercookbook/ex057_GestureGame.dart';
 import 'package:fluttercookbook/ex059_SlidingUpPanel.dart';
+import 'package:fluttercookbook/ex060_SlidingAnyDirection.dart';
+import 'package:fluttercookbook/ex061_GeoLocator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -432,6 +434,8 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("057", "GestureGame", context, const ExGestureGame()),
         listItem("058", "Custom Rocker", context, const ExRocker()),
         listItem("059", "SlidingUpPanel", context, const ExSlidingUpPanel()),
+        listItem("060", "SlidingMenu", context, const ExSlidingAnyDirection()),
+        listItem("061", "GeoLocator", context, const ExGeoLocator()),
       ],
     );
 

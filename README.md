@@ -66,5 +66,6 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex057_GestureGame               | this is the example of Gesture game,which moving with gesture  |
 | ex058_Rocker                    | this is the example of customer Rocker                         |
 | ex059_SlidingUpPanel            | this is the example of SlidingUpPanel                          |
-| ex060_GeoLocator                | this is the example of GeoLocator,which is used for getting GPS|
+| ex060_SlidingMenu               | this is the example of sliding menu,which is created by 3rd pkg|
+| ex061_GeoLocator                | this is the example of GeoLocator,which is used for getting GPS|
 
