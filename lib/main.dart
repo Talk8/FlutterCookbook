@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:fluttercookbook/ex024_Radio.dart';
@@ -61,6 +62,8 @@ import 'package:fluttercookbook/ex057_GestureGame.dart';
 import 'package:fluttercookbook/ex059_SlidingUpPanel.dart';
 import 'package:fluttercookbook/ex060_SlidingAnyDirection.dart';
 import 'package:fluttercookbook/ex061_GeoLocator.dart';
+import 'package:fluttercookbook/ex063_Slivers.dart';
+import 'package:fluttercookbook/ex063_weather_app/app_main.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -116,7 +119,18 @@ void main() {
       logMessage: _bleLogger.addToLog,
     );
 
-    TestConsumer testConsumer = TestConsumer();
+  TestConsumer testConsumer = TestConsumer();
+
+  ///让状态栏和程序的appBar融为一体构成沉浸式效果,android有效果，需要IOS是否有效果
+  ///SystemChrome这个类及其方法只能在main方法中运行，其它地方无法使用
+  SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
+    ///这两个属性可以控制状态栏为透明色,它可以和appBar的颜色一致,主要是去掉了阴影效果
+    statusBarColor: Colors.transparent,
+    statusBarBrightness: Brightness.light,
+    ///修改状态栏中文字的颜色为黑色，没有效果
+    // statusBarIconBrightness: Brightness.dark,
+  );
+  SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
 
   runApp(
     MultiProvider(
@@ -227,8 +241,8 @@ class FlutterCookbookApp extends StatelessWidget {
           bodySmall: TextStyle(fontSize: 16),
           bodyMedium: TextStyle(fontSize: 20),
           bodyLarge: TextStyle(fontSize: 22),
-        )
-        ///程序的亮度
+        ),
+        ///程序的亮度,相当于切换成dark主题
         // brightness: Brightness.dark,///默认值是light
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -436,6 +450,8 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("059", "SlidingUpPanel", context, const ExSlidingUpPanel()),
         listItem("060", "SlidingMenu", context, const ExSlidingAnyDirection()),
         listItem("061", "GeoLocator", context, const ExGeoLocator()),
+        listItem("063", "All kinds of Sliver", context, const ExSlivers()),
+        listItem("062", "Weather App", context, const ExWeatherApp()),
       ],
     );
 

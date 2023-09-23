@@ -83,9 +83,9 @@ class _ExSlidingUpPanelState extends State<ExSlidingUpPanel> {
         header: const Text('header'),
         footer: const  Text('footer'),
 
-        ///展开panel时顶部的内容会向上滑动，因此最上面的内容会被隐藏掉
+        ///panel顶部剩余空间的内容，展开panel时顶部的内容会向上滑动，因此最上面的内容会被隐藏掉
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('no panel'),
             const Icon(Icons.recommend_outlined),
