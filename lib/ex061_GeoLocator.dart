@@ -6,7 +6,7 @@ import 'package:geolocator/geolocator.dart';
 
 ///使用这个包需要在manifest文件中添加位置权限，IOS在info.plist中添加位置说明
 ///主要功能，获取当前GPS权限，开关状态，获取位置权限还能打开位置形状页面(仅android)
-///获取GPS信息，监听GPS状态和GPS开关状态，使用stream来监听非常方便。与154的内容相匹配
+///获取GPS信息，监听GPS状态和GPS开关状态，使用stream来监听非常方便。与155的内容相匹配
 class ExGeoLocator extends StatefulWidget {
   const ExGeoLocator({super.key});
 

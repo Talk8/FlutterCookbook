@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 ///使用flutter_slidable包实现一个滑动菜单，可以向左，向右滑动，向上，向下滑动,滑动时拉菜单。
-///这个滑动菜单实现使用场景不多,与153的内容相匹配
+///这个滑动菜单实现使用场景不多,与154的内容相匹配
 class ExSlidingAnyDirection extends StatefulWidget {
   const ExSlidingAnyDirection({super.key});
 
