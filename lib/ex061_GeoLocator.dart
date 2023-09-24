@@ -68,7 +68,7 @@ class _ExGeoLocatorState extends State<ExGeoLocator> {
       return Future.error('Location service is disabled');
     }
 
-    ///检查位置权限
+    ///检查位置权限，顺序反了，应该先检查位置权限再检查开关状态
     permission = await Geolocator.checkPermission();
     if(permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
       permission = await Geolocator.requestPermission();
@@ -92,7 +92,7 @@ class _ExGeoLocatorState extends State<ExGeoLocator> {
     return Future<Position>.value(positionResult);
   }
 
-  ///手动监听位置信息
+  ///手动监听位置信息变化
   void listenLocationService() {
     ///通过设置指定服务的精确度和更新时间
     LocationSettings locationSettings = const LocationSettings(
@@ -114,7 +114,7 @@ class _ExGeoLocatorState extends State<ExGeoLocator> {
     debugPrint(serviceStatus.toString());
   }
 
-  ///通过stream监听位置信息
+  ///通过stream监听位置信息变化
   Stream<Position> getServiceStream() {
      ///通过设置指定服务的精确度和更新时间
     LocationSettings locationSettings = const LocationSettings(
@@ -127,7 +127,7 @@ class _ExGeoLocatorState extends State<ExGeoLocator> {
     return Geolocator.getPositionStream(locationSettings: locationSettings);
   }
 
-  ///通过stream监听位置服务状态
+  ///通过stream监听位置服务状态:位置开关的变化，比如打开或者关闭
   Stream<ServiceStatus> getServiceStatusStream() {
     return Geolocator.getServiceStatusStream();
   }
