@@ -76,7 +76,7 @@ class _ExSlidingAnyDirectionState extends State<ExSlidingAnyDirection> {
         ),
         ///拉出菜单的高度与child的高度相同，修改滑动方向后最好放大高度，不然菜单都显不全
         child: const SizedBox(
-            height: 500,
+            height: 80,
             child: ListTile(title: Text('Slid me'),),
         ),
       )

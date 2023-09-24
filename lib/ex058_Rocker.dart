@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 ///因此不再使用包中的内容。本章回中包含三个摇杆：JoystickView这个是包中的摇杆，只能在固定条件下使用
 /// RockerWidget是我准备参考包中的写的，但是无法获取计算坐标，因此放弃。
 /// CustomRocker是结合自定义组件的内容实现的，这个可以正常使用。
-///与150和151的内容相匹配
+///与150,151和152的内容相匹配:实现->控制移动范围->优化性能
 // import 'package:control_pad_plus/control_pad_plus.dart';
 
 import 'dart:math' as _math;
@@ -933,6 +934,16 @@ class _CustomRockerState extends State<CustomRocker> {
   ///拖动中才修改小圆的坐标，否则不修改
   late bool isDrag = false;
 
+  ///stream version
+  final StreamController<Offset> _streamController = StreamController();
+
+  ///stream version
+  @override
+  void dispose() {
+    _streamController.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     ///外圆和内圆的半径
@@ -955,9 +966,17 @@ class _CustomRockerState extends State<CustomRocker> {
     final Offset center = Offset(width/2-innerRadius,width/2-innerRadius);
 
     ///注意这里计算偏移是Position组件的偏移,以小圆左上角的坐标进行偏移，所在需要减去小圆的半径，
+    /// state version
+    /*
     if(!isDrag) {
       dragOffset = Offset(center.dx, center.dy);
     }
+     */
+
+    ///stream version
+    dragOffset = Offset(center.dx, center.dy);
+    ///这里相当于初始化小圆的初始坐标值，容易遗漏而导致null数据错误
+    _streamController.sink.addStream(Stream.value(dragOffset));
 
     ///8是真正的边距，其它计算的结果是一个相对值，它可以确保arrow位于外层大圆边上
     double arrowPadding = width/2 - outerRadius + 8;
@@ -1029,6 +1048,11 @@ class _CustomRockerState extends State<CustomRocker> {
             ///显示四个方向箭头,放在这里时在小圆移动过程中会被遮挡
             ...showArrows(arrowPadding, Colors.white),
             ///画内层小圆,这里的偏移与画圆时的偏移不同，它是表示圆形左上角与(0,0)的偏移
+            ///使用更新状态的方式更新程序界面，大小圆形一起更新性能不好，我叫它state version
+            ///修改成stream方式，这样只更新小圆，我称其为stream version
+            ///两个版本都可以使用，打开相应的代码注释就可以。
+            /// state version
+            /*
             Positioned(
               top: dragOffset.dy,
               left: dragOffset.dx,
@@ -1036,7 +1060,19 @@ class _CustomRockerState extends State<CustomRocker> {
                 painter: RockerPainter(innerRadius,Colors.deepOrangeAccent),
                 size: innerSize,
               ),
-            ),
+             */
+            ///stream version
+            StreamBuilder(
+              stream: _streamController.stream,
+              builder: (context,offsetData) {
+                return Positioned(
+                  top: (offsetData.data as Offset).dy,
+                  left:(offsetData.data as Offset).dx,
+                  child: CustomPaint(
+                    painter: RockerPainter(innerRadius,Colors.deepOrangeAccent),
+                    size: innerSize,),
+                );
+              },),
             ///显示四个方向箭头,放在这里时在小圆移动过程中不会被遮挡
             // ...showArrows(arrowPadding, Colors.white),
           ],
@@ -1181,9 +1217,12 @@ class _CustomRockerState extends State<CustomRocker> {
     }
 
 
+    /// state version
+    /*
     setState(() {
       isDrag = true;
       dragOffset = dragOffset;
+     */
 
       ///下面的代码可以让小圆正常滑动，但是没有使用活动区域进行限制
       // if(currentX > diameter && currentY > diameter) {
@@ -1206,13 +1245,40 @@ class _CustomRockerState extends State<CustomRocker> {
       //   dragOffset = Offset(currentX-radius, currentY-radius);
       // }
       // debugPrint('step0 ');
-    });
+    /// state version
+    // });
+
+    ///stream version
+    _streamController.sink.addStream(Stream.value(dragOffset));
   }
 
   void _onPanEnd(DragEndDetails details) {
+
+    /// state version
+    /*
     setState(() {
       isDrag = false;
     });
+     */
+
+    ///stream version
+    ///外圆和内圆的半径
+    final double outerRadius = widget.radius;
+    final double innerRadius = widget.ratio>=1? widget.radius * 0.5 : widget.radius * widget.ratio;
+
+    ///这是小圆的滑动区域半径，默认是大圆半径+小圆半径,需要调整滑动区域时修改0的值就可以
+    ///也就是说小圆最远可能滑动到areaRadius区域
+    final double areaRadius = outerRadius + innerRadius - 0;
+
+    ///外圆外层嵌套一个正方形，用来控制Router的大小,正方形是小圆滑动区域的直径，加两个8表示两边各有8dp的内边距
+    final double width = (areaRadius + widget.padding) * 2;
+
+    ///圆心位置
+    ///注意数学上的中心点不符合stack的对齐要求，因为是stack以小圆左上角坐标进行对齐，所以减去它的半径
+    final Offset center = Offset(width/2-innerRadius,width/2-innerRadius);
+    dragOffset = Offset(center.dx, center.dy);
+
+    _streamController.sink.addStream(Stream.value(dragOffset));
   }
 }
 
