@@ -121,7 +121,7 @@ void main() {
 
   TestConsumer testConsumer = TestConsumer();
 
-  ///让状态栏和程序的appBar融为一体构成沉浸式效果,android有效果，需要IOS是否有效果
+  ///让状态栏和程序的appBar融为一体构成沉浸式效果,android有效果，需要IOS是否有效果:IOS自动把app和系统融入为一体，不需要这样设置
   ///SystemChrome这个类及其方法只能在main方法中运行，其它地方无法使用
   SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
     ///这两个属性可以控制状态栏为透明色,它可以和appBar的颜色一致,主要是去掉了阴影效果
