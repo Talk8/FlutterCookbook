@@ -64,6 +64,7 @@ import 'package:fluttercookbook/ex060_SlidingAnyDirection.dart';
 import 'package:fluttercookbook/ex061_GeoLocator.dart';
 import 'package:fluttercookbook/ex062_Slivers.dart';
 import 'package:fluttercookbook/ex063_weather_app/app_main.dart';
+import 'package:fluttercookbook/ex064_Picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -450,8 +451,9 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("059", "SlidingUpPanel", context, const ExSlidingUpPanel()),
         listItem("060", "SlidingMenu", context, const ExSlidingAnyDirection()),
         listItem("061", "GeoLocator", context, const ExGeoLocator()),
-        listItem("063", "All kinds of Sliver", context, const ExSlivers()),
-        listItem("062", "Weather App", context, const ExWeatherApp()),
+        listItem("062", "All kinds of Sliver", context, const ExSlivers()),
+        listItem("063", "Weather App", context, const ExWeatherApp()),
+        listItem("064", "KindsOfPicker", context, const ExAllPickers()),
       ],
     );
 
