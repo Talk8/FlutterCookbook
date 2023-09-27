@@ -62,7 +62,7 @@ import 'package:fluttercookbook/ex057_GestureGame.dart';
 import 'package:fluttercookbook/ex059_SlidingUpPanel.dart';
 import 'package:fluttercookbook/ex060_SlidingAnyDirection.dart';
 import 'package:fluttercookbook/ex061_GeoLocator.dart';
-import 'package:fluttercookbook/ex063_Slivers.dart';
+import 'package:fluttercookbook/ex062_Slivers.dart';
 import 'package:fluttercookbook/ex063_weather_app/app_main.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
