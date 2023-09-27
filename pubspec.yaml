@@ -98,8 +98,14 @@ dependencies:
 #实现滑动菜单功能，使用场景少
   flutter_slidable: ^3.0.0
 
-#获取GPS信息，还没有使用
+#获取GPS信息，非常好用的GPS包
   geolocator: ^10.0.1
+
+#实现NumberPicker
+  numberpicker: ^2.1.2
+
+#实现各种图形，类似Echart
+#  fl_chart: ^0.63.0
 #dart官方提供的包，像c中的chara一样操作string.还没有使用
 #  characters: ^1.3.0
   #用来生成MD5,SHA加密算法，还没有使用
@@ -122,8 +128,6 @@ dependencies:
 #  percent_indicator:
   #实现各种样式的进度，比如旋转，转动
 #  flutter_spinkit:
-  #实现各种图形，类似Echart
-#  fl_chart:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
