@@ -104,6 +104,18 @@ dependencies:
 #实现NumberPicker
   numberpicker: ^2.1.2
 
+#实现NumberPicker
+  wheel_chooser: ^1.1.2
+
+#试试这个包
+#  flutter_picker: ^2.1.0
+
+  #试试这个包
+#  bottom_picker: ^2.1.0
+
+  #试试这个包
+#  selector_wheel: ^1.1.2
+#  wheel_slider:
 #实现各种图形，类似Echart
 #  fl_chart: ^0.63.0
 #dart官方提供的包，像c中的chara一样操作string.还没有使用
