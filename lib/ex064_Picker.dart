@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:wheel_chooser/wheel_chooser.dart';
 
 class ExAllPickers extends StatefulWidget {
   const ExAllPickers({super.key});
@@ -50,6 +51,7 @@ class _ExAllPickersState extends State<ExAllPickers> {
           //     onDateTimeChanged: (DateTime value) {  },
           //   ),
           // ),
+          /*
           Container(
             alignment: Alignment.center,
             width: 120,
@@ -76,6 +78,8 @@ class _ExAllPickersState extends State<ExAllPickers> {
               ],
             ),
           ),
+
+           */
           Container(
             color: Colors.blueGrey,
             ///容器的宽度最好是itemWidth*itemCount,不然选择框无法与选择数字对齐
@@ -111,6 +115,38 @@ class _ExAllPickersState extends State<ExAllPickers> {
                 });
               },
             ),
+          ),
+          Container(
+            color: Colors.lightGreen,
+            width: 200,
+            height: 200,
+            child: WheelChooser(
+              ///控制滑动方向
+              horizontal: true,
+              ///这个值不知道用来做什么
+              // perspective: 0.003,
+              ///使用装饰可以在选择的内容上方和下方显示一条横线
+              selectTextStyle:TextStyle(
+                ///单独使用和复合使用装饰
+                // decoration: TextDecoration.overline,
+                decoration: TextDecoration.combine([TextDecoration.underline,TextDecoration.overline]),
+              ) ,
+              ///是否循环显示
+              isInfinite: true,
+              onValueChanged: (s) => debugPrint('$s selected'),
+              datas: ['a','b','c'],
+            ),
+          ),
+          SizedBox(
+            height: 200,
+            ///可以添加任意的组件，还有日期，数字等工厂方法可以使用
+            child: WheelChooser.custom(
+              onValueChanged: (value) {},
+              children: [
+                Icon(Icons.one_k),
+                Icon(Icons.twelve_mp),
+                Icon(Icons.three_p),
+              ]),
           ),
         ],
       ),
