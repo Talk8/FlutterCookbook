@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:wheel_chooser/wheel_chooser.dart';
 
+///与164，165的内容相对应
 class ExAllPickers extends StatefulWidget {
   const ExAllPickers({super.key});
 
@@ -28,8 +28,6 @@ class _ExAllPickersState extends State<ExAllPickers> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('data'),
-          Text('data'),
           ///这个日期不好用，指定日期了也不行
           // SizedBox(
           //   height: 300,
@@ -51,6 +49,7 @@ class _ExAllPickersState extends State<ExAllPickers> {
           //     onDateTimeChanged: (DateTime value) {  },
           //   ),
           // ),
+          ///打开注释后可以直接使用
           /*
           Container(
             alignment: Alignment.center,
@@ -78,8 +77,10 @@ class _ExAllPickersState extends State<ExAllPickers> {
               ],
             ),
           ),
-
            */
+
+          ///打开注释后可以直接使用
+          /*
           Container(
             color: Colors.blueGrey,
             ///容器的宽度最好是itemWidth*itemCount,不然选择框无法与选择数字对齐
@@ -116,10 +117,13 @@ class _ExAllPickersState extends State<ExAllPickers> {
               },
             ),
           ),
+           */
+
+          ///WheelChooser基本用法，使用构造方法
           Container(
             color: Colors.lightGreen,
             width: 200,
-            height: 200,
+            height: 100,
             child: WheelChooser(
               ///控制滑动方向
               horizontal: true,
@@ -134,23 +138,60 @@ class _ExAllPickersState extends State<ExAllPickers> {
               ///是否循环显示
               isInfinite: true,
               onValueChanged: (s) => debugPrint('$s selected'),
-              datas: ['a','b','c'],
+              datas: const [1,2,3],
+            ),
+          ),
+          ///使用工厂方法，可以创建任意的选择器
+          SizedBox(
+            height: 150,
+            ///可以添加任意的组件，这里添加的是icon
+            child: WheelChooser.custom(
+              onValueChanged: (value) {},
+              isInfinite: true,
+              children: const [
+                Icon(Icons.looks_3,size: 36,),
+                Icon(Icons.looks_two,size: 36,),
+                Icon(Icons.looks_one,size: 36,),
+              ]),
+          ),
+          ///使用两种工厂方法实现数字选择器
+          SizedBox(
+            ///通过控制容器的大小，可以控制显示被选择内容的范围
+            height: 100,
+            child: WheelChooser.integer(
+              ///显示内容的大小，默认48
+              itemSize: 50,
+              horizontal: true,
+              isInfinite: true,
+              onValueChanged: (value) => debugPrint('$value'),
+              maxValue: 3,
+              minValue: 0,
             ),
           ),
           SizedBox(
+            height: 100,
+            child: WheelChooser.number(
+              isInfinite: true,
+              onValueChanged: (value) => debugPrint('$value'),
+              maxValue: 3,
+              minValue: 0,
+            ),
+          ),
+          ///可以选择任意对象当作被选择对象，因为value是泛型
+          SizedBox(
             height: 200,
-            ///可以添加任意的组件，还有日期，数字等工厂方法可以使用
-            child: WheelChooser.custom(
-              onValueChanged: (value) {},
-              children: [
-                Icon(Icons.one_k),
-                Icon(Icons.twelve_mp),
-                Icon(Icons.three_p),
-              ]),
+            child: WheelChooser.choices(
+             isInfinite: true,
+              onChoiceChanged: (value) {},
+              choices:[
+                WheelChoice(value: 1, title: 'one'),
+                WheelChoice(value: 2, title: 'tow'),
+                WheelChoice(value: 3, title: 'three'),
+              ]
+            ),
           ),
         ],
       ),
     );
   }
-
 }
