@@ -69,5 +69,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex060_SlidingMenu               | this is the example of sliding menu,which is created by 3rd pkg|
 | ex061_GeoLocator                | this is the example of GeoLocator,which is used for getting GPS|
 | ex062_Slivers                   | this is the example of sliverList,Grid,Padding together.       |
-| ex064_Pickers                   | this is the example of numberPicker and  wheel_chooser package.|
+| ex064_Pickers                   | this is the example of numberPicker and wheelChooser package.  |
 
