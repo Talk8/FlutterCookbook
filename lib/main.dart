@@ -65,6 +65,7 @@ import 'package:fluttercookbook/ex061_GeoLocator.dart';
 import 'package:fluttercookbook/ex062_Slivers.dart';
 import 'package:fluttercookbook/ex063_weather_app/app_main.dart';
 import 'package:fluttercookbook/ex064_Picker.dart';
+import 'package:fluttercookbook/ex065_BacgroundImage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -454,6 +455,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("062", "All kinds of Sliver", context, const ExSlivers()),
         listItem("063", "Weather App", context, const ExWeatherApp()),
         listItem("064", "KindsOfPicker", context, const ExAllPickers()),
+        listItem("065", "Background Image", context, const ExBackgroundImage()),
       ],
     );
 
