@@ -20,7 +20,7 @@ class _ExAllPickersState extends State<ExAllPickers> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Example of Charts'),
+        title: const Text('Example of Pickers'),
         backgroundColor: Colors.purpleAccent,
       ),
       body: Column(
