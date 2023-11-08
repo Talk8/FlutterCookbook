@@ -246,6 +246,8 @@ class FlutterCookbookApp extends StatelessWidget {
         ),
         ///程序的亮度,相当于切换成dark主题
         // brightness: Brightness.dark,///默认值是light
+        //打开Material3后会影响主题颜色和风格，最明显的就是按钮变成了椭圆形状
+        useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ///注释掉程序中的splashScreen

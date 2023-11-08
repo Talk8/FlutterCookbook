@@ -79,6 +79,26 @@ class ExButton extends StatelessWidget {
                 ),
               ),
             ),
+
+            ///正常的button和修改style后的button，可以对比
+            ElevatedButton(
+              onPressed: (){},
+              child: const Text("ElevatedButton"),
+            ),
+            ElevatedButton(
+              onPressed: (){},
+              style: ElevatedButton.styleFrom(
+                ///调整圆角度数
+                shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                ///调整文字位置，注意有边距，去掉边距后效果更加明显
+                alignment: Alignment.centerRight,
+                ///调整button内文字的间隔
+                padding:const EdgeInsets.only(left:24,top:8,right: 0,bottom:8),
+                ///调整button的颜色
+                backgroundColor: Colors.black87,
+                foregroundColor: Colors.white,
+            ),
+              child: const Text("ElevatedButton"),),
           ],
         ),
     );
