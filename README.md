@@ -70,4 +70,6 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex061_GeoLocator                | this is the example of GeoLocator,which is used for getting GPS|
 | ex062_Slivers                   | this is the example of sliverList,Grid,Padding together.       |
 | ex064_Pickers                   | this is the example of numberPicker and wheelChooser package.  |
+| ex065_BackgroundImage           | this is the example of creating a page with image background.  |
+| ex066_NavigationBar             | this is the example of NavigationBar widget.                   |
 
