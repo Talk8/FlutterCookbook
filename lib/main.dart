@@ -66,6 +66,7 @@ import 'package:fluttercookbook/ex062_Slivers.dart';
 import 'package:fluttercookbook/ex063_weather_app/app_main.dart';
 import 'package:fluttercookbook/ex064_Picker.dart';
 import 'package:fluttercookbook/ex065_BacgroundImage.dart';
+import 'package:fluttercookbook/ex066_NavigationBar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -248,6 +249,12 @@ class FlutterCookbookApp extends StatelessWidget {
         // brightness: Brightness.dark,///默认值是light
         //打开Material3后会影响主题颜色和风格，最明显的就是按钮变成了椭圆形状
         useMaterial3: true,
+
+        //在这里修改没有效果,不会影响bottomNavigationBar的颜色，原因？
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Colors.green,
+          selectedItemColor: Colors.white,
+        ),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ///注释掉程序中的splashScreen
@@ -458,6 +465,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("063", "Weather App", context, const ExWeatherApp()),
         listItem("064", "KindsOfPicker", context, const ExAllPickers()),
         listItem("065", "Background Image", context, const ExBackgroundImage()),
+        listItem("066", "NavigationBar ", context, const ExNavigationBar()),
       ],
     );
 

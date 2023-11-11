@@ -51,9 +51,15 @@ class _ExNavigationBarState extends State<ExNavigationBar> {
         child: NavigationBar(
           //控制destination中Icon外围的形状，默认是16圆角矩形
           indicatorShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          //按钮被选中时外围的颜色
+          indicatorColor: Colors.yellow,
           backgroundColor: Colors.lightBlueAccent,
-          // backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
+          //阴影颜色，不是很明显
+          shadowColor: Colors.green,
+          //这个颜色在背景色后面，不设置背景色时才能看到，而且有阴影效果
+          surfaceTintColor: Colors.redAccent,
+          //调整高度
+          height: 80,
           selectedIndex: currentIndex,
           onDestinationSelected: (index) {
             setState(() {
@@ -61,8 +67,12 @@ class _ExNavigationBarState extends State<ExNavigationBar> {
             });
           },
 
+          //可以单独添加选择时显示的按钮
           destinations: const [
-            NavigationDestination(icon: Icon(Icons.person), label:"Person" ),
+            NavigationDestination(
+                icon: Icon(Icons.person),
+                selectedIcon: Icon(Icons.person_2_rounded),
+                label:"Person" ),
             NavigationDestination(icon: Icon(Icons.home), label: "Home"),
             NavigationDestination(icon: Icon(Icons.settings), label: "Setting"),
           ],
