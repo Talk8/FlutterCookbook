@@ -99,6 +99,34 @@ class ExButton extends StatelessWidget {
                   foregroundColor: Colors.white),
               child: const Text("ElevatedButton"),
             ),
+
+            //下面是material3中新添加的IconButton
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(onPressed: (){}, icon: const Icon(Icons.add)),
+                IconButton.filled(onPressed: (){}, icon:const Icon(Icons.add)),
+                IconButton.filledTonal(onPressed: (){}, icon: const Icon(Icons.add)),
+                IconButton.outlined(onPressed: (){}, icon: const Icon(Icons.add)),
+                IconButton.filled(onPressed: (){}, icon: const Icon(Icons.add),
+                  //控制图标的颜色
+                  color: Colors.redAccent,
+                  //控制Icon的背景颜色，形状
+                  style: IconButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  //控制星形角的数量，默认是5
+                  shape:const StarBorder(),
+                  ),
+                ),
+                IconButton.filled(onPressed: (){}, icon: const Icon(Icons.face),
+                  color: Colors.blue ,
+                  style: IconButton.styleFrom(
+                  backgroundColor: Colors.yellow,
+                  shape:const StarBorder(points: 6),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
     );
