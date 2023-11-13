@@ -72,4 +72,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex064_Pickers                   | this is the example of numberPicker and wheelChooser package.  |
 | ex065_BackgroundImage           | this is the example of creating a page with image background.  |
 | ex066_NavigationBar             | this is the example of NavigationBar widget.                   |
+| ex067_SearchBar                 | this is the example of SearchBar widget.                       |
 
