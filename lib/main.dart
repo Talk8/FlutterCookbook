@@ -68,6 +68,7 @@ import 'package:fluttercookbook/ex064_Picker.dart';
 import 'package:fluttercookbook/ex065_BacgroundImage.dart';
 import 'package:fluttercookbook/ex066_NavigationBar.dart';
 import 'package:fluttercookbook/ex067_SearchBar.dart';
+import 'package:fluttercookbook/ex068_ExSegmentedButton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -468,6 +469,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("065", "Background Image", context, const ExBackgroundImage()),
         listItem("066", "NavigationBar ", context, const ExNavigationBar()),
         listItem("067", "SearchBar", context, const ExSearchBar()),
+        listItem("068", "SegmentedButton", context, const ExSegmentedButton()),
       ],
     );
 
