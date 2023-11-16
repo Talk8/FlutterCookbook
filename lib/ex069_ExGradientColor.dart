@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
+///173 174 175内容匹配
 class ExGradientColor extends StatefulWidget {
   const ExGradientColor({super.key});
 
