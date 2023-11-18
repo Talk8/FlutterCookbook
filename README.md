@@ -73,5 +73,6 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex065_BackgroundImage           | this is the example of creating a page with image background.  |
 | ex066_NavigationBar             | this is the example of NavigationBar widget.                   |
 | ex067_SearchBar                 | this is the example of SearchBar widget.                       |
-| ex068_GradientColor             | this is the example of GradientColor.                          |
+| ex068_SegmentedButton           | this is the example of SegmentedButton widget.                 |
+| ex069_GradientColor             | this is the example of GradientColor.                          |
 
