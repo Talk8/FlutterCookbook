@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
-///173 174 175内容匹配
+///173 174 175,176内容匹配
 class ExGradientColor extends StatefulWidget {
   const ExGradientColor({super.key});
 
@@ -90,24 +90,37 @@ class _ExGradientColorState extends State<ExGradientColor> {
               ),
               child: const SizedBox.shrink(),
             ),
+            ///注释掉只是为了看到下面的示例的效果与176内容匹配
+            // const Spacer(),
+            // Container(
+            //   width: double.infinity,
+            //   height: 100,
+            //   decoration: const BoxDecoration(
+            //       gradient:RadialGradient(
+            //         ///渐变半径：
+            //         radius: 0.3,
+            //         //渐变位置，主要是中心位置
+            //         center: Alignment.center,
+            //         tileMode: TileMode.repeated,
+            //         colors: [Colors.greenAccent,Colors.redAccent,Colors.amberAccent]
+            //         // colors: [Colors.blue.shade100,Colors.blue.shade200,Colors.white,Colors.white,Colors.white],
+            //       )
+            //   ),
+            //   child: const SizedBox.shrink(),
+            // ),
             const Spacer(),
+            SizedBox(height: 16,),
             Container(
               width: double.infinity,
-              height: 100,
+              height: 200,
               decoration: const BoxDecoration(
-                  gradient:RadialGradient(
-                    ///渐变半径：
-                    radius: 0.3,
-                    //渐变位置，主要是中心位置
-                    center: Alignment.center,
-                    tileMode: TileMode.repeated,
-                    colors: [Colors.greenAccent,Colors.redAccent,Colors.amberAccent]
-                    // colors: [Colors.blue.shade100,Colors.blue.shade200,Colors.white,Colors.white,Colors.white],
-                  )
+                gradient: RadialGradient(
+                  radius: 2,
+                  center: Alignment.topRight,
+                  tileMode: TileMode.clamp,
+                  colors: [Colors.greenAccent,Colors.white,Colors.white,]),
               ),
-              child: const SizedBox.shrink(),
-            ),
-            const Spacer(),
+            )
           ],
         ),
       ),
