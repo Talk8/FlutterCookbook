@@ -109,8 +109,13 @@ dependencies:
 
 #实现垂直switcher，不过效果不理想,不推荐使用
   slide_switcher: ^1.1.2
-#
+
+#可以自定义宽度和高度，替换开，关，thumb图标，缺点是无法滑动thumb
   flutter_advanced_switch: ^3.0.1
+
+#和advanced_switch功能差不多，不过不需要controller，缺点是无法滑动thumb
+  flutter_switch: ^0.3.2
+
 #试试这个包
 #  flutter_picker: ^2.1.0
 
@@ -177,6 +182,8 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
+    #使用images加反斜线可以包含目录下所有图片，不需要单独添加每个图片
+    - images/
     - images/ex.png
     - images/panda.jpeg
 

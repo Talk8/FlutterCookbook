@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_switcher/slide_switcher.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'dart:math' as math;
 
 class ExSliderSwitcher extends StatefulWidget {
@@ -13,6 +14,7 @@ class ExSliderSwitcher extends StatefulWidget {
 
 class _ExSliderSwitcherState extends State<ExSliderSwitcher> {
   final mController = ValueNotifier<bool>(true);
+  var checked = false;
 
   @override
   void initState() {
@@ -106,6 +108,20 @@ class _ExSliderSwitcherState extends State<ExSliderSwitcher> {
             transformAlignment:Alignment.center ,
             child: Switch(value: true,onChanged: (value){},),
           ),
+
+          ///无法垂直显示，但是可以修改开关状态下的图片，thumb的图片和开关的图片保持一致，类似advanceSwitch
+          ///不过不需要配合controller使用，还有一个缺点，开关无法滑动使用，只能点击开和关位置，自动滑动。
+          FlutterSwitch(value:checked, onToggle: (value){
+            setState(() {
+              checked = value;
+            });
+          },
+            inactiveIcon: Icon(Icons.arrow_left),
+            activeIcon: Icon(Icons.arrow_right),
+            width: 120,
+            height: 50,
+          ),
+
         ],
       ),
     );
