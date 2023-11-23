@@ -107,6 +107,10 @@ dependencies:
 #实现NumberPicker
   wheel_chooser: ^1.1.2
 
+#实现垂直switcher，不过效果不理想,不推荐使用
+  slide_switcher: ^1.1.2
+#
+  flutter_advanced_switch: ^3.0.1
 #试试这个包
 #  flutter_picker: ^2.1.0
 
