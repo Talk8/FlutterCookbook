@@ -116,6 +116,9 @@ dependencies:
 #和advanced_switch功能差不多，不过不需要controller，缺点是无法滑动thumb
   flutter_switch: ^0.3.2
 
+#还有一个 day_night_switcher:,估计是从在这个包的基础上创建的，不过却比这个包评价高。
+  day_night_switch: ^1.0.4
+
 #试试这个包
 #  flutter_picker: ^2.1.0
 

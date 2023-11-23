@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:slide_switcher/slide_switcher.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:day_night_switch/day_night_switch.dart';
 import 'dart:math' as math;
 
 class ExSliderSwitcher extends StatefulWidget {
@@ -53,8 +54,11 @@ class _ExSliderSwitcherState extends State<ExSliderSwitcher> {
             onSelect: (value){
             },
             children:const [
-              Text("Open"),
-              Text("Close"),],),
+              Image(image: AssetImage("images/pickdown.png"),),
+              Image(image: AssetImage("images/pickup.png"),),
+              // Text("Open"),
+              // Text("Close"),
+            ],),
            const SizedBox(height: 16.0,),
            ///可以垂直显示，而且可以修改开关状态下的图片，不过无法修改thumb的形状
            SlideSwitcher(
@@ -84,6 +88,8 @@ class _ExSliderSwitcherState extends State<ExSliderSwitcher> {
           AdvancedSwitch(
             width: 120,
             controller: mController,
+            activeImage: AssetImage("images/pickdown.png"),
+            inactiveImage: AssetImage("images/pickup.png"),
           ),
           const SizedBox(height: 16.0,),
 
@@ -120,6 +126,19 @@ class _ExSliderSwitcherState extends State<ExSliderSwitcher> {
             activeIcon: Icon(Icons.arrow_right),
             width: 120,
             height: 50,
+          ),
+          ///主题和颜色比较FlutterSwitch好看，功能差不多，好处是可以滑动开关，不再是点击来切换形状
+          ///上面使用的所有switch都是把图片放在了thumb上，切换开关时切换图片，只有AdvancedSwitch是把图片放在track上，
+          ///滑动开关时切换track，不过thumb不能被修改
+          DayNightSwitch(
+            sunImage: AssetImage("images/pickdown.png"),
+            moonImage: AssetImage("images/pickup.png"),
+            value: checked,
+            onChanged: (value){
+            setState(() {
+              checked = value;
+            });
+            },
           ),
 
         ],
