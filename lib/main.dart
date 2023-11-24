@@ -394,6 +394,10 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     Widget listWidget = ListView(
+      ///反向显示列表内容，不然每次都要滑动很多列表才能使用新列表,不过反向显示后不在最后一个位置上
+      ///可以通过controller控制滚动位置，不过位置=单行高度*行数
+      // reverse: true,
+      controller: ScrollController(initialScrollOffset: 80*70,keepScrollOffset: true),
       scrollDirection: Axis.vertical,
       children: [
         listItem("001", "Column and Row", context, const ExColumnRow()),

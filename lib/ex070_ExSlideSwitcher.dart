@@ -51,13 +51,15 @@ class _ExSliderSwitcherState extends State<ExSliderSwitcher> {
           SlideSwitcher(
             containerHeight: 50,
             containerWight: 200,
+            slidersColors: [Colors.green],
+            containerColor: Colors.redAccent,
             onSelect: (value){
             },
             children:const [
-              Image(image: AssetImage("images/pickdown.png"),),
-              Image(image: AssetImage("images/pickup.png"),),
-              // Text("Open"),
-              // Text("Close"),
+              // Image(image: AssetImage("images/pickdown.png"),),
+              // Image(image: AssetImage("images/pickup.png"),),
+              Text("Open"),
+              Text("Close"),
             ],),
            const SizedBox(height: 16.0,),
            ///可以垂直显示，而且可以修改开关状态下的图片，不过无法修改thumb的形状
