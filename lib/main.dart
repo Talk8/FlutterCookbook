@@ -71,6 +71,7 @@ import 'package:fluttercookbook/ex067_SearchBar.dart';
 import 'package:fluttercookbook/ex068_ExSegmentedButton.dart';
 import 'package:fluttercookbook/ex069_ExGradientColor.dart';
 import 'package:fluttercookbook/ex070_ExSlideSwitcher.dart';
+import 'package:fluttercookbook/ex071_SlideImage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -478,6 +479,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("068", "SegmentedButton", context, const ExSegmentedButton()),
         listItem("069", "GradientColor", context, const ExGradientColor()),
         listItem("070", "SlideSwitcher", context, const ExSliderSwitcher()),
+        listItem("071", "SlideImage", context, const ExSlideImage()),
       ],
     );
 
