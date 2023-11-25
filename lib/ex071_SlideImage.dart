@@ -33,6 +33,51 @@ class _ExSlideImageState extends State<ExSlideImage> {
                 debugPrint("check value: $v");
               },),
           // CusWheelPicker(),
+          const SizedBox(height: 16.0,),
+          ///演示两种阴影效果:BoxDecoration控制的效果在周围，呈发散形状
+          ///card的阴影效果只在下方位置，有立体效果
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ///正常的阴影,阴影效果在组件周围四个方向
+              Container(
+                width: 100,
+                height: 100,
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  boxShadow:[ BoxShadow(
+                    color: Colors.yellow,
+                    blurRadius: 24.0,
+                  ),
+                  ],
+                ),
+              ),
+              ///在正常的阴影的基础通过offset控制阴影的位置
+              Container(
+                width: 100,
+                height: 100,
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  boxShadow:[ BoxShadow(
+                    color: Colors.yellow,
+                    ///控制阴影的位置
+                    offset: Offset(0, 10),
+                    ///控制阴影的大小
+                    blurRadius: 24.0,
+                  ),
+                  ],
+                ),
+              ),
+              ///card的阴影在组件下方，无法控制阴影的位置
+              const Card(
+                color: Colors.blue,
+                shadowColor: Colors.yellow,
+                ///控制阴影的大小
+                elevation: 24,
+                child: SizedBox(width: 100,height: 100,),
+              ),
+            ],
+          ),
         ],
       ),
     );
