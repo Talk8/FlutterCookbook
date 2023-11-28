@@ -77,4 +77,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex069_GradientColor             | this is the example of GradientColor.                          |
 | ex070_SlideSwitcher             | this is the example of Slide Switcher.                         |
 | ex071_SlideImage                | this is the example of Slide Image.                            |
+| ex072_SlideNumber               | this is the example of Slide Number.                           |
 
