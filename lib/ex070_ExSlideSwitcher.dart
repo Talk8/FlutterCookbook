@@ -6,6 +6,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:day_night_switch/day_night_switch.dart';
 import 'dart:math' as math;
 
+///与178内容相匹配
 class ExSliderSwitcher extends StatefulWidget {
   const ExSliderSwitcher({super.key});
 

@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:wheel_chooser/wheel_chooser.dart';
 
+///与179和180的内容相匹配
+
 ///定义回调方法的类型
 typedef ValueChanged<T> = void Function(T value);
 
@@ -34,7 +36,7 @@ class _ExSlideImageState extends State<ExSlideImage> {
               },),
           // CusWheelPicker(),
           const SizedBox(height: 16.0,),
-          ///演示两种阴影效果:BoxDecoration控制的效果在周围，呈发散形状
+          ///演示两种阴影效果:BoxDecoration控制的效果在周围，呈发散形状。对应180的内容
           ///card的阴影效果只在下方位置，有立体效果
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

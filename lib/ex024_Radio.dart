@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///与43和44内容匹配
 class ExRadio extends StatefulWidget {
   const ExRadio({Key? key}) : super(key: key);
 
@@ -12,7 +13,7 @@ class _ExRadioState extends State<ExRadio> {
   var _groupValue = 10;
   var _checkStateStr = "no";
   var _groupValueStr = "groupOne";
-  var _selectedState = false;
+  // var _selectedState = false;
 
   Radio _radio(index) {
     _checkState = index;
@@ -22,7 +23,7 @@ class _ExRadioState extends State<ExRadio> {
       groupValue: _groupValue,
       onChanged: (v) {
         //v的值就是index
-        print("value $v");
+        debugPrint("value $v");
         setState(
           () {
             if (_checkState == _groupValue) {
@@ -45,7 +46,7 @@ class _ExRadioState extends State<ExRadio> {
       groupValue: _groupValueStr,
       onChanged: (v) {
         //v的值就是index
-        print("value $v");
+        debugPrint("value $v");
         setState(
           () {
             if (_checkStateStr == _groupValueStr) {
@@ -72,7 +73,7 @@ class _ExRadioState extends State<ExRadio> {
       selected: (_groupValue == _checkState),
       onChanged: (v) {
         //v的值就是index
-        print("value of list $v");
+        debugPrint("value of list $v");
         setState(
           () {
             if (_checkState == _groupValue) {
