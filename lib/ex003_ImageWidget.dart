@@ -1,4 +1,4 @@
-//这个代码和第六回Image Widget的内容匹配
+//这个代码和第六回Image Widget的内容匹配,183添加了图片阴影
 import 'package:flutter/material.dart';
 
 class ExImage extends StatelessWidget {
@@ -30,7 +30,10 @@ class ExImage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           imageEx,
+          const SizedBox(height: 20,),
           buildImageFill(),
+          buildImageShadow(),
+          const SizedBox(height: 20),
           buildImageCover(),
           buildImageContain(),
           buildImageColorLighten(),
@@ -52,6 +55,8 @@ class ExImage extends StatelessWidget {
       image: AssetImage("images/panda.jpeg"),
       fit: BoxFit.fill,
       filterQuality:FilterQuality.high ,
+      color: Colors.redAccent,
+      colorBlendMode: BlendMode.dstOver,
     );
   }
 
@@ -139,6 +144,26 @@ class ExImage extends StatelessWidget {
       fit: BoxFit.contain,
       filterQuality:FilterQuality.high,
       colorBlendMode: BlendMode.difference,
+    );
+  }
+
+  ///给图片添加阴影，与183内容匹配
+  Widget buildImageShadow() {
+    return Container(
+      decoration: const BoxDecoration(
+        boxShadow: [BoxShadow(color: Colors.redAccent,
+          blurRadius: 16,
+          blurStyle: BlurStyle.solid,
+        ),]
+
+      ),
+      child: const Image(
+        width: 160,
+        height: 100,
+        image: AssetImage("images/panda.jpeg"),
+        fit: BoxFit.fill,
+        filterQuality:FilterQuality.high ,
+      ),
     );
   }
 }
