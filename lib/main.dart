@@ -86,6 +86,7 @@ import 'ex045_BleDemo/src/ble/ble_device_interactor.dart';
 import 'ex045_BleDemo/src/ble/ble_logger.dart';
 import 'ex045_BleDemo/src/ble/ble_scanner.dart';
 import 'ex045_BleDemo/src/ble/ble_status_monitor.dart';
+import 'ex073_CusMutexWidget.dart';
 
 void main() {
   // runApp(const FlutterCookbookApp());
@@ -482,6 +483,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("070", "SlideSwitcher", context, const ExSliderSwitcher()),
         listItem("071", "SlideImage", context, const ExSlideImage()),
         listItem("072", "SlideNumber", context, const ExSlideNumber()),
+        listItem("073", "CusMutexWidget", context, const ExMutexWidget()),
       ],
     );
 
