@@ -14,7 +14,7 @@ class ExMutexWidget extends StatefulWidget {
 class _ExMutexWidgetState extends State<ExMutexWidget> {
   int groupId = 0;
 
-  ///在页面启动前设置为竖屏，在页面退出后恢复原来的设置
+  ///在页面启动前设置为竖屏，在页面退出后恢复原来的设置,与185内容相匹配
   @override
   void initState() {
     super.initState();
@@ -85,14 +85,14 @@ typedef ItemSelected<T> = void Function(T value);
 
 ///单个Radio组件
 class MutexWidget extends StatefulWidget {
-  MutexWidget({super.key,required this.groupValue, required this.index,
+  const MutexWidget({super.key,required this.groupValue, required this.index,
     required this.itemSelected,
   });
 
   ///索引id和组id,以及修改组id的方法都写成组件的属性
-  int groupValue;
-  int index;
-  ItemSelected<int> itemSelected;
+  final int groupValue;
+  final int index;
+  final ItemSelected<int> itemSelected;
 
   @override
   State<MutexWidget> createState() => _MutexWidgetState();
