@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 ///自定义Radio组件，类似单选按钮，可以自行修改组件外观.与184的内容相匹配
 ///难点是实现互斥状态，也就间单选功能，一组按钮中有且仅有一个能被选择
@@ -12,6 +13,25 @@ class ExMutexWidget extends StatefulWidget {
 
 class _ExMutexWidgetState extends State<ExMutexWidget> {
   int groupId = 0;
+
+  ///在页面启动前设置为竖屏，在页面退出后恢复原来的设置
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

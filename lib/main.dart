@@ -142,6 +142,12 @@ void main() {
   );
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
 
+  ///全局禁止页面自动适用屏幕,打开注释掉的代码就可以
+  /*
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(const MainApp()));
+   */
   runApp(
     MultiProvider(
       providers: [
