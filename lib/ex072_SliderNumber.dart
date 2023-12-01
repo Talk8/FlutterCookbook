@@ -155,6 +155,11 @@ class _CusTimePickerState extends State<CusTimePicker> {
             Positioned(
               top: value,
               left: thumbLeft,
+              ///可以指定宽度和高度但是不能指定在同一方向上同时指定数值后再指定infinity，否则会报以下错误
+              ///BoxConstraints forces an infinite height.
+              ///因为这个infinity是最大值，比如top已经有某个数值了，但是height再指定infinity就会导致高度不够用
+                // width: double.infinity,
+                // height: double.infinity,
                 child: Container(
                   color: Colors.transparent,
                   child: const Icon(Icons.face,color: Colors.redAccent,),
