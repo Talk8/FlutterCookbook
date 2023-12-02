@@ -73,6 +73,7 @@ import 'package:fluttercookbook/ex069_ExGradientColor.dart';
 import 'package:fluttercookbook/ex070_ExSlideSwitcher.dart';
 import 'package:fluttercookbook/ex071_SlideImage.dart';
 import 'package:fluttercookbook/ex072_SliderNumber.dart';
+import 'package:fluttercookbook/ex074_DropdownMenu.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -490,6 +491,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("071", "SlideImage", context, const ExSlideImage()),
         listItem("072", "SlideNumber", context, const ExSlideNumber()),
         listItem("073", "CusMutexWidget", context, const ExMutexWidget()),
+        listItem("074", "DropdownMenu", context, const ExDropDownMenu()),
       ],
     );
 
