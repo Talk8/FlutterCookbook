@@ -79,4 +79,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex071_SlideImage                | this is the example of Slide Image.                            |
 | ex072_SlideNumber               | this is the example of Slide Number.                           |
 | ex073_CusRadioWidget            | this is the example of Custom radio widget.                    |
+| ex074_DropdownMenuWidget        | this is the example of DropdownMenu widget.                    |
 
