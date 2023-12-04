@@ -8,9 +8,9 @@ class ExTextField extends StatefulWidget {
 }
 
 class _ExTextField extends State<ExTextField> {
-  _onTextChanged(String text) {
-    print(' text $text changed');
-  }
+  // _onTextChanged(String text) {
+  //   debugPrint(' text $text changed');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _stateTextField extends State<StateTextField> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Example of TextField"),
+        title: const Text("Example of TextField"),
       ),
       //如果在这里单独使用TextField,那么无法使用onChanged属性,必须嵌套一个statefull widget.
       //而且将它包含在布局类widget中，这也是代码中使用column包含它的原因
@@ -48,7 +48,7 @@ class TextFieldStatefull extends StatefulWidget {
 }
 
 class _TextFieldStatefullState extends State<TextFieldStatefull> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _TextFieldStatefullState extends State<TextFieldStatefull> {
     _controller.text = "123456";
     //给控制器添加监听器，用来监听输入值的变化
     _controller.addListener(() {
-      print("hello  listener ${_controller.text}");
+      debugPrint("hello  listener ${_controller.text}");
     });
 
   }
@@ -89,11 +89,11 @@ class _TextFieldStatefullState extends State<TextFieldStatefull> {
             keyboardType: TextInputType.number,
             //这个值是输入框中所有的内容，而不是当前输入的某个内容
             onChanged: (value) {
-              print("hello onchanged $value");
+              debugPrint("hello onchanged $value");
             },
             //这个值是输入框中所有的内容
             onSubmitted: (value){
-              print("hello onSubmited $value");
+              debugPrint("hello onSubmited $value");
             },
             decoration: const InputDecoration(
               //在输入框上显示
@@ -101,12 +101,17 @@ class _TextFieldStatefullState extends State<TextFieldStatefull> {
               hintText: "Name",
               //在输入框下方位置显示
               errorText: "It is wrong",
+              ///通过修改Icon的大小，可以修改textFiled的大小
+              // prefixIcon: Image(width: 80,image: AssetImage("assetName"),
               //输入框前面和后面的图标
-              prefixIcon: Icon(Icons.login),
+              prefixIcon: Icon(Icons.login,),
               suffixIcon: Icon(Icons.panorama_fish_eye),
               border: OutlineInputBorder(),
               //无边框,无边框时不要设置label，不然会和hint重叠在一起
               // border: InputBorder.none,
+              ///这两个值需要同时修改才有效果
+              filled: true,
+              fillColor: Colors.blue,
             ),
             //是否显示为密码形式，true时显示为小圆点
             obscureText: false,
