@@ -11,6 +11,7 @@ class ExText extends StatelessWidget {
       ),
       body: Column(
         children: [
+          ///列中的长文本可以自动换行
           const Text( " Text Widget WidgetWidgetWidgetWidgetWidgetWidgetWidget",
               style: TextStyle(
                 color: Colors.white,
@@ -19,6 +20,7 @@ class ExText extends StatelessWidget {
               ),
           ),
           const SizedBox(height: 16,),
+          ///行中的长文本不可以自动换行，需要嵌套一个Expander组件
           const Row(
             children: [
               Expanded(
