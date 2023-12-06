@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wheel_chooser/wheel_chooser.dart';
 
+///与191，192的内容相匹配
 class ExCusTimePicker extends StatefulWidget {
   const ExCusTimePicker({super.key});
 
@@ -9,9 +10,10 @@ class ExCusTimePicker extends StatefulWidget {
 }
 
 class _ExCusTimePickerState extends State<ExCusTimePicker> {
-  int hour = 0;
-  int minute = 0;
-  String selectedTime = "8:00";
+  ///这是初始化值，如果用户不选择就用此值l
+  int hour = 8;
+  int minute = 30;
+  String selectedTime = "8:30";
   
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,6 @@ class _ExCusTimePickerState extends State<ExCusTimePicker> {
           showModalBottomSheet(
               context: context,
               builder: (BuildContext context){
-                // screenWidth = MediaQuery.of(context).size.width;
-                // screenHeight = MediaQuery.of(context).size.height;
 
                 return Container(
                   width: screenWidth,
@@ -70,7 +70,7 @@ class _ExCusTimePickerState extends State<ExCusTimePicker> {
                                 listWidth: 80,
                                 listHeight: screenHeight*2/3 - 128,
                                 itemSize: 56,
-                                startPosition: 8,
+                                startPosition: hour,
                                 selectTextStyle: const TextStyle(color: Colors.white),
                                 unSelectTextStyle: const TextStyle(color: Colors.black),
                                 onValueChanged: (value){
@@ -86,7 +86,7 @@ class _ExCusTimePickerState extends State<ExCusTimePicker> {
                               listWidth: 80,
                               listHeight: screenHeight*2/3 - 128,
                               itemSize: 56,
-                              startPosition: 30,
+                              startPosition: minute,
                               selectTextStyle: const TextStyle(color: Colors.white),
                               unSelectTextStyle: const TextStyle(color: Colors.black),
                               onValueChanged: (value){minute = value;},
@@ -132,7 +132,7 @@ class _ExCusTimePickerState extends State<ExCusTimePicker> {
             width: screenWidth - 16*2,
             height: 96,
             decoration: BoxDecoration(
-              color: Colors.black45,
+              color: Colors.blue[500],
               borderRadius: BorderRadius.circular(24),
             ),
             child: Padding(
