@@ -119,8 +119,13 @@ dependencies:
 #还有一个 day_night_switcher:,估计是从在这个包的基础上创建的，不过却比这个包评价高。
   day_night_switch: ^1.0.4
 
-# 
+# 这个包可以获取到手机上的屏幕尺寸，android版本等有用信息
   device_info_plus: ^9.1.1
+
+# 新版本需要flutter版本支持：
+  # Because fluttercookbook depends on package_info_plus >=5.0.1 which requires SDK version ^3.2.0, version solving failed.
+  # Process finished with exit code 1
+  package_info_plus: ^4.2.0
 
 #试试这个包
 #  flutter_picker: ^2.1.0
