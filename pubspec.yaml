@@ -119,6 +119,9 @@ dependencies:
 #还有一个 day_night_switcher:,估计是从在这个包的基础上创建的，不过却比这个包评价高。
   day_night_switch: ^1.0.4
 
+# 
+  device_info_plus: ^9.1.1
+
 #试试这个包
 #  flutter_picker: ^2.1.0
 
