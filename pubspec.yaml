@@ -127,6 +127,9 @@ dependencies:
   # Process finished with exit code 1
   package_info_plus: ^4.2.0
 
+#打开系统中的一些设置开关，比如蓝牙WIFI等
+  open_settings: ^2.0.2
+
 #试试这个包
 #  flutter_picker: ^2.1.0
 

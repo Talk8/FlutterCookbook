@@ -1,5 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:open_settings/open_settings.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class ExDeviceInfo extends StatefulWidget {
@@ -23,6 +24,7 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
       ),
 
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(pkgInfo),
           ElevatedButton(
@@ -41,6 +43,13 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
               // });
             },
             child: const Text("Show Device Info"),
+          ),
+          ///与open_settings包内容匹配
+          ElevatedButton(
+            onPressed: (){
+              OpenSettings.openBluetoothSetting();
+            },
+            child: const Text("Open BT"),
           ),
         ],
       ),
