@@ -1,3 +1,4 @@
+import 'package:bluetooth_enable_fork/bluetooth_enable_fork.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:open_settings/open_settings.dart';
@@ -16,6 +17,13 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
 
   @override
   Widget build(BuildContext context) {
+
+    String dialogTitle ="title";
+    String dialogContent = "Pls open bluetooth of phone";
+    String cancelBtnText = "No";
+    String acceptBtnText = "Yes";
+    double dialogRadius = 30;
+    bool barrierDismissible = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -50,6 +58,29 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
               OpenSettings.openBluetoothSetting();
             },
             child: const Text("Open BT"),
+          ),
+          ///使用bluetooth_enable_fork包
+          ///只弹出一个简单窗口
+          ElevatedButton(
+            onPressed: (){
+              BluetoothEnable.enableBluetooth.then((value) {
+                debugPrint("value is: $value");
+              });
+            },
+            child: const Text("Open BT"),
+          ),
+
+          ///可以弹出复杂窗口，窗口可以自定义，不过风格不能修改
+          ElevatedButton(
+
+            onPressed: (){
+              BluetoothEnable.customBluetoothRequest(
+                context, dialogTitle,
+                true, dialogContent,
+                cancelBtnText, acceptBtnText,
+                dialogRadius, barrierDismissible);
+            },
+            child: const Text("Open BT by Dialog"),
           ),
         ],
       ),

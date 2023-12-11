@@ -130,6 +130,8 @@ dependencies:
 #打开系统中的一些设置开关，比如蓝牙WIFI等
   open_settings: ^2.0.2
 
+#
+  bluetooth_enable_fork: ^0.1.6
 #试试这个包
 #  flutter_picker: ^2.1.0
 
