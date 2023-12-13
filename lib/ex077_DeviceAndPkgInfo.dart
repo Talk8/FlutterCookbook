@@ -25,6 +25,8 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
     double dialogRadius = 30;
     bool barrierDismissible = false;
 
+    ThemeData themeData = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Example of Device and Package Info"),
@@ -70,9 +72,8 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
             child: const Text("Open BT"),
           ),
 
-          ///可以弹出复杂窗口，窗口可以自定义，不过风格不能修改
+          ///可以弹出复杂窗口，窗口可以自定义，不过风格不能修改，比如文字颜色大小
           ElevatedButton(
-
             onPressed: (){
               BluetoothEnable.customBluetoothRequest(
                 context, dialogTitle,
@@ -81,6 +82,41 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
                 dialogRadius, barrierDismissible);
             },
             child: const Text("Open BT by Dialog"),
+          ),
+          Theme(
+            data: themeData.copyWith(
+              textTheme: const TextTheme(
+                displayLarge: TextStyle(color: Colors.purpleAccent),
+                displayMedium: TextStyle(color: Colors.blue),
+                displaySmall: TextStyle(color: Colors.greenAccent),
+                titleLarge: TextStyle(color: Colors.purpleAccent),
+                titleMedium: TextStyle(color: Colors.purpleAccent),
+                titleSmall: TextStyle(color: Colors.purpleAccent),
+              ),
+              textButtonTheme: TextButtonThemeData(
+               style: TextButton.styleFrom(foregroundColor: Colors.greenAccent,textStyle: const TextStyle(color: Colors.redAccent,),),
+              ),
+              dialogBackgroundColor: Colors.redAccent,
+              ///只有这个起作用，其它的都不起作用，估计嵌套导致的
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                  style:ElevatedButton.styleFrom(foregroundColor: Colors.redAccent,), ),
+              dialogTheme: const DialogTheme(
+                backgroundColor: Colors.redAccent,
+                contentTextStyle: TextStyle(color: Colors.redAccent,),
+              ),
+              primaryColor: Colors.greenAccent,
+
+            ),
+            child: ElevatedButton(
+              onPressed: (){
+                BluetoothEnable.customBluetoothRequest(
+                    context, dialogTitle,
+                    true, dialogContent,
+                    cancelBtnText, acceptBtnText,
+                    dialogRadius, barrierDismissible);
+              },
+              child: const Text("Open BT by Dialog"),
+            ),
           ),
         ],
       ),
