@@ -5,7 +5,8 @@ import 'package:flutter_ttc_ble/flutter_ttc_ble.dart';
 import 'package:fluttercookbook/_private_data.dart';
 import 'package:provider/provider.dart';
 
-///这个示例使用flutter_ttc_ble包中的内容实现
+///这个示例使用flutter_ttc_ble包中的内容实现,包含扫描，连接，发送和接收数据功能。
+///扫描和发送数据有专门的按钮，连接设备没有，通过点击设备名称实现连接功能
 class ExBleWithTTC extends StatefulWidget {
   const ExBleWithTTC({super.key});
 
