@@ -41,6 +41,7 @@ import 'package:fluttercookbook/ex041_SharedData.dart';
 import 'package:fluttercookbook/ex042_Animation.dart';
 import 'package:fluttercookbook/ex045_BleDemo/main.dart';
 import 'package:fluttercookbook/ex045_BleTiDemo/main.dart';
+import 'package:fluttercookbook/ex045_BleWithTTC.dart';
 import 'package:fluttercookbook/ex045_BlueDemo.dart';
 import 'package:fluttercookbook/ex045_Bluetooth.dart';
 import 'package:fluttercookbook/ex043_ScreenSize.dart';
@@ -466,6 +467,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("045", "BLE DemoTIApp", context, const MyApp()),
         listItem("045", "FlutterBlueApp ", context, const FlutterBlueApp()),
         listItem("045", "FlutterReactiveBlueApp ", context, const ExReactiveBleDemo()),
+        listItem("045", "BLE with TTC", context, const ExBleWithTTC()),
         listItem("046", "ExpandList, Flexible", context, const ExExpandList()),
         listItem("047", "All kinds of list", context, const ExAllKindsOfList()),
         listItem("048", "ModalBarrier", context, const ExModalBarrier()),
