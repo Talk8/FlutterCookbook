@@ -19,6 +19,7 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
   final _ScanViewModel viewModel = _ScanViewModel();
   String _deviceId = "";
   Future<bool> _future = Future.value(false);
+  final StreamController<Future<bool>> _streamController = StreamController();
 
   @override
   void initState() {
@@ -79,6 +80,8 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
 
   @override
   Widget build(BuildContext context) {
+    _streamController.add(bleProxy.isConnected(deviceId: _deviceId),);
+
     return ChangeNotifierProvider<_ScanViewModel>(
       create:(_) => viewModel,
       child: Scaffold(
@@ -144,7 +147,25 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
                              bleProxy.connect(deviceId: _deviceId);
                            },
                            child: ListTile(
+                             ///StreamBuilder无法嵌套在ChangeNotifierProvider中，会有编译错误,这段代码无法使用
+                             // leading: StreamBuilder(
+                             //   stream: _streamController.stream,
+                             //   builder: (context,shotData){
+                             //
+                             //     bool? connected = false;
+                             //     connected = shotData.data as bool?;
+                             //
+                             //     debugPrint("^^^^ stream connected: $connected");
+                             //     ///显示设备连接状态
+                             //     if(connected??false) {
+                             //       return const Icon(Icons.bluetooth,color: Colors.white,);
+                             //     }else {
+                             //       return const Icon(Icons.bluetooth,color: Colors.grey,);
+                             //     }
+                             //   },
+                             // ),
                              ///这个FutureBuilder不起作用，真正起作用是vm中更新数据，consumer读取更新后的数据。
+                             ///所以可以去掉它，去掉后仍然可以正常显示设备的连接状态
                              leading: FutureBuilder(
                                future: bleProxy.isConnected(deviceId: _deviceId),
                                builder: (context,shotData) {
