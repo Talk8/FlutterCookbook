@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class ExBleWithTTC extends StatefulWidget {
 class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
   final _ScanViewModel viewModel = _ScanViewModel();
   String _deviceId = "";
+  Future<bool> _future = Future.value(false);
 
   @override
   void initState() {
@@ -50,12 +52,17 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
   void onConnected(String deviceId) {
     debugPrint("--> device is connected");
     BleManager().enableNotification(deviceId: deviceId);
+
+    _future = Future.value(true);
+    viewModel.updateConnectedState();
     super.onConnected(deviceId);
   }
 
   @override
   void onDisconnected(String deviceId) {
     debugPrint("--> device is disconnected");
+    _future = Future.value(false);
+    viewModel.updateConnectedState();
     super.onDisconnected(deviceId);
   }
 
@@ -87,6 +94,7 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
                 children: [
                   ElevatedButton(
                     onPressed:  (){
+                      bleProxy.disconnect(deviceId: _deviceId);
                       bleProxy.startScan();
                       ///3s秒后停止扫描
                       Future.delayed(const Duration(seconds: 3),(){
@@ -128,13 +136,35 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
                     return Container(
                       color: Colors.blue,
                       child: ListView.separated(
+                        shrinkWrap: true,
                         itemBuilder: (context,index){
                           return Listener(
                            onPointerDown: (event){
                              _deviceId = vm._devices[index].deviceId;
                              bleProxy.connect(deviceId: _deviceId);
                            },
-                           child: Text("item : $index ${vm._devices[index].name}"),
+                           child: ListTile(
+                             ///这个FutureBuilder不起作用，真正起作用是vm中更新数据，consumer读取更新后的数据。
+                             leading: FutureBuilder(
+                               future: bleProxy.isConnected(deviceId: _deviceId),
+                               builder: (context,shotData) {
+                                 bool? connected = false;
+                                 // bleProxy.isConnected(deviceId: _deviceId).then((value) => connected = value);
+                                 if(shotData.connectionState == ConnectionState.done
+                                     && _deviceId == vm._devices[index].deviceId) {
+                                   connected = shotData.data as bool?;
+                                 }
+                                 debugPrint("^^^^ future connected: $connected");
+
+                                 ///显示设备连接状态
+                                 if(connected??false) {
+                                   return const Icon(Icons.bluetooth,color: Colors.white,);
+                                 }else {
+                                   return const Icon(Icons.bluetooth,color: Colors.grey,);
+                                 }
+                               }
+                             ),
+                             title: Text("item : $index ${vm._devices[index].name}"),),
                           );
                         },
                         separatorBuilder:(context,index) => const Divider(),
@@ -175,6 +205,10 @@ class _ScanViewModel extends ChangeNotifier {
       _devices.clear();
       notifyListeners();
     }
+  }
+
+  void updateConnectedState() {
+    notifyListeners();
   }
 
   // void _sortDevices() {
