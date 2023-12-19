@@ -90,6 +90,8 @@ class _EXSharedDataState extends State<EXSharedData> {
           SizedBox(
             width: 200,
             height: 100,
+            ///注意：修改viewModel中的数据和获取viewModel中的数据时使用相同的viewModel.
+            ///consumer可以保证这一点，也可以把viewModel定义成单例对象
             child: Consumer<ViewModel>(
               builder: (context, viewModel, child) {
                 return ElevatedButton(

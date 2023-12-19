@@ -528,7 +528,8 @@ class _ExBleWithBluePlusState extends State<ExBleWithBluePlus> {
     //   return null;
     // }
 
-    List<int> value = [12,13,14];
+    // List<int> value = [12,13,14];
+    List<int> value = PrivateKey.value;
     ///计算CRC
     for(var v in value) {
       value[value.length-1] += v;
