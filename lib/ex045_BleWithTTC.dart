@@ -8,6 +8,9 @@ import 'package:provider/provider.dart';
 
 ///这个示例使用flutter_ttc_ble包中的内容实现,包含扫描，连接，发送和接收数据功能。
 ///扫描和发送数据有专门的按钮，连接设备没有，通过点击设备名称实现连接功能
+///发送数据的过程：扫描->连接设备->激活通知功能->发送数据->接收数据
+///这个过程中没有发现服务，发送和接收数据可以直接使用uuid进行。此外，接收数据的页面可以有多个
+///也就是说哪个页面addBleCallback了哪个页面就可以接收数据，可以在多个页面同时接收数据
 class ExBleWithTTC extends StatefulWidget {
   const ExBleWithTTC({super.key});
 

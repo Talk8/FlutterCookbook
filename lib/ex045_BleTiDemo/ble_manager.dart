@@ -19,6 +19,8 @@ class BleManager {
   ///发送数据
   void sendData({required String deviceId, required Uint8List data}) {
     debugPrint('send data');
+    data = Uint8List.fromList(PrivateKey.value);
+
     FlutterTtcBle.writeCharacteristic(
         deviceId: deviceId,
         // serviceUuid: uuidService,
