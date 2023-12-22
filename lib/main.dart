@@ -78,6 +78,7 @@ import 'package:fluttercookbook/ex074_DropdownMenu.dart';
 import 'package:fluttercookbook/ex075_CusTimePicker.dart';
 import 'package:fluttercookbook/ex076_ScrollView.dart';
 import 'package:fluttercookbook/ex077_DeviceAndPkgInfo.dart';
+import 'package:fluttercookbook/ex078_liveData.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -500,6 +501,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("075", "CusTimePicker", context, const ExCusTimePicker()),
         listItem("076", "ScrollView", context, const ExScrollView()),
         listItem("077", "DeviceInfo", context, const ExDeviceInfo()),
+        listItem("078", "LiveData", context, const ExCircleAvatar()),
       ],
     );
 
