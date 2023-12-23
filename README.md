@@ -82,4 +82,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex074_DropdownMenuWidget        | this is the example of DropdownMenu widget.                    |
 | ex075_CusTimePickerWidget       | this is the example of CusTimePicker widget.                   |
 | ex076_ScrollView                | this is the example of Scrollview widget.                      |
+| ex077_DeviceAndPkgInfo          | this is the example of Device and PackageInfo widget.          |
 
