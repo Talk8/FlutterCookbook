@@ -239,7 +239,7 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
                             builder: (context) {
                               isConnectingOrDisconnecting[r.device.remoteId] ??= ValueNotifier(true);
                               isConnectingOrDisconnecting[r.device.remoteId]!.value = true;
-                              r.device.connect(timeout: Duration(seconds: 35)).catchError((e) {
+                              r.device.connect(timeout: const Duration(seconds: 35),autoConnect: true).catchError((e) {
                                 final snackBar = snackBarFail(prettyException("Connect Error:", e));
                                 snackBarKeyC.currentState?.removeCurrentSnackBar();
                                 snackBarKeyC.currentState?.showSnackBar(snackBar);
