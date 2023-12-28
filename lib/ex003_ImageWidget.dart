@@ -32,7 +32,9 @@ class ExImage extends StatelessWidget {
           imageEx,
           const SizedBox(height: 20,),
           buildImageFill(),
-          buildImageShadow(),
+          ///显示时打开注释，因为页面高度够用
+          // buildImageShadow(),
+          buildImageOpacity(),
           const SizedBox(height: 20),
           buildImageCover(),
           buildImageContain(),
@@ -158,6 +160,29 @@ class ExImage extends StatelessWidget {
 
       ),
       child: const Image(
+        width: 160,
+        height: 100,
+        image: AssetImage("images/panda.jpeg"),
+        fit: BoxFit.fill,
+        filterQuality:FilterQuality.high ,
+      ),
+    );
+  }
+
+  ///给图片添加透明度的两种方法： 与183内容匹配
+  Widget buildImageOpacity() {
+    // return const Image(
+    //   opacity: AlwaysStoppedAnimation(0.2),
+    //   width: 160,
+    //   height: 100,
+    //   image: AssetImage("images/panda.jpeg"),
+    //   fit: BoxFit.fill,
+    //   filterQuality:FilterQuality.high ,
+    // );
+    return const Opacity(
+      opacity: 0.6,
+      child: Image(
+        opacity: AlwaysStoppedAnimation(0.2),
         width: 160,
         height: 100,
         image: AssetImage("images/panda.jpeg"),
