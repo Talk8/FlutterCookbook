@@ -62,6 +62,14 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
                 _showSNKBar(context);
               },
             ),
+
+            ElevatedButton(
+              child: const Text("Show SnackBar later"),
+              onPressed: () {
+                ///延时显示snackBar
+                Future.delayed(const Duration(seconds: 2,),() => _showSnackBar(context,"delay showing"),);
+              },
+            ),
             ///下面内容与218中的内容匹配
             const SizedBox(height: 8,),
             ///正常的CircleAvatar只在不超过外层容器的大小都可以通过radius来调整它的大小
@@ -130,31 +138,39 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
     );
   }
 
-  Widget _showSnackBar(BuildContext context) {
-    return TextButton(
-      child: SizedBox.shrink(),
-      onPressed: () {
-        //通过showSnackBar方法显示SnackBar
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: const Text("This is SnackBar"),
-          backgroundColor: Colors.amberAccent,
-          //修改形状，默认为矩形
-          shape: const CircleBorder(
-            side: BorderSide(),
-          ),
-          //显示时间
-          duration: const Duration(seconds: 3),
-          action: SnackBarAction(
-            textColor: Colors.black12,
-            label: "SnackBar Action",
-            onPressed: () {
-              //do nothing
-            },
-          ),
-        ));
-      },
+  void _showSnackBar(BuildContext context,String content) {
+    //通过showSnackBar方法显示SnackBar
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("This is $content"),
+      backgroundColor: Colors.amberAccent,
+      ///behavior设定为floating后才能给width赋值
+      behavior: SnackBarBehavior.floating,
+      // width: MediaQuery.of(context).size.width-32,
+      ///控制snackBar与屏幕之间的距离，相当于外边距，不能与width同时使用
+      margin: const EdgeInsets.only(left:16,right:16,bottom:90),
+      ///控制snackBar中内容与边框之间的距离，相当于内边距
+      // padding: EdgeInsets.only(top: 300),
+      ///控制snackBar的宽高比，默认值是0.25
+      actionOverflowThreshold: 0.1,
+      elevation: 29,
+      //修改形状，默认为矩形
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: const BorderSide(),
+      ),
+      //显示时间
+      duration: const Duration(seconds: 3),
+      action: SnackBarAction(
+        textColor: Colors.black12,
+        label: "SnackBar Action",
+        onPressed: () {
+          //do nothing
+        },
+      ),
+    ),
     );
   }
+
 }
 
 mixin CallBack {
