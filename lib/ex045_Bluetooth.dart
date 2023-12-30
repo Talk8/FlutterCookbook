@@ -19,6 +19,7 @@ import 'package:provider/provider.dart';
 ///还有一种读写数据的方式就是通过notify功能,首先激活notify功能，然后监听onValueChanged这个
 ///stream,它重写了onCharacteristicChanged这个原生方法，因此可以在这里接收数据。
 ///注意是character的stream而不是service的stream.
+///与197,198中的内容相匹配
 class ExBleWithBluePlus extends StatefulWidget {
   const ExBleWithBluePlus({Key? key}) : super(key: key);
 
