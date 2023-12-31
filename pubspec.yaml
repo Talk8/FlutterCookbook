@@ -132,6 +132,9 @@ dependencies:
 
 #
   bluetooth_enable_fork: ^0.1.6
+# 可以进行状态管理，显示dialog,snackBar不需要context
+  get: ^4.6.5
+
 #试试这个包
 #  flutter_picker: ^2.1.0
 
