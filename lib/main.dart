@@ -159,6 +159,8 @@ void main() {
       providers: [
         ChangeNotifierProvider( create:(context) => ViewModel(), child: const FlutterCookbookApp(),),
         ChangeNotifierProvider( create:(context) => DeviceViewModel(), child: const FlutterCookbookApp(),),
+        ///在078文件中LiveData中使用它
+        ChangeNotifierProvider( create:(context) => LiveDataViewModel(), child: const FlutterCookbookApp(),),
         ///测试共享时使用的数据
         Provider.value(value: shData),
         ///测试类中共享数据

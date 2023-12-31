@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ExCircleAvatar extends StatefulWidget {
   const ExCircleAvatar({super.key});
@@ -31,7 +32,7 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Example of CircleAvade"),
+          title: const Text("Example of Circle Avatar and LiveData",style: TextStyle(fontSize: 18),),
         ),
         body: Column(
           children: [
@@ -39,12 +40,13 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
               onPressed: () {
                 changeData("data1");
               },
-              child: const Text("Change data"),
+              child: const Text("Change data yb CB"),
             ),
+            ///使用Stream监听回调方法中的数据变化，点击上面的按钮相当于回调方法修改数据
             StreamBuilder(
               stream: _dataStreamController.stream,
               builder: (context, shotData) {
-                ///builde中不能显示snackBar
+                ///builder中不能显示snackBar
                 /*
                 if(shotData.data == "data1") {
                   _showSNKBar(context);
@@ -56,6 +58,34 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
                 // return _showSnackBar(context);
               },
             ),
+
+            ///通过vm修改数据，然后通过consumer更新数据，数据传递和管理由provide负责。这个和LiveData的原理相同
+            const SizedBox(height: 8,),
+            Consumer<LiveDataViewModel>(
+              builder: (context,shotData,child) {
+                return Builder(
+                  builder: (context) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text("Name: ${shotData.name}",),
+                        Text("Age: ${shotData.age.toString()}",),
+                      ],
+                    );
+                  }
+                );
+              }
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  ///通过vm来更新数据，注意vm需要使用单例，确保修改和接收的vm相同
+                  LiveDataViewModel().name = "Talk8";
+                  LiveDataViewModel().age = 66;
+                },
+                child: const Text("change data by VM"),
+            ),
+
+
             ElevatedButton(
               child: const Text("Show SnackBar"),
               onPressed: () {
@@ -173,6 +203,7 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
 
 }
 
+///接口类，用来模拟回调方法
 mixin CallBack {
   String _data = "default";
 
@@ -182,4 +213,38 @@ mixin CallBack {
   }
 
   void onDataChanged(String data) {}
+}
+
+
+
+///与LiveData配合使用的viewMode,需要在runApp中的MultiProvide中添加Provide后才可以使用
+class LiveDataViewModel extends ChangeNotifier {
+  static final liveDataViewModel = LiveDataViewModel._internal();
+  String _name = "Unknown";
+  int _age = 0;
+
+
+  // LiveDataViewModel() {
+  //   _connected = false;
+  //   _connectedDeviceId = "";
+  // }
+
+
+
+  ///创建单例对象,使用了工厂方法
+  LiveDataViewModel._internal();
+  factory LiveDataViewModel() => liveDataViewModel;
+
+  int get age => _age;
+  String get name => _name;
+
+  set name(String value) {
+    _name = value;
+    notifyListeners();
+  }
+
+  set age(int value) {
+    _age = value;
+    notifyListeners();
+  }
 }
