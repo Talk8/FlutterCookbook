@@ -15,8 +15,13 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
 
   @override
   void onDataChanged(String data) {
+
     super.onDataChanged(data);
+    ///在监听到的回调中给stream添加事件,streamBuilder收到后会更新数据
     _dataStreamController.sink.add(data);
+    ///按钮中通过changeData()方法模拟其它模块执行回调，这里相当于当前模拟监听到的回调中数据后
+    ///通过vm修改数据,这可以看作是在响应其它模块的cb操作
+    LiveDataViewModel().name = data;
     debugPrint("Callback: $data");
   }
 
@@ -85,7 +90,7 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
                 child: const Text("change data by VM"),
             ),
 
-
+            ///正常显示SnackBar
             ElevatedButton(
               child: const Text("Show SnackBar"),
               onPressed: () {
@@ -93,6 +98,7 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
               },
             ),
 
+            ///延时显示SnackBar
             ElevatedButton(
               child: const Text("Show SnackBar later"),
               onPressed: () {
@@ -100,6 +106,32 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
                 Future.delayed(const Duration(seconds: 2,),() => _showSnackBar(context,"delay showing"),);
               },
             ),
+
+            ///延时并且数据有更新时才显示SnackBar,点下按钮修改数据，或者等待cb修改数据。
+            ///因为cb是其它模块运行完成后的回调方法，这里只能被动监听回调方法
+            ElevatedButton(
+              child: const Text("Show SnackBar after data is updated"),
+              onPressed: () {
+
+                ///模拟cb修改数据，因为cb是其它模块主动执行的，当前模块只能被动监听cb,监听到后再通过vm修改数据
+                changeData("talk8");
+                ///主动通过vm修改数据
+                // LiveDataViewModel().name = "talk8";
+                ///延时显示snackBar
+                Future.delayed(const Duration(seconds:2),()=>{})
+                    .then((value) {
+                  if(LiveDataViewModel().name == "talk8") {
+                    _showSnackBar(context, "data is updated");
+                  }else {
+                    _showSnackBar(context, "data is not updated");
+                  }
+                }).onError((error, stackTrace) {
+                  _showSnackBar(context, "updating data failed");
+                });
+              },
+            ),
+
+
             ///下面内容与218中的内容匹配
             const SizedBox(height: 8,),
             ///正常的CircleAvatar只在不超过外层容器的大小都可以通过radius来调整它的大小
@@ -207,6 +239,7 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
 mixin CallBack {
   String _data = "default";
 
+  ///用来模拟其它模块调用回调方法
   void changeData(String data) {
     _data = data;
     onDataChanged(_data);
