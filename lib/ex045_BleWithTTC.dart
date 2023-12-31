@@ -21,7 +21,6 @@ class ExBleWithTTC extends StatefulWidget {
 class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
   final _ScanViewModel viewModel = _ScanViewModel();
   String _deviceId = "";
-  Future<bool> _future = Future.value(false);
   final StreamController<Future<bool>> _streamController = StreamController();
 
   @override
@@ -55,9 +54,9 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
   @override
   void onConnected(String deviceId) {
     debugPrint("--> device is connected");
-    BleManager().enableNotification(deviceId: deviceId);
+    ///建议在连接完成后修改mtu，修改完Mtu后激活特征值
+    bleProxy.requestMtu(deviceId: deviceId, mtu: 512);
 
-    _future = Future.value(true);
     viewModel.updateConnectedState();
     super.onConnected(deviceId);
   }
@@ -65,9 +64,14 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
   @override
   void onDisconnected(String deviceId) {
     debugPrint("--> device is disconnected");
-    _future = Future.value(false);
     viewModel.updateConnectedState();
     super.onDisconnected(deviceId);
+  }
+
+  @override
+  void onMtuChanged(String deviceId, int mtu) {
+    BleManager().enableNotification(deviceId: deviceId);
+    super.onMtuChanged(deviceId, mtu);
   }
 
   @override
