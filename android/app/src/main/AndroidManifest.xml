@@ -3,6 +3,8 @@
    <application
         android:label="fluttercookbook"
         android:name="${applicationName}"
+        android:networkSecurityConfig="@xml/action"
+<!--       flutter中不配置明文传输也可以进行http请求操作-->
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
