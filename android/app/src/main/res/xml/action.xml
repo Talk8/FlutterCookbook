@@ -2,3 +2,4 @@
 <network-security-config>
     <base-config cleartextTrafficPermitted="true" />
 </network-security-config>
+    <!--       flutter中不配置明文传输也可以进行http请求操作-->
