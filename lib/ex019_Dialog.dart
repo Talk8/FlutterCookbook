@@ -142,6 +142,80 @@ class _ExDialogState extends State<ExDialog> {
         });
   }
 
+  ///自定义Dialog:中间是一个输入框，下面是两个按钮
+  _showCustomDialog() {
+    showDialog(context: context,
+        builder: (BuildContext context) {
+          double width = MediaQuery.of(context).size.width;
+          double height = MediaQuery.of(context).size.height;
+
+          ///自定义Dialog，通过container控制大小
+          return AlertDialog(
+            ///两颜色同时设置才有效果
+            surfaceTintColor: Colors.white,,
+            ///这个是对话框窗口的背景颜色
+            backgroundColor: Colors.white,
+            ///修改对话框的圆角，默认带圆角，可以不处理,下面的代码给对话框镶了一个金边
+            shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: const BorderSide(color: Colors.yellow,width: 4),
+            ),
+            content: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.only(top: 48,bottom: 8),
+              width: width - 16*2,
+              height: height/4,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(0),
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        ///输入框最左侧和最右侧的图标
+                        prefixIcon: const Icon(Icons.mail),
+                        suffixIcon: const Icon(Icons.delete),
+                        ///输入框的填充颜色
+                        filled: true,
+                        fillColor: Colors.black26,
+                        ///输入框的边框,不同状态下有不同的边框
+                        enabled: true,
+                        disabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.redAccent,width: 4),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.redAccent,width: 4),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        ///输入时显示的边框
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.blue,width: 4),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(onPressed: (){}, child: const Text("Yes"),),
+                        ElevatedButton(onPressed: (){}, child: const Text("No"),),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+        );
+  }
+
   //用来演示Dialog和ModalBottomSheet
   @override
   Widget build(BuildContext context) {
@@ -218,6 +292,10 @@ class _ExDialogState extends State<ExDialog> {
             child: const Text("Consumer debug"),
           ),
 
+          ElevatedButton(onPressed: () {
+            _showCustomDialog();
+            },
+            child: const Text("Show Custom Dialog"),),
 
         ],
       ),
