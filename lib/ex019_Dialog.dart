@@ -152,7 +152,7 @@ class _ExDialogState extends State<ExDialog> {
           ///自定义Dialog，通过container控制大小
           return AlertDialog(
             ///两颜色同时设置才有效果
-            surfaceTintColor: Colors.white,,
+            surfaceTintColor: Colors.white,
             ///这个是对话框窗口的背景颜色
             backgroundColor: Colors.white,
             ///修改对话框的圆角，默认带圆角，可以不处理,下面的代码给对话框镶了一个金边
