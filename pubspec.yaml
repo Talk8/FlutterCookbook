@@ -138,6 +138,7 @@ dependencies:
 #
   readmore: ^2.2.0
 
+#获取时区的包
   flutter_timezone: ^1.0.8
 
 #试试这个包
