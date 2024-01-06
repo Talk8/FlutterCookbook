@@ -134,6 +134,8 @@ dependencies:
   bluetooth_enable_fork: ^0.1.6
 # 可以进行状态管理，显示dialog,snackBar不需要context
   get: ^4.6.5
+# 本地存储
+  get_storage: ^2.1.1
 
 #
   readmore: ^2.2.0
