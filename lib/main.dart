@@ -79,7 +79,9 @@ import 'package:fluttercookbook/ex075_CusTimePicker.dart';
 import 'package:fluttercookbook/ex076_ScrollView.dart';
 import 'package:fluttercookbook/ex077_DeviceAndPkgInfo.dart';
 import 'package:fluttercookbook/ex078_liveData.dart';
+import 'package:fluttercookbook/ex079_getPkg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_storage/get_storage.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'ex001_ColumnRow.dart';
@@ -94,7 +96,7 @@ import 'ex045_BleDemo/src/ble/ble_scanner.dart';
 import 'ex045_BleDemo/src/ble/ble_status_monitor.dart';
 import 'ex073_CusMutexWidget.dart';
 
-void main() {
+void main() async{
   // runApp(const FlutterCookbookApp());
   ///共享数据是自定义的viewModel
   ///在整个应用的顶层设置Notifier,
@@ -148,6 +150,7 @@ void main() {
   );
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
 
+  await GetStorage.init("db");
   ///全局禁止页面自动适用屏幕,打开注释掉的代码就可以
   /*
   WidgetsFlutterBinding.ensureInitialized();
@@ -504,6 +507,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("076", "ScrollView", context, const ExScrollView()),
         listItem("077", "DeviceInfo", context, const ExDeviceInfo()),
         listItem("078", "LiveData", context, const ExCircleAvatar()),
+        listItem("079", "Get", context, const ExGetPkg()),
       ],
     );
 

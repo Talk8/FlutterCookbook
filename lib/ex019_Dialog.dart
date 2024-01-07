@@ -142,7 +142,7 @@ class _ExDialogState extends State<ExDialog> {
         });
   }
 
-  ///自定义Dialog:中间是一个输入框，下面是两个按钮
+  ///自定义Dialog:中间是一个输入框，下面是两个按钮,与205内容匹配
   _showCustomDialog() {
     showDialog(context: context,
         builder: (BuildContext context) {
