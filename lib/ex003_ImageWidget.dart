@@ -31,10 +31,27 @@ class ExImage extends StatelessWidget {
         children: [
           imageEx,
           const SizedBox(height: 20,),
-          buildImageFill(),
+          // buildImageFill(),
+          Image.network("https://openweathermap.org/img/wn/04d@2x.png",
+            color: Colors.yellow,
+            width: 60,height: 60,
+            loadingBuilder: (context,widget,loadProgress) {
+              debugPrint("loading img: $loadProgress");
+              ///导入完成后这个值为Null,
+              if(loadProgress == null) {
+                return widget;
+              }else {
+                return const Icon(Icons.sunny,color: Colors.red,);
+              }
+            },
+            errorBuilder: (context,error,track) {
+              debugPrint("loading img error ${error.toString()}");
+              return const Icon(Icons.cloud,color: Colors.green,);
+            },
+          ),
           ///显示时打开注释，因为页面高度够用
           // buildImageShadow(),
-          buildImageOpacity(),
+          // buildImageOpacity(),
           const SizedBox(height: 20),
           buildImageCover(),
           buildImageContain(),
