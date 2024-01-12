@@ -80,6 +80,7 @@ import 'package:fluttercookbook/ex076_ScrollView.dart';
 import 'package:fluttercookbook/ex077_DeviceAndPkgInfo.dart';
 import 'package:fluttercookbook/ex078_liveData.dart';
 import 'package:fluttercookbook/ex079_getPkg.dart';
+import 'package:fluttercookbook/ex080_keyboard.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 // import 'package:logger/logger.dart';
@@ -508,6 +509,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("077", "DeviceInfo", context, const ExDeviceInfo()),
         listItem("078", "LiveData", context, const ExCircleAvatar()),
         listItem("079", "Get", context, const ExGetPkg()),
+        listItem("080", "Keyboard", context, const ExKeyboardPage()),
       ],
     );
 
