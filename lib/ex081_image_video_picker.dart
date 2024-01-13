@@ -18,6 +18,8 @@ class _ExImageVideoPickerState extends State<ExImageVideoPicker> {
   List<XFile>? _mediaFileList;
   final ImagePicker imagePicker = ImagePicker();
 
+  VideoPlayerController? _controller;
+
   XFile? _videoFile;
 
   double imgWidth = 200;
@@ -47,6 +49,42 @@ class _ExImageVideoPickerState extends State<ExImageVideoPicker> {
     return list;
   }
 
+  Future<XFile?> getVideoByCamera() async {
+    var list = await imagePicker.pickVideo(source: ImageSource.camera);
+    return list;
+  }
+
+  ///预览视频文件
+  void preViewVideo(XFile file) async {
+    _controller = VideoPlayerController.file(File(file.path));
+    await _controller?.setVolume(0.0);
+    await _controller?.initialize();
+    await _controller?.setLooping(true);
+    await _controller?.play();
+
+    // return AspectRatioVideo(_controller);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+
+  @override
+  void deactivate() {
+    if (_controller != null) {
+      _controller!.setVolume(0.0);
+      _controller!.pause();
+    }
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    _controller = null;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -170,24 +208,28 @@ class _ExImageVideoPickerState extends State<ExImageVideoPicker> {
             top: row4Height,
             left: 0,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    getVideoFiles().then((value) {
+                    // getVideoFiles().then((value) {
+                    getVideoByCamera().then((value) {
                       debugPrint('get video file future->then running');
                       ///因为是异步，所以需要通过setState更新数据源
                       setState(() {
                         ///返回的路径是app下的缓冲目录：data/user/0/com.cookbook.flutter.fluttercookbook/cache/scaled_1000000010.jpg
                         // debugPrint("path: v${value[0].path}");
                         _videoFile = value;
+                        preViewVideo(_videoFile!);
                       });
                     });
                   },
                   child: const Text("load video"),
                 ),
-                _videoFile == null ? Text("no video file") :
-                (_videoFile!.path.isEmpty? Text("do not select video file"):
-                    Text("no video file")
+                _videoFile == null ? const Text("no video file") :
+                (_videoFile!.path.isEmpty? const Text("do not select video file"):
+                    // Text("video is playing")
+                    AspectRatioVideo(_controller)
                 ),
 
 
@@ -197,5 +239,59 @@ class _ExImageVideoPickerState extends State<ExImageVideoPicker> {
         ],
       ),
     );
+  }
+}
+
+
+class AspectRatioVideo extends StatefulWidget {
+  const AspectRatioVideo(this.controller, {super.key});
+
+  ///用来控制视频的播放，停止，暂停等功能
+  final VideoPlayerController? controller;
+
+  @override
+  AspectRatioVideoState createState() => AspectRatioVideoState();
+}
+
+class AspectRatioVideoState extends State<AspectRatioVideo> {
+  VideoPlayerController? get controller => widget.controller;
+  bool initialized = false;
+
+  void _onVideoControllerUpdate() {
+    if (!mounted) {
+      return;
+    }
+    if (initialized != controller!.value.isInitialized) {
+      initialized = controller!.value.isInitialized;
+      setState(() {});
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller!.addListener(_onVideoControllerUpdate);
+  }
+
+  @override
+  void dispose() {
+    controller!.removeListener(_onVideoControllerUpdate);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (initialized) {
+      return Center(
+
+        ///控制视频的宽高比
+        child: AspectRatio(
+          aspectRatio: controller!.value.aspectRatio,
+          child: VideoPlayer(controller!),
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 }
