@@ -81,6 +81,8 @@ import 'package:fluttercookbook/ex077_DeviceAndPkgInfo.dart';
 import 'package:fluttercookbook/ex078_liveData.dart';
 import 'package:fluttercookbook/ex079_getPkg.dart';
 import 'package:fluttercookbook/ex080_keyboard.dart';
+import 'package:fluttercookbook/ex081_filePicker.dart';
+import 'package:fluttercookbook/ex081_image_video_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 // import 'package:logger/logger.dart';
@@ -510,6 +512,8 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("078", "LiveData", context, const ExCircleAvatar()),
         listItem("079", "Get", context, const ExGetPkg()),
         listItem("080", "Keyboard", context, const ExKeyboardPage()),
+        listItem("081", "FileAndImagePicker", context, const ExFilePicker()),
+        listItem("081", "VideoAndImagePicker", context, const ExImageVideoPicker()),
       ],
     );
 

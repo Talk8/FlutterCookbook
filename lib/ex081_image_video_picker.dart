@@ -212,8 +212,8 @@ class _ExImageVideoPickerState extends State<ExImageVideoPicker> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // getVideoFiles().then((value) {
-                    getVideoByCamera().then((value) {
+                    getVideoFiles().then((value) {
+                    // getVideoByCamera().then((value) {
                       debugPrint('get video file future->then running');
                       ///因为是异步，所以需要通过setState更新数据源
                       setState(() {
@@ -229,7 +229,12 @@ class _ExImageVideoPickerState extends State<ExImageVideoPicker> {
                 _videoFile == null ? const Text("no video file") :
                 (_videoFile!.path.isEmpty? const Text("do not select video file"):
                     // Text("video is playing")
-                    AspectRatioVideo(_controller)
+                    Container(
+                      width: 240,
+                      height: 320,
+                      alignment: Alignment.center,
+                      child: AspectRatioVideo(_controller),
+                    )
                 ),
 
 
