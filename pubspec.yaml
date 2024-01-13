@@ -81,6 +81,10 @@ dependencies:
 # project already has a custom config set. In order for CocoaPods integration to work at all, please either set the base configurations of the target `Runner` to `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` or include the `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` in your build configuration (`Flutter/Release.xcconfig`).
 #  去掉此警告需要在xcode中配置：project:Runner ->Inof ->Configuration把debug,release,profile三个扩展下的runner修改成None,然后再pod install就可以
   image_picker: ^1.0.2
+# image_picker需要此包，用来播放视频文件
+  video_player: ^2.7.2
+# image_picker需要此包,用来处理媒体文件的类型
+  mime: ^1.0.4
 
 #Flutter官方提供的webview
   webview_flutter: ^4.2.4
