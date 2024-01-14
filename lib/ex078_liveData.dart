@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+///viewMode的内容与216匹配。within中的内容与220中的内容匹配
+///snackBar的代码与213，214的内容匹配
 class ExCircleAvatar extends StatefulWidget {
   const ExCircleAvatar({super.key});
 
@@ -45,7 +47,7 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
               onPressed: () {
                 changeData("data1");
               },
-              child: const Text("Change data yb CB"),
+              child: const Text("Change data by CB"),
             ),
             ///使用Stream监听回调方法中的数据变化，点击上面的按钮相当于回调方法修改数据
             StreamBuilder(
@@ -90,6 +92,7 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
                 child: const Text("change data by VM"),
             ),
 
+            ///snackBar的代码与213，214的内容匹配
             ///正常显示SnackBar
             ElevatedButton(
               child: const Text("Show SnackBar"),
