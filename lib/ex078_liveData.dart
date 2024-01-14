@@ -166,9 +166,39 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
                 trailing: const Icon(Icons.arrow_right),
               ),
             ),
+
+            const SizedBox(height: 8,),
+            FutureBuilder(
+              future: delayFunc(3),
+              builder:(context,shotData) {
+                String strState = "init Data";
+                if(shotData.connectionState == ConnectionState.waiting) {
+                  strState = " data is waiting";
+                }else if(shotData.connectionState == ConnectionState.none) {
+                  strState = " none data";
+                }else if(shotData.connectionState == ConnectionState.done) {
+                  strState = "data is: ${shotData.data.toString()}";
+                }else {
+                  strState = " unKnown data";
+                }
+                return Text(strState,style: const TextStyle(color: Colors.purpleAccent),);
+              }),
           ],
-        ));
+        ),
+    );
   }
+
+  ///在future中加入延时，以延长事件处理过程，与221内容匹配
+  Future<String> delayFunc(int delayTime) {
+
+    String result = "default";
+    return Future.delayed(Duration(seconds: delayTime,), () {
+      result = "time delay $delayTime s";
+      return Future.value(result);
+    },
+    );
+  }
+
 
   void _showSNKBar(BuildContext context) {
     //通过showSnackBar方法显示SnackBar
