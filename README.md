@@ -86,5 +86,6 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex078_liveData                  | this is the example of LiveData and change snakeBar location   |
 | ex079_Get                       | this is the example of Get package and textMore package        |
 | ex080_Keyboard                  | this is the example of hidden keyboard                         |
+| ex081_ImageAndVideoPicker       | this is the example of ImagePicker package                     |
 
 
