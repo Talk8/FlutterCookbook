@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 ///发送数据的过程：扫描->连接设备->激活通知功能->发送数据->接收数据
 ///这个过程中没有发现服务，发送和接收数据可以直接使用uuid进行。此外，接收数据的页面可以有多个
 ///也就是说哪个页面addBleCallback了哪个页面就可以接收数据，可以在多个页面同时接收数据
+///与206-212章回的内容匹配,213,214在078文件中
 class ExBleWithTTC extends StatefulWidget {
   const ExBleWithTTC({super.key});
 

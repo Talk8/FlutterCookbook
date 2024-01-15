@@ -186,7 +186,7 @@ class ExImage extends StatelessWidget {
     );
   }
 
-  ///给图片添加透明度的两种方法： 与183内容匹配
+  ///给图片添加透明度的两种方法： 与222内容匹配
   Widget buildImageOpacity() {
     // return const Image(
     //   opacity: AlwaysStoppedAnimation(0.2),
