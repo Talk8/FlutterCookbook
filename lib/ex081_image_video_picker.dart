@@ -16,6 +16,8 @@ class _ExImageVideoPickerState extends State<ExImageVideoPicker> {
 
   XFile? _mediaFile;
   List<XFile>? _mediaFileList;
+  List<XFile>? _multiMediaFileList;
+
   final ImagePicker imagePicker = ImagePicker();
 
   VideoPlayerController? _controller;
@@ -51,6 +53,11 @@ class _ExImageVideoPickerState extends State<ExImageVideoPicker> {
 
   Future<XFile?> getVideoByCamera() async {
     var list = await imagePicker.pickVideo(source: ImageSource.camera);
+    return list;
+  }
+
+  Future<List<XFile>> getMultiMedia() async {
+    var list = await imagePicker.pickMultipleMedia(maxHeight:imgHeight,maxWidth: imgWidth,imageQuality: 100);
     return list;
   }
 
@@ -95,7 +102,8 @@ class _ExImageVideoPickerState extends State<ExImageVideoPicker> {
     double row2Height = screenHeight*3/30;
     double row3Height = screenHeight*5/30;
     double row4Height = screenHeight*7/30;
-    double row5Height = screenHeight*8/30;
+    double row5Height = screenHeight*8/30+24;
+    double row6Height = screenHeight*11/30;
 
     return Scaffold(
       appBar: AppBar(
@@ -240,7 +248,71 @@ class _ExImageVideoPickerState extends State<ExImageVideoPicker> {
 
               ],
             ),
-          )
+          ),
+          ///第五内容：
+          Positioned(
+            top: row5Height,
+            left: 0,
+            width: screenWidth,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    getMultiMedia()
+                        .then((value) {
+                          setState(() {
+                            _multiMediaFileList = value;
+                          });
+                    });
+                  },
+                  child: const Text("load multiMedia"),
+                ),
+                const Icon(Icons.add)
+              ],
+            ),
+          ),
+          ///第六行内容：配合第五行显示多张图片或者视频，用水平列表显示
+          Positioned(
+
+            top: row6Height,
+            left: 0,
+            width: screenWidth,
+            height: screenHeight/3,
+            ///这是一个水平方向的列表
+            child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: _multiMediaFileList == null ? 1 :_multiMediaFileList?.length,
+              itemBuilder: (context,index) {
+                return (_multiMediaFileList == null? const Text("default image"):
+                (_multiMediaFileList!.isEmpty? const Text("do not select image") :
+                Row(
+                  children: [
+                    Image.file(
+                      File(_multiMediaFileList![index].path),
+                      width: imgWidth,
+                      height: imgHeight,
+                      errorBuilder: (context,error,trace) {
+                        return Text("load image error: $error");
+                      },
+                    ),
+                    ///thickness用来控制分隔线的高度
+                    Container(
+                      color: Colors.lightGreen,
+                      width: 4,
+                      height: imgHeight,
+                      ///单独使用divider没有效果，需要在外层嵌套一个容器,感觉水平时不好用，不如直接用容器
+                      // child: Divider(color: Colors.purpleAccent,thickness: imgHeight,height:20),
+                      child: const SizedBox.shrink(),
+                    ),
+                  ],
+                )
+                )
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
