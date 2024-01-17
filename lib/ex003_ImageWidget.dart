@@ -1,8 +1,20 @@
 //这个代码和第六回Image Widget的内容匹配,183添加了图片阴影
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class ExImage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+
+class ExImage extends StatefulWidget {
   const ExImage({Key?key}) : super(key: key);
+
+  @override
+  State<ExImage> createState() => _ExImageState();
+}
+
+class _ExImageState extends State<ExImage> {
+  ///对应目录：storage/emulated/0/Android/data/package_name/files
+  Future<Directory?>? _externalDocumentsDirectory;
+  String filePath = "";
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +30,15 @@ class ExImage extends StatelessWidget {
         ],
       ),
     );
+
+
+    _externalDocumentsDirectory = getExternalStorageDirectory();
+    _externalDocumentsDirectory?.then((value) {
+      debugPrint("current path: ${value?.path} ");
+      setState(() {
+        filePath = "${value?.path}/switch.png";
+      });
+    });
 
     return Scaffold(
       appBar: AppBar(
@@ -49,6 +70,29 @@ class ExImage extends StatelessWidget {
               return const Icon(Icons.cloud,color: Colors.green,);
             },
           ),
+          ///显示本地图片，需要在对应目录下放一个名叫switch.png的文件才能显示文件,否则通过
+          ///text显示错误信息
+          Image.file(
+            File(filePath),
+            width: 200,
+            height: 200,
+            alignment: Alignment.center,
+            fit: BoxFit.fill,
+            ///处理文件导入正确相关的内容
+            frameBuilder:(context,child,frame,wasSynchronouslyLoaded) {
+              if(wasSynchronouslyLoaded) {
+                return child;
+              }else {
+                // return Text("frame:${frame.toString()}");
+                return child;
+              }
+            },
+            ///处理文件导入错误相关的内容
+            errorBuilder: (context,error,trace) {
+              debugPrint("load file error: ${error.toString()}");
+              return Text(error.toString());
+            },
+          ),
           ///显示时打开注释，因为页面高度够用
           // buildImageShadow(),
           // buildImageOpacity(),
@@ -66,7 +110,6 @@ class ExImage extends StatelessWidget {
   }
 
   //抽象成方法
-  //组件尺寸和图片不同时，图片会有拉伸
   Image buildImageFill() {
     return const Image(
       width: 160,
