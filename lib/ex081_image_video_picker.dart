@@ -55,6 +55,14 @@ class _ExImageVideoPickerState extends State<ExImageVideoPicker> {
     return list;
   }
 
+  ///获取单个图片或者视频文件，需要对获取到的文件判断文件类型
+  Future<XFile?> getMedia() async {
+    var file = await imagePicker.pickMedia(
+        maxHeight: imgHeight, maxWidth: imgWidth, imageQuality: 100);
+    return file;
+  }
+
+  ///加一个判断文件类型的操作
   Future<List<XFile>> getMultiMedia() async {
     var list = await imagePicker.pickMultipleMedia(
         maxHeight: imgHeight, maxWidth: imgWidth, imageQuality: 100);
