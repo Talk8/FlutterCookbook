@@ -163,6 +163,20 @@
             </list>
           </value>
         </entry>
+        <entry key="extended_image">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/extended_image-8.0.2/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="extended_image_library">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/extended_image_library-3.5.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="fake_async">
           <value>
             <list>
@@ -457,6 +471,13 @@
             </list>
           </value>
         </entry>
+        <entry key="http_client_helper">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/http_client_helper-3.0.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="http_parser">
           <value>
             <list>
@@ -720,6 +741,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_windows-0.1.3/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="photo_manager">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/photo_manager-2.8.1/lib" />
             </list>
           </value>
         </entry>
@@ -1045,6 +1073,13 @@
             </list>
           </value>
         </entry>
+        <entry key="wechat_assets_picker">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/wechat_assets_picker-8.6.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="wheel_chooser">
           <value>
             <list>
@@ -1106,6 +1141,8 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/device_info_plus_platform_interface-7.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/dio-5.2.1+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/dots_indicator-2.1.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/extended_image-8.0.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/extended_image_library-3.5.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/fake_async-1.3.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/ffi-2.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/file-6.1.4/lib" />
@@ -1144,6 +1181,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/glob-2.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/html-0.15.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/http-1.1.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/http_client_helper-3.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/http_parser-4.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/image_picker-1.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/image_picker_android-0.8.7+4/lib" />
@@ -1182,6 +1220,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_apple-9.1.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_platform_interface-3.11.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_windows-0.1.3/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/photo_manager-2.8.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/platform-3.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/protobuf-2.1.0/lib" />
@@ -1227,6 +1266,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_android-3.9.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_platform_interface-2.5.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-3.7.4/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/wechat_assets_picker-8.6.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/wheel_chooser-1.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/win32-5.0.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/win32_registry-1.1.1/lib" />

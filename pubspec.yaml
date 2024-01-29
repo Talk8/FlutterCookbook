@@ -85,7 +85,9 @@ dependencies:
   video_player: ^2.7.2
 # image_picker需要此包,用来处理媒体文件的类型
   mime: ^1.0.4
-
+# 图片获取和Image_Picker类似，只不过界面是微信的界面,注意版本需要flutter_sdk支持20240130已经到8.8了。为了与当前flutter版本匹配才用的8.6.3
+  #这个包依赖了其它的包，比较多，比如video_player，extended_image: 好在都是他们自己组织做的包
+  wechat_assets_picker: ^8.6.3
 #Flutter官方提供的webview
   webview_flutter: ^4.2.4
 
