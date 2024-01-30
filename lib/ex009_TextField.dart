@@ -1,4 +1,6 @@
 //代码和16l回的内容相匹配
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class ExTextField extends StatefulWidget {
@@ -49,6 +51,9 @@ class TextFieldStatefull extends StatefulWidget {
 
 class _TextFieldStatefullState extends State<TextFieldStatefull> {
   final TextEditingController _controller = TextEditingController();
+
+  int countdownTime = 0;
+
 
   bool isPasswordVisible = false;
   String pwdValue = "";
@@ -206,6 +211,34 @@ class _TextFieldStatefullState extends State<TextFieldStatefull> {
               });
             },
           ),
+        ),
+        ///自己实现的计时器，和Stream.periodic()方法的原理相同，不同之处在于可以控制事件的逻辑，Stream中只能是做加法
+        TextButton(
+          onPressed: () {
+            Timer.periodic(const Duration(seconds: 1,), (timer) {
+              setState(() {
+                countdownTime++;
+                if(countdownTime == 5) {
+                  timer.cancel();
+                }
+              });
+            });
+          },
+          child: countdownTime == 0 ? const Text("Start") : Text(countdownTime.toString()),
+        ),
+        ///模拟上一个内容，做成倒计时,不过需要先启动上一个按钮，加到5以后才能启动下一个按钮
+        TextButton(
+          onPressed: () {
+            Timer.periodic(const Duration(seconds: 1,), (timer) {
+              setState(() {
+                countdownTime--;
+                if(countdownTime == 0) {
+                  timer.cancel();
+                }
+              });
+            });
+          },
+          child: countdownTime != 0 ? const Text("Start") : Text(countdownTime.toString()),
         ),
       ],
     );
