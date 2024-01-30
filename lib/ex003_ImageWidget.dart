@@ -53,6 +53,8 @@ class _ExImageState extends State<ExImage> {
           imageEx,
           const SizedBox(height: 20,),
           // buildImageFill(),
+          ///可以以网址后面加个时间，这样可以避免网址没变但是内容变了图片无法刷新的问题
+          ///url = "${url}?${DateTime.now().millisecondsSinceEpoch}";
           Image.network("https://openweathermap.org/img/wn/04d@2x.png",
             color: Colors.yellow,
             width: 60,height: 60,
