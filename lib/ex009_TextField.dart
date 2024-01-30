@@ -50,6 +50,33 @@ class TextFieldStatefull extends StatefulWidget {
 class _TextFieldStatefullState extends State<TextFieldStatefull> {
   final TextEditingController _controller = TextEditingController();
 
+  bool isPasswordVisible = false;
+  String pwdValue = "";
+  ///配合focus，用来判断输入的password是否为空
+  bool isPwdEmpty = false;
+
+  ///输入框不同需要不同的focusNode,不然会出现两个输入框中都有光标的现象
+  final FocusNode pwd1FocusNode = FocusNode();
+  // final FocusNode pwd2FocusNode = FocusNode();
+
+
+  void _handlePwd1FocusChanged() {
+    if(!pwd1FocusNode.hasFocus) {
+      setState(() {
+        if(pwdValue == "" || pwdValue.isEmpty) {
+          isPwdEmpty = true;
+        }else {
+          if(pwdValue.length<6) {
+            isPwdEmpty = true;
+          }else {
+            isPwdEmpty = false;
+          }
+        }
+      });
+    }
+  }
+
+
   @override
   void initState() {
     // TODO: implement initState
@@ -61,6 +88,8 @@ class _TextFieldStatefullState extends State<TextFieldStatefull> {
       debugPrint("hello  listener ${_controller.text}");
     });
 
+    ///添加监听器
+    pwd1FocusNode.addListener(_handlePwd1FocusChanged);
   }
 
   @override
@@ -68,6 +97,11 @@ class _TextFieldStatefullState extends State<TextFieldStatefull> {
     // TODO: implement dispose
     //界面退出时需要销毁控制器不然会有内存渔泄漏的风险
     _controller.dispose();
+
+    ///移除监听器
+    pwd1FocusNode.addListener(_handlePwd1FocusChanged);
+    pwd1FocusNode.dispose();
+
     super.dispose();
   }
 
@@ -84,10 +118,10 @@ class _TextFieldStatefullState extends State<TextFieldStatefull> {
           height: 90,
           child: TextField(
             autofocus: true,
-            //设置初始值，可以监听值的变化,和onChanged中得到的值一样
+            ///设置初始值，可以监听值的变化,和onChanged中得到的值一样
             controller: _controller,
             keyboardType: TextInputType.number,
-            //这个值是输入框中所有的内容，而不是当前输入的某个内容
+            ///这个值是输入框中所有的内容，而不是当前输入的某个内容
             onChanged: (value) {
               debugPrint("hello onchanged $value");
             },
@@ -118,6 +152,61 @@ class _TextFieldStatefullState extends State<TextFieldStatefull> {
           ),
         ),
         const Icon(Icons.drag_handle_rounded),
+        ///实现一个密码输入框主要功能：显示隐藏密码
+        Container(
+          padding: const EdgeInsets.all(16),
+
+          child: TextField(
+            obscureText: !isPasswordVisible,
+            keyboardType: TextInputType.text,
+            ///添加光标监听器
+            focusNode: pwd1FocusNode,
+
+            decoration: InputDecoration(
+              ///这两个一起使用才有填充颜色
+              filled: true,
+              fillColor: Colors.grey[200],
+
+              ///属性值不为空时(!= null)显示errorText,
+              errorText: isPwdEmpty? "password is empty": null,
+
+              ///用来去掉输入框下面的横线
+              border: InputBorder.none,
+              ///实现显示和隐藏密码功能
+              suffixIcon: IconButton(
+                icon:isPasswordVisible ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
+                onPressed: () {
+                  setState(() {
+                    isPasswordVisible = !isPasswordVisible;
+                  });
+                },
+              ),
+
+              ///失去焦点并且errorTest的值不为null时就显示
+              errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color:Colors.red,width: 1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              ///获得售点并且errorTest的值不为null时就显示
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color:Colors.red,width: 1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+            ),
+            ///这里的值配合光标监听器和两个border一起实现红色边框错误提示功能
+            onChanged: (value) {
+              setState(() {
+                if(value == "" || value.isEmpty) {
+                  pwdValue = "";
+                  isPwdEmpty = true;
+                }else {
+                  pwdValue = value;
+                  isPwdEmpty = false;
+                }
+              });
+            },
+          ),
+        ),
       ],
     );
   }
