@@ -15,7 +15,7 @@ class ExStreamProvider extends StatefulWidget {
 class _ExStreamProviderState extends State<ExStreamProvider> {
   ///多种创建stream的方法
   Stream<String> _stream1 = Stream.value('init data');
-  ///每隔3s运行一次，一共运行3次
+  ///每隔3s运行一次，一共运行3次,periodic方法只能递增，可以看源代码。247回内容做了分析
   final Stream<int> _stream2 = Stream.periodic(const Duration(seconds: 3,),(count) => (count+1)).take(3);
 
   ///通过streamController自动创建stream，给Controller添加事件就可以自动生成stream.

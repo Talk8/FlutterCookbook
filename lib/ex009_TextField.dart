@@ -227,6 +227,7 @@ class _TextFieldStatefullState extends State<TextFieldStatefull> {
           child: countdownTime == 0 ? const Text("Start") : Text(countdownTime.toString()),
         ),
         ///模拟上一个内容，做成倒计时,不过需要先启动上一个按钮，加到5以后才能启动下一个按钮
+        ///类似倒计时功能，参考248内容，对比050文件中的stream2
         TextButton(
           onPressed: () {
             Timer.periodic(const Duration(seconds: 1,), (timer) {
