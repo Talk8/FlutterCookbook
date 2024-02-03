@@ -104,7 +104,7 @@ class _TextFieldStatefullState extends State<TextFieldStatefull> {
     _controller.dispose();
 
     ///移除监听器
-    pwd1FocusNode.addListener(_handlePwd1FocusChanged);
+    pwd1FocusNode.removeListener(_handlePwd1FocusChanged);
     pwd1FocusNode.dispose();
 
     super.dispose();
