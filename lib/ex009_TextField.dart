@@ -156,7 +156,22 @@ class _TextFieldStatefullState extends State<TextFieldStatefull> {
             obscureText: false,
           ),
         ),
-        const Icon(Icons.drag_handle_rounded),
+        ///与252内容匹配
+        ///删除光标，相当于主动释放输入框的焦点
+        IconButton(
+          onPressed: () {
+            pwd1FocusNode.unfocus();
+          },
+          icon: const Icon(Icons.remove_circle_outline),
+        ),
+
+        ///获取光标，相当于主动获取输入框的焦点
+        IconButton(
+          onPressed: () {
+            pwd1FocusNode.requestFocus();
+          },
+          icon: const Icon(Icons.add_box_outlined),
+        ),
         ///实现一个密码输入框主要功能：显示隐藏密码,与249，250内容匹配
         Container(
           padding: const EdgeInsets.all(16),
