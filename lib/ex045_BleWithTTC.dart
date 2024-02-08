@@ -77,7 +77,7 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
 
   @override
   void onDataSend(String deviceId, String serviceUuid, String characteristicUuid, Uint8List? data, int status) {
-    debugPrint("--> device send data: ${data?.toHex()}");
+    debugPrint("--> send data to device: ${data?.toHex()}");
     super.onDataSend(deviceId, serviceUuid, characteristicUuid, data, status);
   }
   @override
@@ -152,6 +152,13 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
                           return Listener(
                            onPointerDown: (event){
                              _deviceId = vm._devices[index].deviceId;
+                             ///在连接设备时需要断开已经连接的其它的设备，不然连接失败
+                             for(int i=0; i<vm._devices.length; i++) {
+                               if(i != index) {
+                                 debugPrint("disconnect device: $i, id: ${vm._devices[i].deviceId}");
+                                 bleProxy.disconnect(deviceId: vm._devices[i].deviceId);
+                               }
+                             }
                              bleProxy.connect(deviceId: _deviceId);
                            },
                            child: ListTile(
@@ -183,7 +190,7 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
                                      && _deviceId == vm._devices[index].deviceId) {
                                    connected = shotData.data as bool?;
                                  }
-                                 debugPrint("^^^^ future connected: $connected");
+                                 debugPrint("^^^^ future connected: $connected id:${vm._devices[index].deviceId}");
 
                                  ///显示设备连接状态
                                  if(connected??false) {
