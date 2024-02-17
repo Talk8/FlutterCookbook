@@ -538,6 +538,13 @@ class AspectRatioVideoState extends State<AspectRatioVideo> {
 
   @override
   Widget build(BuildContext context) {
+    ///用来获取当前系统中的语言
+    Locale locale = Localizations.localeOf(context);
+    debugPrint(locale.countryCode);
+    debugPrint(locale.languageCode);
+    debugPrint(locale.toLanguageTag());
+    debugPrint(locale.toString());
+
     if (initialized) {
       return Center(
         child: AspectRatio(
