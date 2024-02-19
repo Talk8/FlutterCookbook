@@ -54,7 +54,7 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
   }
   @override
   void onConnected(String deviceId) {
-    debugPrint("--> device is connected");
+    debugPrint(" ----- device is connected --------- request mtu");
     ///建议在连接完成后修改mtu，修改完Mtu后激活特征值
     bleProxy.requestMtu(deviceId: deviceId, mtu: 512);
 
@@ -72,7 +72,13 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
   @override
   void onMtuChanged(String deviceId, int mtu) {
     BleManager().enableNotification(deviceId: deviceId);
+    debugPrint("-------- onMtuChanged mtu: $mtu, id:$deviceId ------ enable notification");
     super.onMtuChanged(deviceId, mtu);
+  }
+  @override
+  void onNotificationStateChanged(String deviceId, String serviceUuid, String characteristicUuid, bool enabled, String? error) {
+    super.onNotificationStateChanged(deviceId, serviceUuid, characteristicUuid, enabled, error);
+    debugPrint("-------- onNotificationStateChanged id:$deviceId ---------- ");
   }
 
   @override
@@ -103,6 +109,12 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
               right: 32,
               child: Row(
                 children: [
+                  ElevatedButton(
+                    onPressed:  (){
+                      bleProxy.requestMtu(deviceId: _deviceId, mtu: 512);
+                    },
+                    child: const Text("change MTU"),),
+
                   ElevatedButton(
                     onPressed:  (){
                       bleProxy.disconnect(deviceId: _deviceId);
@@ -190,7 +202,7 @@ class _ExBleWithTTCState extends State<ExBleWithTTC> with BleCallback2{
                                      && _deviceId == vm._devices[index].deviceId) {
                                    connected = shotData.data as bool?;
                                  }
-                                 debugPrint("^^^^ future connected: $connected id:${vm._devices[index].deviceId}");
+                                 // debugPrint("^^^^ future connected: $connected id:${vm._devices[index].deviceId}");
 
                                  ///显示设备连接状态
                                  if(connected??false) {
