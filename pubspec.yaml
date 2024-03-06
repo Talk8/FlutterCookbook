@@ -154,6 +154,8 @@ dependencies:
 #可以获取所有时区，但是无法获取当前时区，可以把时间转换成不同时区下的时间
   timezone: ^0.9.2
 
+# 监听页面的生命周期
+  lifecycle: ^0.8.0
 #试试这个包
 #  flutter_picker: ^2.1.0
 

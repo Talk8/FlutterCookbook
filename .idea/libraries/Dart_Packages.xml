@@ -576,6 +576,13 @@
             </list>
           </value>
         </entry>
+        <entry key="lifecycle">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/lifecycle-0.8.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="lints">
           <value>
             <list>
@@ -1210,6 +1217,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/intl_translation-0.18.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/introduction_screen-3.1.11/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/js-0.6.7/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/lifecycle-0.8.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/lints-2.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/logger-1.4.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/matcher-0.12.15/lib" />
