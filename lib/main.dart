@@ -83,8 +83,11 @@ import 'package:fluttercookbook/ex079_getPkg.dart';
 import 'package:fluttercookbook/ex080_keyboard.dart';
 import 'package:fluttercookbook/ex081_filePicker.dart';
 import 'package:fluttercookbook/ex081_image_video_picker.dart';
+import 'package:fluttercookbook/ex082_image_video_picker_like_wechat.dart';
+import 'package:fluttercookbook/ex083_lifecycle_of_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lifecycle/lifecycle.dart';
 // import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'ex001_ColumnRow.dart';
@@ -291,6 +294,8 @@ class FlutterCookbookApp extends StatelessWidget {
       routes: <String,WidgetBuilder>{
         "MyHomePage":(BuildContext context) => const MyHomePage(title: "My Home Page"),
         'SecondRouter':(BuildContext context) => const SecondRouter(data: 'data from home'),
+        "080Page" : (BuildContext context) => const ExKeyboardPage(),
+        "081Page" : (BuildContext context) => const ExFilePicker(),
       },
       ///主要用来拦截不在routes属性中定义的路由，需要和pushNamed方法配合使用才能回调该属性对应的方法
       onGenerateRoute:(settings) {
@@ -334,6 +339,10 @@ class FlutterCookbookApp extends StatelessWidget {
           return const SecondRouter(data: 'data from home');
         });
       },
+      ///用来监听Lifecycle中的事件
+      navigatorObservers: [
+        defaultLifecycleObserver,
+      ],
     );
   }
 }
@@ -514,6 +523,8 @@ class _MyHomePageState extends State<MyHomePage> {
         listItem("080", "Keyboard", context, const ExKeyboardPage()),
         listItem("081", "FileAndImagePicker", context, const ExFilePicker()),
         listItem("081", "VideoAndImagePicker", context, const ExImageVideoPicker()),
+        listItem("082", "VideoAndImagePicker", context, const ExMediaPickerLikeWechat()),
+        listItem("083", "Page LifeCycle", context, const ExPageLifeCycle()),
       ],
     );
 
