@@ -34,7 +34,7 @@ class _ExSnackBarState extends State<ExSnackBar> {
         alignment: Alignment.center,
         width: 400,
         height: 300,
-        child: Text('Show Tooltip'),
+        child: const Text('Show Tooltip'),
       ),
     );
   }
@@ -64,40 +64,67 @@ class _ExSnackBarState extends State<ExSnackBar> {
     );
   }
 
+  ///通过key来控制snackBar的显示和隐藏，需要配合ScaffoldMessenger使用，与239内容匹配
+  final snackBarKeyA = GlobalKey<ScaffoldMessengerState>();
+  
   @override
   Widget build(BuildContext context) {
     debugPrint("SubPage build");
     // return Text('Replace');
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.purpleAccent,
-        title: const Text('Example of SnackBar'),
+    return ScaffoldMessenger(
+      key: snackBarKeyA,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.purpleAccent,
+          title: const Text('Example of SnackBar'),
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _showToolTip(),
+            ///通过showSnackBar来显示Snackbar
+            _showSnackBar(context),
+
+            ElevatedButton(onPressed: () => snackBarKeyA.currentState?.showSnackBar(createSnackBar()),
+                child: const Text("Show another SnackBar"),
+            ),
+            ElevatedButton(onPressed: () => snackBarKeyA.currentState?.removeCurrentSnackBar(),
+              child: const Text("remover another SnackBar"),
+            ),
+            // TextStatefulWidget(),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  value += 1;
+                  debugPrint("SubPage value: $value");
+                });
+              },
+              child: const Text("change value"),
+            ),
+            Text("Value : $value"),
+          ],
+        ),
+        // body: _showToolTip(),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _showToolTip(),
-          _showSnackBar(context),
-          // TextStatefulWidget(),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                value += 1;
-                print("SubPage value: ${value}");
-              });
-            },
-            child: Text("change value"),
-          ),
-          Text("Value : $value"),
-        ],
-      ),
-      // body: _showToolTip(),
     );
   }
 
+  SnackBar createSnackBar() {
+    return const SnackBar(
+      content: Text("This is SnackBar"),
+      backgroundColor: Colors.amberAccent,
+      //修改形状，默认为矩形
+      shape:CircleBorder(
+        side: BorderSide(),
+      ),
+      //显示时间
+      duration:Duration(seconds: 3),
+    );
+  }
+  
   @override
   void didChangeDependencies() {
-    print("SubPage didChangeDependencies");
+    debugPrint("SubPage didChangeDependencies");
   }
 
   @override
@@ -108,29 +135,29 @@ class _ExSnackBarState extends State<ExSnackBar> {
 
   @override
   void activate() {
-    print("SubPage activate");
+    debugPrint("SubPage activate");
   }
 
   @override
   void deactivate() {
-    print("SubPage deactivate");
+    debugPrint("SubPage deactivate");
   }
 
 
   @override
   void reassemble() {
-    print("SubPage reassemble");
+    debugPrint("SubPage reassemble");
   }
 
   @override
   void didUpdateWidget(ExSnackBar oldWidget) {
     super.didUpdateWidget(oldWidget);
-    print("SubPage didUpdateWidget");
+    debugPrint("SubPage didUpdateWidget");
   }
 
   @override
   void initState() {
-    print("SubPage initState");
+    debugPrint("SubPage initState");
   }
 }
 
@@ -150,32 +177,32 @@ class _TextStatefulWidgetState extends State<TextStatefulWidget> {
 
   @override
   void didChangeDependencies() {
-    print('TestStatefulWidget didChangeDependencies');
+    debugPrint('TestStatefulWidget didChangeDependencies');
   }
 
   @override
   void dispose() {
-    print('TestStatefulWidget dispose');
+    debugPrint('TestStatefulWidget dispose');
     super.dispose();
   }
 
   @override
   void activate() {
-    print('TestStatefulWidget activate');
+    debugPrint('TestStatefulWidget activate');
   }
 
   @override
   void deactivate() {
-    print('TestStatefulWidget deactivate');
+    debugPrint('TestStatefulWidget deactivate');
   }
 
   @override
   void reassemble() {
-    print('TestStatefulWidget reassemble');
+    debugPrint('TestStatefulWidget reassemble');
   }
 
   @override
   void initState() {
-    print('TestStatefulWidget initState');
+    debugPrint('TestStatefulWidget initState');
   }
 }
