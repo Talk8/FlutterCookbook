@@ -1,5 +1,6 @@
 import 'package:bluetooth_enable_fork/bluetooth_enable_fork.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:open_settings/open_settings.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -149,11 +150,24 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
     result = androidDeviceInfo.toString();
 
 
-    debugPrint("device info: $result");
+    ///获取屏幕尺寸和倍率
+    String size= androidDeviceInfo.displayMetrics.sizeInches.toStringAsFixed(2);
+    String width = androidDeviceInfo.displayMetrics.widthPx.toString();
+    String height = androidDeviceInfo.displayMetrics.heightPx.toString();
+    ///获取sdk版本号
+    String sdkVersion = androidDeviceInfo.version.sdkInt.toString();
+    debugPrint("device info: $result, display: $width");
+    debugPrint(" display: $size resolution: ($width x $height)");
+    debugPrint("device info version : $sdkVersion");
 
-    ///可以得到以下关键信息
+    ///把相关信息整理成自己需要的格式
+    result = " br size:$size ($width*$height),Android$sdkVersion";
+    debugPrint("device info : $result");
+    ///从androidDeviceInfo中可以得到以下关键信息，也可以像上面一样单独获取这些信息
     // widthPx: 1080.0, heightPx: 2460  sdkInt: 33
 
+    if(defaultTargetPlatform == TargetPlatform.android) {
+    }
     return result;
   }
 
@@ -161,6 +175,9 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
   void getPackageInfo() async {
     var pkgInfo = await PackageInfo.fromPlatform();
     debugPrint("package info: ${pkgInfo.toString()}");
+
+    String version = pkgInfo.version;
+    debugPrint("package info version: $version");
     ///打印出的信息如下：
     ///appName: fluttercookbook, buildNumber: 1, packageName: com.cookbook.flutter.fluttercookbook, version: 1.0.0
   }
