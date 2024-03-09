@@ -364,8 +364,8 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-
-class _MyHomePageState extends State<MyHomePage> {
+///WidgetsBindingObserver只有放到MaterialApp的子组件下可以监听到消息，放在其它widget中无法监听到消息
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
   ///引入ble共享数据后这个logger重名，因为它也使用了logger这个包，这里先不使用
   // Logger logger = Logger(
   //   printer: PrettyPrinter(
@@ -374,6 +374,14 @@ class _MyHomePageState extends State<MyHomePage> {
   //       printTime: true,
   //   ),
   // );
+
+  ///注意：需要在initState中注册监听器并且在disPose中销毁监听器
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    debugPrint(" app state: $state");
+    super.didChangeAppLifecycleState(state);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -542,6 +550,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     debugPrint('HomePage initState');
+    WidgetsBinding.instance.addObserver(this);
     ///测试各种log输出
     // logger.v('initState');
     // logger.i('initState');
@@ -553,6 +562,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void dispose() {
     super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     debugPrint('HomePage dispose');
   }
 

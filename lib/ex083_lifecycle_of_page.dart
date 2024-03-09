@@ -9,6 +9,7 @@ class ExPageLifeCycle extends StatefulWidget {
 }
 
 ///LLifecycle的这两个接口还有顺序要求
+///WidgetsBindingObserver只在Material的子组件中才有效果，这里没有效果，监听不到任何事件，因此不会输出日志
 class _ExPageLifeCycleState extends State<ExPageLifeCycle> with WidgetsBindingObserver,LifecycleAware,LifecycleMixin{
   @override
   void onLifecycleEvent(LifecycleEvent event) {
@@ -49,6 +50,18 @@ class _ExPageLifeCycleState extends State<ExPageLifeCycle> with WidgetsBindingOb
     // TODO: implement didPushRoute
     debugPrint(" check didPushRoute ");
     return super.didPushRoute(route);
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
   }
 
   @override
