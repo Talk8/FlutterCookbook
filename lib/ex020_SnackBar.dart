@@ -43,6 +43,7 @@ class _ExSnackBarState extends State<ExSnackBar> {
     return ElevatedButton(
       child: const Text("Show SnackBar"),
       onPressed: () {
+        ///关闭snackbar ScaffoldMessenger.of(context).removeCurrentSnackBar();
         //通过showSnackBar方法显示SnackBar
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: const Text("This is SnackBar"),
