@@ -118,6 +118,10 @@ class _ExSnackBarState extends State<ExSnackBar> {
       shape:CircleBorder(
         side: BorderSide(),
       ),
+      ///这个设定后才能使用margin，否则有运行时错误
+      behavior: SnackBarBehavior.floating,
+      ///控制snackBar与屏幕之间的距离，相当于外边距，不能与width同时使用
+      margin: EdgeInsets.only(left:16,right:16,bottom:90),
       //显示时间
       duration:Duration(seconds: 3),
     );

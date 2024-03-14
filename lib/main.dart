@@ -296,6 +296,7 @@ class FlutterCookbookApp extends StatelessWidget {
         'SecondRouter':(BuildContext context) => const SecondRouter(data: 'data from home'),
         "080Page" : (BuildContext context) => const ExKeyboardPage(),
         "081Page" : (BuildContext context) => const ExFilePicker(),
+        "010Page" : (BuildContext context) => const ExBottomNavigation(),
       },
       ///主要用来拦截不在routes属性中定义的路由，需要和pushNamed方法配合使用才能回调该属性对应的方法
       onGenerateRoute:(settings) {
