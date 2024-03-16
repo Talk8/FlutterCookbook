@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:numberpicker/numberpicker.dart';
 import 'package:wheel_chooser/wheel_chooser.dart';
 
 ///与164，165的内容相对应
@@ -12,7 +11,7 @@ class ExAllPickers extends StatefulWidget {
 }
 
 class _ExAllPickersState extends State<ExAllPickers> {
-  int _selectedValue = 0;
+  // int _selectedValue = 0;
 
   @override
   Widget build(BuildContext context) {

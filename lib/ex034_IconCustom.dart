@@ -71,6 +71,7 @@ class _ExIconCustomState extends State<ExIconCustom> {
 
   @override
   void initState() {
+    super.initState();
    //带有数据的事件流，数据类型为string
     _eventStream = Stream.fromFutures([
       _eventOne(),
@@ -140,7 +141,7 @@ class _ExIconCustomState extends State<ExIconCustom> {
   //这种方法添加到事件流中后会中断事件流，不会走到onError方法中
   String _eventFuncError() {
     throw "func error";
-    return 'event Func error';
+    // return 'event Func error';
   }
 
   //使用streamController向stream中添加事件,事件类型是泛型与controller类型相同,对应80回的内容

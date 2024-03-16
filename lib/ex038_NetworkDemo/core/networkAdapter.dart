@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:fluttercookbook/ex038_NetworkDemo/request/base_request.dart';
-import 'package:fluttercookbook/generated/json/base/json_convert_content.dart';
 import 'dart:convert';
 
 ///封装网络操作返回的结果类型

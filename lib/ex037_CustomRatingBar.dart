@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 ///自定义评分条，可以定义评分条中图标的形状(icon类型），数量，大小，颜色
 ///默认为5个灰色的star，评分后灰色变成黄色，评分值是必选参数

@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 
 ///不要像JAVA中一样写成大写，否则编译器会提示符合命名规则
 enum HttpMethod {get, post, delete}

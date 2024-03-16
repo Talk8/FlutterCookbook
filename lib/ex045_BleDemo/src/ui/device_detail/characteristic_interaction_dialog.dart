@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 // import 'package:flutter_reactive_ble_example/src/ble/ble_device_interactor.dart';
-import 'package:fluttercookbook/ex045_BleDemo//src/ble/ble_device_interactor.dart';
-import 'package:provider/provider.dart';
 
 ///这个类是demo中封装的类，主要用来提供数据读写操作的界面，实际项目中可以参考,其缺点是读写数据只返回
 ///成功与失败，没有具体的值，这个有些遗憾。

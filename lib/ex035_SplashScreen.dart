@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'main.dart';
 
 //这里是启动页splash screen示例，同时也包含生命周期方法对应81 82，回的内容。还有部分代码在020文件中
 class ExSplashScreen extends StatefulWidget {
@@ -16,8 +15,8 @@ class _ExSplashScreenState extends State<ExSplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("Widget Circle: initState");
-    Future.delayed(Duration(seconds: 3), () {
+    debugPrint("Widget Circle: initState");
+    Future.delayed(const Duration(seconds: 3), () {
       //可以在这里加一些广播或者视频等,我们是延时3秒后启动主页
       Navigator.of(context).pushReplacementNamed("MyHomePage");
     });
@@ -37,37 +36,33 @@ class _ExSplashScreenState extends State<ExSplashScreen> {
 
 
   @override
-  void didUpdateWidget(Widget oldWidget) {
-    print("Widget Circle: didUpdateWidget");
-  }
-
-  @override
   Widget build(BuildContext context) {
-    print("Widget Circle: build");
+    debugPrint("Widget Circle: build");
 
-    return Container(
-      child: Image.asset("images/ex.png"),
-    );
+    return Image.asset("images/ex.png");
   }
 
   @override
   void deactivate() {
-    print("Widget Circle: deactivate");
+    super.deactivate();
+    debugPrint("Widget Circle: deactivate");
   }
 
   @override
   void activate() {
-    print("Widget Circle: activate");
+    super.activate();
+    debugPrint("Widget Circle: activate");
   }
 
   @override
   void dispose() {
-    print("Widget Circle: dispose");
+    debugPrint("Widget Circle: dispose");
     super.dispose();
   }
 
   @override
   void didChangeDependencies() {
-    print("Widget Circle: didChangeDependencies");
+    super.didChangeDependencies();
+    debugPrint("Widget Circle: didChangeDependencies");
   }
 }

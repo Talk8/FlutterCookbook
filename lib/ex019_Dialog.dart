@@ -259,7 +259,7 @@ class _ExDialogState extends State<ExDialog> {
           ///包中的内容却不行，估计是包中嵌套的太多导致的。
           ElevatedButton(
             onPressed: () {
-              String str = Provider.of<String>(context,listen: false);
+              // String str = Provider.of<String>(context,listen: false);
               showDialog(context: context, builder: (context) {
                 return Consumer<String>(
                   builder: (context, data, _) {

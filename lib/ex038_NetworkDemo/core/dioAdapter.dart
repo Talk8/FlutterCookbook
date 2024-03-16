@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:fluttercookbook/ex038_NetworkDemo/core/networkAdapter.dart';
-import 'package:fluttercookbook/ex038_NetworkDemo/core/networkException.dart';
 import 'package:fluttercookbook/ex038_NetworkDemo/request/base_request.dart';
 
 ///dio适配器，其功能和mockAdapter类似，主要用来切换

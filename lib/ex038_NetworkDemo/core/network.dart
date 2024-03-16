@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:fluttercookbook/ex038_NetworkDemo/core/dioAdapter.dart';
 import 'package:fluttercookbook/ex038_NetworkDemo/core/mockAdapter.dart';
-import 'package:fluttercookbook/ex038_NetworkDemo/core/networkAdapter.dart';
 import 'package:fluttercookbook/ex038_NetworkDemo/core/networkException.dart';
 import 'package:fluttercookbook/ex038_NetworkDemo/request/base_request.dart';
 

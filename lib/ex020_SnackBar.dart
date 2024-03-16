@@ -129,6 +129,7 @@ class _ExSnackBarState extends State<ExSnackBar> {
   
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     debugPrint("SubPage didChangeDependencies");
   }
 
@@ -140,17 +141,20 @@ class _ExSnackBarState extends State<ExSnackBar> {
 
   @override
   void activate() {
+    super.activate();
     debugPrint("SubPage activate");
   }
 
   @override
   void deactivate() {
+    super.deactivate();
     debugPrint("SubPage deactivate");
   }
 
 
   @override
   void reassemble() {
+    super.reassemble();
     debugPrint("SubPage reassemble");
   }
 
@@ -162,6 +166,7 @@ class _ExSnackBarState extends State<ExSnackBar> {
 
   @override
   void initState() {
+    super.initState();
     debugPrint("SubPage initState");
   }
 }
@@ -182,6 +187,7 @@ class _TextStatefulWidgetState extends State<TextStatefulWidget> {
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     debugPrint('TestStatefulWidget didChangeDependencies');
   }
 
@@ -193,21 +199,25 @@ class _TextStatefulWidgetState extends State<TextStatefulWidget> {
 
   @override
   void activate() {
+    super.activate();
     debugPrint('TestStatefulWidget activate');
   }
 
   @override
   void deactivate() {
+    super.deactivate();
     debugPrint('TestStatefulWidget deactivate');
   }
 
   @override
   void reassemble() {
+    super.reassemble();
     debugPrint('TestStatefulWidget reassemble');
   }
 
   @override
   void initState() {
+    super.initState();
     debugPrint('TestStatefulWidget initState');
   }
 }
