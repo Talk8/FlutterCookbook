@@ -89,6 +89,9 @@ dependencies:
   #这个包依赖了其它的包，比较多，比如video_player，extended_image: 好在都是他们自己组织做的包
   #注意：这个包需要高版本的sdk. The plugin photo_manager requires Android SDK version 34.
   wechat_assets_picker: ^8.6.3
+# 通过相机获取图片和视频，Pick风格是wechat和 wechat_assets_picker一样都是国内人员开发的包
+  #这个包依赖camera包，会自动把camera包添加到项目中来
+  wechat_camera_picker: ^4.0.0
 # 视频压缩包,用来处理视频文件的，它可以获取到视频文件的时长，路径，分辨率等类型
   video_compress: ^3.1.2
 #Flutter官方提供的webview

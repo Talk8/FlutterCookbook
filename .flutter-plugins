@@ -1,5 +1,9 @@
 # This is a generated file; do not edit or check into version control.
 bluetooth_enable_fork=/Users/wy/.pub-cache/hosted/pub.dev/bluetooth_enable_fork-0.1.6/
+camera=/Users/wy/.pub-cache/hosted/pub.dev/camera-0.10.5+9/
+camera_android=/Users/wy/.pub-cache/hosted/pub.dev/camera_android-0.10.8+16/
+camera_avfoundation=/Users/wy/.pub-cache/hosted/pub.dev/camera_avfoundation-0.9.13+10/
+camera_web=/Users/wy/.pub-cache/hosted/pub.dev/camera_web-0.3.2+2/
 device_info=/Users/wy/.pub-cache/hosted/pub.dev/device_info-2.0.3/
 device_info_plus=/Users/wy/.pub-cache/hosted/pub.dev/device_info_plus-9.1.1/
 file_picker=/Users/wy/.pub-cache/hosted/pub.dev/file_picker-5.5.0/
@@ -41,6 +45,7 @@ permission_handler_apple=/Users/wy/.pub-cache/hosted/pub.dev/permission_handler_
 permission_handler_windows=/Users/wy/.pub-cache/hosted/pub.dev/permission_handler_windows-0.1.3/
 photo_manager=/Users/wy/.pub-cache/hosted/pub.dev/photo_manager-2.8.1/
 reactive_ble_mobile=/Users/wy/.pub-cache/hosted/pub.dev/reactive_ble_mobile-5.1.1/
+sensors_plus=/Users/wy/.pub-cache/hosted/pub.dev/sensors_plus-4.0.2/
 shared_preferences=/Users/wy/.pub-cache/hosted/pub.dev/shared_preferences-2.2.0/
 shared_preferences_android=/Users/wy/.pub-cache/hosted/pub.dev/shared_preferences_android-2.2.0/
 shared_preferences_foundation=/Users/wy/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.3.2/
