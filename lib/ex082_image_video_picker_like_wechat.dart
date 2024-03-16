@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 ///主要介绍如何使用wechat_assets_picker这个包来创建具有wechat风格的
 ///标题中使用了自定义的内容，可以当作单独的内容来看
@@ -10,6 +11,16 @@ class ExMediaPickerLikeWechat extends StatefulWidget {
 }
 
 class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
+  AssetEntity? assetEntity ;
+  List<AssetEntity>? assetEntityList;
+  final AssetPickerConfig pickerConfig = const AssetPickerConfig(
+    ///最多选择图片的数量，默认值为9
+    maxAssets: 3,
+    ///选择器网格数量，默认值为4
+    gridCount: 2,
+
+  );
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -85,9 +96,56 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
           // ),
         ],
       ),
-      body: const Column(
+      body: Column(
         children: [
-          Text("datahelll "),
+          ///充当标题
+          const Center(
+              child: Text(" Picked image"),
+          ),
+          ///显示单张图片，没有选择时显示文字：no image
+          (assetEntity == null) ? const Text("no image")
+          :Image(image: AssetEntityImageProvider(assetEntity!,isOriginal: false),),
+
+          ///选择图片，此时会弹出图片Picker，和微信中的风格完全相同
+          ElevatedButton(
+            onPressed: () async {
+              debugPrint("");
+              assetEntityList = await AssetPicker.pickAssets(context,pickerConfig: pickerConfig);
+              ///如果选择了图片就更新assetEntity中的值，否则不去处理
+              if(assetEntityList != null && assetEntityList!.isNotEmpty) {
+                setState(() {
+                  assetEntity = assetEntityList![0];
+                });
+              }
+            },
+            child: const Text("Pick Image"),
+          ),
+
+          ///显示多张图片，可以做成provide，这样就可以使用consumer来显示图片
+          Builder(
+            builder: (context) {
+              if(assetEntityList != null && assetEntityList!.length >1) {
+                ///用来当作相框，用来限制相框的大小
+                return Container(
+                  color: Colors.lightBlue,
+                  width: 80,
+                  height: 100,
+                  child: ListView(
+                    scrollDirection:Axis.horizontal,
+                    children: List.generate(assetEntityList!.length,
+                            (index) => Padding( ///主要用来控制图片之间边距
+                              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                              child: Image(image: AssetEntityImageProvider(assetEntityList![index],isOriginal: false),
+                                width: 40,height: 40,
+                              ),
+                            ),),
+                  ),
+                );
+              }else {
+                return const Text("image size is less then 2");
+              }
+            }
+          ),
         ],
       ),
     );
