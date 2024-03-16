@@ -45,7 +45,7 @@ class _CustomRatingBarState extends State<CustomRatingBar> {
     return Scaffold(
       ///在实际使用中可以把app去掉，这样就能直接用于其它widget中
       appBar: AppBar(
-        title: Text('Example of CustomRatingBar'),
+        title: const Text('Example of CustomRatingBar'),
         backgroundColor: Colors.purpleAccent,
       ),
       body: Stack(children: [

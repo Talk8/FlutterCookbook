@@ -24,7 +24,7 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _themeData = Theme.of(context);
+    ThemeData themeData = Theme.of(context);
     return MaterialApp(
       //如果MaterialApp有嵌套，那么每个都需要设置，特别是最外层的MaterialApp
       //外层设置后这里也要设置，不然不起作用，仍然显示Debug字样
@@ -38,7 +38,7 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
         initialIndex: 1,
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Example of Material App"),
+            title: const Text("Example of Material App"),
             //默认使用系统设置，为true
             centerTitle: false,
             //会控制AppBar内所有的Icon
@@ -58,25 +58,25 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
               const Icon(Icons.download),
               IconButton(
                   onPressed: () {
-                    print("share value button clicked");
+                    debugPrint("share value button clicked");
                   },
-                  icon: Icon(Icons.share)),
+                  icon: const Icon(Icons.share)),
             ],
             bottom: TabBar(
               labelColor: Colors.green,
               indicatorColor: Colors.green,
               unselectedLabelColor: Colors.grey,
               onTap: (index) {
-                print("$index is selected");
+                debugPrint("$index is selected");
               },
               tabs: [
                 const Icon(Icons.web),
                 //使用主题覆盖单独修改第二个图标的颜色
                 Theme(
-                  data: _themeData.copyWith(
-                    iconTheme: _themeData.iconTheme.copyWith(color: Colors.red),
+                  data: themeData.copyWith(
+                    iconTheme: themeData.iconTheme.copyWith(color: Colors.red),
                   ),
-                    child:Icon(Icons.favorite),
+                    child:const Icon(Icons.favorite),
                 ),
                 const Icon(Icons.self_improvement),
               ],
@@ -85,11 +85,11 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
           body: TabBarView(
             children: [
               TextButton(
-                child: Text("First TabBarView"),
+                child: const Text("First TabBarView"),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder:(context){
-                      return ExButton();
+                      return const ExButton();
                     },
                     ///用来控制窗口的进入方式，默认从右到左，设置为true后从下到上，类似IOS中的modal窗口
                     fullscreenDialog: true,)
@@ -107,9 +107,9 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
           //   child: _drawer,
           // ),
           // drawer: _drawer,
-          drawer: ExDrawer(),
+          drawer: const ExDrawer(),
           onDrawerChanged: (changed) {
-            print("changed: $changed");
+            debugPrint("changed: $changed");
           },
         ),
       ),
@@ -118,7 +118,7 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
         //定义根路由,注意home属性有值后不能在此指定根路由，否则报错
         // "/": (context) => ExPageView(),
         // =>写法是一个语法糖，它和MaterialPageRoute中的build属性相同
-        "/ButtonExample": (context) => ExButton(),
+        "/ButtonExample": (context) => const ExButton(),
 
       },
       //使用自定义的主题的两种方式
@@ -157,7 +157,6 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
           child:
               //用来控制drawer最上部分的区域
               DrawerHeader(
-            child: Text("The Header"),
             decoration: BoxDecoration(
               //只控制header区域的颜色，不设置时默认为主题的primerColor
               color: Colors.yellow,
@@ -171,6 +170,7 @@ class _ExMaterialAppState extends State<ExMaterialApp> {
                     ColorFilter.mode(Colors.greenAccent, BlendMode.hardLight),
               ),
             ),
+            child: Text("The Header"),
           ),
         ),
         //drawer中的选项，也就是list中的item
@@ -203,13 +203,13 @@ class _ExDrawerState extends State<ExDrawer> {
     return Drawer(
       backgroundColor: Colors.lightGreen,
       child: ListView(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         children: [
           //创建用户信息的头部
           UserAccountsDrawerHeader(
-            accountName: Text("User Name"),
-            accountEmail: Text("User Mail"),
-            currentAccountPicture: CircleAvatar(
+            accountName: const Text("User Name"),
+            accountEmail: const Text("User Mail"),
+            currentAccountPicture: const CircleAvatar(
               backgroundImage: AssetImage("images/ex.png"),
             ),
             otherAccountsPictures: const [
@@ -224,24 +224,24 @@ class _ExDrawerState extends State<ExDrawer> {
             //和name,mail位于同一行，不过是在tail位置显示。
             arrowColor: Colors.redAccent,
             //name,mail和arraw中任何一个点击时回调此方法
-            onDetailsPressed: (){print("details pressed");},
-            decoration: BoxDecoration(
+            onDetailsPressed: (){debugPrint("details pressed");},
+            decoration: const BoxDecoration(
               color: Colors.greenAccent,
               //header背景色与drawer背景色的混合效果
               backgroundBlendMode: BlendMode.hardLight,
             ),
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("Settings"),
+            leading: const Icon(Icons.settings),
+            title: const Text("Settings"),
             //控制事个Listtile的颜色，而不只是title的颜色
             tileColor: Colors.blue,
             //点击这个条目关闭drawer,
             onTap: () => Navigator.pop(context),
           ),
           ListTile(
-            leading: Icon(Icons.message),
-            title: Text("Messages"),
+            leading: const Icon(Icons.message),
+            title: const Text("Messages"),
             //点击这个条目跳转到其它页面r,
             onTap: () {
               // Navigator.of(context).push(
