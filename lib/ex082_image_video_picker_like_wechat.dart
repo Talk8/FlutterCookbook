@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+///主要介绍如何使用wechat_assets_picker这个包来创建具有wechat风格的
+///标题中使用了自定义的内容，可以当作单独的内容来看
 class ExMediaPickerLikeWechat extends StatefulWidget {
   const ExMediaPickerLikeWechat({super.key});
 
@@ -15,24 +17,29 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
     return Scaffold(
       appBar: AppBar(
         // title: Text("Example of Video Image Picker like wechat"),
-        titleSpacing: 60.0,
+        ///控制title内容与返回箭头之间的距离
+        titleSpacing: 0.0,
+        ///自定义的标题，取代简单的Text Widget组件,通过自定义可以实现一些复杂的标题.与400内容相匹配
         title: SizedBox(
-          width: screenWidth/2,
-          child: Row(
+          width: screenWidth/4,
+          child: const Row(
             children: [
+              ///使用Expand是为了显示长字符
               Expanded(
                 child: Text("Example of Video Image Picker like wechat",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Icon(Icons.post_add),
+              Icon(Icons.favorite),
             ],
           ),
         ),
+        ///Action的优先级大于Title，它会占用Title的空间，如果它的空间过大时会把Title覆盖掉
+        ///比如把action3-5打开后就会覆盖Title的内容.与401内容相匹配
         actions: [
           SizedBox(
-            width: 30,
+            width: 80,
               child: TextButton(
                 onPressed: (){
                   showMenu(
@@ -58,23 +65,27 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
                       ),
                     ],);
                 },
-                child: Text("action1")),
+                child: const Text("action1")),
           ),
-          SizedBox(
-            width: 30,
+          const SizedBox(
+            width: 80,
             child: Text("action2"),
           ),
-          SizedBox(
-            width: 30,
-            child: Text("action3"),
-          ),
-          SizedBox(
-            width: 30,
-            child: Text("action4"),
-          ),
+          // const SizedBox(
+          //   width: 80,
+          //   child: Text("action3"),
+          // ),
+          // const SizedBox(
+          //   width: 80,
+          //   child: Text("action4"),
+          // ),
+          // const SizedBox(
+          //   width: 60,
+          //   child: Text("action5"),
+          // ),
         ],
       ),
-      body: Column(
+      body: const Column(
         children: [
           Text("datahelll "),
         ],
