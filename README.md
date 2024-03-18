@@ -88,6 +88,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex080_Keyboard                  | this is the example of hidden keyboard                         |
 | ex081_ImageAndVideoPicker       | this is the example of ImagePicker package                     |
 | ex082_Lifecycle                 | this is the example of Lifecycle package                       |
-| ex082_Lifecycle                 | this is the example of Lifecycle package                       |
 
 
