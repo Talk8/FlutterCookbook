@@ -158,7 +158,11 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
                 ///如果选择了视频就从assetEntity中的获取文件，然后再去创建controller
                 ///注意：这个过程包含两个异步操作：获取assetEntity对象，然后从assetEntity对象中获取视频文件
                 if(assetEntity != null && assetEntity!.type == AssetType.video) {
-                    assetEntity!.originFile.then((value) {
+                    // assetEntity!.originFile.then((value) {
+                  ///两种file都可以，不过要注意是异步操作
+                    assetEntity!.file.then((value) {
+                      ///这里获取到的是文件真实的路径：/storage/emulated/0/DCIM/Camera/xxx.mp4
+                      debugPrint(" file path: ${value?.path}");
                       if(value != null) {
                         setState(() {
                           preViewVideo(value);

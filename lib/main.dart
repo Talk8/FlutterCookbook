@@ -227,9 +227,10 @@ class FlutterCookbookApp extends StatelessWidget {
     return MaterialApp(
       ///只在Android有效果，在最近程序的缩略图中显示这个名称
       title: 'Flutter Cookbook',
-      //locale属性可以手动指定当前app使用的语言和地区，如果不指定，默认为跟随系统语言
+      ///locale属性可以手动指定当前app使用的语言和地区，如果不指定，默认为跟随系统语言
+      ///在wechatAssetPicker中需要依据context中的语言来显示语言
       // locale: Locale('zh','CN'),
-      locale: const Locale('es'),
+      // locale: const Locale('es'),
       localizationsDelegates: const [
         ///添加自己定义的多语言文字
         AppLocalizations.delegate,
