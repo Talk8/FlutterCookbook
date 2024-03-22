@@ -1,5 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 
 ///主要介绍如何使用wechat_assets_picker这个包来创建具有wechat风格的
 ///标题中使用了自定义的内容，可以当作单独的内容来看
@@ -20,6 +23,9 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
     gridCount: 2,
 
   );
+
+  ///显示和播放视频时使用
+  VideoPlayerController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -100,22 +106,66 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
         children: [
           ///充当标题
           const Center(
-              child: Text(" Picked image"),
+              child: Text(" Picked image and video"),
           ),
-          ///显示单张图片，没有选择时显示文字：no image
-          (assetEntity == null) ? const Text("no image")
-          :Image(image: AssetEntityImageProvider(assetEntity!,isOriginal: false),),
+          ///依据选择的文件类型显示所选择的内容，类型包含：image,video,audio,other
+          Builder(builder: (context) {
+           if(assetEntity == null)  {
+             return const Text("selected nothing");
+           }else {
+             ///显示单张图片，图片大小为原图大小，没有缩放，没有选择文件时显示上面的文字.
+             if(assetEntity?.type == AssetType.image) {
+               return Image(image: AssetEntityImageProvider(assetEntity!,isOriginal: false),);
+             }else if(assetEntity?.type == AssetType.video) {
+               ///显示视频文件
+               debugPrint("file path: ${assetEntity?.file.toString()}");
+               ///如果controller为空就不去显示视频,因为获取controller是异步操作
+               if(controller == null) {
+                 return const Text("video is initializing");
+               }else {
+                 return Container(
+                   color: Colors.white60,
+                   width: assetEntity!.width.toDouble()/2,
+                   height: assetEntity!.height.toDouble()/4,
+                   child: AspectRatioVideo(controller),
+                 );
+               }
+             }else {
+               return const Text("Audio or other type");
+             }
+           }
+          },),
 
           ///选择图片，此时会弹出图片Picker，和微信中的风格完全相同
+          ///遗留问题：如何让picker通过context获取到Local,因为当前默认是中文文字，而且我的环境是英文？
+          ///只要不在materialApp中通过locale属性指定当前语言环境就可以，context自动可以获取到当前语言环境
           ElevatedButton(
             onPressed: () async {
-              debugPrint("");
+              debugPrint(" picker button clicked");
+              ///选择下一个视频时清空当前的视频
+              if(controller != null) {
+                controller = null;
+              }
+
               assetEntityList = await AssetPicker.pickAssets(context,pickerConfig: pickerConfig);
               ///如果选择了图片就更新assetEntity中的值，否则不去处理
               if(assetEntityList != null && assetEntityList!.isNotEmpty) {
                 setState(() {
+                  debugPrint(" update file of picker");
                   assetEntity = assetEntityList![0];
-                });
+               });
+
+                ///如果选择了视频就从assetEntity中的获取文件，然后再去创建controller
+                ///注意：这个过程包含两个异步操作：获取assetEntity对象，然后从assetEntity对象中获取视频文件
+                if(assetEntity != null && assetEntity!.type == AssetType.video) {
+                    assetEntity!.originFile.then((value) {
+                      if(value != null) {
+                        setState(() {
+                          preViewVideo(value);
+                        });
+                      }
+                    });
+                  }
               }
             },
             child: const Text("Pick Image"),
@@ -138,7 +188,8 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
                               child: Image(image: AssetEntityImageProvider(assetEntityList![index],isOriginal: false),
                                 width: 40,height: 40,
                               ),
-                            ),),
+                            ),
+                    ),
                   ),
                 );
               }else {
@@ -146,8 +197,110 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
               }
             }
           ),
+          ElevatedButton(
+            onPressed: () async {
+              debugPrint("");
+              CameraPicker.pickFromCamera(context);
+
+              ///如果选择了图片就更新assetEntity中的值，否则不去处理
+              // if(assetEntityList != null && assetEntityList!.isNotEmpty) {
+              //   setState(() {
+              //     assetEntity = assetEntityList![0];
+              //   });
+              // }
+            },
+            child: const Text("Pick Image by Camera"),
+          ),
         ],
       ),
     );
+  }
+
+  ///预览视频文件,主要是初始化controller
+  void preViewVideo(File file) async {
+    debugPrint("init video controller");
+    controller = VideoPlayerController.file(file);
+    await controller?.setVolume(0.0);
+    await controller?.initialize();
+    await controller?.setLooping(true);
+    await controller?.play();
+  }
+}
+
+
+///从ex81中获取的类，用来显示和播放视频文件
+class AspectRatioVideo extends StatefulWidget {
+  const AspectRatioVideo(this.controller, {super.key});
+
+  ///用来控制视频的播放，停止，暂停等功能
+  final VideoPlayerController? controller;
+
+  @override
+  AspectRatioVideoState createState() => AspectRatioVideoState();
+}
+
+class AspectRatioVideoState extends State<AspectRatioVideo> {
+  VideoPlayerController? get controller => widget.controller;
+  bool initialized = false;
+
+  void _onVideoControllerUpdate() {
+    if (!mounted) {
+      debugPrint(" video is not mounted");
+      return;
+    }
+
+    if(controller == null) {
+      return;
+    }
+
+    if (initialized != controller!.value.isInitialized) {
+      initialized = controller!.value.isInitialized;
+      debugPrint(" update video controller state: ${initialized.toString()}");
+      setState(() {});
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if(controller == null) {
+      return;
+    }
+    controller!.addListener(_onVideoControllerUpdate);
+  }
+
+  @override
+  void deactivate() {
+    if (controller != null) {
+      controller!.setVolume(0.0);
+      controller!.pause();
+    }
+
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    if(controller == null) {
+      return;
+    }
+    controller!.removeListener(_onVideoControllerUpdate);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (initialized) {
+      debugPrint("show video");
+      return Center(
+        ///控制视频的宽高比
+        child: AspectRatio(
+          aspectRatio: controller!.value.aspectRatio,
+          child: VideoPlayer(controller!),
+        ),
+      );
+    } else {
+      return  const Text("video is not initialized");
+    }
   }
 }
