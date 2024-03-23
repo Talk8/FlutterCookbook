@@ -159,6 +159,9 @@ dependencies:
 
 # 监听页面的生命周期
   lifecycle: ^0.8.0
+# 用来创建splash页面
+  flutter_native_splash: ^2.3.7
+
 #试试这个包
 #  flutter_picker: ^2.1.0
 
