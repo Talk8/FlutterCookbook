@@ -22,7 +22,8 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
     maxAssets: 3,
     ///选择器网格数量，默认值为4
     gridCount: 2,
-
+    ///图片文件大小，默认是80
+    pageSize: 20,
   );
 
   final CameraPickerConfig cameraPickerConfig = const CameraPickerConfig(
