@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:fluttercookbook/ex024_Radio.dart';
 import 'package:fluttercookbook/ex035_SplashScreen.dart';
@@ -163,6 +164,10 @@ void main() async{
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(const MainApp()));
    */
+
+  ///
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(
     MultiProvider(
       providers: [
@@ -553,6 +558,12 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
     super.initState();
     debugPrint('HomePage initState');
     WidgetsBinding.instance.addObserver(this);
+
+    ///添加延时，用来延长splash的显示时间
+    // Future.delayed(const Duration(seconds: 6),);
+    ///在主程序页面中移除splash,这个插件没有产生实际效果，splash还是默认的laucher
+    FlutterNativeSplash.remove();
+
     ///测试各种log输出
     // logger.v('initState');
     // logger.i('initState');

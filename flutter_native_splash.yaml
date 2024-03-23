@@ -1,0 +1,9 @@
+flutter_native_splash:
+  color: "#42a5f5"
+  #图片格式必须是png
+  image: images/avata.png
+
+  android12:
+    color: "#42a5f5"
+    #图片格式必须是png
+    image: images/avata.png
