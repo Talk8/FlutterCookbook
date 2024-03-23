@@ -16,12 +16,23 @@ class ExMediaPickerLikeWechat extends StatefulWidget {
 class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
   AssetEntity? assetEntity ;
   List<AssetEntity>? assetEntityList;
+  ///用来配置选择图片时的界面
   final AssetPickerConfig pickerConfig = const AssetPickerConfig(
     ///最多选择图片的数量，默认值为9
     maxAssets: 3,
     ///选择器网格数量，默认值为4
     gridCount: 2,
 
+  );
+
+  final CameraPickerConfig cameraPickerConfig = const CameraPickerConfig(
+    enableRecording: true, ///是否支持录像功能
+    enableTapRecording: true, ///是否可以单击录像
+    shouldAutoPreviewVideo: true,
+    shouldDeletePreviewFile: true,
+    resolutionPreset: ResolutionPreset.high, ///设定分辨率
+    maximumRecordingDuration: Duration(seconds: 10),
+    minimumRecordingDuration: Duration(seconds: 3),
   );
 
   ///显示和播放视频时使用
@@ -108,7 +119,7 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
           const Center(
               child: Text(" Picked image and video"),
           ),
-          ///依据选择的文件类型显示所选择的内容，类型包含：image,video,audio,other
+          ///依据选择的文件类型显示所选择的内容，类型包含：image,video,audio,other，当前只能显示图片和视频
           Builder(builder: (context) {
            if(assetEntity == null)  {
              return const Text("selected nothing");
@@ -201,17 +212,20 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
               }
             }
           ),
+          ///通过cameraPicker来获取图片和视频，界面和wechat一样：轻按拍照长按录像，不过录像功能不能用，无法录制视频
           ElevatedButton(
             onPressed: () async {
               debugPrint("");
-              CameraPicker.pickFromCamera(context);
+              ///可以不带config获取图片，但是不能获取视频
+              // assetEntity = await CameraPicker.pickFromCamera(context);
+              ///可以通过config获取图片和视频，并且对图片和视频做相关的配置，不过录像时按钮依次填充完，感觉不如直接显示录像时间好用
+              ///这里没有添加显示视频的功能，只能显示拍照后的图片，不能显示录制后的视频。可以参考picImage按钮上的功能来实现
+              assetEntity = await CameraPicker.pickFromCamera(context,pickerConfig: cameraPickerConfig);
 
               ///如果选择了图片就更新assetEntity中的值，否则不去处理
-              // if(assetEntityList != null && assetEntityList!.isNotEmpty) {
-              //   setState(() {
-              //     assetEntity = assetEntityList![0];
-              //   });
-              // }
+              if(assetEntity != null) {
+                setState(() {});
+              }
             },
             child: const Text("Pick Image by Camera"),
           ),
