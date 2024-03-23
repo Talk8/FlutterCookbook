@@ -51,5 +51,11 @@
 	<string>always usage bluetooth</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>using ble for device</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>using Photo Library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>using Camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>using micr for audio</string>
 </dict>
 </plist>
