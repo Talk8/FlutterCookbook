@@ -159,6 +159,11 @@ dependencies:
 
 # 监听页面的生命周期
   lifecycle: ^0.8.0
+
+
+  overlay_tooltip: ^0.2.3
+
+#  onboarding_overlay: ^3.2.1
 # 用来创建splash页面
   flutter_native_splash: ^2.3.7
 
@@ -181,6 +186,13 @@ flutter_launcher_icons:
   image_path_android: "images/avata.png"
   image_path_ios: "images/avata.png"
 
+
+  #试试这个包
+#  dynamic_themes: ^1.1.0
+
+
+  #试试这个包
+  #easy_date_timeline: ^1.0.6
 
   #试试这个包
 #  flutter_picker: ^2.1.0
