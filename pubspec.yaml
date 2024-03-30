@@ -169,10 +169,12 @@ dependencies:
 #  显示像聊天窗口一样的窗口,国人写的
   bubble_box: ^0.5.3
 
-  #  显示像聊天窗口一样的窗口,比bubble_box受欢迎一些
+#  显示像聊天窗口一样的窗口,比bubble_box受欢迎一些
   flutter_chat_bubble: ^2.0.2
-#  这个有3年没有更新了，比较老
-#  bubble: ^1.2.1
+#  这个也是显示聊天窗口，不过有3年没有更新了，比较老
+  bubble: ^1.2.1
+
+#  chat_bubbles: ^1.6.0
 
 #  冒泡动画，和我做的效果一样
 #  floating_bubbles: ^2.6.2

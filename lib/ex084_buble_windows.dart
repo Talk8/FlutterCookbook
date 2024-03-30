@@ -1,3 +1,4 @@
+import 'package:bubble/bubble.dart';
 import 'package:bubble_box/bubble_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
@@ -55,8 +56,8 @@ class _ExBubleWidowState extends State<ExBubleWidow> {
             blendMode: BlendMode.difference,
             child: const Text("Bubble Window"),
           ),
-          ///第二行：ChatBubble示例
-          ///nip就是箭头，可以通过参数控制它的高度和宽度，不过方向和位置无法控制.Clipper1箭头在右上，Clipper2箭头在右下
+          ///第二行：FlutterChatBubble示例
+          ///nip就是箭头，这个叫法比较专业，可以通过参数控制它的高度和宽度，不过方向和位置无法控制.Clipper1箭头在右上，Clipper2箭头在右下
           ///Clipper一共9种，就是箭头的形状不一样，其它内容一样，不再一一列出。与BubbleBox相比，优点是可以控制箭头的长度和宽度，缺点是无法控制箭头的方向和位置
           ChatBubble(
             clipper: ChatBubbleClipper1(type: BubbleType.sendBubble,),
@@ -66,7 +67,26 @@ class _ExBubleWidowState extends State<ExBubleWidow> {
           ChatBubble(
             clipper: ChatBubbleClipper2(type: BubbleType.sendBubble,nipWidth: 50,nipHeight: 30),
             alignment: Alignment.topRight,
-            child: const Text("ChatBuble Window"),
+            child: const Text("FlutterChatBubble Window"),
+          ),
+          ///第三行：Bubble示例.这个插件功能十分强大，虽然三年没有更新但是可以弥补BubbleBox的所有缺点，
+          ///我觉得FlutterChatBubble就是在此基础上创建的。我十分推荐此插件
+          Bubble(
+            color: Colors.deepPurpleAccent,
+            nip: BubbleNip.leftCenter,
+            ///用来控制箭头的长度和宽度
+            nipHeight: 16,
+            nipWidth: 20,
+            ///用来控制箭头的在边框上的具体位置
+            nipOffset: 4,
+            ///箭头的范围，一般不设置也可以，它必须小于长度和宽度的二分之一
+            ///它会影响到箭头的尖锐程度
+            nipRadius: 5,
+            ///整个bubble父组件中的位置
+            alignment: Alignment.centerRight,
+            style: const BubbleStyle(borderColor: Colors.redAccent,borderUp:true),
+            stick: true, ///用来控制左右两边的边距
+            child: const Text("Bubble"),
           ),
         ],
       ),
