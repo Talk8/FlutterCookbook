@@ -89,5 +89,6 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex081_ImageAndVideoPicker       | this is the example of ImagePicker package                     |
 | ex082_ImageAndVideoPicker       | this is the example of wechat_assets_picker and wechat_camera_picker package |
 | ex083_Lifecycle                 | this is the example of Lifecycle package                       |
+| ex084_BubbleBox                 | this is the example of BubbleBox package                       |
 
 
