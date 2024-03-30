@@ -1,7 +1,9 @@
 import 'package:bubble_box/bubble_box.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_bubble/chat_bubble.dart';
 
 ///与BubbleBox的内容相匹配，这个插件简单易用，而且是国人写的
+///与flutter_chat_bubble的内容相匹配，这个插件简单易用，
 class ExBubleWidow extends StatefulWidget {
   const ExBubleWidow({super.key});
 
@@ -16,7 +18,9 @@ class _ExBubleWidowState extends State<ExBubleWidow> {
       appBar: AppBar(
       title: const Text("Example of Bubble Widow"),),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          ///第一行：BubbleBox示例
           BubbleBox(
             ///box的形状，border用来控制边框颜色，radius用来控制边框角度，如果不设置默认是矩形
             shape: BubbleShapeBorder(
@@ -51,7 +55,19 @@ class _ExBubleWidowState extends State<ExBubleWidow> {
             blendMode: BlendMode.difference,
             child: const Text("Bubble Window"),
           ),
-
+          ///第二行：ChatBubble示例
+          ///nip就是箭头，可以通过参数控制它的高度和宽度，不过方向和位置无法控制.Clipper1箭头在右上，Clipper2箭头在右下
+          ///Clipper一共9种，就是箭头的形状不一样，其它内容一样，不再一一列出。与BubbleBox相比，优点是可以控制箭头的长度和宽度，缺点是无法控制箭头的方向和位置
+          ChatBubble(
+            clipper: ChatBubbleClipper1(type: BubbleType.sendBubble,),
+            alignment: Alignment.topRight,
+            child: const Text("ChatBuble Window"),
+          ),
+          ChatBubble(
+            clipper: ChatBubbleClipper2(type: BubbleType.sendBubble,nipWidth: 50,nipHeight: 30),
+            alignment: Alignment.topRight,
+            child: const Text("ChatBuble Window"),
+          ),
         ],
       ),
     );

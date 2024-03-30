@@ -310,6 +310,13 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_chat_bubble">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_chat_bubble-2.0.2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_keyboard_visibility">
           <value>
             <list>
@@ -1315,6 +1322,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/fixnum-1.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_advanced_switch-3.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_blue_plus-1.14.7/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_chat_bubble-2.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility-5.4.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility_linux-1.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility_macos-1.0.0/lib" />
