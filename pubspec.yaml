@@ -165,7 +165,8 @@ dependencies:
   overlay_tooltip: ^0.2.3
 
 
-#  onboarding_overlay: ^3.2.1
+  onboarding_overlay: ^3.2.1
+
 #  显示像聊天窗口一样的窗口,国人写的
   bubble_box: ^0.5.3
 

@@ -44,6 +44,13 @@
             </list>
           </value>
         </entry>
+        <entry key="auto_size_text">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/auto_size_text-3.0.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="badges">
           <value>
             <list>
@@ -730,6 +737,13 @@
             </list>
           </value>
         </entry>
+        <entry key="onboarding_overlay">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/onboarding_overlay-3.2.1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="open_settings">
           <value>
             <list>
@@ -1299,6 +1313,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/archive-3.4.10/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/args-2.4.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/async-2.11.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/auto_size_text-3.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/badges-3.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/bluetooth_enable_fork-0.1.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/boolean_selector-2.1.1/lib" />
@@ -1393,6 +1408,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/mime-1.0.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/nested-1.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/numberpicker-2.1.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/onboarding_overlay-3.2.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/open_settings-2.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/overlay_tooltip-0.2.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/package_config-2.1.0/lib" />

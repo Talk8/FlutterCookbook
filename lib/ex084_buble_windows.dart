@@ -4,8 +4,12 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 
+
+///这个包含了4个类似聊天窗口的插件，其中三个功能类似，最后一个与其它三个功能不同
 ///与BubbleBox的内容相匹配，这个插件简单易用，而且是国人写的
 ///与flutter_chat_bubble的内容相匹配，这个插件简单易用，
+///与bubble的内容相匹配，这个插件功能十分强大
+///与chat_bubble的内容相匹配，这个插件和其它三个插件不同主打chat功能
 class ExBubleWidow extends StatefulWidget {
   const ExBubleWidow({super.key});
 
@@ -20,7 +24,7 @@ class _ExBubleWidowState extends State<ExBubleWidow> {
       appBar: AppBar(
       title: const Text("Example of Bubble Widow"),),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ///第一行：BubbleBox示例
           BubbleBox(
