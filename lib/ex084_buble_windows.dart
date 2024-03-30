@@ -1,5 +1,6 @@
 import 'package:bubble/bubble.dart';
 import 'package:bubble_box/bubble_box.dart';
+import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 
@@ -88,6 +89,24 @@ class _ExBubleWidowState extends State<ExBubleWidow> {
             stick: true, ///用来控制左右两边的边距
             child: const Text("Bubble"),
           ),
+          ///第四行：chat_bubble示例.这个插件功相当是个bubble,它可以嵌套声音和图片.这个插件主打聊天特色，比如发送，接收等，不过对箭头控制有限
+          const BubbleSpecialThree(
+            ///是否显示箭头nip
+            tail: true,
+           ///会在最右侧显示一个对号
+            sent:false ,
+            delivered: true,
+            seen: true,
+            ///窗口的背景颜色
+            color: Colors.yellow,
+            text: "chat_bubble window"),
+          ///可以在图片，audio外层嵌套bubble，并且对它们进行控制,还有一个messageBar没有实践，需要时再使用
+          BubbleNormalImage(id: "001", image: const Icon(Icons.favorite),
+            tail: true,
+            color: Colors.lightGreenAccent,
+            onTap: (){},
+          ),
+
         ],
       ),
     );
