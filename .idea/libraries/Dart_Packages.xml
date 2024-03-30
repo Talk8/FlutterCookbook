@@ -65,6 +65,13 @@
             </list>
           </value>
         </entry>
+        <entry key="bubble_box">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/bubble_box-0.5.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="camera">
           <value>
             <list>
@@ -709,6 +716,13 @@
             </list>
           </value>
         </entry>
+        <entry key="overlay_tooltip">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/overlay_tooltip-0.2.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="package_config">
           <value>
             <list>
@@ -1267,6 +1281,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/badges-3.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/bluetooth_enable_fork-0.1.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/boolean_selector-2.1.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/bubble_box-0.5.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/camera-0.10.5+9/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/camera_android-0.10.8+16/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/camera_avfoundation-0.9.13+10/lib" />
@@ -1355,6 +1370,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/nested-1.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/numberpicker-2.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/open_settings-2.0.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/overlay_tooltip-0.2.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/package_config-2.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/package_info_plus-4.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/package_info_plus_platform_interface-2.0.1/lib" />
