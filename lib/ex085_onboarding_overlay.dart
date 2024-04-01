@@ -5,6 +5,7 @@ import 'package:onboarding_overlay/onboarding_overlay.dart';
 ///在某个功能上显示功能的介绍，功能区域高亮显示（本组件称其为hole)，其它区域模糊显示(本组件称其为overlay)。
 ///点击模糊区域时跳转到下一个功能说明(组件中称为step).开发人员需要做的是把scaffold组件当作child赋值给Onboarding。
 ///然后在需要解析的功能上通过Focus组件添加解析说明。说明的内容通过OnboardingStep实现。
+///这个包比overlay_tooltip在解析框外多了箭头，使用相对繁杂一些，整体的使用思路类似
 class ExOnboardingOverlay extends StatefulWidget {
   const ExOnboardingOverlay({super.key});
 
