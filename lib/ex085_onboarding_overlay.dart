@@ -81,7 +81,7 @@ class _ExOnboardingOverlayState extends State<ExOnboardingOverlay> {
           // overlayShape: const RoundedRectangleBorder(
           //   borderRadius: BorderRadius.all(Radius.circular(30.0),),
           // ),
-          overlayShape:const CircleBorder(),
+          // overlayShape:const CircleBorder(),
           ///模糊层上高亮显色内容的形状，默认是矩形
           // shape: CircleBorder(
           // ),
@@ -95,7 +95,7 @@ class _ExOnboardingOverlayState extends State<ExOnboardingOverlay> {
           ///设置成translucent后点击模糊区域无法跳转到下一个step,这个属性的值有多种，功能不同，
             ///主要用来控制在哪里响应点击事件，功能值可以查看官方文档
           overlayBehavior: HitTestBehavior.translucent,
-          fullscreen: false,
+          fullscreen: true,
           onTapCallback: (TapArea area, VoidCallback next, VoidCallback close){
           ///它的值分三种：hole:就是模糊层上高亮部分，overlay:就是模糊层, label：就是文本部分
           debugPrint("onTapCallback: area:$area");

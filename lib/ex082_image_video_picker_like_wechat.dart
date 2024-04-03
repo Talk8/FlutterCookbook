@@ -8,7 +8,7 @@ import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 ///主要介绍如何使用wechat_assets_picker这个包来创建具有wechat风格的
 ///标题中使用了自定义的内容，可以当作单独的内容来看
 ///在介绍wechxx_picker的基础上介绍TooltipController，因为它是基于某个页面来显示的。
-///与235-238内容匹配
+///与235-238内容匹配,OverlayTooltipScaffold内容与418和419内容相匹配
 class ExMediaPickerLikeWechat extends StatefulWidget {
   const ExMediaPickerLikeWechat({super.key});
 
@@ -88,7 +88,7 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
     },
       // overlayColor: Colors.blueAccent,
       // tooltipAnimationCurve: Curves.easeInCirc,
-      ///第个点击后跳转到下一个tip的时间
+      ///每个tooltip被点击后跳转到下一个tip的时间
       tooltipAnimationDuration: const Duration(milliseconds: 100),
       ///这个是在除了tooltip位置外任意位置上点击时的事件，它主要用来切换不同的tips
       preferredOverlay: GestureDetector(
