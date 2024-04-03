@@ -22,26 +22,27 @@ class ExListView extends StatelessWidget {
             fontSize: 22,
           ),
         ),
-        onTap:(){print(" Item $index onClicked");} ,
+        subtitle: Text("subtitle: $index"),
+        onTap:(){debugPrint(" Item $index onClicked");} ,
       );
     }
 
 
-    ScrollController _scrollController = ScrollController();
-    _scrollController.addListener(() {
+    ScrollController scrollController = ScrollController();
+    scrollController.addListener(() {
       //offset并不是ListView中的索引值
-      print("offset---: ${_scrollController.offset}");
+      debugPrint("offset---: ${scrollController.offset}");
       //Position的信息多，包含了offset
-      print("position---: ${_scrollController.position}");
-      print("pixels___: ${_scrollController.position.pixels}");
+      debugPrint("position---: ${scrollController.position}");
+      debugPrint("pixels___: ${scrollController.position.pixels}");
       //这两个是底部和顶部的offset
-      print("max___: ${_scrollController.position.maxScrollExtent}");
-      print("min___: ${_scrollController.position.minScrollExtent}");
-      // print(_scrollController.jumpTo(1));
+      debugPrint("max___: ${scrollController.position.maxScrollExtent}");
+      debugPrint("min___: ${scrollController.position.minScrollExtent}");
+      // debugPrint(scrollController.jumpTo(1));
     });
 
     Widget listEx = ListView(
-      controller: _scrollController,
+      controller: scrollController,
       //指定每个Item的高度
       itemExtent: 56,
       scrollDirection: Axis.vertical,
@@ -61,9 +62,10 @@ class ExListView extends StatelessWidget {
 
     //通过边框线来设定Divider,在第一行的顶部也会有，把边框设置为圆角后就可以看出来
     Widget listEx01 = ListView.builder(
-      controller: _scrollController,
+      shrinkWrap: true,
+      controller: scrollController,
       itemCount: 8,
-      itemExtent: 80,
+      itemExtent: 96,
       itemBuilder: (BuildContext context, int index) {
         //不添加任何装饰
         // return listItem(Icons.ice_skating, "$index",index);
@@ -85,7 +87,7 @@ class ExListView extends StatelessWidget {
         return Column(
           children: [
             listItem(Icons.ice_skating, "$index",index),
-            Divider(
+            const Divider(
               color: Colors.grey,
               //用来控制分隔线的宽度,默认值是0.0
               thickness: 1.0,
@@ -101,9 +103,9 @@ class ExListView extends StatelessWidget {
 
     //通过separatorBuilder属性来设定divider
     Widget listEx02 = ListView.separated(
-        controller: _scrollController,
+        controller: scrollController,
         itemBuilder: (BuildContext context, int index) {
-          print("index : ${index}");
+          debugPrint("index : $index");
           return listItem(Icons.cabin, "$index",index);
         },
         separatorBuilder: (BuildContext context, int index) {
@@ -117,13 +119,43 @@ class ExListView extends StatelessWidget {
     );
 
 
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double res = MediaQuery.of(context).devicePixelRatio;
+
+    debugPrint("height: $screenHeight, top： $statusBarHeight, ratio:$res");
     return Scaffold(
       appBar: AppBar(
         title: const Text("ListView example AppBar"),
         backgroundColor: Colors.purpleAccent,
       ),
-       // body: listEx,
-      body: listEx01,
+      ///这个程序可以巧妙地计算出appBar的高度，通过运行时的错误，我的是56
+      ///A RenderFlex overflowed by 56 pixels on the bottom.
+      body: Column(
+        children: [
+          ///在列表外层嵌套一个容器，实现局部动态列表，不然页面显示异常，而且列表无法滚动
+         ///详细内容可以参考114回局部动态列表相关的内容
+          Container(
+            color: Colors.lightGreen,
+            width: screenWidth,
+            height: (screenHeight - statusBarHeight)/3,
+              child: listEx,
+          ),
+          Container(
+            color: Colors.lightBlueAccent,
+            width: screenWidth,
+            height: (screenHeight - statusBarHeight)/3,
+            child: listEx01,
+          ),
+          Container(
+            color: Colors.orangeAccent,
+            width: screenWidth,
+            height: (screenHeight - statusBarHeight)/3,
+            child: listEx02,
+          ),
+        ],
+      ),
       // body: listEx02,
     );
   }
