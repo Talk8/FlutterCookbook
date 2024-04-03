@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 
 ///在Scaffold页面上层显示一蒙板,呈模糊状态与417内容匹配
+///这个是自定义的内容，也可以通过overlay_tooltip和onboarding_overlay两个包实现,不过它们的功能不同
 class ExScaffoldOverlay extends StatefulWidget {
   const ExScaffoldOverlay({super.key});
 

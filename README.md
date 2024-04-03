@@ -92,5 +92,6 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex083_Lifecycle                 | this is the example of Lifecycle package                       |
 | ex084_BubbleBox                 | this is the example of BubbleBox package                       |
 | ex085_onboarding_overlay        | this is the example of onboarding_overlay package              |
+| ex086_overlay                   | this is the example of overlay for scaffold                    |
 
 
