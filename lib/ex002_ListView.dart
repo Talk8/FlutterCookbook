@@ -123,6 +123,8 @@ class ExListView extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     double res = MediaQuery.of(context).devicePixelRatio;
+    ///bottom有区别
+    MediaQuery.of(context).viewPadding.top;
 
     debugPrint("height: $screenHeight, top： $statusBarHeight, ratio:$res");
     return Scaffold(
