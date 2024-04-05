@@ -48,16 +48,51 @@ class _ExGetPkgState extends State<ExGetPkg> {
             },
             child:const  Text("show SanckBar"),
           ),
-          const ReadMoreText(
-            "this is a long text,aaaaaaaaaaaaaaaaaaaa,bbbbbbbbbbbbbbb,ccccccccccc,",
-            trimLines: 3,
-            trimMode: TrimMode.Line,
-            trimCollapsedText: "Show more",
-            trimExpandedText: "Show Less",
-            moreStyle: TextStyle(color: Colors.purpleAccent),
-
+          ///readMore插件，需要添加约束类容器，如果在column或者row中时没有效果。
+          Container(
+            width:  300,
+            height: 260,
+            color: Colors.lightGreen,
+            child: const ReadMoreText(
+              "this is a long text,aaaaaaaaaaaaaaaaaaaa,bbbbbbbbbbbbbbb,ccccccccccc,adfiiiiiidfdfdfd,afsfdfdll",
+              // "Flutter is Google's mobile UI open source framework to build high-quality native(super fast) interfaces for IOS and Android Apps with the unified codebase",
+              trimLines: 2,
+              ///切换成length后不会省略内容
+              trimMode: TrimMode.Line,
+              colorClickableText: Colors.pink,
+              trimCollapsedText: "Show more",
+              trimExpandedText: "Show Less",
+              moreStyle: TextStyle(color: Colors.purpleAccent),
+              ///在正常文本前面显示的内容
+              preDataText: "AMANDA",
+            ),
           ),
 
+          ///正常文件组件与readMore对比
+          const Text( "Flutter is Google's mobile UI open source framework to build high-quality native(super fast) interfaces for IOS and Android Apps with the unified codebase",
+          ),
+
+          ///想试验一下3.0版本的新功能，但是无法通过编译
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: ReadMoreText(
+              "This is sample test with a #hashtag, a mention<@123>, and a URL: https://pub.dev.",
+              trimMode: TrimMode.Line,
+              trimLines: 2,
+              colorClickableText: Colors.pink,
+              ///3.0版本才开始添加此功能,但是我的3.0版本无法通过编译
+              // annotations:[
+              //   Annotation(
+              //       regExp: RegExp(r'#([a-zA-Z0-9_]+)'),
+              //       ///这个参数是函数类型
+              //       spanBuilder: ({required String text, TextStyle? textStyle}) => TextSpan(
+              //         text: text,
+              //         style: textStyle?.copyWith(color: Colors.yellow),
+              //       ),
+              //   ),
+              // ],
+            ),
+          ),
           ///获取时区的方法，与267与265内容匹配
           ElevatedButton(onPressed: () async {
             ///获取时区，在future中获取,输出：future timeZone: Asia/Shanghai
@@ -93,12 +128,12 @@ class _ExGetPkgState extends State<ExGetPkg> {
             ///通过时间获取时区
             var ltTimeZones = ldTimezone.timeZone(bjTime.millisecondsSinceEpoch);
             var bjTimeZones = bjTimezone.timeZone(bjTime.millisecondsSinceEpoch);
-            debugPrint("bjTimeZone is $bjTimeZones, ltTimeZone: ${ltTimeZones}");
+            debugPrint("bjTimeZone is $bjTimeZones, ltTimeZone: $ltTimeZones");
 
 
             ///转换时间：北京时间8点转换成伦敦时间是几点？通过输出内容可以看到
             var ltTime = tz.TZDateTime.from(bjTime,ldTimezone);
-            debugPrint("bjTime is $bjTime, ltTime: ${ltTime}");
+            debugPrint("bjTime is $bjTime, ltTime: $ltTime");
 
             ///把2024-1-1-12：13这个时间转换成北京时区下的时间
             var time = tz.TZDateTime(bjTimezone,2024,1,1,12,13);
@@ -108,6 +143,7 @@ class _ExGetPkgState extends State<ExGetPkg> {
             debugPrint("intl timeZone: ${Intl.getCurrentLocale()}");
           }, child: const Text("timeZoned"),
           ),
+          ///get_storage的示例
           ElevatedButton(
             onPressed: (){
               debugPrint("write data");
