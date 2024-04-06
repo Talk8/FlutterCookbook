@@ -202,12 +202,13 @@ flutter_native_splash:
     #图片格式必须是png
     image: "images/avata.png"
 
-  flutter_launcher_icons: ^0.13.1
-flutter_launcher_icons:
-  android: true
-  ios: true
-  image_path_android: "images/avata.png"
-  image_path_ios: "images/avata.png"
+#在dependencies下配置没有效果，需要在dev_dependencies下配置才有效果
+#  flutter_launcher_icons: ^0.13.1
+#flutter_launcher_icons:
+#  android: true
+#  ios: true
+#  image_path_android: "images/avata.png"
+#  image_path_ios: "images/avata.png"
 
 
   #试试这个包
@@ -264,6 +265,17 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+
+   #这个是三方插件，它必须配置在 dev_dependencies:下方， 在它下面的其它插件是官方的配置：
+  flutter_launcher_icons: ^0.13.1
+flutter_launcher_icons:
+    android: true
+    ios: true
+    image_path: "images/avata.png"
+  #  image_path_android: "images/avata.png"
+  #  image_path_ios: "images/avata.png"
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
