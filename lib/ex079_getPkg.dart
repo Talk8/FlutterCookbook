@@ -7,6 +7,8 @@ import 'package:readmore/readmore.dart';
 import 'package:timezone/timezone.dart'as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
+///本来是想演示get这个包的功能，不过没有加上getMaterialApp，因此很多功能无法使用
+///这里只演示readMore,获取时区，getStorage相关的示例
 class ExGetPkg extends StatefulWidget {
   const ExGetPkg({super.key});
 
@@ -39,12 +41,14 @@ class _ExGetPkgState extends State<ExGetPkg> {
         children: [
           ElevatedButton(
             onPressed: (){
-              Get.showSnackbar(
-                const GetSnackBar(
-                  title: "Notice",
-                  messageText: Text("Today is a holiday"),
-                ),
-              );
+              ///这两种方法都不行，因为根目录是MaterialApp
+              Get.snackbar("title", "constent message");
+              // Get.showSnackbar(
+              //   const GetSnackBar(
+              //     title: "Notice",
+              //     messageText: Text("Today is a holiday"),
+              //   ),
+              // );
             },
             child:const  Text("show SanckBar"),
           ),
