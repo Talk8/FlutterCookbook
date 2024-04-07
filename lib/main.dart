@@ -80,6 +80,7 @@ import 'package:fluttercookbook/ex075_CusTimePicker.dart';
 import 'package:fluttercookbook/ex076_ScrollView.dart';
 import 'package:fluttercookbook/ex077_DeviceAndPkgInfo.dart';
 import 'package:fluttercookbook/ex078_liveData.dart';
+import 'package:fluttercookbook/ex079_getMaterialApp.dart';
 import 'package:fluttercookbook/ex079_getPkg.dart';
 import 'package:fluttercookbook/ex080_keyboard.dart';
 import 'package:fluttercookbook/ex081_filePicker.dart';
@@ -538,6 +539,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
         listItem("077", "DeviceInfo", context, const ExDeviceInfo()),
         listItem("078", "LiveData", context, const ExCircleAvatar()),
         listItem("079", "Get", context, const ExGetPkg()),
+        listItem("079", "GetMaterialApp", context, const ExGetMaterialApp()),
         listItem("080", "Keyboard", context, const ExKeyboardPage()),
         listItem("081", "FileAndImagePicker", context, const ExFilePicker()),
         listItem("081", "VideoAndImagePicker", context, const ExImageVideoPicker()),
