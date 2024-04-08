@@ -85,6 +85,7 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex077_DeviceAndPkgInfo          | this is the example of Device and PackageInfo OpenSetting3rd pkg|
 | ex078_liveData                  | this is the example of LiveData and change snakeBar location   |
 | ex079_Get                       | this is the example of Get package and textMore package        |
+| ex079_GetMaterialApp            | this is the example of GetMaterialApp and other functions      |
 | ex080_Keyboard                  | this is the example of hidden keyboard                         |
 | ex081_ImageAndVideoPicker       | this is the example of ImagePicker package                     |
 | ex082_ImageAndVideoPicker       | this is the example of wechat_assets_picker and wechat_camera_picker package |
@@ -93,5 +94,6 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex084_BubbleBox                 | this is the example of BubbleBox package                       |
 | ex085_onboarding_overlay        | this is the example of onboarding_overlay package              |
 | ex086_overlay                   | this is the example of overlay for scaffold and MediaQuery     |
+| ex086_overlayEntry              | this is the example of overlay ,which is provided by FlutterSDK|
 
 
