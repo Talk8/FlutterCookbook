@@ -570,7 +570,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
     WidgetsBinding.instance.addObserver(this);
 
     ///添加延时，用来延长splash的显示时间
-    Future.delayed(const Duration(seconds: 6),);
+    Future.delayed(const Duration(seconds: 2),);
     ///在主程序页面中移除splash,这个插件没有产生实际效果，splash还是默认的laucher
     FlutterNativeSplash.remove();
 
