@@ -90,7 +90,7 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
       // tooltipAnimationCurve: Curves.easeInCirc,
       ///每个tooltip被点击后跳转到下一个tip的时间
       tooltipAnimationDuration: const Duration(milliseconds: 100),
-      ///这个是在除了tooltip位置外任意位置上点击时的事件，它主要用来切换不同的tips
+      ///这个是在模糊层(除了tooltip位置外)上任意位置上点击时的事件，它主要用来切换不同的tips
       preferredOverlay: GestureDetector(
         onTap: () {
           // ///跳转到最后一个tips的时候停止跳转
@@ -104,6 +104,7 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
             debugPrint("next tips");
             tooltipController.next();
         },
+        ///控制模糊层，在它外面嵌套了一个手势事件，用来响应用户的点击事件
         child: Container(
           width: double.infinity,
           height: double.infinity,
