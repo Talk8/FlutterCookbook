@@ -15,8 +15,25 @@ class ExGetMaterialApp extends StatelessWidget {
 }
 
 
-class GetHomePage extends StatelessWidget {
+class GetHomePage extends StatefulWidget {
   const GetHomePage({super.key});
+
+  @override
+  State<GetHomePage> createState() => _GetHomePageState();
+}
+
+class _GetHomePageState extends State<GetHomePage> {
+  ///这个类型是RxString ,定义RxXXX类型有三种方法:.obs,RxString,Rx<String>
+  ///推荐使用.obs.它会自动初始化变量。比如下面就把int类型的变量初始化为0.
+  var stateValue = "default value".obs;
+  var intValue = 0.obs;
+  var boolValue = false.obs;
+
+  ///生成数据模型对象,注意与find的区别，find是查找已经有的对象
+  var getController = Get.put(ValueController());
+
+  ///创建数据模型对象，使用Obx响应式状态管理
+  var valueModel = ValueController().obs;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +46,47 @@ class GetHomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text("this is body"),
+          ///******* 第一部分：状态管理:定义一个变量，后续用obs修饰，修改时使用.value修改，监听通过Obx组件。
+          ///使用就这么三个步骤，非常简单和方便.Get包中还有两个状态管理组件GetX()和GetBuilder();
+          ///这两个组件早于Obx()，使用上不如Obx方便，作者建议使用Obx()。可以查看官方文档。其中Obx和GetX是响应式状态管理
+          ///GetBuilder是简单式状态管理,用法类型Provider.Obx是响应式的状态管理
+          ///我使用后发现切换页面后Obx中的数据会恢复到初始化值，但是GetBuilder中的数据不会。
+          ElevatedButton(
+            ///在按钮事件中修改变量，按钮下方的Obx就可以监听到变量的变化并且更新组件
+            onPressed: () {
+              ///Obx更新当前页面中的数据
+              stateValue.value = "new value";
+              intValue.value = 666;
+              boolValue.value = true;
+              ///GetBuilder更新数据：下面两种方式都可以，推荐使用当前没有注释掉的方法
+              // Get.find<ValueController>().updateValue();
+              getController.updateValue();
+
+              ///Obx更新数据模型中的数据,注意更新数据的方法
+              valueModel.update((val) {
+                val?.iValue = 999;
+                val?.strValue = "String Value";
+              });
+            },
+            ///官方文档中需要使用controller.stateValue,但是不需要，而且有语法错误
+            // child: Obx(() => Text(${controller.stateValue}),),
+            ///   obx是Observer of Rx的缩写
+            child:Obx(() => Text("State management value: $stateValue"),),
+          ),
+          ///单独使用Obx组件,Obx监听当前页面中的数据
+          Obx(() => Text("intValue: ${intValue.toString()}, boolValue: ${boolValue.toString()}"),),
+          ///Obx监听数据模型类中的数据,页面再次进入时数据恢复默认值
+          Obx(() => Text("intValue: ${valueModel.value.iValue.toString()}, strValue: ${valueModel.value.strValue}"),),
+          ///使用GetBuilder监听数据更新
+          GetBuilder<ValueController>(
+            ///init可以加也可以不加，GetBuilder会自动获取该对象
+            init: ValueController(),
+            builder: (controller) {
+              return Text("intValue: ${controller.iValue.toString()}, strValue: ${controller.strValue}");
+            }
+          ),
+
+
           ///显示snackBar的两种方式，一种使用固定的样式，另外一种使用自定义样式
           ElevatedButton(
             onPressed: () {
@@ -63,6 +121,18 @@ class GetHomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+///这个是配合Obx和GetBuilder使用的数据模型类，用法类似Provider中的ViewModel
+class ValueController extends GetxController {
+  int iValue = 0;
+  String strValue = "default string";
+
+  void updateValue() {
+    iValue = 666;
+    strValue = "new String Value";
+    update();
   }
 }
 
