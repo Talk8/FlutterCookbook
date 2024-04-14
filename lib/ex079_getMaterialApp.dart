@@ -75,16 +75,60 @@ class _GetHomePageState extends State<GetHomePage> {
                   )
               );
             },
-            child: const Text("show overly"),
+            child: const Text("show custom SNB"),
           ),
 
+          ///******* 第二部分：显示Dialog。演示了两种类型的dialog,第一种类似overlay,第二种是正常的dialog.
           ElevatedButton(
             onPressed:() {
-              ///和官方Overlay的效果完全一样
-              Get.dialog(const Text("This is dialog"));
+              ///和官方Overlay的效果完全一样,不像dialog
+              Get.dialog(//const Text("This is dialog"),
+                ///这里控制dialog中的组件，可以是简单的文本，也可以是多种组件的组合
+                const Column(
+                  children: [
+                    Text("Row1"),
+                    Text("Row2"),
+                  ],
+                ),
+                barrierColor: Colors.lightBlueAccent,
+                ///不设置此属性不会有淡入淡出的效果，这里相当于给模糊层设置了一个淡入淡出的效果
+                transitionDuration: const Duration(seconds: 2,),
+              );
             } ,
             child: const Text("show Dialog"),
           ),
+          ElevatedButton(
+            onPressed:() {
+              ///这个才是正常的Dialog，不过大小是自适应的，无法调整窗口的大小
+              Get.defaultDialog(
+                title: "Title",
+                backgroundColor: Colors.greenAccent,
+                content: const Text("Content , this ia a long text, which will shown at dialog,please check the size of dialog"),
+                ///文字居中显示，无法调整位置
+                // confirm: const Text("Yes"),
+                // cancel:  const Text("No"),
+                ///把文字转换成button,布局上仍然是居中显示
+                confirm: ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Yes"),
+                ),
+                cancel:  ElevatedButton(
+                  ///这个navigator就是navigatorKey属性对应的值
+                  onPressed: ( ) {navigator?.pop();},
+                  child: const Text("No"),
+                ),
+                ///在窗口最底部和confirm/cancel按钮在一行
+                actions: [
+                  // Text("Action1"),
+                  // Text("Action2"),
+                ],
+                buttonColor: Colors.purpleAccent,
+                navigatorKey:Get.key,
+              );
+            } ,
+            child: const Text("show Dialog"),
+          ),
+
           ///******* 第x部分：状态管理:定义一个变量，后续用obs修饰，修改时使用.value修改，监听通过Obx组件。
           ///使用就这么三个步骤，非常简单和方便.Get包中还有两个状态管理组件GetX()和GetBuilder();
           ///这两个组件早于Obx()，使用上不如Obx方便，作者建议使用Obx()。可以查看官方文档。其中Obx和GetX是响应式状态管理
