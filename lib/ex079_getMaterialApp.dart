@@ -46,7 +46,46 @@ class _GetHomePageState extends State<GetHomePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text("this is body"),
-          ///******* 第一部分：状态管理:定义一个变量，后续用obs修饰，修改时使用.value修改，监听通过Obx组件。
+          ///******* 第一部分：显示snackBar的两种方式，一种使用固定的样式，另外一种使用自定义样式
+          ElevatedButton(
+            onPressed: () {
+              ///这个snb默认透明色而且是在顶部显示
+              Get.snackbar("title", "Message");
+            },
+            child: const Text("show SnackBar"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.showSnackbar(
+                  const GetSnackBar(
+                    title: "Title",
+                    message: "Message",
+                    ///需要加显示时间，默认一直显示
+                    duration: Duration(seconds: 2),
+                    backgroundColor: Colors.blue,
+                    ///控制snb与屏幕的边距
+                    margin:EdgeInsets.only(bottom: 80,left: 16,right: 16),
+                    ///不能像原生的snb一样控制形状，但是可以控制圆角，默认是矩形
+                    borderRadius: 16,
+                    ///会在snb顶部显示水平滚动条
+                    showProgressIndicator: true,
+                    ///这两个属性决定了snackBar的默认在底部显示
+                    // this.snackPosition = SnackPosition.BOTTOM,
+                    // this.snackStyle = SnackStyle.FLOATING,
+                  )
+              );
+            },
+            child: const Text("show overly"),
+          ),
+
+          ElevatedButton(
+            onPressed:() {
+              ///和官方Overlay的效果完全一样
+              Get.dialog(const Text("This is dialog"));
+            } ,
+            child: const Text("show Dialog"),
+          ),
+          ///******* 第x部分：状态管理:定义一个变量，后续用obs修饰，修改时使用.value修改，监听通过Obx组件。
           ///使用就这么三个步骤，非常简单和方便.Get包中还有两个状态管理组件GetX()和GetBuilder();
           ///这两个组件早于Obx()，使用上不如Obx方便，作者建议使用Obx()。可以查看官方文档。其中Obx和GetX是响应式状态管理
           ///GetBuilder是简单式状态管理,用法类型Provider.Obx是响应式的状态管理
@@ -87,37 +126,7 @@ class _GetHomePageState extends State<GetHomePage> {
           ),
 
 
-          ///显示snackBar的两种方式，一种使用固定的样式，另外一种使用自定义样式
-          ElevatedButton(
-            onPressed: () {
-              ///这个snb默认透明色而且是在顶部显示
-              Get.snackbar("title", "Message");
-            },
-            child: const Text("show SnackBar"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Get.showSnackbar(
-                const GetSnackBar(
-                  title: "Title",
-                  message: "Message",
-                  ///需要加显示时间，默认一直显示
-                  duration: Duration(seconds: 2),
-                  backgroundColor: Colors.blue,
-                  ///控制snb与屏幕的边距
-                  margin:EdgeInsets.only(bottom: 80,left: 16,right: 16),
-                  ///不能像原生的snb一样控制形状，但是可以控制圆角，默认是矩形
-                  borderRadius: 16,
-                  ///会在snb顶部显示水平滚动条
-                  showProgressIndicator: true,
-                  ///这两个属性决定了snackBar的默认在底部显示
-                  // this.snackPosition = SnackPosition.BOTTOM,
-                  // this.snackStyle = SnackStyle.FLOATING,
-                )
-              );
-            },
-            child: const Text("show overly"),
-          ),
+
         ],
       ),
     );
