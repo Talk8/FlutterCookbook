@@ -109,11 +109,21 @@ class _GetHomePageState extends State<GetHomePage> {
                 // cancel:  const Text("No"),
                 ///把文字转换成button,布局上仍然是居中显示
                 confirm: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ///获取时间戳，默认带时区，utc方法中的不带时区，而且可以指定到某个时间点的时间戳，与268内容匹配，
+                    ///在其它文件中还有时间戳相关的代码，暂时找不到位置。
+                    String timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
+                    String timeStamp1 = DateTime.utc(2024,4,14,0,0,0,0,0).millisecondsSinceEpoch.toString();
+                    String timeStamp2 = DateTime.utc(2024,4,14,10,50,0,0,0).millisecondsSinceEpoch.toString();
+
+                    debugPrint("time: $timeStamp size:${timeStamp.length}");
+                    debugPrint("tim1: $timeStamp1 size:${timeStamp1.length}");
+                    debugPrint("tim2: $timeStamp2 size:${timeStamp2.length}");
+                  },
                   child: const Text("Yes"),
                 ),
                 cancel:  ElevatedButton(
-                  ///这个navigator就是navigatorKey属性对应的值
+                  ///这个navigator就是navigatorKey属性对应的值,通过它关闭dialog
                   onPressed: ( ) {navigator?.pop();},
                   child: const Text("No"),
                 ),
@@ -129,7 +139,7 @@ class _GetHomePageState extends State<GetHomePage> {
             child: const Text("show Dialog"),
           ),
 
-          ///******* 第x部分：状态管理:定义一个变量，后续用obs修饰，修改时使用.value修改，监听通过Obx组件。
+          ///******* 第三部分：状态管理:定义一个变量，后续用obs修饰，修改时使用.value修改，监听通过Obx组件。
           ///使用就这么三个步骤，非常简单和方便.Get包中还有两个状态管理组件GetX()和GetBuilder();
           ///这两个组件早于Obx()，使用上不如Obx方便，作者建议使用Obx()。可以查看官方文档。其中Obx和GetX是响应式状态管理
           ///GetBuilder是简单式状态管理,用法类型Provider.Obx是响应式的状态管理
