@@ -179,8 +179,17 @@ class _GetHomePageState extends State<GetHomePage> {
             }
           ),
 
-
-
+          ///******* 第四部分：路由管理
+          ElevatedButton(onPressed: () {
+            Get.defaultDialog(
+              cancel: ElevatedButton(onPressed: () {
+                ///无法退出dialog.
+                Get.back();
+              }, child: Text("cancel"),),
+            );
+          },
+              child: Text("Navigator"),
+          ),
         ],
       ),
     );
