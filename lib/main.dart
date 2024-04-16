@@ -91,6 +91,7 @@ import 'package:fluttercookbook/ex084_buble_windows.dart';
 import 'package:fluttercookbook/ex085_onboarding_overlay.dart';
 import 'package:fluttercookbook/ex086_overlay.dart';
 import 'package:fluttercookbook/ex086_overlayEntry.dart';
+import 'package:fluttercookbook/ex087_html_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lifecycle/lifecycle.dart';
@@ -550,6 +551,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
         listItem("085", "OnboardingOverly", context, const ExOnboardingOverlay()),
         listItem("086", "ScaffoldOverly", context, const ExScaffoldOverlay()),
         listItem("086", "FlutterOverly", context, const ExOverlayEntry()),
+        listItem("087", "Html Widget", context, const ExHtmlView()),
       ],
     );
 

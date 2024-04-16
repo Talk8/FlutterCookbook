@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:html/dom_parsing.dart';
-import 'package:html/parser.dart' ;
-///这个包中定义了Text类与material中的Text有冲突,所以重命名。
-// import 'package:html/dom.dart' ;
-import 'package:html/dom.dart' as html_dom;
 
 ///上一个ex086使用的是自定义的overlay,我叫它蒙板，本文件中使用的是官方SDK中提供的Overlay组件
 ///官方通过overlayState来显示OverlayEntry,但是不能管理多个OverlayEntry。OverlayEntry可以删除自己，
 ///官方的这个OverlayEntry适合显示单个Overlay，不适合做功能引导:onBoarding Overlay
-///
-/// 最后内容与html包中的示例
 class ExOverlayEntry extends StatefulWidget {
   const ExOverlayEntry({super.key});
 
@@ -24,41 +17,7 @@ class _ExOverlayEntryState extends State<ExOverlayEntry> {
 
   @override
   Widget build(BuildContext context) {
-    var htmStr = parse('''
-     <body>
-     <h2>Header 1</h2>
-     <p>Text.</p>
-     <h2>Header 2</h2>
-     More text.
-     <br/>
-     </body>''');
 
-    ///输出：I/flutter (22038): <html><head></head><body>
-    // I/flutter (22038):      <h2>Header 1</h2>
-    // I/flutter (22038):      <p>Text.</p>
-    // I/flutter (22038):      <h2>Header 2</h2>
-    // I/flutter (22038):      More text.
-    // I/flutter (22038):      <br>
-    // I/flutter (22038):      </body></html>
-    debugPrint(htmStr.outerHtml);
-    ///输出：I/flutter (22038): <html>
-    // I/flutter (22038):   <head>
-    // I/flutter (22038):   </head>
-    // I/flutter (22038):   <body>
-    // I/flutter (22038):     <h2>
-    // I/flutter (22038):       Header 1
-    // I/flutter (22038):     </h2>
-    // I/flutter (22038):     <p>
-    // I/flutter (22038):       Text.
-    // I/flutter (22038):     </p>
-    // I/flutter (22038):     <h2>
-    // I/flutter (22038):       Header 2
-    // I/flutter (22038):     </h2>
-    // I/flutter (22038):     More text.
-    // I/flutter (22038):     <br/>
-    // I/flutter (22038):   </body>
-    // I/flutter (22038): </html>
-    _Visitor().visit(htmStr);
 
     return Scaffold(
       key: globalKey,
@@ -76,11 +35,6 @@ class _ExOverlayEntryState extends State<ExOverlayEntry> {
             onPressed: () => _showCurrentOverlay(context),
             child: const Text("Show current Overlay"),
           ),
-
-          ///提取html中的元素
-          Text("data is : ${htmStr.body}"),
-          Text("data is : ${htmStr.head}"),
-          Text("data is : ${htmStr.documentElement}"),
         ],
       ),
     );
@@ -178,37 +132,5 @@ class _ExOverlayEntryState extends State<ExOverlayEntry> {
         _overlayEntry2 = null;
       }
     });
-  }
-}
-
-class _Visitor extends TreeVisitor {
-  String indent = '';
-
-
-  @override
-  void visitText(html_dom.Text node) {
-    if (node.data.trim().isNotEmpty) {
-      print('$indent${node.data.trim()}');
-    }
-  }
-
-  @override
-  void visitElement(html_dom.Element node) {
-    if (isVoidElement(node.localName)) {
-      print('$indent<${node.localName}/>');
-    } else {
-      print('$indent<${node.localName}>');
-      indent += '  ';
-      visitChildren(node);
-      indent = indent.substring(0, indent.length - 2);
-      print('$indent</${node.localName}>');
-    }
-  }
-
-  @override
-  void visitChildren(html_dom.Node node) {
-    for (var child in node.nodes) {
-      visit(child);
-    }
   }
 }
