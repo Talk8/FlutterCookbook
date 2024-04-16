@@ -110,6 +110,17 @@ class _GetHomePageState extends State<GetHomePage> {
                 ///把文字转换成button,布局上仍然是居中显示
                 confirm: ElevatedButton(
                   onPressed: () {
+                    ///java获取时间戳的代码，与dart对比一下
+                    //        long timestamp = Instant.now().getEpochSecond();
+                    //         long timestamp1 = Instant.parse("2024-04-14T10:50:00.000000000Z").getEpochSecond();
+                    //
+                    //         LocalDate localDate = LocalDate.of(2024,4,14);
+                    //         long timestamp2 =  localDate.atStartOfDay(ZoneOffset.UTC).toInstant().getEpochSecond();
+                    //
+                    //         System.out.println("timeStamp: "+timestamp+" size: "+String.valueOf(timestamp).length());
+                    //         System.out.println("timeStam1: "+timestamp1+" size: "+String.valueOf(timestamp1).length());
+                    //         System.out.println("timeStam2: "+timestamp2+" size: "+String.valueOf(timestamp2).length());
+                    //         System.out.println("timeStam1: "+Instant.now().toString());
                     ///获取时间戳，默认带时区，utc方法中的不带时区，而且可以指定到某个时间点的时间戳，与268内容匹配，
                     ///在其它文件中还有时间戳相关的代码，暂时找不到位置。
                     String timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
@@ -185,10 +196,10 @@ class _GetHomePageState extends State<GetHomePage> {
               cancel: ElevatedButton(onPressed: () {
                 ///无法退出dialog.
                 Get.back();
-              }, child: Text("cancel"),),
+              }, child: const Text("cancel"),),
             );
           },
-              child: Text("Navigator"),
+              child: const Text("Navigator"),
           ),
         ],
       ),
