@@ -21,9 +21,9 @@ class _ExHtmlViewState extends State<ExHtmlView> {
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(Colors.lightGreen)
     ..setNavigationDelegate(
-      NavigationDelegate( onProgress: (progress)=>print('onProgress'),
+      NavigationDelegate( onProgress: (progress)=>debugPrint('onProgress'),
       ),
-    ) ;
+    );
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,30 @@ class _ExHtmlViewState extends State<ExHtmlView> {
      <h2>Header 1</h2>
      <p>Text.</p>
      <h2>Header 2</h2>
-     More text.
+     More text.<br>
+     Line 1... <br>
+     Line 2...<br>
+     Line 3...<br>
+     Line 4...<br>
+     Line 5...<br>
+     Line 6...<br>
+     Line 7...<br>
+     Line 8...<br>
+     Line 9...<br>
+     Line 10...<br>
+     <br/>
+     </body>''');
+
+    ///parse方法可以直接处理html文本
+    var htmlStr = parse('''
+     <body>
+     <h2>Header 1</h2>
+     <p>Text.</p>
+     <h2>Header 2</h2>
+     More text.<br>
+     Line 1... <br>
+     Line 2...<br>
+     Line 3...<br>
      <br/>
      </body>''');
 
@@ -81,23 +104,38 @@ class _ExHtmlViewState extends State<ExHtmlView> {
         title:const Text("Example of HtmlView"),
         backgroundColor: Colors.purpleAccent,
       ),
-      /*
+
       body: Column(
         children: [
           ///提取html中的元素，但是不是元素对应的值而是html中的标签,不是我期望的效果
           Text("data is : ${htmStr.body}"), ///显示<htm body>
           Text("data is : ${htmStr.head}"),///显示<htm head>
           Text("data is : ${htmStr.documentElement}"),
-          ///通过包中的widget直接渲染html文本
-          HtmlWidget(htmStr.outerHtml),
+          ///无法使用父容器限制HtmlWidget的大小，有运行时错误
+          // Container(
+          //   color: Colors.deepOrangeAccent,
+          //   padding: const EdgeInsets.all(16),
+          //   width: MediaQuery.sizeOf(context).width,
+          //   height: MediaQuery.sizeOf(context).height/5,
+          //   child: HtmlWidget(htmStr.outerHtml),
+          // ),
+          ///直接通过包中的widget直接渲染html文本
+          HtmlWidget(htmlStr.outerHtml),
 
           ///通过webViewWidget渲染html文本，不过尺寸太大，不能放在这里，需要放在整个屏幕中
-          WebViewWidget(controller: webViewController),
+          // WebViewWidget(controller: webViewController),
+          ///把webView放在父容器中用来限制WebView的大小，内容无法显示时可以自动滚动
+          Container(
+          color: Colors.lightBlueAccent,
+          padding: const EdgeInsets.all(16),
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height/5,
+          child: WebViewWidget(controller: webViewController,),
+          ),
         ],
       ),
-       */
-      ///通过webViewWidget渲染html文本，尺寸太大，需要放在整个屏幕中
-      body: WebViewWidget(controller: webViewController,),
+      ///通过webViewWidget渲染html文本，尺寸太大，需要放在整个屏幕中,
+      // body: WebViewWidget(controller: webViewController,),
     );
   }
 }
