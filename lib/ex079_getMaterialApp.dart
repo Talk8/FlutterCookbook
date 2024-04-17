@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercookbook/ex086_overlayEntry.dart';
+import 'package:fluttercookbook/ex087_html_view.dart';
 import 'package:get/get.dart';
 
 class ExGetMaterialApp extends StatelessWidget {
@@ -7,8 +9,19 @@ class ExGetMaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      home: GetHomePage(),
+    return GetMaterialApp(
+      // home: GetHomePage(),
+      ///配置好路由后可以使用命名路由，配置方法和Material方法相同
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => const GetHomePage(),),
+        GetPage(name: '/overlay', page: () => const ExOverlayEntry(),),
+        GetPage(name: '/html', page: () => const ExHtmlView(),),
+      ],
+      theme: ThemeData(
+        ///建议打开Material主题，否则页面风格太难看
+        useMaterial3: true,
+      ),
     );
   }
 
@@ -193,14 +206,38 @@ class _GetHomePageState extends State<GetHomePage> {
           ///******* 第四部分：路由管理
           ElevatedButton(onPressed: () {
             Get.defaultDialog(
+              navigatorKey: Get.key,
               cancel: ElevatedButton(onPressed: () {
-                ///无法退出dialog.
+                ///必须给navigatorKey赋值，否则无法退出dialog.
                 Get.back();
               }, child: const Text("cancel"),),
             );
           },
-              child: const Text("Navigator"),
+              child: const Text(" Show / Hidden Dialog"),
           ),
+          Row(
+            children: [
+              ///正常跳转到下一个页面
+              ElevatedButton(
+                onPressed: () {
+                  ///下面两种路由方法等效。
+                  // Get.to(const ExHtmlView());
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ExHtmlView()));
+                },
+                child: const Text("Go "),
+              ),
+              ///跳转到下一个页面，并且取消下一个页面的导航(返回箭头),从ExHtmlView页面返回后不会返回当前页面
+              ///而是返回当前页面的上一个页面,下面两种方法等效。
+              ElevatedButton(
+                onPressed: () {
+                  // Get.off(ExHtmlView());
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const ExHtmlView()));
+                },
+                child: const Text("Off"),
+              ),
+            ],
+          ),
+
         ],
       ),
     );
