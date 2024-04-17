@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:html/dom_parsing.dart';
-import 'package:html/parser.dart' ;
+import 'package:html/parser.dart';
+
 ///这个包中定义了Text类与material中的Text有冲突,所以重命名。
 // import 'package:html/dom.dart' ;
 import 'package:html/dom.dart' as html_dom;
@@ -21,14 +22,14 @@ class _ExHtmlViewState extends State<ExHtmlView> {
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(Colors.lightGreen)
     ..setNavigationDelegate(
-      NavigationDelegate( onProgress: (progress)=>debugPrint('onProgress'),
+      NavigationDelegate(
+        onProgress: (progress) => debugPrint('onProgress'),
       ),
     );
 
   @override
   Widget build(BuildContext context) {
-
-   ///parse方法可以直接处理html文本
+    ///parse方法可以直接处理html文本
     var htmStr = parse('''
      <body>
      <h2>Header 1</h2>
@@ -77,6 +78,7 @@ class _ExHtmlViewState extends State<ExHtmlView> {
     // I/flutter (22038):      <br>
     // I/flutter (22038):      </body></html>
     debugPrint(htmStr.outerHtml);
+
     ///输出：I/flutter (22038): <html>
     // I/flutter (22038):   <head>
     // I/flutter (22038):   </head>
@@ -96,21 +98,25 @@ class _ExHtmlViewState extends State<ExHtmlView> {
     // I/flutter (22038): </html>
     _Visitor().visit(htmStr);
 
-
     webViewController.loadHtmlString(htmStr.outerHtml);
 
     return Scaffold(
       appBar: AppBar(
-        title:const Text("Example of HtmlView"),
+        title: const Text("Example of HtmlView"),
         backgroundColor: Colors.purpleAccent,
       ),
 
       body: Column(
         children: [
           ///提取html中的元素，但是不是元素对应的值而是html中的标签,不是我期望的效果
-          Text("data is : ${htmStr.body}"), ///显示<htm body>
-          Text("data is : ${htmStr.head}"),///显示<htm head>
+          Text("data is : ${htmStr.body}"),
+
+          ///显示<htm body>
+          Text("data is : ${htmStr.head}"),
+
+          ///显示<htm head>
           Text("data is : ${htmStr.documentElement}"),
+
           ///无法使用父容器限制HtmlWidget的大小，有运行时错误
           // Container(
           //   color: Colors.deepOrangeAccent,
@@ -126,24 +132,25 @@ class _ExHtmlViewState extends State<ExHtmlView> {
           // WebViewWidget(controller: webViewController),
           ///把webView放在父容器中用来限制WebView的大小，内容无法显示时可以自动滚动
           Container(
-          color: Colors.lightBlueAccent,
-          padding: const EdgeInsets.all(16),
-          width: MediaQuery.sizeOf(context).width,
-          height: MediaQuery.sizeOf(context).height/5,
-          child: WebViewWidget(controller: webViewController,),
+            color: Colors.lightBlueAccent,
+            padding: const EdgeInsets.all(16),
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height / 5,
+            child: WebViewWidget(
+              controller: webViewController,
+            ),
           ),
         ],
       ),
+
       ///通过webViewWidget渲染html文本，尺寸太大，需要放在整个屏幕中,
       // body: WebViewWidget(controller: webViewController,),
     );
   }
 }
 
-
 class _Visitor extends TreeVisitor {
   String indent = '';
-
 
   @override
   void visitText(html_dom.Text node) {
@@ -172,4 +179,3 @@ class _Visitor extends TreeVisitor {
     }
   }
 }
-
