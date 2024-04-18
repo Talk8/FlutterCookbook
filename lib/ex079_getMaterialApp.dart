@@ -232,10 +232,21 @@ class _GetHomePageState extends State<GetHomePage> {
                 onPressed: () {
                   // Get.off(ExHtmlView());
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const ExHtmlView()));
+
+                  ///删除所有的路由并且跳转到下一个页面,下面两种方法等效。
+                  // Get.offAll(page);
+                  // Navigator.of(context).pushAndRemoveUntil(newRoute, (route) => false);
+                  ///上面介绍的这几种路由方式都有命名路由，就是在原来的方法中加上named就可以
                 },
                 child: const Text("Off"),
               ),
-              ///继续其它的路由方法
+              ///使用命名路由进行跳转,下面两种跳转方法的效果相同，路由名称在GetMaterialApp的getPages属性中设置
+              ElevatedButton(
+                onPressed: (){
+                  // Get.toNamed('/html');
+                  Navigator.of(context).pushNamed('/html');
+                },
+                child: const Text("Named"),),
             ],
           ),
 
