@@ -62,8 +62,8 @@ dependencies:
 #导入permission包来使用权限申请
   permission_handler: ^10.4.3
 
-#导入screenutil包来适配屏幕
-  flutter_screenutil: ^5.8.4
+#导入screenutil包来适配屏幕，更新版本以解决编译错误
+  flutter_screenutil: ^5.9.0
 
 #导入BLE包来使用蓝牙
   flutter_reactive_ble: ^5.1.1
@@ -85,13 +85,13 @@ dependencies:
   video_player: ^2.7.2
 # image_picker需要此包,用来处理媒体文件的类型
   mime: ^1.0.4
-# 图片获取和Image_Picker类似，只不过界面是微信的界面,注意版本需要flutter_sdk支持20240130已经到8.8了。为了与当前flutter版本匹配才用的8.6.3
+# 图片获取和Image_Picker类似，只不过界面是微信的界面,注意版本需要flutter_sdk支持20240130已经到8.8了。为了与flutter版本3.10.2匹配才用的8.6.3
   #这个包依赖了其它的包，比较多，比如video_player，extended_image: 好在都是他们自己组织做的包
   #注意：这个包需要高版本的sdk. The plugin photo_manager requires Android SDK version 34.
-  wechat_assets_picker: ^8.6.3
+  wechat_assets_picker: ^9.0.3
 # 通过相机获取图片和视频，Pick风格是wechat和 wechat_assets_picker一样都是国内人员开发的包
   #这个包依赖camera包，会自动把camera包添加到项目中来
-  wechat_camera_picker: ^4.0.0
+  wechat_camera_picker: ^4.2.1
 # 视频压缩包,用来处理视频文件的，它可以获取到视频文件的时长，路径，分辨率等类型
   video_compress: ^3.1.2
 #Flutter官方提供的webview
@@ -107,8 +107,8 @@ dependencies:
 # 创建panel的包，基于bottomsheet
   sliding_up_panel: ^2.0.0
 
-#实现滑动菜单功能，使用场景少
-  flutter_slidable: ^3.0.0
+#实现滑动菜单功能，使用场景少,3.0.0与flutter3.10.2版本匹配，3.1.0与flutter3.19.6匹配
+  flutter_slidable: ^3.1.0
 
 #获取GPS信息，非常好用的GPS包
   geolocator: ^10.0.1

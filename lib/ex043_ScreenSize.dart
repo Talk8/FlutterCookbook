@@ -91,8 +91,11 @@ class XScreenUtil {
   ///baseSize以iPhone6为基准，默认值是750px,375dp
   static void init(BuildContext context,[baseSize=375]) {
     ///获取屏幕物理分辨率,单位是px
-    physicalWidth = View.of(context).physicalGeometry.width;
-    physicalHeight = View.of(context).physicalGeometry.height;
+    physicalWidth = View.of(context).physicalSize.width;
+    // physicalGeometry.width;
+    ///更新到Flutter3.19.6版本后有编译错误，下面的代码可以解决编译错误
+    // physicalHeight = View.of(context).physicalGeometry.height;
+    physicalHeight = View.of(context).physicalSize.height;
 
     ///获取屏幕物理分辨率,单位是pt
     realWidth = MediaQuery.of(context).size.width;

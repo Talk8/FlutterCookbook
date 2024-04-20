@@ -80,7 +80,9 @@ class _ExDialogState extends State<ExDialog> {
     ElevatedButton(
       child: const Text('showBottomSheet'),
       onPressed: () {
-        Scaffold.of(context).showBottomSheet<void>(
+        Scaffold.of(context).showBottomSheet(
+          ///Flutter升级到3.19版本后报编译错误，因此换成上面的代码
+        // Scaffold.of(context).showBottomSheet<void>(
           (BuildContext context) {
             return Container(
               height: 200,
@@ -327,7 +329,8 @@ class ExBottomSheet extends StatelessWidget {
       child: ElevatedButton(
         child: const Text('showBottomSheet'),
         onPressed: () {
-          Scaffold.of(context).showBottomSheet<void>(
+          // Scaffold.of(context).showBottomSheet<void>(
+          Scaffold.of(context).showBottomSheet(
             (BuildContext context) {
               return Container(
                 height: 200,
