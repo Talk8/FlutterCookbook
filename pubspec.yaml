@@ -36,7 +36,7 @@ dependencies:
   intl: any
 
 #导入intl依赖，输入任何数字后IDE就会自动弹出当前最新的版本
-  intl_translation: ^0.18.2
+  intl_translation: ^0.19.0
 
 
 #导入包用来访问网络,开始使用最新版本无法导入，换成低版本后就可以了
@@ -186,6 +186,10 @@ dependencies:
 #这个插件主打聊天特色功能，可以封装audio,image等内容
   chat_bubbles: ^1.5.0
 
+# 使用riverpod进行状态管理,这里安装两个插件在dev_dependance中还有4个依赖
+# 安装这个版本的riverpod需要flutter高版本才可以，我的是3.19,不然会有各种包的版本冲突
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
 
 #  冒泡动画，和我做的效果一样
 #  floating_bubbles: ^2.6.2
@@ -260,6 +264,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+#把包中版本冲突：because fluttercookbook depends on both flutter_riverpod ^2.5.1 and flutter_test from sdk, version solving failed.
+#可以使用以下方法解决
+#dependency_overrides:
+#  collection: ^1.17.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -271,6 +280,11 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
+##这4个包是配合riverpod使用的，前两个没有指定版本
+  build_runner:
+  custom_lint:
+  riverpod_generator: ^2.4.0
+  riverpod_lint: ^2.3.10
 
    #这个是三方插件，它必须配置在 dev_dependencies:下方， 在它下面的其它插件是官方的配置：
   flutter_launcher_icons: ^0.13.1
