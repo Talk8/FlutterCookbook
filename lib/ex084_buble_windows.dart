@@ -10,6 +10,7 @@ import 'package:flutter_chat_bubble/chat_bubble.dart';
 ///与flutter_chat_bubble的内容相匹配，这个插件简单易用，
 ///与bubble的内容相匹配，这个插件功能十分强大
 ///与chat_bubble的内容相匹配，这个插件和其它三个插件不同主打chat功能
+///与425-429的内容匹配
 class ExBubleWidow extends StatefulWidget {
   const ExBubleWidow({super.key});
 
