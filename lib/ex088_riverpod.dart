@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class ExRiverPod extends ConsumerWidget {
   const ExRiverPod({super.key});
@@ -28,9 +29,13 @@ class ExRiverPod extends ConsumerWidget {
           ///点击按钮后会更新上面Text组件中的数据
           ElevatedButton(
             onPressed: (){
-              dataViewModel.setIntValue(6);
-              dataViewModel.setBoolValue(false);
-              dataViewModel.setStringValue("new data");
+              ///这个写法虽然能修改数据，但是不推荐这么做,推荐下面的写法。
+              // dataViewModel.setIntValue(6);
+              // dataViewModel.setBoolValue(false);
+              // dataViewModel.setStringValue("new data");
+              ref.read(dataVMRiverPodProvider).setIntValue(8);
+              ref.read(dataVMRiverPodProvider).setBoolValue(false);
+              ref.read(dataVMRiverPodProvider).setStringValue("read data");
             },
             child: const Text("change data"),
           ),
@@ -94,3 +99,48 @@ final dataVMRiverPodProvider = ChangeNotifierProvider((ref) {
   return DataViewModel();
 });
 
+///3. 完全使用riverpod实现Provider中的功能
+// class RiverPodData{
+//   ///这个数据可以理解为状态
+//   late int intData;
+//   late String strData;
+//   late bool boolData;
+//   late List<String> strListData;
+//
+//   ///初始化方法
+//   RiverPodDataViewModel() {
+//     _init();
+//   }
+//
+//   Future<void> _init()  async {
+//     intData = 1;
+//     strData = "Default string";
+//     boolData = true;
+//     strListData = ["a","b","c","d","e","f"];
+//   }
+//
+//   ///修改数据的方法，相当于修改状态
+//   Future<void> setIntValue(int v) async {
+//     intData = v;
+//   }
+//
+//   Future<void> setStringValue(String v) async {
+//     strData = v;
+//   }
+//
+//   Future<void> setBoolValue(bool v) async {
+//     boolData = v;
+//   }
+//
+//   Future<void> setListValue(List<String> list) async {
+//     strListData = list;
+//   }
+// }
+
+// @riverpod
+// class RiverPodDataViewModel extends _$RiverPodDataViewModel {
+//   @override
+//   FutureOr<RiverPodData> build() async {
+//     return RiverPodData();
+//   }
+// }
