@@ -37,6 +37,8 @@ class _ExCircleAvatarState extends State<ExCircleAvatar> with CallBack {
   Widget build(BuildContext context) {
     _dataStreamController.sink.add("default data");
 
+    debugPrint("build is running");
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("Example of Circle Avatar and LiveData",style: TextStyle(fontSize: 18),),
