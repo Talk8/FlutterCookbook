@@ -98,7 +98,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lifecycle/lifecycle.dart';
 // import 'package:logger/logger.dart';
+///这两个包只能开一个，因为riverpod包中包含provider.
 import 'package:provider/provider.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -564,6 +566,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
         listItem("086", "FlutterOverly", context, const ExOverlayEntry()),
         listItem("087", "Html Widget", context, const ExHtmlView()),
         listItem("088", "Riverpod", context, const ExRiverPod()),
+        // listItem("089", "Html Widget", context, const ExNavigation()),
       ],
     );
 
