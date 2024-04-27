@@ -99,43 +99,57 @@ final dataVMRiverPodProvider = ChangeNotifierProvider((ref) {
   return DataViewModel();
 });
 
-///3. 完全使用riverpod实现Provider中的功能
-// class RiverPodData{
-//   ///这个数据可以理解为状态
-//   late int intData;
-//   late String strData;
-//   late bool boolData;
-//   late List<String> strListData;
-//
-//   ///初始化方法
-//   RiverPodDataViewModel() {
-//     _init();
-//   }
-//
-//   Future<void> _init()  async {
-//     intData = 1;
-//     strData = "Default string";
-//     boolData = true;
-//     strListData = ["a","b","c","d","e","f"];
-//   }
-//
-//   ///修改数据的方法，相当于修改状态
-//   Future<void> setIntValue(int v) async {
-//     intData = v;
-//   }
-//
-//   Future<void> setStringValue(String v) async {
-//     strData = v;
-//   }
-//
-//   Future<void> setBoolValue(bool v) async {
-//     boolData = v;
-//   }
-//
-//   Future<void> setListValue(List<String> list) async {
-//     strListData = list;
-//   }
-// }
+
+///3. 完全使用riverpod实现Provider中的功能,代码还有错误
+class RiverPodData{
+  ///这个数据可以理解为状态
+  late int intData;
+  late String strData;
+  late bool boolData;
+  late List<String> strListData;
+
+  ///初始化方法
+  RiverPodDataViewModel() {
+    _init();
+  }
+
+  Future<void> _init()  async {
+    intData = 1;
+    strData = "Default string";
+    boolData = true;
+    strListData = ["a","b","c","d","e","f"];
+  }
+
+  ///修改数据的方法，相当于修改状态
+  Future<void> setIntValue(int v) async {
+    intData = v;
+  }
+
+  Future<void> setStringValue(String v) async {
+    strData = v;
+  }
+
+  Future<void> setBoolValue(bool v) async {
+    boolData = v;
+  }
+
+  Future<void> setListValue(List<String> list) async {
+    strListData = list;
+  }
+}
+
+///这个是snip自动生成的代码，但是有编译错误
+@riverpod
+class RiverpodDataProvider extends _$RiverpodDataProvider {
+  @override
+  RiverPodData build() {
+    return RiverPodData() ;
+  }
+
+}
+///这个是为了解决编译错误定义的类
+class _$RiverpodDataProvider {
+}
 
 // @riverpod
 // class RiverPodDataViewModel extends _$RiverPodDataViewModel {
