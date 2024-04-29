@@ -66,6 +66,7 @@ class _ExAnimationState extends State<ExAnimation> with SingleTickerProviderStat
           AnimatedBuilder(
             animation: _animationTween,
             builder: (context,child){
+              ///如何平移？
               return Icon(Icons.face,size: _animationTween.value,);},
             ///这个child和builder中child参数相同
             // child: Icon(Icons.surround_sound,size: _animationTween.value,),
