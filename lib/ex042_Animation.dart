@@ -82,9 +82,9 @@ class _ExAnimationState extends State<ExAnimation> with SingleTickerProviderStat
           ),
           ///自动旋转组件,其它以Animated开头的组件也有动画功能，这类动画是显式动画
           const AnimatedRotation(
-            child: Text("hi"),
             duration: Duration(seconds: 3),
             turns: pi/3,
+            child: Text("hi"),
           ),
           AnimatedOpacity(opacity: 1.0, duration: const Duration(seconds: 3),
             child: Container(width: 100,height: 100,color: Colors.red,),
