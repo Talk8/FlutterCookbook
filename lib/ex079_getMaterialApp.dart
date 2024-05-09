@@ -245,8 +245,8 @@ class _GetHomePageState extends State<GetHomePage> {
               ///包中还有一个中间件，其实是路由拦截，原理和MaterialApp相同，只是语法不同。有需要了再去看
               ElevatedButton(
                 onPressed: (){
-                  // Get.toNamed('/html');
-                  Navigator.of(context).pushNamed('/html');
+                  Get.toNamed('/html');
+                  // Navigator.of(context).pushNamed('/html');
                   ///通过参数传递和获取数据
                   // Get.toNamed('/html',arguments: "data");
                   // Get.arguments
