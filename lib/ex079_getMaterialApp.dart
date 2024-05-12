@@ -43,6 +43,7 @@ class _GetHomePageState extends State<GetHomePage> {
   var boolValue = false.obs;
 
   ///生成数据模型对象,注意与find的区别，find是查找已经有的对象
+  ///put方法通过依赖注入来初始化实例对象
   var getController = Get.put(ValueController());
 
   ///创建数据模型对象，使用Obx响应式状态管理
@@ -176,6 +177,7 @@ class _GetHomePageState extends State<GetHomePage> {
               intValue.value = 666;
               boolValue.value = true;
               ///GetBuilder更新数据：下面两种方式都可以，推荐使用当前没有注释掉的方法
+              ///这种获取实例的方法使用了依赖管理技术
               // Get.find<ValueController>().updateValue();
               getController.updateValue();
 
