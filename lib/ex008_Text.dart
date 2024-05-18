@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class ExText extends StatelessWidget {
@@ -58,6 +59,38 @@ class ExText extends StatelessWidget {
               maxLines: 1,
               //超过最大行数后显示三个点
               overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Container(
+            width: 300,
+            height: 64,
+            color: Colors.grey,
+            ///这个组件不能单独使用，需要嵌套到其它组件中才可以，不然无法被显示到页面上
+            ///TextSpan不能单独使用，需要RichText把它渲染到屏幕上
+            child: RichText(text: TextSpan(
+              ///默认显示白色文字
+              text: "Hello",
+              ///通过此属性组合多个TextSpan组件在一起，形成一个完整文本
+              children: [
+                ///这里不能使用此组件
+                // Text("good"),
+                ///第一个文本
+                TextSpan(text: "Flutter",
+                  ///通过style让不同的文本显示不同的内容
+                  style: const TextStyle(color: Colors.lightBlue,
+                  ///用来显示下划线，删除线等
+                  decoration: TextDecoration.underline,
+                  ),
+                  ///添加手势事件
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      debugPrint("it is Gesture event");
+                    }
+                ),
+                ///第二个文本,和第一个文本组成完整的文本
+                const TextSpan(text: ",We are coming!"),
+              ]
+            ),
             ),
           ),
         ],
