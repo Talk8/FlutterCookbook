@@ -268,6 +268,7 @@ class ValueController extends GetxController {
   int iValue = 0;
   String strValue = "default string";
 
+  ///更新数据的方法
   void updateValue() {
     iValue = 666;
     strValue = "new String Value";
