@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -39,6 +40,73 @@ class ExRiverPod extends ConsumerWidget {
             },
             child: const Text("change data"),
           ),
+
+          ///在AlertDial的column中直接显示checkBox也是有外边距，与dialog无关
+          ElevatedButton(onPressed: () {
+            showDialog(context: context, builder:
+            (context){
+              return AlertDialog(
+                contentPadding: EdgeInsets.zero,
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Checkbox(value: true, onChanged: (checkValue){
+                    }),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                            color: Colors.lightBlue,
+                            alignment: Alignment.centerLeft,
+                            width: MediaQuery.sizeOf(context).width/2,
+                            child: Transform.translate(
+                              offset: const Offset(-16,0),
+                              child: Checkbox(
+                                  value: false,
+                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  splashRadius: 0,
+                                  shape: RoundedRectangleBorder(side:const BorderSide(width: 8,color: Colors.redAccent),
+                                    borderRadius: BorderRadius.circular(16),),
+                                  onChanged: (checkValue){ }),
+                            ),
+                        ),
+                        const Text("dataaa"),
+                      ],
+                    ),
+                    const Text("dataaa dd"),
+                  ],
+                ),
+              );
+            });
+          }, child: const Text("Show dialog"),),
+
+          ///在column中直接显示checkBox也是有外边距，与dialog无关，解决方法是使用偏移组件，手动移动组件位置
+          Row(
+            children: [
+              Container(
+                color: Colors.lightBlue,
+                alignment: Alignment.topRight,
+                child: Transform.translate(
+                  ///向左移动16dp是合理的数据
+                  offset: const Offset(0,0),
+                  child: Checkbox(
+                      value: false,
+                      // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      // materialTapTargetSize: MaterialTapTargetSize.padded,
+                      onChanged: (checkValue){ }),
+                ),
+                // child: CupertinoCheckbox(value: false, onChanged: (va){}),
+              ),
+              const Text("dataaa"),
+            ],
+          ),
+          CheckboxListTile(value: false, onChanged: (bool? value) {  },
+            title: const Text("hello"),
+          ),
+          CupertinoCheckbox(value: false, onChanged: (va){}),
         ],
       ),
 
