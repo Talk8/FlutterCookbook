@@ -27,6 +27,8 @@ class _ExWillPopScopeState extends State<ExWillPopScope> {
 
   @override
   Widget build(BuildContext context) {
+    ///flutter 3.12之后WillPopScope被弃用
+    /*
     return WillPopScope(
       onWillPop: _backIconOnPress,
       child: Scaffold(
@@ -36,6 +38,25 @@ class _ExWillPopScopeState extends State<ExWillPopScope> {
         ),
         body: const Center(
             child: Text('连续两次点击小于3s时才能退出页面'),
+        ),
+      ),
+    );
+     */
+    return PopScope(
+      ///参数中的值就是canPop中的值，可以通过canPop控制是否退出当前页面
+      onPopInvoked: (hasPop) {
+        debugPrint(" back value: ${hasPop.toString()}");
+      },
+      ///设置为true时才可以退出当前页面
+      canPop: false,
+      // onWillPop: _backIconOnPress,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Example of WillPopScope Widget'),
+          backgroundColor: Colors.purpleAccent,
+        ),
+        body: const Center(
+          child: Text('连续两次点击小于3s时才能退出页面'),
         ),
       ),
     );
