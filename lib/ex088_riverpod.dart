@@ -94,7 +94,8 @@ class ExRiverPod extends ConsumerWidget {
                   offset: const Offset(0,0),
                   child: Checkbox(
                       value: false,
-                      // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ///这两个属性可以去掉一部分边距
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       // materialTapTargetSize: MaterialTapTargetSize.padded,
                       onChanged: (checkValue){ }),
                 ),
@@ -103,9 +104,11 @@ class ExRiverPod extends ConsumerWidget {
               const Text("dataaa"),
             ],
           ),
+          ///这个组件的checkBox在最右侧
           CheckboxListTile(value: false, onChanged: (bool? value) {  },
             title: const Text("hello"),
           ),
+          ///IOS风格的checkBox也有间隔
           CupertinoCheckbox(value: false, onChanged: (va){}),
         ],
       ),
@@ -114,7 +117,7 @@ class ExRiverPod extends ConsumerWidget {
   }
 }
 
-///1. 创建时使用了Flutter Riverpod Snippets插件，输入provider就会自动生成代码版本，类型stf生成代码版本一样
+///1. 创建时使用了Flutter Riverpod Snippets插件，输入provider就会自动生成代码版本，类似stf生成代码版本一样
 final helloRiverpodProvider = Provider<String>((ref) {
   return "HelloRiverPod";
 });
