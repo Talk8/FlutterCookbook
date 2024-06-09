@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+///part这语法是什么意思？
+part 'ex088_riverpod.g.dart';
 
 class ExRiverPod extends ConsumerWidget {
   const ExRiverPod({super.key});
@@ -13,6 +15,8 @@ class ExRiverPod extends ConsumerWidget {
 
     ///2. 这个用法是Provider代码迁移到riverPod的用法
     final DataViewModel dataViewModel = ref.watch(dataVMRiverPodProvider);
+
+    final String strOfDVM = ref.watch(pjtDataVMProvider).name;
 
     return Scaffold(
       appBar: AppBar(
@@ -27,16 +31,18 @@ class ExRiverPod extends ConsumerWidget {
           /// 2.这个用法是Provider代码迁移到riverPod的用法
           Text("Default data<${dataViewModel.intData},${dataViewModel.strData},"
               "${dataViewModel.boolData},${dataViewModel.strListData.toString()}>"),
+          // Text(strRiver),
           ///点击按钮后会更新上面Text组件中的数据
           ElevatedButton(
             onPressed: (){
+
               ///这个写法虽然能修改数据，但是不推荐这么做,推荐下面的写法。
               // dataViewModel.setIntValue(6);
               // dataViewModel.setBoolValue(false);
               // dataViewModel.setStringValue("new data");
-              ref.read(dataVMRiverPodProvider).setIntValue(8);
+              ref.read(dataVMRiverPodProvider).setIntValue(9);
               ref.read(dataVMRiverPodProvider).setBoolValue(false);
-              ref.read(dataVMRiverPodProvider).setStringValue("read data");
+              ref.read(dataVMRiverPodProvider).setStringValue("str data");
             },
             child: const Text("change data"),
           ),
@@ -110,6 +116,16 @@ class ExRiverPod extends ConsumerWidget {
           ),
           ///IOS风格的checkBox也有间隔
           CupertinoCheckbox(value: false, onChanged: (va){}),
+
+          Text("ProjectDataViewModel: $strOfDVM"),
+          Text("ProjectDataViewModel: ${ref.watch(pjtDataVMProvider).name}"),
+          ElevatedButton(
+              onPressed: () {
+                // ref.read(pjtDataVMProvider).name = "name is changed";
+                ref.read(pjtDataVMProvider).changeName("change ");
+          },
+              child: Text("Change the data"),
+          ),
         ],
       ),
 
@@ -118,6 +134,7 @@ class ExRiverPod extends ConsumerWidget {
 }
 
 ///1. 创建时使用了Flutter Riverpod Snippets插件，输入provider就会自动生成代码版本，类似stf生成代码版本一样
+///这种Provider只能监听数据 ，不能修改数据
 final helloRiverpodProvider = Provider<String>((ref) {
   return "HelloRiverPod";
 });
@@ -209,19 +226,7 @@ class RiverPodData{
   }
 }
 
-///这个是snip自动生成的代码，但是有编译错误
-@riverpod
-class RiverpodDataProvider extends _$RiverpodDataProvider {
-  @override
-  RiverPodData build() {
-    return RiverPodData() ;
-  }
-
-}
-///这个是为了解决编译错误定义的类
-class _$RiverpodDataProvider {
-}
-
+///这个是snip自动生成的代码，但是有编译错误,需要执行命令来手动生成代码，借助了flutter_gern
 // @riverpod
 // class RiverPodDataViewModel extends _$RiverPodDataViewModel {
 //   @override
@@ -229,3 +234,51 @@ class _$RiverpodDataProvider {
 //     return RiverPodData();
 //   }
 // }
+
+///我在上面的三种用法都是从Provider角度迁移的用法
+
+
+class ImageResposity {
+  int getImageCount() {
+    return 3;
+  }
+}
+
+@riverpod
+ImageResposity imageRespty(ImageResptyRef ref) {
+  return ImageResposity();
+}
+
+@riverpod
+class Example extends _$Example {
+  @override
+  String build() {
+    return "example";
+  }
+}
+
+///无法修改数据
+class ProjectDataViewMode {
+  int size = 0;
+  String name = "Default";
+
+  void changeName(String v) {
+    name = v;
+  }
+}
+
+@riverpod
+ProjectDataViewMode pjtDataVM(PjtDataVMRef ref) {
+  return ProjectDataViewMode();
+}
+
+///每次都运行命令，flutter pub run build_runner watch -d
+///否则不会自动生成代码
+
+@riverpod
+class TDataVM extends _$TDataVM {
+  @override
+  TDataVM build() {
+    return TDataVM();
+  }
+}
