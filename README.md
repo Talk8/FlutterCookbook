@@ -97,4 +97,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex086_overlayEntry              | this is the example of overlay ,which is provided by FlutterSDK|
 | ex087_HtmlView                  | this is the example of html and flutter_widget_from_html package|
 | ex088_Riverpod                  | this is the example of Riverpod                                |
+| ex088_Riverpod                  | this is the example of Riverpod                                |
 
