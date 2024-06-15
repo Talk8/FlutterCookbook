@@ -1654,6 +1654,20 @@
             </list>
           </value>
         </entry>
+        <entry key="vibration">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/vibration-1.9.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="vibration_platform_interface">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/vibration_platform_interface-0.0.1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="video_compress">
           <value>
             <list>
@@ -2063,6 +2077,8 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/vector_math-2.1.4/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/vibration-1.9.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/vibration_platform_interface-0.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/video_compress-3.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/video_player-2.7.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/video_player_android-2.4.11/lib" />
