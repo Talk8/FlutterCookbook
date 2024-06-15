@@ -18,7 +18,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: ">=2.17.6 <4.0.0"
+#  sdk: ">=2.17.6 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -185,6 +186,9 @@ dependencies:
 #最新版本为1.6.0基于intl0.19.0,为了当前环境中的intl匹配修改成1.5.0版本
 #这个插件主打聊天特色功能，可以封装audio,image等内容
   chat_bubbles: ^1.5.0
+
+#实现振动功能的包
+  vibration: ^1.9.0
 
 # 使用riverpod进行状态管理,这里安装两个插件在dev_dependance中还有4个依赖
 # 安装这个版本的riverpod需要flutter高版本才可以，我的是3.19,不然会有各种包的版本冲突
