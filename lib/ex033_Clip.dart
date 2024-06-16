@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///与70回剪切类组件内容匹配
 class ExClip extends StatefulWidget {
   const ExClip({Key? key}) : super(key: key);
 
@@ -12,7 +13,7 @@ class _ExClipState extends State<ExClip> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Example of all kinds of Clip Widget"),
+        title: const Text("Example of all kinds of Clip Widget"),
         backgroundColor: Colors.purpleAccent,
       ),
       body: Align(
@@ -64,6 +65,14 @@ class _ExClipState extends State<ExClip> {
               borderRadius: BorderRadius.circular(30),
               child: Image.asset("images/ex.png",width: 90,height: 90,),
               ),
+            ),
+            ///使用Material也可以实现剪裁功能，它类型于Container中的属性
+            ///type的功能了也很强大，默认是canvas,可以设置为圆形矩形等形状，还可以设置成无组件
+            Material(
+              type: MaterialType.canvas,
+              clipBehavior: Clip.antiAlias,
+              borderRadius: BorderRadius.circular(30),
+              child: Image.asset("images/ex.png",width: 90,height: 90,),
             ),
           ],
         ),
