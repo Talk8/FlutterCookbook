@@ -21,13 +21,13 @@ class _ExClipState extends State<ExClip> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            //原始图片
+            ///原始图片
             Container(
-              width: 200, height: 100,
+              width: 200, height: 80,
               color: Colors.grey,
               child: Image.asset("images/ex.png",width: 90,),
             ),
-            //剪裁成椭圆或者圆形形状
+            ///剪裁成椭圆或者圆形形状
             Container(
               width: 100, height: 100,
               color: Colors.grey,
@@ -35,12 +35,12 @@ class _ExClipState extends State<ExClip> {
                 child: Image.asset("images/ex.png",width: 50,height: 80,),
               ),
             ),
-            //Avatar剪裁效果好
+            ///Avatar剪裁效果好
             CircleAvatar(
               radius: 40,
               child: Image.asset("images/ex.png",width: 50,height: 80,),
             ),
-            //剪裁成椭圆或者圆形形状,使用自定义的剪裁尺寸，效果比默认的好一些
+            ///剪裁成椭圆或者圆形形状,使用自定义的剪裁尺寸，效果比默认的好一些
             Container(
               width: 100, height: 100,
               color: Colors.grey,
@@ -49,7 +49,7 @@ class _ExClipState extends State<ExClip> {
                 child: Image.asset("images/ex.png",width: 50,height: 80,),
               ),
             ),
-            //剪裁效果是？
+            ///没有剪裁效果是
             Container(
               width: 100, height: 100,
               color: Colors.grey,
@@ -57,7 +57,7 @@ class _ExClipState extends State<ExClip> {
                 child: Image.asset("images/ex.png",width: 90,),
               ),
             ),
-            //剪切成圆角矩形
+            ///剪切成圆角矩形,30度不明显
             Container(
               width: 100, height: 100,
               color: Colors.grey,
@@ -71,7 +71,14 @@ class _ExClipState extends State<ExClip> {
             Material(
               type: MaterialType.canvas,
               clipBehavior: Clip.antiAlias,
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(60),
+              child: Image.asset("images/ex.png",width: 90,height: 90,),
+            ),
+            ///通过type剪切成圆形，不能添加borderRadius属性，但是color属性不能少，它是背景色
+            Material(
+              type: MaterialType.circle,
+              color: Colors.orangeAccent,
+              clipBehavior: Clip.antiAlias,
               child: Image.asset("images/ex.png",width: 90,height: 90,),
             ),
           ],
