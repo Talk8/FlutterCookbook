@@ -43,6 +43,8 @@ class _ExSliderState extends State<ExSlider> {
     );
   }
 
+  RangeValues rangeSliderValue = const RangeValues(1, 13);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,15 +79,15 @@ class _ExSliderState extends State<ExSlider> {
         // 在每列中添加一个文本控件，对比文本控件和容器之间的距离就能看出来
         //transform组件没有旋转布局，
         const Text("start widget"),
-        RotatedBox(
-          quarterTurns: 1,
-          child: Container(
-            color: Colors.blue,
-            width: 300,
-            height: 200,
-            child: _slider(),
-          ),
-        ),
+        // RotatedBox(
+        //   quarterTurns: 1,
+        //   child: Container(
+        //     color: Colors.blue,
+        //     width: 300,
+        //     height:200,
+        //     child: _slider(),
+        //   ),
+        // ),
         const Text("end widget"),
         Transform.rotate(
           //通过指定的弧度进行旋转
@@ -110,7 +112,28 @@ class _ExSliderState extends State<ExSlider> {
             ),
             child: _slider(),
         ),
-      ]),
+            ///双向滑动的slider，可以控制一个范围
+            RangeSlider(
+              ///最大小值
+              min: 0,
+              max: 15,
+              ///不给这个属性赋值，就不会显示label
+              divisions: 15,
+              ///label有两个：开始和结束。loble的主题可以像上一个slider一样使用SliderTheme
+              labels: RangeLabels(rangeSliderValue.start.toString(),rangeSliderValue.end.toString()),
+              values: rangeSliderValue,
+              ///修改滑动条的颜色，
+              activeColor: Colors.orange,
+              inactiveColor: Colors.green,
+              onChanged: (value) {
+                setState(() {
+                  rangeSliderValue = value;
+                });
+                debugPrint(value.toString());
+              },
+            ),
+      ],
+      ),
     );
   }
 }
