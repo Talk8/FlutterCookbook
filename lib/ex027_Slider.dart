@@ -125,11 +125,23 @@ class _ExSliderState extends State<ExSlider> {
               ///修改滑动条的颜色，
               activeColor: Colors.orange,
               inactiveColor: Colors.green,
+              ///不论start还是end的bar被拖动时就会回调，或者说只要有数值变化就回调
+              ///值变化一点就回调一次，回调频率高
               onChanged: (value) {
                 setState(() {
                   rangeSliderValue = value;
                 });
-                debugPrint(value.toString());
+                debugPrint("change value: ${value.toString()}");
+              },
+              ///不论start还是end的bar被拖动时就会回调，或者说只要有数值开始变化就回调
+              ///有且回调一次，就是数值开始变化时
+              onChangeStart: (value) {
+                debugPrint("start value: ${value.toString()}");
+              },
+              ///不论start还是end的bar被拖动时就会回调，或者说只要有数值结束变化就回调
+              ///有且回调一次，就是数值结束变化时
+              onChangeEnd: (value) {
+                debugPrint("end value: ${value.toString()}");
               },
             ),
       ],
