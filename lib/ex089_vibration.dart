@@ -12,7 +12,7 @@ class _ExVibrateState extends State<ExVibrate> {
   @override
   void initState() {
     // TODO: implement initState
-    ///检查是否有振动的权限
+    ///检查是否有振动的权限,使用前先检查是否有此功能，再调用功能，可以封装成一个独立的函数
     Future.delayed(const Duration(seconds: 1), () async {
       if(await Vibration.hasVibrator() ?? false) {
         debugPrint("has vibrator");
