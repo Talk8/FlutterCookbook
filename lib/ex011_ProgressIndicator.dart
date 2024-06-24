@@ -15,10 +15,10 @@ class _ExProgressWidgetState extends State<ExProgressWidget> {
           title: const Text("Example of Progress indicator"),
           backgroundColor: Colors.purpleAccent,
         ),
-        body: Column(
+        body: const Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             LinearProgressIndicator(
               backgroundColor: Colors.blue,
               valueColor: AlwaysStoppedAnimation(Colors.purpleAccent),
