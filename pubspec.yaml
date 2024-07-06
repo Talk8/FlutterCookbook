@@ -97,6 +97,8 @@ dependencies:
   video_compress: ^3.1.2
 #Flutter官方提供的webview
   webview_flutter: ^4.2.4
+  #三方提供的Webview，可以避开安全策略来加载本地的html文件
+  flutter_inappwebview: ^6.0.0
 
 #在组件旁边添加小红点
   badges: ^3.1.2
@@ -322,6 +324,7 @@ flutter:
     - images/
     - images/ex.png
     - images/panda.jpeg
+    - images/indexdev.html
 
   fonts:
     - family: IconMoon

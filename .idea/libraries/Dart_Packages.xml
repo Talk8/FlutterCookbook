@@ -506,6 +506,55 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_inappwebview">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview-6.0.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_inappwebview_android">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_android-1.0.13/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_inappwebview_internal_annotations">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_internal_annotations-1.1.1/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_inappwebview_ios">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_ios-1.0.13/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_inappwebview_macos">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_macos-1.0.11/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_inappwebview_platform_interface">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_platform_interface-1.0.10/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_inappwebview_web">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_web-1.0.8/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_keyboard_visibility">
           <value>
             <list>
@@ -1244,7 +1293,7 @@
         <entry key="plugin_platform_interface">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.4/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.8/lib" />
             </list>
           </value>
         </entry>
@@ -1917,6 +1966,13 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_blue_plus-1.14.7/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_cache_manager-3.3.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_chat_bubble-2.0.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview-6.0.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_android-1.0.13/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_internal_annotations-1.1.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_ios-1.0.13/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_macos-1.0.11/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_platform_interface-1.0.10/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_inappwebview_web-1.0.8/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility-5.4.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility_linux-1.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility_macos-1.0.0/lib" />
@@ -2019,7 +2075,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/photo_manager-3.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/photo_manager_image_provider-2.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/platform-3.1.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.4/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.8/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/pointycastle-3.7.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/pool-1.5.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/protobuf-2.1.0/lib" />
