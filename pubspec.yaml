@@ -100,6 +100,9 @@ dependencies:
   #三方提供的Webview，可以避开安全策略来加载本地的html文件
   flutter_inappwebview: ^6.0.0
 
+# 三方图片库，用来显示PGM格式的图片文件
+  image: ^4.2.0
+
 #在组件旁边添加小红点
   badges: ^3.1.2
 # 用来创建app介绍页面的包，不过get后发现它叫flutter_keyboard_visibility，难道是原来的名字，它还依赖dots_indicator这个包
