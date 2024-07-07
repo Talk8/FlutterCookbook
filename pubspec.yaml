@@ -102,8 +102,9 @@ dependencies:
 
 # 三方图片库，用来显示PGM格式的图片文件,无法解码，
   image: ^4.2.0
- # 显示三维图像
+ # 显示三维图像,ditredi用的坐标会用到vector_math中的内容
   ditredi: ^2.0.2
+  vector_math: ^2.1.4
 
 #在组件旁边添加小红点
   badges: ^3.1.2
