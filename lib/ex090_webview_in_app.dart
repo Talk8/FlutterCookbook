@@ -7,6 +7,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 ///这个示例主要运行flutter_inappwebview插件实现访问app中资源(asset)目录下的html文件
 ///flutter官方的webView可以在app中显示正常网页，不过不能访问app中资源(asset)目录下的html文件
 ///如果想访问需要在manifest文件中开相关权限，这会影响完全，因此使用本插件
+///可以结合ex_053WebView的代码一起看
 class ExWebViewInApp extends StatefulWidget {
   const ExWebViewInApp({super.key});
 
