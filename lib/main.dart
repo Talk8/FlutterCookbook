@@ -95,6 +95,8 @@ import 'package:fluttercookbook/ex086_overlayEntry.dart';
 import 'package:fluttercookbook/ex087_html_view.dart';
 import 'package:fluttercookbook/ex088_riverpod.dart';
 import 'package:fluttercookbook/ex089_vibration.dart';
+import 'package:fluttercookbook/ex090_webview_in_app.dart';
+import 'package:fluttercookbook/extest3.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lifecycle/lifecycle.dart';
@@ -568,6 +570,8 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
         listItem("087", "Html Widget", context, const ExHtmlView()),
         listItem("088", "Riverpod", context, const ExRiverPod()),
         listItem("089", "Vibration", context, const ExVibrate()),
+        listItem("090", "WebViewInApp", context, const ExWebViewInApp()),
+        listItem("090", "Test View", context, const ExTestThree()),
         // listItem("089", "Html Widget", context, const ExNavigation()),
       ],
     );
