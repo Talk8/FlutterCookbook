@@ -100,11 +100,15 @@ dependencies:
   #三方提供的Webview，可以避开安全策略来加载本地的html文件
   flutter_inappwebview: ^6.0.0
 
-# 三方图片库，用来显示PGM格式的图片文件,无法解码，
+# 三方图片库，用来显示PGM格式的图片文件,不过实践后无法解码，
+#  注意：three_dart >=0.0.5 depends on image ^3.1.1 and fluttercookbook depends on image ^4.2.0,three_dart >=0.0.5 is forbidden.
   image: ^4.2.0
  # 显示三维图像,ditredi用的坐标会用到vector_math中的内容
   ditredi: ^2.0.2
   vector_math: ^2.1.4
+
+#国内人开发的库，相当于把three移植到了flutter中，不过版本比较底先不引入，主要是依赖其它插件的版本有冲突
+#  three_dart: ^0.0.16
 
 #在组件旁边添加小红点
   badges: ^3.1.2
