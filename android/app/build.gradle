@@ -55,7 +55,10 @@ android {
         applicationId "com.cookbook.flutter.fluttercookbook"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
-        minSdkVersion 26
+//        minSdkVersion 26
+//        anifest merger failed : uses-sdk:minSdkVersion 26 cannot be smaller than version 27 declared in library [:flutter_angle]
+        //使用three_js包时需要最低版本27,主要是flutter_angl这个包对android的SDK版本有要求
+        minSdkVersion 27
 //        targetSdkVersion 31
 //        minSdkVersion flutter.minSdkVersion
 //        targetSdkVersion flutter.targetSdkVersion
