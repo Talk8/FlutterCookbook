@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:overlay_tooltip/overlay_tooltip.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -35,6 +36,8 @@ class _ExMediaPickerLikeWechatState extends State<ExMediaPickerLikeWechat> {
 
   final CameraPickerConfig cameraPickerConfig = const CameraPickerConfig(
     enableRecording: true,
+    ///设置相机的方向，仅在录像时有效果
+    lockCaptureOrientation: DeviceOrientation.portraitDown,
 
     ///是否支持录像功能
     enableTapRecording: true,
