@@ -99,4 +99,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex088_Riverpod                  | this is the example of Riverpod                                |
 | ex089_Vibration                 | this is the example of Vibration                               |
 | ex090_WebViewInApp              | this is the example of web view in app.                        |
+| ex090_WebViewInApp              | this is the example of web view in app.                        |
 
