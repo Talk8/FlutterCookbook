@@ -111,6 +111,8 @@ dependencies:
   flutter_3d_controller: ^1.3.1
  #这个是20240722的2周前一个国外人新写的插件，用的人比较少
   three_js: ^0.0.4
+  three_js_geometry: ^0.0.2
+  three_js_helpers: ^0.0.4
 
 #国内人开发的库，相当于把three移植到了flutter中，不过版本比较底先不引入，主要是依赖其它插件的版本有冲突
 #  three_dart: ^0.0.16

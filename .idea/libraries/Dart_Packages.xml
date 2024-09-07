@@ -936,7 +936,7 @@
         <entry key="get">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/get-4.6.5/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/get-4.6.6/lib" />
             </list>
           </value>
         </entry>
@@ -1766,6 +1766,13 @@
             </list>
           </value>
         </entry>
+        <entry key="three_js_helpers">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/three_js_helpers-0.0.4/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="three_js_math">
           <value>
             <list>
@@ -2077,14 +2084,14 @@
         <entry key="win32">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/win32-5.0.6/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/win32-5.5.4/lib" />
             </list>
           </value>
         </entry>
         <entry key="win32_registry">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/win32_registry-1.1.1/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/win32_registry-1.1.4/lib" />
             </list>
           </value>
         </entry>
@@ -2241,7 +2248,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/geolocator_platform_interface-4.0.8/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/geolocator_web-2.1.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/geolocator_windows-0.2.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/get-4.6.5/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/get-4.6.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/get_storage-2.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/glob-2.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/graphs-2.3.1/lib" />
@@ -2359,6 +2366,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/three_js_core_loaders-0.0.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/three_js_curves-0.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/three_js_geometry-0.0.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/three_js_helpers-0.0.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/three_js_math-0.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/three_js_simple_loaders-0.0.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/three_js_text-0.0.3/lib" />
@@ -2403,8 +2411,8 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/wechat_camera_picker-4.2.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/wechat_picker_library-1.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/wheel_chooser-1.1.2/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/win32-5.0.6/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/win32_registry-1.1.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/win32-5.5.4/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/win32_registry-1.1.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/xdg_directories-1.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/xml-6.5.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/yaml-3.1.2/lib" />
