@@ -36,8 +36,8 @@ dependencies:
     sdk: flutter
   intl: any
 
-#导入intl依赖，输入任何数字后IDE就会自动弹出当前最新的版本
-  intl_translation: ^0.19.0
+#导入intl依赖，输入任何数字后IDE就会自动弹出当前最新的版本. 开始用0.19.0版本更新FlutterSDK后提高到0.20.0版本，否则有编译错误
+  intl_translation: ^0.20.0
 
 
 #导入包用来访问网络,开始使用最新版本无法导入，换成低版本后就可以了
@@ -162,8 +162,8 @@ dependencies:
 
 #
   bluetooth_enable_fork: ^0.1.6
-# 可以进行状态管理，显示dialog,snackBar不需要context
-  get: ^4.6.5
+# 可以进行状态管理，显示dialog,snackBar不需要context,开始用4.6.5版本更新FlutterSDK后提高到4.6.6版本，否则有编译错误
+  get: ^4.6.6
 # 本地存储
   get_storage: ^2.1.1
 
@@ -284,6 +284,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
+#更新FlutterSDK到3.24.2后有编译错误，因此强制加上这两个包，不知道是哪个插件引用了它们
+  win32: ^5.5.4
+  win32_registry: ^1.1.4
 
 #把包中版本冲突：because fluttercookbook depends on both flutter_riverpod ^2.5.1 and flutter_test from sdk, version solving failed.
 #可以使用以下方法解决
