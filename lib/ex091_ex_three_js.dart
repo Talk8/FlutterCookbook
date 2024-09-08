@@ -81,6 +81,7 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     // threeJs.camera.position.setValues(0, 9, 10);
     // threeJs.camera.position.z = 5;
 
+    ///创建场景
     threeJs.scene = three.Scene();
     ///修改场景的大小和颜色，相当于背景的颜色,但是是大小不起作用,需要在创建threeJs对象时指定大小
     // threeJs.renderer?.setSize(200, 200,);
