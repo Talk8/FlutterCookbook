@@ -99,4 +99,7 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex088_Riverpod                  | this is the example of Riverpod                                |
 | ex089_Vibration                 | this is the example of Vibration                               |
 | ex090_WebViewInApp              | this is the example of web view in app.                        |
+| ex091_3dView                    | this is the example of Dirtrei package,which is uesed fo 3d view|
+| ex092_threeJsView               | this is the example of threeJs package.                        |
+| ex093_ImageDecoder              | this is the example of Image package,which is used for decoder 2d image file.|
 
