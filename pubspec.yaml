@@ -346,7 +346,8 @@ flutter:
     - images/ex.png
     - images/panda.jpeg
     - images/indexdev.html
-    - images/pool.obj
+    - images/ex_02pool.obj
+    - images/ex_01map.pgm
 
   fonts:
     - family: IconMoon
