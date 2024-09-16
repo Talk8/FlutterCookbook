@@ -91,6 +91,9 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     var cube = three.Mesh(geometry,material);
     threeJs.scene.add(cube);
 
+    ///6. 把渲染器添加到html页面中，web中使用js时有此操作，flutter中不需要此操作
+    // threeJs.renderer?.render(threeJs.scene, threeJs.camera);
+
     ///接下来是介绍控制器，相机设置
     ///物体形状，物体材质，纹理
     ///光照和材质对物体的影响
