@@ -23,17 +23,17 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
   late three.ThreeJS threeJs;
 
   ///创建一个球，用来显示轨迹
-  var sphereGeometryBall;
-  var sphereMaterialBall;
-  var sphereMeshBall;
+  late three.SphereGeometry? sphereGeometryBall;
+  late three.MeshBasicMaterial? sphereMaterialBall;
+  late three.Mesh? sphereMeshBall;
 
   ///创建轨迹
-  var trailGeometry ;
-  var trailMaterial ;
+  late three.BufferGeometry? trailGeometry ;
+  late three.LineBasicMaterial? trailMaterial ;
   var trailPoints = [];
-  var trail;
+  late three.Line? trail;
 
-  ///create controlls
+  ///create controllers
   late three.OrbitControls controls;
 
   ///three初始化时的大小，在计算坐标时有用
@@ -48,7 +48,7 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
       onSetupComplete: (){
         setState(() {});
       },
-      // setup: setup,
+      ///所有功能都在这个方法中
       setup: cusSetup,
     );
 
@@ -58,12 +58,44 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
   @override
   void dispose() {
     // TODO: implement dispose
+    ///释放相关资源
     threeJs.dispose();
     three.loading.clear();
+
+    sphereGeometryBall?.dispose();
+    sphereMaterialBall?.dispose();
+    sphereMeshBall?.dispose();
+
+    trailGeometry?.dispose();
+    trailMaterial?.dispose();
+    trail?.dispose();
+
     super.dispose();
   }
 
   Future<void> cusSetup() async {
+    ///1. 创建场景
+    threeJs.scene = three.Scene();
+    ///2. 创建相机，常用的是透视相机，还可以创建正视相机
+    threeJs.camera = three.PerspectiveCamera(45, threeJs.width / threeJs.height, 1, 2000);
+    threeJs.camera.position.setValues(15, 15, 15);
+    ///3. 创建矩形类物体
+    var geometry = three.BoxGeometry(3,3,3);
+    ///3. 创建球体类物体
+    // var geometry = three.SphereGeometry(radians(80));
+
+    ///4. 创建物体的材质，把纹理添加到材质中，这个
+    var material = three.MeshBasicMaterial({three.MaterialProperty.color : 0x00ff9c});
+
+    ///5. 创建物体网格模型,并且把模型添加到场景中，这样就可以在场景中看到模型了
+    var cube = three.Mesh(geometry,material);
+    threeJs.scene.add(cube);
+
+    ///接下来是介绍控制器，相机设置
+    ///物体形状，物体材质，纹理
+    ///光照和材质对物体的影响
+    ///
+
     ///相机的角度和位置影响obj模型的大小和位置,下面的两组值与obj模型匹配
     // threeJs.camera = three.PerspectiveCamera(75, threeJs.width / threeJs.height, 0.1, 100);
     // threeJs.camera.position.setValues(15, 15, 15);
@@ -82,12 +114,11 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     // threeJs.camera.position.setValues(0, 9, 10);
     // threeJs.camera.position.z = 5;
 
-    ///创建场景
-    threeJs.scene = three.Scene();
+    ///通过渲染器修改场景参数
     ///修改场景的大小和颜色，相当于背景的颜色,但是是大小不起作用,需要在创建threeJs对象时指定大小
     // threeJs.renderer?.setSize(200, 200,);
     // threeJs.renderer?.setClearColor(three.Color.fromHex32(0xff582181));
-    ///这个蓝色还不错,不过讨论后修改成黑色
+    ///这个蓝色还不错,
     // threeJs.renderer?.setClearColor(three.Color.fromHex32(0x1181ff));
     // threeJs.renderer?.setClearColor(three.Color.fromHex32(0x000000));
     threeJs.renderer?.setClearColor(three.Color.fromHex32(0xffffff));
@@ -97,21 +128,14 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     // Log.d("check 2", "width: ${threeJs.renderer?.width}, height: ${threeJs.renderer?.height}");
 
 
-    // var render = three.WebGLRenderer({"width" : 200,"height" : 300});
-    ///矩形类物体
-    var geometry = three.BoxGeometry(3,3,3);
-    ///球体类物体
-    // var geometry = three.SphereGeometry(radians(80));
-
 
     ///创建纹理
     var textLoader = three.TextureLoader();
 
-    ///把纹理添加到材质中，这个
-    var material = three.MeshBasicMaterial({three.MaterialProperty.color : 0x00ff00});
+    material = three.MeshBasicMaterial({three.MaterialProperty.color : 0x00ff00});
 
-    textLoader.fromAsset("images/cleanpathfloorbg.png").then((value) {
-      material.map = value;
+    textLoader.fromAsset("images/cleaningbg.png").then((value) {
+      // material.map = value;
     });
 
     // var material = three.MeshPhysicalMaterial({three.MaterialProperty.color : 0x00ff00});
@@ -126,6 +150,8 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     // var material = three.MeshToonMaterial({three.MaterialProperty.color : 0x00ff00});
     // var material = three.MeshLambertMaterial({three.MaterialProperty.color : 0x00ff00});
     // var material = three.MeshPhongMaterial({three.MaterialProperty.color : 0x00ff00});
+
+
 
     ///点光源
     // var pointLight = three.PointLight(0xff9033,1,0,1);
@@ -148,7 +174,7 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
 
 
     const double axisLength = 5;
-    const double axisWidth = 0.1;
+    // const double axisWidth = 0.1;
 
     ///给物体添加x,y,z坐标
     var positionGeometry = three.BufferGeometry();
@@ -180,7 +206,7 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     var yAxis = three.Line(yGeometry,yLineMaterial);
     var zAxis = three.Line(zGeometry,zLineMaterial);
 
-    var cube = three.Mesh(geometry,material);
+    // var cube = three.Mesh(geometry,material);
 
     ///响应滑动事件,不加这个事件也能滑动？这是哪里在处理
     controls = three.OrbitControls(threeJs.camera,threeJs.globalKey);
@@ -289,7 +315,7 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     sphereGeometryBall = three.SphereGeometry(1.0,20,20,);
     sphereMaterialBall = three.MeshBasicMaterial({three.MaterialProperty.color : 0xff1100, three.MaterialProperty.wireframe: true});
     sphereMeshBall = three.Mesh(sphereGeometryBall,sphereMaterialBall);
-    sphereMeshBall.position.setFrom(three.Vector3(0,-2,0));
+    sphereMeshBall?.position.setFrom(three.Vector3(0,-2,0));
     // threeJs.scene.add(sphereMeshBall);
 
     ///创建轨迹
@@ -300,21 +326,21 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     threeJs.scene.add(trail);
 
     void updateTrailGeometry() {
-      trailPoints.add(three.Vector3(sphereMeshBall.position.x,sphereMeshBall.position.y,sphereMeshBall.position.z));
+      trailPoints.add(three.Vector3(sphereMeshBall?.position.x,sphereMeshBall?.position.y,sphereMeshBall?.position.z));
       ///如果点太多，删除最早的点
       if(trailPoints.length > 100) {
         // trailPoints.shift()
       }
 
-      trailGeometry.setFromPoints(trailPoints);
+      trailGeometry?.setFromPoints(trailPoints);
       threeJs.renderer?.render(threeJs.scene, threeJs.camera);
     }
 
 
     void moveBall() {
       var speed = 0.02;
-      sphereMeshBall.position.x  += speed;
-      sphereMeshBall.position.y  += speed;
+      sphereMeshBall?.position.x  += speed;
+      sphereMeshBall?.position.y  += speed;
 
       ///边界检测，反弹
       // if(Math.abs(sphereMeshBall.position.x >= 2) || Math.abs(sphereMeshBall.position.y >= 2)) {
@@ -382,14 +408,10 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     waterMesh.position.y -= 1.0;
 
 
-    ///定义一个中心坐标，从模型中获取中心坐标o
-    var centerLocation ;
-    var box;
-
     ///加载obj文件,需要在这里进行add操作，不然看不到被加载的文件
     var objLoader = three.OBJLoader();
     var objGeo;
-    objLoader.fromAsset('images/pool.obj').then((value) {
+    objLoader.fromAsset('images/ex_02pool.obj').then((value) {
       setState(() {
         ///注释掉的这些内容都没有效果
         /*
@@ -429,8 +451,6 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
         ///修改视角，我感觉比旋转的效果还要好一些
         value?.lookAt(three.Vector3(9,3,0));
 
-        ///找不到box3这个类
-        // box =  threeJs.Box3().setFromObject(value);
 
         ///OK有效果，把线框全部显示出来了，就是镂空的效果，打开后可以直接使用
         /*
@@ -601,7 +621,7 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     ///Line生成的线条不闭合，Loop生成的会闭合
     var lineMesh = three.Line(bufferGeometry,lineMaterial);
     // var lineMesh = three.Line(bufferGeometry,dashLineMaterial);
-    threeJs.scene.add(lineMesh);
+    // threeJs.scene.add(lineMesh);
 
     // var loopLineMesh = three.LineLoop(bufferGeometry,lineMaterial);
     // threeJs.scene.add(loopLineMesh);
