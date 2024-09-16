@@ -10,6 +10,7 @@ import 'package:three_js_geometry/tube_geometry.dart';
 import 'package:three_js_geometry/cylinder.dart';
 import 'package:three_js_helpers/three_js_helpers.dart';
 
+///这个示例代码主要用来演示threejs这个库，内容比较全面
 class ExThreeJsPage extends StatefulWidget {
   const ExThreeJsPage({super.key});
 
@@ -730,3 +731,5 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     );
   }
 }
+
+
