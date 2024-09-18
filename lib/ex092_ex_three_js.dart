@@ -97,7 +97,8 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     ///接下来是介绍控制器，相机设置
     ///物体形状，物体材质，纹理
     ///光照和材质对物体的影响
-    ///
+    ///画线，直线，曲线。
+    ///画面
 
     ///相机的角度和位置影响obj模型的大小和位置,下面的两组值与obj模型匹配
     // threeJs.camera = three.PerspectiveCamera(75, threeJs.width / threeJs.height, 0.1, 100);
