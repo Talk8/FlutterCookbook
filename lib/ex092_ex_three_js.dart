@@ -109,7 +109,7 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     threeJs.camera = three.PerspectiveCamera(45, threeJs.width / threeJs.height, 1, 2200);
     threeJs.camera.position.setValues(15, 15, 15);
 
-    ///从下向上看
+    ///从下向上看,调整相机
     // threeJs.camera = three.PerspectiveCamera(88, threeJs.width / threeJs.height, 0.1, 1000);
     // threeJs.camera.position.setValues(0, -5, 10);
 
