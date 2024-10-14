@@ -104,7 +104,6 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     // threeJs.camera = three.PerspectiveCamera(75, threeJs.width / threeJs.height, 0.1, 100);
     // threeJs.camera.position.setValues(15, 15, 15);
     // threeJs.camera.position.setValues(15, 15, 15);
-    // threeJs.camera.position.setValues(15, 15, 15);
 
 
     ///这个相册的位置适合看自己定义的泳池模型需要配合lookat(0,0,0),或者使用默认值也可以
