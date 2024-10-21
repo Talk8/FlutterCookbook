@@ -37,7 +37,7 @@ class _ExAnimationState extends State<ExAnimation> with SingleTickerProviderStat
     _animationController.addListener(() {
       ///do nothing
       ///可以在这里做一些事情，比如更新进度
-      debugPrint('listener running');
+      // debugPrint('listener running');
     });
 
     ///监听动画变化的状态，只有状态变化时才回调，这里的状态是AnimationStatus中的枚举值
@@ -69,6 +69,7 @@ class _ExAnimationState extends State<ExAnimation> with SingleTickerProviderStat
           AnimatedBuilder(
             animation: _animationTween,
             builder: (context,child){
+              debugPrint('animation Value: ${_animationTween.value}');
               ///如何平移?而且要有方向
               return Icon(Icons.face,size: _animationTween.value,);},
             ///这个child和builder中child参数相同
@@ -81,10 +82,16 @@ class _ExAnimationState extends State<ExAnimation> with SingleTickerProviderStat
             child: const Text('start animation'),
           ),
           ///自动旋转组件,其它以Animated开头的组件也有动画功能，这类动画是显式动画
-          const AnimatedRotation(
-            duration: Duration(seconds: 3),
-            turns: pi/3,
-            child: Text("hi"),
+          AnimatedRotation(
+            duration: _animationController.duration!,
+            turns: _animationController.value,
+            curve: Curves.easeInOut,
+            child: Builder(
+              builder: (context) {
+                debugPrint("controller value: ${_animationController.value}");
+                return const Text("hi");
+              }
+            ),
           ),
           AnimatedOpacity(opacity: 1.0, duration: const Duration(seconds: 3),
             child: Container(width: 100,height: 100,color: Colors.red,),
