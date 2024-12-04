@@ -221,6 +221,14 @@ dependencies:
 #  flutter_animated_icons: ^1.0.1
 # 用来创建splash页面
   flutter_native_splash: ^2.3.7
+# 用来实现本地消息推送功能，参考官方的readMe来配置
+  awesome_notifications_core: ^0.10.0
+  awesome_notifications: ^0.10.0
+
+# 用来实现远程消息推送功能，参考官方的readMe来配置
+#  awesome_notifications_fcm: ^0.10.0
+#  firebase_messaging: 上面的插件可以替换本插件
+#  firebase_core: ^
 
 #不建议在这里配置，使用flutter_native_splash.yaml文件单独进行配置
 #flutter_native_splash:
