@@ -102,4 +102,5 @@ this is a cookbook of flutter, there are all kinds of demo,please refer to follo
 | ex091_3dView                    | this is the example of Dirtrei package,which is uesed fo 3d view|
 | ex092_threeJsView               | this is the example of threeJs package.                        |
 | ex093_ImageDecoder              | this is the example of Image package,which is used for decoder 2d image file.|
+| ex094_Notification              | this is the example of AwesomeNotification package             |
 
