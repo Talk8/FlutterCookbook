@@ -222,8 +222,15 @@ dependencies:
 # 用来创建splash页面
   flutter_native_splash: ^2.3.7
 # 用来实现本地消息推送功能，参考官方的readMe来配置
-  awesome_notifications_core: ^0.10.0
-  awesome_notifications: ^0.10.0
+#添加通知功能，参考包官方的readme来添加,不要升级到0.10.0版本以及后续版本，除非flutter官方的AGP版本升级到了8.0及以及版本
+#因为Gradle8.0版本进行了重大的升级，很多包不支持. 在使用awesome_notifications插件时发现AGP在8.0进行重大的升级，去掉了
+# transform相关的内容，因此在使用Flutter的三方插件时需要关注插件是否需要gradle8.0支持，如果需要就降低插件版本到不需要8.0支持
+#的版本。因为很多插件不支持Gradle8.0，除非等到Flutter官方SDK支持8.0后再升级. 我在setting.gradle和gradle-wrapper.properties
+#文件都写了AGP和gradle的版本，在新建项目中没有其它插件只使用awesome_notifications插件0.10.0版本时可以正常编译和运行。
+#后续如果项目整体升级AGP版本到8.0以上时可以参考这两个版本号（当前没有使用注释掉了）。
+
+  awesome_notifications_core: ^0.9.3
+  awesome_notifications: ^0.9.3
 
 # 用来实现远程消息推送功能，参考官方的readMe来配置
 #  awesome_notifications_fcm: ^0.10.0
