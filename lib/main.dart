@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -184,6 +185,13 @@ void main() async{
   ///
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  AwesomeNotifications().initialize(
+      // defaultIcon,把默认的icon设定为空时会使用app的启动图标
+      '',
+      [
+        NotificationChannel(channelKey: "key4channel", channelName: "channelEx1", channelDescription: "ChannelTest"),
+      ]);
   ///下面是使用Provider当作状态管理的代码，注释掉后示例中与Provider关联的代码可以通过编译，但是有运行时错误
   // runApp(
   //   MultiProvider(
