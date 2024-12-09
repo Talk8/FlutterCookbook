@@ -69,6 +69,8 @@ class _Ex094NotificationState extends State<Ex094Notification> {
   }
 
   void showNotification() {
+    //创建通知前需要判断是否有通知权限，如果没有权限就创建通知会有异常：
+    // me.carda.awesome_notifications.core.exceptions.AwesomeNotificationsException: Notifications are disabled
     AwesomeNotifications().createNotification(
         content: NotificationContent(
           id: 1,
