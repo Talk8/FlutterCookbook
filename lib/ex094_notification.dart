@@ -76,8 +76,10 @@ class _Ex094NotificationState extends State<Ex094Notification> {
           id: 1,
           ///这个key需要和main方法中注册的key相同，不然会提示找不到key
           channelKey: "key4channel",
-          actionType: ActionType.Default,
-          // actionType: ActionType.KeepOnTop,
+          ///这个Default类型就不错，也是常用的类型，在标题栏中弹出的通知窗口上点击时会跳转到应用中
+          ///其它通知类型的解释可以看代码中的注释，写的比较详细
+          // actionType: ActionType.Default,
+          actionType: ActionType.SilentAction,
           title: "Notification Title",
           body: "this is the body of notification",
         )
@@ -119,7 +121,7 @@ class _Ex094NotificationState extends State<Ex094Notification> {
   }
 }
 
-///这个类自定义的，用来响应各种通知事件
+///这个类自定义的，用来响应各种通知事件，收到通知后的回调顺序：Create -> Display.点击通知时的回调顺序: Received -> Dismiss
 class NotificationController {
   @pragma("vm:entry-point")
   static Future<void> onNotificationCreatedMethod(ReceivedNotification receivedNotification) async {
