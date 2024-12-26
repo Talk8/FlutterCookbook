@@ -15,8 +15,8 @@ class _ExDialogState extends State<ExDialog> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Alert Dialog"),
-            content: Text("This is a Example of  AlerDialog"),
+            title: const Text("Alert Dialog"),
+            content: const Text("This is a Example of  AlertDialog"),
             actions: [
               TextButton(
                 onPressed: () {
