@@ -70,6 +70,7 @@ class _bodyWidget extends State<BodyWidget> {
       ),
       // body: const Text("test"),
       body: bodyWidgetList[selectIndex],
+      /*
       ///嵌套剪切组件用来把导航栏左右两侧切成圆角
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -94,6 +95,37 @@ class _bodyWidget extends State<BodyWidget> {
             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Person"),
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Setting")
+          ],
+        ),
+      ),
+
+       */
+      ///上面是Material2的用法，下面是Material3的用法
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.only(topLeft:Radius.circular(30),topRight: Radius.circular(30)),
+        child: NavigationBar(
+          backgroundColor: Colors.lightBlueAccent,
+          selectedIndex: selectIndex,
+          onDestinationSelected: (index){
+            setState(() {
+              selectIndex = index;
+            });
+          },
+          destinations:[
+            ///让每个按钮之间有间隔，不过要用颜色来显示，不然看不出效果来
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Container(
+                color: Colors.green,
+                child: const NavigationDestination(icon: Icon(Icons.home), label: "Home")),
+            ),
+            ///单独修改某个按钮的形状和颜色，需要ClipRRect和Container组件同时使用才可以修改形状
+            ClipRRect(
+                borderRadius: const BorderRadius.only(topLeft:Radius.circular(30),topRight: Radius.circular(30)),
+                child: Container(
+                  color: Colors.orange,
+                    child: const NavigationDestination(icon: Icon(Icons.favorite), label: "Favorite"))),
+            const NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
           ],
         ),
       ),
