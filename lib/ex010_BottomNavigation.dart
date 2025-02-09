@@ -51,7 +51,7 @@ class _bodyWidget extends State<BodyWidget> {
       // child: const Text("Float Button"),
       child: const Icon(Icons.add),
       onPressed: () {
-        print("FloatingButton onClicked");
+        debugPrint("FloatingButton onClicked");
       },
     ),
   );
@@ -70,25 +70,32 @@ class _bodyWidget extends State<BodyWidget> {
       ),
       // body: const Text("test"),
       body: bodyWidgetList[selectIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        //超过3个item时需要使用type属性,不然无法显示文字
-        backgroundColor: Colors.amber,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: selectIndex,
-        fixedColor: Colors.blue,
-        //放在iconsize,同时bottomBar整体也跟着放大
-        iconSize: 40,
-        onTap: (index) {
-          setState(() {
-            // print(index);
-            selectIndex = index;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Person"),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Setting")
-        ],
+      ///嵌套剪切组件用来把导航栏左右两侧切成圆角
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+        child: BottomNavigationBar(
+          //超过3个item时需要使用type属性,不然无法显示文字
+          backgroundColor: Colors.amber,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: selectIndex,
+          fixedColor: Colors.blue,
+          //放在iconsize,同时bottomBar整体也跟着放大
+          iconSize: 40,
+          onTap: (index) {
+            setState(() {
+              // print(index);
+              selectIndex = index;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Person"),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Setting")
+          ],
+        ),
       ),
       floatingActionButton: _floatingActionButton,
       //控制FloatingActionButton的位置，默认在屏幕右下角
