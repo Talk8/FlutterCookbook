@@ -394,6 +394,13 @@
             </list>
           </value>
         </entry>
+        <entry key="cupertino_battery_indicator">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/cupertino_battery_indicator-1.2.1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="cupertino_icons">
           <value>
             <list>
@@ -2217,6 +2224,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/cross_file-0.3.3+4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/crypto-3.0.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/csslib-1.0.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/cupertino_battery_indicator-1.2.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/custom_lint-0.6.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/custom_lint_builder-0.6.4/lib" />

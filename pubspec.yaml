@@ -214,7 +214,12 @@ dependencies:
   flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5
 
+#显示手机当前的最量(实时显示)
   realtime_battery_indicator: ^1.0.2
+
+# 这个插件需要Flutter3.27以上版本，不然有编译错误
+#  cupertino_battery_indicator: ^1.2.1
+
 #  冒泡动画，和我做的效果一样
 #  floating_bubbles: ^2.6.2
 
