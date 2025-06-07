@@ -142,6 +142,20 @@
             </list>
           </value>
         </entry>
+        <entry key="battery_plus">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/battery_plus-4.1.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="battery_plus_platform_interface">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/battery_plus_platform_interface-1.2.2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="bluetooth_enable_fork">
           <value>
             <list>
@@ -1486,6 +1500,13 @@
             </list>
           </value>
         </entry>
+        <entry key="realtime_battery_indicator">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/realtime_battery_indicator-1.0.2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="riverpod">
           <value>
             <list>
@@ -1850,6 +1871,13 @@
             </list>
           </value>
         </entry>
+        <entry key="upower">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/upower-0.7.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="url_launcher">
           <value>
             <list>
@@ -2153,6 +2181,8 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/awesome_notifications-0.9.3+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/awesome_notifications_core-0.9.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/badges-3.1.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/battery_plus-4.1.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/battery_plus_platform_interface-1.2.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/bluetooth_enable_fork-0.1.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/boolean_selector-2.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/bubble-1.2.1/lib" />
@@ -2341,6 +2371,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/reactive_ble_mobile-5.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/reactive_ble_platform_interface-5.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/readmore-2.2.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/realtime_battery_indicator-1.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/riverpod-2.5.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/riverpod_analyzer_utils-0.5.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/riverpod_annotation-2.3.5/lib" />
@@ -2392,6 +2423,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/typr_dart-0.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/universal_html-2.2.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/universal_io-2.2.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/upower-0.7.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher-6.3.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_ios-6.3.1/lib" />

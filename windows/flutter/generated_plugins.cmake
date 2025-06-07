@@ -6,6 +6,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   audioplayers_windows
   awesome_notifications
   awesome_notifications_core
+  battery_plus
   file_selector_windows
   flutter_angle_windows
   geolocator_windows
