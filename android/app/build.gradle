@@ -34,8 +34,12 @@ if (flutterVersionName == null) {
 
 
 android {
+    ///更新FlutterSDK版本后需要在这里指定命名空间
+    namespace "com.cookbook.flutter.fluttercookbook"
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+//    ndkVersion flutter.ndkVersion
+    ///指定ndk版本，不然编译时与插件中用的ndk版本不同会导致编译错误
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -62,7 +66,7 @@ android {
 //        targetSdkVersion 31
 //        minSdkVersion flutter.minSdkVersion
 //        targetSdkVersion flutter.targetSdkVersion
-        compileSdkVersion 34
+        compileSdkVersion 35
         targetSdkVersion  34
 
         versionCode flutterVersionCode.toInteger()
@@ -81,7 +85,7 @@ android {
 flutter {
     source '../..'
 }
-
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
+///版本在settings.gradle中指定
+//dependencies {
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//}

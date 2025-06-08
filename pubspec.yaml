@@ -18,7 +18,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.6 <4.0.0"
+  sdk: ">=3.0.2 <4.0.0"
+#  sdk: ">=2.17.6 <4.0.0"
 #  sdk: ">=2.17.6 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
@@ -36,6 +37,9 @@ dependencies:
     sdk: flutter
   intl: any
 
+# flutter_intl借助这个包来生成文件
+  intl_utils: ^2.8.7
+
 #导入intl依赖，输入任何数字后IDE就会自动弹出当前最新的版本. 开始用0.19.0版本更新FlutterSDK后提高到0.20.0版本，否则有编译错误
   intl_translation: ^0.20.0
 
@@ -50,10 +54,10 @@ dependencies:
   shared_preferences: ^2.2.0
 
 #导入path_provider包实现文件存储
-  path_provider: ^2.0.15
+  path_provider: ^2.1.4
 
 #导入provide实现数据共享
-  provider: ^6.0.5
+  provider: ^6.1.2
 
 #导入font_awesome_flutter字体图标包
   font_awesome_flutter: ^10.5.0
@@ -62,42 +66,42 @@ dependencies:
 #  logger: ^1.4.0
   logger: ^2.3.0
 #导入permission包来使用权限申请
-  permission_handler: ^10.4.3
+  permission_handler: ^11.3.1
 
 #导入screenutil包来适配屏幕，更新版本以解决编译错误
-  flutter_screenutil: ^5.9.0
+  flutter_screenutil: ^5.9.3
 
 #导入BLE包来使用蓝牙
-  flutter_reactive_ble: ^5.1.1
+  flutter_reactive_ble: ^5.4.0
 #导入BLE包来使用蓝牙,这个包的版本更新太快了，几乎一天一更新
   flutter_blue_plus: any
 #国内一家专门做ble IOT公司(TTCIOTSDK)提供的包,前面两个我都无法收到BLE回复的数据，这个包可以。
 #这个包还使用device_info_plus和synchronized这两个包来获取设备信息和异步操作（用lock实现）
-  flutter_ttc_ble: ^0.1.2
+  flutter_ttc_ble: ^0.1.4
 #ttc_ble的demo中使用了file_picker，所以导入这个包
-  file_picker: ^5.5.0
+  file_picker: ^10.1.2
 #有时间了试试这个包1
 #  flutter_esp_ble_prov: any
 #导入image_picer用来使用相机和相册,IOS上需要使用pod install 命令安装相关的依赖，不然无法通过编译
 # 执行命令时有警告，详细如下： CocoaPods did not set the base configuration of your project because your
 # project already has a custom config set. In order for CocoaPods integration to work at all, please either set the base configurations of the target `Runner` to `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` or include the `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` in your build configuration (`Flutter/Release.xcconfig`).
 #  去掉此警告需要在xcode中配置：project:Runner ->Inof ->Configuration把debug,release,profile三个扩展下的runner修改成None,然后再pod install就可以
-  image_picker: ^1.0.2
+  image_picker: ^1.1.2
 # image_picker需要此包，用来播放视频文件
-  video_player: ^2.7.2
+  video_player: ^2.9.5
 # image_picker需要此包,用来处理媒体文件的类型
-  mime: ^1.0.4
+  mime: ^1.0.6
 # 图片获取和Image_Picker类似，只不过界面是微信的界面,注意版本需要flutter_sdk支持20240130已经到8.8了。为了与flutter版本3.10.2匹配才用的8.6.3
   #这个包依赖了其它的包，比较多，比如video_player，extended_image: 好在都是他们自己组织做的包
   #注意：这个包需要高版本的sdk. The plugin photo_manager requires Android SDK version 34.
-  wechat_assets_picker: ^9.0.3
+  wechat_assets_picker: ^9.5.1
 # 通过相机获取图片和视频，Pick风格是wechat和 wechat_assets_picker一样都是国内人员开发的包
   #这个包依赖camera包，会自动把camera包添加到项目中来
-  wechat_camera_picker: ^4.2.1
+  wechat_camera_picker: ^4.3.7
 # 视频压缩包,用来处理视频文件的，它可以获取到视频文件的时长，路径，分辨率等类型
-  video_compress: ^3.1.2
+  video_compress: ^3.1.4
 #Flutter官方提供的webview
-  webview_flutter: ^4.2.4
+  webview_flutter: ^4.8.0
   #三方提供的Webview，可以避开安全策略来加载本地的html文件
   flutter_inappwebview: ^6.0.0
 
@@ -110,9 +114,9 @@ dependencies:
  # 可以直接把3d格式的文件渲染成图形，比如glf,glb,不过不支持Obj,它的核心是Google的ModelViewer(显示3d图形，只支持glb,glf,js语言实现）
   flutter_3d_controller: ^1.3.1
  #这个是20240722的2周前一个国外人新写的插件，用的人比较少
-  three_js: ^0.0.4
+  three_js: ^0.0.7
   three_js_geometry: ^0.0.2
-  three_js_helpers: ^0.0.4
+  three_js_helpers: ^0.0.5
 
 #国内人开发的库，相当于把three移植到了flutter中，不过版本比较底先不引入，主要是依赖其它插件的版本有冲突
 #  three_dart: ^0.0.16
@@ -120,7 +124,7 @@ dependencies:
 #在组件旁边添加小红点
   badges: ^3.1.2
 # 用来创建app介绍页面的包，不过get后发现它叫flutter_keyboard_visibility，难道是原来的名字，它还依赖dots_indicator这个包
-  introduction_screen: ^3.1.11
+  introduction_screen: ^3.1.17
 # 使用这个包来创建摇杆,不过有错误，不再使用
 #  control_pad_plus: ^0.1.0
 
@@ -128,10 +132,10 @@ dependencies:
   sliding_up_panel: ^2.0.0
 
 #实现滑动菜单功能，使用场景少,3.0.0与flutter3.10.2版本匹配，3.1.0与flutter3.19.6匹配
-  flutter_slidable: ^3.1.0
+  flutter_slidable: ^4.0.0
 
 #获取GPS信息，非常好用的GPS包
-  geolocator: ^10.0.1
+  geolocator: ^14.0.1
 
 #实现NumberPicker
   numberpicker: ^2.1.2
@@ -152,18 +156,19 @@ dependencies:
   day_night_switch: ^1.0.4
 
 # 这个包可以获取到手机上的屏幕尺寸，android版本等有用信息
-  device_info_plus: ^9.1.1
+  device_info_plus: ^10.1.0
 
 # 新版本需要flutter版本支持：
   # Because fluttercookbook depends on package_info_plus >=5.0.1 which requires SDK version ^3.2.0, version solving failed.
   # Process finished with exit code 1
-  package_info_plus: ^4.2.0
+  package_info_plus: ^8.3.0
 
-#打开系统中的一些设置开关，比如蓝牙WIFI等
-  open_settings: ^2.0.2
+#打开系统中的一些设置开关，比如蓝牙WIFI等,这个插件很长时间不更新了，用open_setting_plus来代替它
+#  open_settings: ^2.0.2
+  open_settings_plus: ^0.4.0
 
-#
-  bluetooth_enable_fork: ^0.1.6
+#这个包2year没有更新了，项目中不再使用此包，可以使用bluetooth_enable_plus来代替它
+#  bluetooth_enable_fork: ^0.1.6
 # 可以进行状态管理，显示dialog,snackBar不需要context,开始用4.6.5版本更新FlutterSDK后提高到4.6.6版本，否则有编译错误
   get: ^4.6.6
 # 本地存储
@@ -235,8 +240,8 @@ dependencies:
 #文件都写了AGP和gradle的版本，在新建项目中没有其它插件只使用awesome_notifications插件0.10.0版本时可以正常编译和运行。
 #后续如果项目整体升级AGP版本到8.0以上时可以参考这两个版本号（当前没有使用注释掉了）。
 
-  awesome_notifications_core: ^0.9.3
-  awesome_notifications: ^0.9.3
+  awesome_notifications_core: ^0.10.0
+  awesome_notifications: ^0.10.0
 
 # 用来实现远程消息推送功能，参考官方的readMe来配置
 #  awesome_notifications_fcm: ^0.10.0
@@ -326,7 +331,8 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  #从2.0.0升级到6.0.0
+  flutter_lints: ^6.0.0
 
 ##这4个包是配合riverpod使用的，前两个没有指定版本
   build_runner:
@@ -403,3 +409,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  ##########
+  # 20250608 0263的修改比较大，主要更新了FlutterSDK和AST，都当前日期下最新的版本，因此yal中各个插件的版本也做了更新
+  # 此外，在android目录下的gradle配置，AGP版本都做了相应的更新。最大小的更新就是使用了新的namespace来定义包名，
+  # 而不是像以前一样在Manifest文件中修改包名
+  ##########
