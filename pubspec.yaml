@@ -209,7 +209,7 @@ dependencies:
 
 #最新版本为1.6.0基于intl0.19.0,为了当前环境中的intl匹配修改成1.5.0版本
 #这个插件主打聊天特色功能，可以封装audio,image等内容
-  chat_bubbles: ^1.5.0
+  chat_bubbles: ^1.7.0
 
 #实现振动功能的包
   vibration: ^1.9.0
@@ -240,8 +240,8 @@ dependencies:
 #文件都写了AGP和gradle的版本，在新建项目中没有其它插件只使用awesome_notifications插件0.10.0版本时可以正常编译和运行。
 #后续如果项目整体升级AGP版本到8.0以上时可以参考这两个版本号（当前没有使用注释掉了）。
 
-  awesome_notifications_core: ^0.10.0
-  awesome_notifications: ^0.10.0
+  awesome_notifications_core: ^0.10.1
+  awesome_notifications: ^0.10.1
 
 # 用来实现远程消息推送功能，参考官方的readMe来配置
 #  awesome_notifications_fcm: ^0.10.0
