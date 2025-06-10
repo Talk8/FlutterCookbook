@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ExLocalization extends StatefulWidget {
   const ExLocalization({Key? key}) : super(key: key);
@@ -27,7 +27,8 @@ class _ExLocalizationState extends State<ExLocalization> {
           Text("country code: ${_locale.countryCode}"),
           Text("local all: ${_locale.toString()}"),
           //测试多语言设置是否生效，可以在MaterialApp中通过local属性手动切换语言
-          Text("test localization: ${AppLocalizations.of(context)!.helloWorld}"),
+          ///不使用官方intl后去掉此内容，不然不无法通过编译
+          // Text("test localization: ${AppLocalizations.of(context)!.helloWorld}"),
         ],
       ),
     );
