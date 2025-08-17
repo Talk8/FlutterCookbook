@@ -4,11 +4,11 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   audioplayers_windows
-  awesome_notifications
-  awesome_notifications_core
   battery_plus
   file_selector_windows
-  flutter_angle_windows
+  flutter_angle
+  flutter_inappwebview_windows
+  flutter_timezone
   geolocator_windows
   permission_handler_windows
   url_launcher_windows

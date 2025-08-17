@@ -275,7 +275,7 @@ class _CommPageState extends State<CommPage> with BleCallback2 {
                         ///获取GATT服务
                         bleProxy
                             .getGattServices(deviceId: _deviceId)
-                            .then((services) => _printGattServices(services));
+                            .then((services) => {} );//_printGattServices(services));
                       },
                     ),
                   ],
@@ -289,6 +289,7 @@ class _CommPageState extends State<CommPage> with BleCallback2 {
         ));
   }
 
+  /*
   void _printGattServices(List<GattService> services) {
     // print() 打印的字符串长度最大是1K，所以这里使用循环打印
     for (var service in services) {
@@ -299,6 +300,7 @@ class _CommPageState extends State<CommPage> with BleCallback2 {
     }
   }
 
+   */
   void _getConnectionState() async {
     final bool connected = await bleProxy.isConnected(deviceId: _deviceId);
     jPrint('是否已连接：$connected');

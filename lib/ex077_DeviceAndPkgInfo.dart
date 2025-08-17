@@ -1,8 +1,8 @@
-import 'package:bluetooth_enable_fork/bluetooth_enable_fork.dart';
+// import 'package:bluetooth_enable_fork/bluetooth_enable_fork.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:open_settings/open_settings.dart';
+// import 'package:open_settings/open_settings.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 ///与199-204中的内容相匹配
@@ -61,7 +61,7 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
           ///与open_settings包内容匹配
           ElevatedButton(
             onPressed: (){
-              OpenSettings.openBluetoothSetting();
+              // OpenSettings.openBluetoothSetting();
             },
             child: const Text("Open BT"),
           ),
@@ -69,9 +69,9 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
           ///只弹出一个简单窗口
           ElevatedButton(
             onPressed: (){
-              BluetoothEnable.enableBluetooth.then((value) {
-                debugPrint("value is: $value");
-              });
+              // BluetoothEnable.enableBluetooth.then((value) {
+              //   debugPrint("value is: $value");
+              // });
             },
             child: const Text("Open BT"),
           ),
@@ -79,11 +79,14 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
           ///可以弹出复杂窗口，窗口可以自定义，不过风格不能修改，比如文字颜色大小
           ElevatedButton(
             onPressed: (){
+              /*
               BluetoothEnable.customBluetoothRequest(
                 context, dialogTitle,
                 true, dialogContent,
                 cancelBtnText, acceptBtnText,
                 dialogRadius, barrierDismissible);
+
+               */
             },
             child: const Text("Open BT by Dialog"),
           ),
@@ -105,7 +108,8 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
               ///只有这个起作用，其它的都不起作用，估计嵌套导致的
               elevatedButtonTheme: ElevatedButtonThemeData(
                   style:ElevatedButton.styleFrom(foregroundColor: Colors.redAccent,), ),
-              dialogTheme: const DialogTheme(
+              ///解决编译错误：Error: The argument type 'DialogTheme' can't be assigned to the parameter type 'DialogThemeData?'.
+              dialogTheme: const DialogThemeData(
                 backgroundColor: Colors.redAccent,
                 contentTextStyle: TextStyle(color: Colors.redAccent,),
               ),
@@ -114,11 +118,13 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
             ),
             child: ElevatedButton(
               onPressed: (){
+                /*
                 BluetoothEnable.customBluetoothRequest(
                     context, dialogTitle,
                     true, dialogContent,
                     cancelBtnText, acceptBtnText,
                     dialogRadius, barrierDismissible);
+                 */
               },
               child: const Text("Open BT by Dialog"),
             ),
@@ -151,6 +157,7 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
 
 
     ///获取屏幕尺寸和倍率
+    /*
     String size= androidDeviceInfo.displayMetrics.sizeInches.toStringAsFixed(2);
     String width = androidDeviceInfo.displayMetrics.widthPx.toString();
     String height = androidDeviceInfo.displayMetrics.heightPx.toString();
@@ -160,12 +167,13 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
     debugPrint(" display: $size resolution: ($width x $height)");
     debugPrint("device info version : $sdkVersion");
 
+
     ///把相关信息整理成自己需要的格式
     result = " br size:$size ($width*$height),Android$sdkVersion";
     debugPrint("device info : $result");
     ///从androidDeviceInfo中可以得到以下关键信息，也可以像上面一样单独获取这些信息
     // widthPx: 1080.0, heightPx: 2460  sdkInt: 33
-
+     */
     if(defaultTargetPlatform == TargetPlatform.android) {
     }
     return result;
@@ -210,8 +218,9 @@ class _ExDeviceInfoState extends State<ExDeviceInfo> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton(
+                    onPressed: (){},
                     ///点击Yes跳转到蓝牙开关设置页面，这个是手机上默认的设置页面
-                    onPressed: () {OpenSettings.openBluetoothSetting();},
+                    // onPressed: () {OpenSettings.openBluetoothSetting();},
                     child: const Text("Yes",style: TextStyle(color: Colors.black),),
                   ),
                   TextButton(onPressed: () {

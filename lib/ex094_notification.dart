@@ -1,4 +1,4 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
+// import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 
 class Ex094Notification extends StatefulWidget {
@@ -12,6 +12,7 @@ class _Ex094NotificationState extends State<Ex094Notification> {
   @override
   void initState() {
     // TODO: implement initState
+    /*
     AwesomeNotifications().setListeners(
       ///这种写法也可以，感觉不够简洁
       /*
@@ -25,11 +26,15 @@ class _Ex094NotificationState extends State<Ex094Notification> {
       onNotificationDisplayedMethod: NotificationController.onNotificationDisplayedMethod,
       onDismissActionReceivedMethod: NotificationController.onDismissActionReceivedMethod,
     );
+
+     */
     super.initState();
   }
 
   ///获取应用发送通知的权限
   void requestPermissionOfNotification(BuildContext context) {
+
+    /*
     AwesomeNotifications().isNotificationAllowed().then((isAllowed){
       if(!isAllowed) {
         debugPrint("Notification permission is not allowed");
@@ -66,11 +71,13 @@ class _Ex094NotificationState extends State<Ex094Notification> {
         debugPrint("Notification permission is allowed");
       }
     });
+    */
   }
 
   void showNotification() {
     //创建通知前需要判断是否有通知权限，如果没有权限就创建通知会有异常：
     // me.carda.awesome_notifications.core.exceptions.AwesomeNotificationsException: Notifications are disabled
+    /*
     AwesomeNotifications().createNotification(
         content: NotificationContent(
           id: 1,
@@ -84,6 +91,8 @@ class _Ex094NotificationState extends State<Ex094Notification> {
           body: "this is the body of notification",
         )
     );
+
+     */
   }
 
   @override
@@ -123,6 +132,7 @@ class _Ex094NotificationState extends State<Ex094Notification> {
 
 ///这个类自定义的，用来响应各种通知事件，收到通知后的回调顺序：Create -> Display.点击通知时的回调顺序: Received -> Dismiss
 ///这个类自定义的，用来响应各种通知事件，收到通知后的回调顺序：Create -> Display.点击通知时的回调顺序: Received -> Dismiss
+/*
 class NotificationController {
   @pragma("vm:entry-point")
   static Future<void> onNotificationCreatedMethod(ReceivedNotification receivedNotification) async {
@@ -144,3 +154,5 @@ class NotificationController {
     debugPrint("onActionReceivedMethod");
   }
 }
+
+ */

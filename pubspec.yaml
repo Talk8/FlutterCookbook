@@ -18,7 +18,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.2 <4.0.0"
+  sdk: ^3.8.1
+#  sdk: ">=3.0.2 <4.0.0"
 #  sdk: ">=2.17.6 <4.0.0"
 #  sdk: ">=2.17.6 <3.0.0"
 
@@ -45,16 +46,19 @@ dependencies:
 
 
 #导入包用来访问网络,开始使用最新版本无法导入，换成低版本后就可以了
-  url_launcher: ^6.1.6
+  url_launcher: ^6.3.2
+  #通常情况下，引入上一个包就可以包含下面这个包，但是有编译错误，因此单独指定下面包的版本
+  url_launcher_android: ^6.3.17
+
 #  url_launcher: ^6.1.11
 
 #导入DIO包来访问网络
   dio: ^5.2.1
 #导入shared_preferences包实现本地存储
-  shared_preferences: ^2.2.0
+  shared_preferences: ^2.5.3
 
 #导入path_provider包实现文件存储
-  path_provider: ^2.1.4
+  path_provider: ^2.1.5
 
 #导入provide实现数据共享
   provider: ^6.1.2
@@ -86,7 +90,7 @@ dependencies:
 # 执行命令时有警告，详细如下： CocoaPods did not set the base configuration of your project because your
 # project already has a custom config set. In order for CocoaPods integration to work at all, please either set the base configurations of the target `Runner` to `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` or include the `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` in your build configuration (`Flutter/Release.xcconfig`).
 #  去掉此警告需要在xcode中配置：project:Runner ->Inof ->Configuration把debug,release,profile三个扩展下的runner修改成None,然后再pod install就可以
-  image_picker: ^1.1.2
+  image_picker: ^1.2.0
 # image_picker需要此包，用来播放视频文件
   video_player: ^2.9.5
 # image_picker需要此包,用来处理媒体文件的类型
@@ -101,7 +105,7 @@ dependencies:
 # 视频压缩包,用来处理视频文件的，它可以获取到视频文件的时长，路径，分辨率等类型
   video_compress: ^3.1.4
 #Flutter官方提供的webview
-  webview_flutter: ^4.8.0
+  webview_flutter: ^4.13.0
   #三方提供的Webview，可以避开安全策略来加载本地的html文件
   flutter_inappwebview: ^6.0.0
 
@@ -112,7 +116,7 @@ dependencies:
   ditredi: ^2.0.2
   vector_math: ^2.1.4
  # 可以直接把3d格式的文件渲染成图形，比如glf,glb,不过不支持Obj,它的核心是Google的ModelViewer(显示3d图形，只支持glb,glf,js语言实现）
-  flutter_3d_controller: ^1.3.1
+  flutter_3d_controller: ^2.2.0
  #这个是20240722的2周前一个国外人新写的插件，用的人比较少
   three_js: ^0.0.7
   three_js_geometry: ^0.0.2
@@ -170,7 +174,7 @@ dependencies:
 #这个包2year没有更新了，项目中不再使用此包，可以使用bluetooth_enable_plus来代替它
 #  bluetooth_enable_fork: ^0.1.6
 # 可以进行状态管理，显示dialog,snackBar不需要context,开始用4.6.5版本更新FlutterSDK后提高到4.6.6版本，否则有编译错误
-  get: ^4.6.6
+  get: ^4.7.2
 # 本地存储
   get_storage: ^2.1.1
 
@@ -181,43 +185,45 @@ dependencies:
   html: ^0.15.4
 
   #用来渲染html的文本，图片，声音等内容，这个包导入了太多的其它包，使用时估计会导致运行包太大，比如rxDart,image等，详细可以看0235的提交记录。
-  flutter_widget_from_html: ^0.14.11
+#  flutter_widget_from_html: ^0.14.11
+  flutter_widget_from_html: ^0.17.0
 
 #获取当前时区的包
-  flutter_timezone: ^1.0.8
+  flutter_timezone: ^4.1.1
 #可以获取所有时区，但是无法获取当前时区，可以把时间转换成不同时区下的时间
   timezone: ^0.9.2
 
 # 监听页面的生命周期
-  lifecycle: ^0.8.0
+  lifecycle: ^0.9.0
 
 
 #用来显示首次使用引导功能，和onboarding_overlay功能类似
-  overlay_tooltip: ^0.2.3
+  overlay_tooltip: ^0.2.4
 
 
 #用来显示首次使用引导功能
-  onboarding_overlay: ^3.2.1
+  onboarding_overlay: ^3.2.2
 
 #  显示像聊天窗口一样的窗口,国人写的
-  bubble_box: ^0.5.3
+#  bubble_box: ^0.5.3
 
 #  显示像聊天窗口一样的窗口,比bubble_box受欢迎一些
-  flutter_chat_bubble: ^2.0.2
+#  flutter_chat_bubble: ^2.0.2
 #  这个也是显示聊天窗口，不过有3年没有更新了，比较老,但是功能十分强大，推荐使用
-  bubble: ^1.2.1
+#  bubble: ^1.2.1
 
 #最新版本为1.6.0基于intl0.19.0,为了当前环境中的intl匹配修改成1.5.0版本
 #这个插件主打聊天特色功能，可以封装audio,image等内容
-  chat_bubbles: ^1.7.0
+#  chat_bubbles: ^1.7.0
 
+#  audio_session: ^0.2.2
 #实现振动功能的包
-  vibration: ^1.9.0
+  vibration: ^3.1.3
 
 # 使用riverpod进行状态管理,这里安装两个插件在dev_dependance中还有4个依赖
 # 安装这个版本的riverpod需要flutter高版本才可以，我的是3.19,不然会有各种包的版本冲突
-  flutter_riverpod: ^2.5.1
-  riverpod_annotation: ^2.3.5
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
 
 #显示手机当前的最量(实时显示)
   realtime_battery_indicator: ^1.0.2
@@ -240,8 +246,8 @@ dependencies:
 #文件都写了AGP和gradle的版本，在新建项目中没有其它插件只使用awesome_notifications插件0.10.0版本时可以正常编译和运行。
 #后续如果项目整体升级AGP版本到8.0以上时可以参考这两个版本号（当前没有使用注释掉了）。
 
-  awesome_notifications_core: ^0.10.1
-  awesome_notifications: ^0.10.1
+#  awesome_notifications_core: ^0.10.1
+#  awesome_notifications: ^0.10.1
 
 # 用来实现远程消息推送功能，参考官方的readMe来配置
 #  awesome_notifications_fcm: ^0.10.0
@@ -300,7 +306,7 @@ dependencies:
 #  carousel_slider:
 
 # 实现sqlLite相关功能
-#  sqflite:
+  sqflite: ^2.4.2
   #实现自动调整文字大小的组件，相当于Text的扩展。
 #  auto_size_text:
   # 实现文字动画
@@ -314,8 +320,8 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 #更新FlutterSDK到3.24.2后有编译错误，因此强制加上这两个包，不知道是哪个插件引用了它们
-  win32: ^5.5.4
-  win32_registry: ^1.1.4
+#  win32: ^5.5.4
+#  win32_registry: ^1.1.4
 
 #把包中版本冲突：because fluttercookbook depends on both flutter_riverpod ^2.5.1 and flutter_test from sdk, version solving failed.
 #可以使用以下方法解决

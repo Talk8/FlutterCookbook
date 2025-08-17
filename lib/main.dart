@@ -1,4 +1,4 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
+// import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -33,7 +33,7 @@ import 'package:fluttercookbook/ex029_DataTable.dart';
 import 'package:fluttercookbook/ex030_PaginatedDataTable.dart';
 import 'package:fluttercookbook/ex031_Card.dart';
 import 'package:fluttercookbook/ex032_Localization.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttercookbook/ex033_Clip.dart';
 import 'package:fluttercookbook/ex034_IconCustom.dart';
 import 'package:fluttercookbook/ex036_networkDIO.dart';
@@ -187,12 +187,15 @@ void main() async{
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+  /*
   AwesomeNotifications().initialize(
       // defaultIcon,把默认的icon设定为空时会使用app的启动图标
       '',
       [
         NotificationChannel(channelKey: "key4channel", channelName: "channelEx1", channelDescription: "ChannelTest"),
       ]);
+
+   */
   ///下面是使用Provider当作状态管理的代码，注释掉后示例中与Provider关联的代码可以通过编译，但是有运行时错误
   // runApp(
   //   MultiProvider(
@@ -272,7 +275,7 @@ class FlutterCookbookApp extends StatelessWidget {
       // locale: const Locale('es'),
       localizationsDelegates: const [
         ///添加自己定义的多语言文字
-        AppLocalizations.delegate,
+        // AppLocalizations.delegate,
         ///添加这三个delegate后界面上的文字就会自动适配手机当前的语言
         ///这三个库包含系统自带组件中使用的文字，比如日期组件中的年月日
         GlobalMaterialLocalizations.delegate,

@@ -11,6 +11,7 @@ class ExDialog extends StatefulWidget {
 
 class _ExDialogState extends State<ExDialog> {
   _showAlertDialog() {
+    ///这个窗口的Action在右下角，而且只有文字没有按钮的样式
     showDialog(
         context: context,
         builder: (BuildContext context) {

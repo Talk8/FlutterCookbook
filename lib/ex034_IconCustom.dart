@@ -193,11 +193,12 @@ class _ExIconCustomState extends State<ExIconCustom> {
           color: Colors.blue[400],
           ),
           ///通过IconData使用ttf文件中的图标
-          Icon(IconData(0x2211,fontFamily:'IconMoon' )),
+          ///不使用官方的Intl后不能这样引用IconData,会有编译错误
+          // Icon(IconData(0x2211,fontFamily:'IconMoon' )),
           ///使用自定义类中的字体图标，还可以修改图标和大小和颜色
-          Icon(CustomIcon.char_count,size: 40,color: Colors.purpleAccent,),
+          // Icon(CustomIcon.char_count,size: 40,color: Colors.purpleAccent,),
           ///使用自定义类中的图标，图标和大小和颜色使用默认值，图标从网络下载遵守SIL开源协议
-          Icon(CustomAppIcon.gplus_circled),
+          // Icon(CustomAppIcon.gplus_circled),
           ///使用font_awesome_flutter包中的图标
           Icon(FontAwesomeIcons.twitter),
           Icon(FontAwesomeIcons.music),
@@ -239,6 +240,7 @@ class _ExIconCustomState extends State<ExIconCustom> {
 }
 
 //自定义图标类，方便在代码中直接使用
+/*
 class CustomIcon {
   static const IconData char_e = const IconData(0x13ec, fontFamily: 'IconMoon', matchTextDirection: true,);
   static const IconData char_count = const IconData(0x2211, fontFamily: 'IconMoon', matchTextDirection: true,);
@@ -246,7 +248,10 @@ class CustomIcon {
   static const IconData shap_3 = const IconData(0x2206, fontFamily: 'IconMoon', matchTextDirection: true,);
 }
 
+ */
+
 //从fluttericon.com下载的图标，类型是Entypo,下面的代码来自下载包中的示例MyFlutterApp.dart,我修改了名字
+/*
 class CustomAppIcon {
   //单例模式
   CustomAppIcon.CustomAppIcon_();
@@ -540,3 +545,5 @@ class CustomAppIcon {
   static const IconData sweden = IconData(0xf601, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData logo_db = IconData(0xf603, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
+
+ */

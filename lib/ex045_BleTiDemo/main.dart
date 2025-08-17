@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      /*
       ///这个界面在SDK中，而不是在demo中,通过下拉刷新功能实现扫描BLE功能,扫描不能通过uuid做过滤，不过可以使用右上角的图标来对uuid排序。
       home: ScanScreen(
         title: 'TTC Flutter BLE Demo',
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
                   builder: (context) => CommPage(device: device)));
         },
       ),
+       */
     );
   }
 }

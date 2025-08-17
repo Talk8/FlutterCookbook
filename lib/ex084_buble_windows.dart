@@ -1,8 +1,8 @@
-import 'package:bubble/bubble.dart';
-import 'package:bubble_box/bubble_box.dart';
-import 'package:chat_bubbles/chat_bubbles.dart';
+// import 'package:bubble/bubble.dart';
+// import 'package:bubble_box/bubble_box.dart';
+// import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_bubble/chat_bubble.dart';
+// import 'package:flutter_chat_bubble/chat_bubble.dart';
 
 
 ///这个包含了4个类似聊天窗口的插件，其中三个功能类似，最后一个与其它三个功能不同
@@ -28,6 +28,7 @@ class _ExBubleWidowState extends State<ExBubleWidow> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ///第一行：BubbleBox示例
+          /*
           BubbleBox(
             ///box的形状，border用来控制边框颜色，radius用来控制边框角度，如果不设置默认是矩形
             shape: BubbleShapeBorder(
@@ -111,7 +112,7 @@ class _ExBubleWidowState extends State<ExBubleWidow> {
             color: Colors.lightGreenAccent,
             onTap: (){},
           ),
-
+           */
         ],
       ),
     );
