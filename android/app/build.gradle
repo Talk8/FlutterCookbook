@@ -36,18 +36,25 @@ if (flutterVersionName == null) {
 android {
     ///更新FlutterSDK版本后需要在这里指定命名空间
     namespace "com.cookbook.flutter.fluttercookbook"
-    compileSdkVersion flutter.compileSdkVersion
+//    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 35
 //    ndkVersion flutter.ndkVersion
     ///指定ndk版本，不然编译时与插件中用的ndk版本不同会导致编译错误
     ndkVersion = "27.0.12077973"
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+
+//        sourceCompatibility = JavaVersion.VERSION_11
+//        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+//        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     sourceSets {
@@ -62,12 +69,12 @@ android {
 //        minSdkVersion 26
 //        anifest merger failed : uses-sdk:minSdkVersion 26 cannot be smaller than version 27 declared in library [:flutter_angle]
         //使用three_js包时需要最低版本27,主要是flutter_angl这个包对android的SDK版本有要求
-        minSdkVersion 27
+        minSdkVersion 31
 //        targetSdkVersion 31
 //        minSdkVersion flutter.minSdkVersion
 //        targetSdkVersion flutter.targetSdkVersion
-        compileSdkVersion 35
-        targetSdkVersion  34
+//        compileSdkVersion 35
+        targetSdkVersion  35
 
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

@@ -21,7 +21,10 @@ allprojects {
 
 rootProject.buildDir = '../build'
 subprojects {
+//    val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
+//    project.layout.buildDirectory.value(newSubprojectBuildDir)
     project.buildDir = "${rootProject.buildDir}/${project.name}"
+//    afterEvaluate { android { compileSdkVersion 35 } }
 }
 subprojects {
     project.evaluationDependsOn(':app')
