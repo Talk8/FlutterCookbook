@@ -98,10 +98,10 @@ dependencies:
 # 图片获取和Image_Picker类似，只不过界面是微信的界面,注意版本需要flutter_sdk支持20240130已经到8.8了。为了与flutter版本3.10.2匹配才用的8.6.3
   #这个包依赖了其它的包，比较多，比如video_player，extended_image: 好在都是他们自己组织做的包
   #注意：这个包需要高版本的sdk. The plugin photo_manager requires Android SDK version 34.
-  wechat_assets_picker: ^9.5.1
+  wechat_assets_picker: ^9.8.0
 # 通过相机获取图片和视频，Pick风格是wechat和 wechat_assets_picker一样都是国内人员开发的包
   #这个包依赖camera包，会自动把camera包添加到项目中来
-  wechat_camera_picker: ^4.3.7
+  wechat_camera_picker: ^4.4.0
 # 视频压缩包,用来处理视频文件的，它可以获取到视频文件的时长，路径，分辨率等类型
   video_compress: ^3.1.4
 #Flutter官方提供的webview
@@ -305,8 +305,11 @@ dependencies:
 #实现banner效果，还没有使用
 #  carousel_slider:
 
-# 实现sqlLite相关功能
+# 实现sqlLite相关功能,项目中没有用这个包，加上是为了解决编译错误
   sqflite: ^2.4.2
+# 项目中没有用这个包，加上是为了解决编译IOS版本时的错误
+  wakelock_plus: ^1.3.2
+
   #实现自动调整文字大小的组件，相当于Text的扩展。
 #  auto_size_text:
   # 实现文字动画
