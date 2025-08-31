@@ -105,8 +105,10 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     // threeJs.camera.position.setValues(15, 15, 15);
 
 
-    ///这个相册的位置适合看自己定义的泳池模型需要配合lookat(0,0,0),或者使用默认值也可以
-    threeJs.camera = three.PerspectiveCamera(45, threeJs.width / threeJs.height, 1, 2200);
+    ///这个camera的位置适合看自己定义的泳池模型需要配合lookat(0,0,0),或者使用默认值也可以
+    // threeJs.camera = three.PerspectiveCamera(45, threeJs.width / threeJs.height, 1, 2200);
+    ///25可以影响物体的大小，值越大，物体越小
+    threeJs.camera = three.PerspectiveCamera(25, threeJs.width / threeJs.height, 1, 1000);
     threeJs.camera.position.setValues(15, 15, 15);
 
     ///从下向上看,调整相机
@@ -226,6 +228,11 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     });
     controls.addEventListener('click', (event) {
       debugPrint("move");
+    });
+
+    ///这个事件起作用
+    controls.addEventListener("change", (event){
+      debugPrint("change event");
     });
 
     // controls.addPointer(() {
