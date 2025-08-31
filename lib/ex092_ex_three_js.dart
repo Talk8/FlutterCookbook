@@ -198,6 +198,7 @@ class _ExThreeJsPageState extends State<ExThreeJsPage> {
     var yGeometry = three.BufferGeometry().setFromPoints([three.Vector3(0,0,0),three.Vector3(0,axisLength,0)]);
     var zGeometry = three.BufferGeometry().setFromPoints([three.Vector3(0,0,0),three.Vector3(0,0,axisLength)]);
 
+    ///这里缺少物体位置(position),索引（index),法线(normal）相关知识的代码，需要补上
     ///x,y,z对应R,G,B
     var xLineMaterial = three.LineBasicMaterial({three.MaterialProperty.color : 0xff0000});
     var yLineMaterial = three.LineBasicMaterial({three.MaterialProperty.color : 0x00ff00});
