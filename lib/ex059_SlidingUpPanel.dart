@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 ///这个包的功能十分强大，各种想要的属性和功能都包含了，缺点是最近2年没有更新,与153的内容相匹配
+///截止202509这个包也没有更新以后不需要考虑使用这个包。另外用了modal_bottom_sheet这个包，
+///使用比较复杂，而且需要修改Scaffold组件.总之修改Scaffold的组件的三方插件要慎重。
+///可以自己使用showModalBottomSheet+DraggableScrollableSheet+ListView来实现slidingUpPanel的效果。
+///具体为：底部有内容，向上滑动此内容可以显示窗口，窗口内的所有内容可以滑动(inside scroll)，而且大小可以调节。
+///也可以在底部没有内容，通过事件触发来弹出窗口。
 class ExSlidingUpPanel extends StatefulWidget {
   const ExSlidingUpPanel({super.key});
 
