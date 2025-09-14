@@ -102,6 +102,7 @@ import 'package:fluttercookbook/ex093_image_pgk.dart';
 import 'package:fluttercookbook/ex091_Ditrei_pkg.dart';
 import 'package:fluttercookbook/ex094_notification.dart';
 import 'package:fluttercookbook/ex095_battery_indicator.dart';
+import 'package:fluttercookbook/ex096_pull_down.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lifecycle/lifecycle.dart';
@@ -591,6 +592,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
         listItem("093", "Image View", context, const Ex4View()),
         listItem("094", "Notification", context, const Ex094Notification()),
         listItem("095", "BatteryIndicator", context, const Ex095BatteryIndicator()),
+        listItem("096", "PullDown", context, const Ex096PullDown()),
       ],
     );
 
