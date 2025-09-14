@@ -1444,6 +1444,13 @@
             </list>
           </value>
         </entry>
+        <entry key="pull_down_button">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/pull_down_button-0.10.2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="reactive_ble_mobile">
           <value>
             <list>
@@ -2362,6 +2369,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/provider-6.1.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/pub_semver-2.1.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/pubspec_parse-1.2.3/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/pull_down_button-0.10.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/reactive_ble_mobile-5.4.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/reactive_ble_platform_interface-5.4.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/readmore-2.2.0/lib" />

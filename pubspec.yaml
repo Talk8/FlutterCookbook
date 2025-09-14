@@ -309,6 +309,8 @@ dependencies:
   sqflite: ^2.4.2
 # 项目中没有用这个包，加上是为了解决编译IOS版本时的错误
   wakelock_plus: ^1.3.2
+# 实现IOS中类似setting中的各种组菜单，比较简洁和好看
+  pull_down_button: ^0.10.2
 
   #实现自动调整文字大小的组件，相当于Text的扩展。
 #  auto_size_text:
