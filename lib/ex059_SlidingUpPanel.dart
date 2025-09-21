@@ -5,7 +5,9 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 ///使用比较复杂，而且需要修改Scaffold组件.总之修改Scaffold的组件的三方插件要慎重。
 ///可以自己使用showModalBottomSheet+DraggableScrollableSheet+ListView来实现slidingUpPanel的效果。
 ///具体为：底部有内容，向上滑动此内容可以显示窗口，窗口内的所有内容可以滑动(inside scroll)，而且大小可以调节。
-///也可以在底部没有内容，通过事件触发来弹出窗口。
+///也可以在底部没有内容，通过事件触发来弹出窗口。这个方法还有一个缺点就是底部有内容时向上滑动只是窗口内部的内容可以滑动
+///而不是向上滑动弹出窗口，后来想了一个思路：在内容外层嵌套一个Gestecture组件，该组件可以监听到向上或者向下滑动的事件
+///在事件中弹出窗口。对于底部无内容的页面，可以放一个透明的窗口来响应手势事件。
 class ExSlidingUpPanel extends StatefulWidget {
   const ExSlidingUpPanel({super.key});
 
