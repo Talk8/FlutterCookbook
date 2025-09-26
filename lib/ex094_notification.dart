@@ -131,6 +131,7 @@ class _Ex094NotificationState extends State<Ex094Notification> {
 }
 
 ///这个类自定义的，用来响应各种通知事件，收到通知后的回调顺序：Create -> Display.点击通知时的回调顺序: Received -> Dismiss
+///这个类自定义的，用来响应各种通知事件，收到通知后的回调顺序：Create -> Display.点击通知时的回调顺序: Received -> Dismiss
 /*
 class NotificationController {
   @pragma("vm:entry-point")
