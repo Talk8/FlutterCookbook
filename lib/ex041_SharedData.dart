@@ -14,6 +14,8 @@ class _EXSharedDataState extends State<EXSharedData> {
   String _tempData = "default value";
   @override
   Widget build(BuildContext context) {
+    debugPrint("build of page is running");
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Example of shared data of widget'),
@@ -25,7 +27,7 @@ class _EXSharedDataState extends State<EXSharedData> {
         children: [
           Container(
             width: 300,
-            height: 100,
+            height: 60,
             alignment: Alignment.center,
             color: Colors.blue,
             child: FatherWidget(
@@ -39,7 +41,7 @@ class _EXSharedDataState extends State<EXSharedData> {
           ///使用Provider获取共享数据，并且更新组件
           Container(
             width: 300,
-            height: 100,
+            height: 40,
             alignment: Alignment.center,
             color: Colors.green,
             child: WidgetA(),
@@ -48,7 +50,7 @@ class _EXSharedDataState extends State<EXSharedData> {
           ///使用Consumer获取共享数据,并且更新组件
           Container(
             width: 300,
-            height: 100,
+            height: 40,
             alignment: Alignment.center,
             color: Colors.green,
             child: WidgetB(),
@@ -58,10 +60,18 @@ class _EXSharedDataState extends State<EXSharedData> {
           ///Selector还有数据转换功能
           Container(
             width: 300,
-            height: 100,
+            height: 40,
             alignment: Alignment.center,
             color: Colors.green,
             child: WidgetC(),
+          ),
+          ///Selector只监听固定类型的数据
+          Container(
+            width: 300,
+            height: 40,
+            alignment: Alignment.center,
+            color: Colors.lightBlueAccent,
+            child: WidgetD(),
           ),
           SizedBox(
             width: 200,
@@ -78,7 +88,7 @@ class _EXSharedDataState extends State<EXSharedData> {
           ),
           SizedBox(
             width: 200,
-            height: 100,
+            height: 60,
             child: ElevatedButton(
               onPressed: () {
                 // ViewModel()._data = 'notifier new data';
@@ -89,22 +99,106 @@ class _EXSharedDataState extends State<EXSharedData> {
           ),
           SizedBox(
             width: 200,
-            height: 100,
+            height: 60,
             ///注意：修改viewModel中的数据和获取viewModel中的数据时使用相同的viewModel.
             ///consumer可以保证这一点，也可以把viewModel定义成单例对象
             child: Consumer<ViewModel>(
               builder: (context, viewModel, child) {
                 return ElevatedButton(
                     onPressed: () {
-                      viewModel.setData = "change data";
+                      // viewModel.setData = "change data";
+                      context.read<ViewModel>().setData = "change data";
                       print('change value button clicked');
                     },
                     child: const Text('change data by Consumer'));
               },
             ),
           ),
+          SizedBox(
+            width: 200,
+            height: 60,
+            ///注意：修改viewModel中的数据和获取viewModel中的数据时使用相同的viewModel.
+            ///consumer可以保证这一点，也可以把viewModel定义成单例对象
+            child: Consumer<ViewModel>(
+              builder: (context,vm,_) {
+                return ElevatedButton(
+                    onPressed: () {
+                      // ViewModel().intData = 999;
+                      vm.intData = 999;
+                      print('change int value button clicked');
+                    },
+                    child: const Text('change data by Selector1'));
+              }
+            ),
+          ),
+          ///这个按钮和上一个按钮的功能相同，不同的地方在于这里通过vm的单例对数据进行修改，
+          ///上一个按钮通过consumer中的vm到数据进行修改，这两种方法都可以保证修改和接收数据时操作是的同一个vm。
+          SizedBox(
+            width: 200,
+            height: 60,
+            ///注意：修改viewModel中的数据和获取viewModel中的数据时使用相同的viewModel.
+            ///consumer可以保证这一点，也可以把viewModel定义成单例对象
+            child: Builder(
+              builder: (context) {
+                return ElevatedButton(
+                    onPressed: () {
+                      ///ViewModel是单例时可以这样修改
+                      // ViewModel().intData = 888;
+                      ///ViewModel不是单例时可以这样修改
+                      context.read<ViewModel>().intData = 888;
+                      print('change int value button clicked');
+                    },
+                    child: const Text('change data by Selector2'));
+              }
+            ),
+          ),
         ],
       ),
+    );
+  }
+}
+
+///演示selector只更新特定类型的用法
+class WidgetD extends StatelessWidget {
+  const WidgetD({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    ///这里指定ViewMode和ViewMode中的属性类型为int，相当于只监听ViewModel类型为int的属性
+    ///当前string类型中变量更新时build不会运行
+    return Selector<ViewModel, int>(
+      ///这里的value就是selector属性中返回的数据
+      builder: (context, value,child) {
+        print('builder of Selector of Widget D running');
+        return Text('Widget D data: $value');
+      },
+      ///在selector中获取VM中的数据，数据的类型与Selector泛型中指定的类型相同，也就是int
+      selector: (context, viewModel) {
+        ///这个selector每次都会运行，但是上面的build只有shouldRebuild返回true时才运行
+        print('selector param of Selector of Widget D running');
+        debugPrint("data before exchange: ${viewModel.intData}");
+        return viewModel.intData;
+      },
+      ///可以配置是否需要更新数据，默认用的更新原则是基于==这个符号进行判断的。
+      ///下面是我写的一个示例，默认的更新算法与此类似
+      /*
+      shouldRebuild:(previous,next) {
+      ///previous和next的值就是selector中指定的类型值，这里就是int类型变量的值
+        debugPrint("data shouldRebuild: previous:$previous, next:$next");
+        if(previous == next) {
+          debugPrint("data should not Rebuild");
+          return false;
+        } else {
+          debugPrint("data should Rebuild");
+          return true;
+        }
+      },
+       */
+      ///没有使用该属性
+      child: Text('child'),
     );
   }
 }
@@ -277,9 +371,14 @@ class _SonWidgetState extends State<SonWidget> {
 
 ///创建数据共享类,需要继承ChangeNotifier类，使用类中的notifyListeners()方法通知：数据有更新
 class ViewModel extends ChangeNotifier {
-  late int _intData;
-  late String _data;
+  int _intData = 0;
+  String _data = "init data";
 
+  // static final _singleInstance = ViewModel._internal();
+  // ViewModel._internal();
+  // factory ViewModel() => _singleInstance;
+
+  ///把原来的普通类修改成单例,方便直接通过vm来修改数据
   ViewModel() {
     _intData = 0;
     _data = 'init data';
@@ -289,6 +388,7 @@ class ViewModel extends ChangeNotifier {
 
   set intData(int value) {
     _intData = value;
+    notifyListeners();
   }
 
   ///使用IDE自动生成的getter和setter方法是同名的，这样居然没有编译错误
@@ -311,9 +411,9 @@ class ViewModel extends ChangeNotifier {
 class ViewModelAfterTranslate {
   late int _intData;
 
-  ViewModel() {
-    _intData = 0;
-  }
+  // ViewModel() {
+  //   _intData = 0;
+  // }
 
   int get getIntData => _intData;
 
