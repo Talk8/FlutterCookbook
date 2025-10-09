@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttercookbook/ex024_Radio.dart';
 import 'package:fluttercookbook/ex035_SplashScreen.dart';
 import 'package:fluttercookbook/ex004_GirdView.dart';
@@ -107,9 +106,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lifecycle/lifecycle.dart';
 // import 'package:logger/logger.dart';
-///这两个包只能开一个，因为riverpod包中包含provider.
+///这两个包只能开一个，因为riverpod包中包含provider.或者用下一行的hide语法，这个是点击IDE的错误提示时自动修改的
 import 'package:provider/provider.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart' hide ChangeNotifierProvider;
 import 'ex001_ColumnRow.dart';
 import 'ex002_ListView.dart';
 import 'ex003_ImageWidget.dart';
@@ -198,59 +198,59 @@ void main() async{
 
    */
   ///下面是使用Provider当作状态管理的代码，注释掉后示例中与Provider关联的代码可以通过编译，但是有运行时错误
-  // runApp(
-  //   MultiProvider(
-  //     providers: [
-  //       ChangeNotifierProvider( create:(context) => ViewModel(), child: const FlutterCookbookApp(),),
-  //       ChangeNotifierProvider( create:(context) => DeviceViewModel(), child: const FlutterCookbookApp(),),
-  //       ///在078文件中LiveData中使用它
-  //       ChangeNotifierProvider( create:(context) => LiveDataViewModel(), child: const FlutterCookbookApp(),),
-  //       ///测试共享时使用的数据
-  //       Provider.value(value: shData),
-  //       ///测试类中共享数据
-  //       Provider.value(value: testConsumer),
-  //       ///使用StreamProvider共享stream中的数据,在ex050文件中通过consumer获取数据
-  //       StreamProvider(create:(_) => Stream.periodic(const Duration(seconds: 2),(event)=>(event+1)).take(5),
-  //           initialData: 9),
-  //
-  //       ///给ex045_BleDemo目录下的程序使用，主要用来管理共享数据
-  //       Provider.value(value: _scanner),
-  //       Provider.value(value: _monitor),
-  //       Provider.value(value: _connector),
-  //       Provider.value(value: _serviceDiscoverer),
-  //       // Provider(create: (_) => _serviceDiscoverer,),
-  //       Provider.value(value: _bleLogger),
-  //       ///这个state本质上是一个stream，用来监听扫描到的设备列表，在BleScanner中的startScan
-  //       ///方法中会通过该stream的controller向stream中添加设备
-  //       StreamProvider<BleScannerState?>(
-  //         create: (_) => _scanner.state,
-  //         initialData: const BleScannerState(
-  //           discoveredDevices: [],
-  //           scanIsInProgress: false,
-  //         ),
-  //       ),
-  //       StreamProvider<BleStatus?>(
-  //         create: (_) => _monitor.state,
-  //         initialData: BleStatus.unknown,
-  //       ),
-  //       StreamProvider<ConnectionStateUpdate>(
-  //         create: (_) => _connector.state,
-  //         initialData: const ConnectionStateUpdate(
-  //           deviceId: 'Unknown device',
-  //           connectionState: DeviceConnectionState.disconnected,
-  //           failure: null,
-  //         ),
-  //       ),
-  //     ],
-  //     child:const FlutterCookbookApp(),),
-  // );
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider( create:(context) => ViewModel(), child: const FlutterCookbookApp(),),
+        ChangeNotifierProvider( create:(context) => DeviceViewModel(), child: const FlutterCookbookApp(),),
+        ///在078文件中LiveData中使用它
+        ChangeNotifierProvider( create:(context) => LiveDataViewModel(), child: const FlutterCookbookApp(),),
+        ///测试共享时使用的数据
+        Provider.value(value: shData),
+        ///测试类中共享数据
+        Provider.value(value: testConsumer),
+        ///使用StreamProvider共享stream中的数据,在ex050文件中通过consumer获取数据
+        StreamProvider(create:(_) => Stream.periodic(const Duration(seconds: 2),(event)=>(event+1)).take(5),
+            initialData: 9),
+
+        ///给ex045_BleDemo目录下的程序使用，主要用来管理共享数据
+        Provider.value(value: _scanner),
+        Provider.value(value: _monitor),
+        Provider.value(value: _connector),
+        Provider.value(value: _serviceDiscoverer),
+        // Provider(create: (_) => _serviceDiscoverer,),
+        Provider.value(value: _bleLogger),
+        ///这个state本质上是一个stream，用来监听扫描到的设备列表，在BleScanner中的startScan
+        ///方法中会通过该stream的controller向stream中添加设备
+        StreamProvider<BleScannerState?>(
+          create: (_) => _scanner.state,
+          initialData: const BleScannerState(
+            discoveredDevices: [],
+            scanIsInProgress: false,
+          ),
+        ),
+        StreamProvider<BleStatus?>(
+          create: (_) => _monitor.state,
+          initialData: BleStatus.unknown,
+        ),
+        StreamProvider<ConnectionStateUpdate>(
+          create: (_) => _connector.state,
+          initialData: const ConnectionStateUpdate(
+            deviceId: 'Unknown device',
+            connectionState: DeviceConnectionState.disconnected,
+            failure: null,
+          ),
+        ),
+      ],
+      child:const FlutterCookbookApp(),),
+  );
 
   ///下面是使用riverpod当作状态管理的代码，注释掉后示例中与Provider关联的代码可以通过编译，但是有运行时错误
-  runApp(
-    const ProviderScope(
-      child: FlutterCookbookApp(),
-    ) ,
-  );
+  // runApp(
+  //   const ProviderScope(
+  //     child: FlutterCookbookApp(),
+  //   ) ,
+  // );
 
   ///单个ChangeNotifierProvider
   // runApp(
