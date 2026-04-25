@@ -37,11 +37,11 @@ android {
     ///更新FlutterSDK版本后需要在这里指定命名空间
     namespace "com.cookbook.flutter.fluttercookbook"
 //    compileSdkVersion flutter.compileSdkVersion
-    compileSdkVersion 35
+    compileSdkVersion 36
 //    ndkVersion flutter.ndkVersion
     ///指定ndk版本，不然编译时与插件中用的ndk版本不同会导致编译错误
-    ndkVersion = "27.0.12077973"
-
+//    ndkVersion = "27.0.12077973"
+    ndkVersion = "28.2.13676358"
     compileOptions {
 //        sourceCompatibility JavaVersion.VERSION_1_8
 //        targetCompatibility JavaVersion.VERSION_1_8
